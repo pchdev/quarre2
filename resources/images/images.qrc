@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/background">
+        <file>quarre.jpg</file>
+    </qresource>
+    <qresource prefix="/teaser">
+        <file>white.png</file>
+    </qresource>
+</RCC>

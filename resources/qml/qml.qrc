@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>NextInteractionView.qml</file>
+        <file>CurrentInteractionView.qml</file>
+        <file>InfoView.qml</file>
+        <file>MainView.qml</file>
+        <file>HeaderView.qml</file>
+        <file>PrefsView.qml</file>
+        <file>Sensors.qml</file>
+    </qresource>
+</RCC>
