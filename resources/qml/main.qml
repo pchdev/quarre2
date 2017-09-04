@@ -63,10 +63,38 @@ ApplicationWindow {
                 // FIRST UPPER VIEW SECTION
                 // used to display time elapsed since the beginning of scenario
                 id: uv_header_section
+
+                property int count: 0
                 width: parent.width
                 height: parent.height*0.2
                 color: "#000000"
-                opacity: 0.9
+                opacity: 0.9                
+
+                function int_to_time(value) {
+
+                    var min = Math.floor(value/60);
+                    var sec = value % 60;
+                    var min_str, sec_str;
+
+                    if(min < 10) min_str = "0" + min.toString();
+                    else min_str = min.toString();
+
+                    if(sec < 10) sec_str = "0" + sec.toString();
+                    else sec_str = sec.toString();
+
+                    return min_str + ":" + sec_str;
+                }
+
+                Timer {
+                    id: uv_header_timer
+                    interval: 1000
+                    running: true
+                    repeat: true
+                    onTriggered: {
+                        uv_header_section.count += 1;
+                        uv_header_timer_label.text = parent.int_to_time(parent.count);
+                    }
+                }
 
                 Text {
 
@@ -74,7 +102,7 @@ ApplicationWindow {
                     // gets started whenever the device receives
                     // a critical 'scenario start' message
                     // and stopped at 'scenario end' message
-                    id: uv_header_timer
+                    id: uv_header_timer_label
                     text: "02:55"
                     color: "#ffffff"
                     font.pointSize: 40
@@ -92,14 +120,27 @@ ApplicationWindow {
                 // used to display next interactions
                 // it is composed of 3 elements: the 'NEXT' label
                 // the label of the next interaction to come
+                property int count: 5
                 id: uv_next_interaction_section
                 width: parent.width
                 height: parent.height*0.3
                 y: uv_header_section.height
                 color: "#99001307"
 
+                Timer {
+                    id: uv_next_interaction_timer
+                    interval: 1000
+                    running: false
+                    repeat: true
+                    onTriggered: {
+                        if(parent.count == 0) running = false
+                        else parent.count -= 1;
+                        uv_next_interaction_countdown_label.text = parent.count;
+                    }
+                }
+
                 Text {
-                    id: uv_next_label
+                    id: uv_next_interaction_label
                     text: "NEXT"
                     color: "#ffffff"
                     width: parent.width
@@ -114,7 +155,7 @@ ApplicationWindow {
                 Text {
 
                     // the title of the next incoming interaction
-                    id: uv_next_title
+                    id: uv_next_interaction_title
                     text: "super spatialisation interaction"
                     color: "#ffffff"
                     width: parent.width * 0.47
@@ -130,19 +171,24 @@ ApplicationWindow {
                 Rectangle {
 
                     // the countdown circle element
-                    id: uv_next_circle
+                    id: uv_next_interaction_circle
                     width: parent.width*0.25
                     height: width
                     color: "#b3ffffff"
                     radius: width/2
                     x: parent.width * 0.725
 
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: uv_next_interaction_timer.running = true;
+                    }
+
                     Text {
 
-                        // the countdown itself
-                        id: uv_next_countdown
+                        // the countdown display
+                        id: uv_next_interaction_countdown_label
                         anchors.fill: parent
-                        text: "31"
+                        text: uv_next_interaction_section.count
                         color: "#000000"
                         verticalAlignment: Text.AlignVCenter
                         horizontalAlignment: Text.AlignHCenter
@@ -156,10 +202,23 @@ ApplicationWindow {
 
                 // THIRD UPPER VIEW SECTION
                 id: uv_current_interaction_section
+                property int count: 47
                 width: parent.width
                 height: parent.height*0.5
                 y: height
                 color: "#e60d0000"
+
+                Timer {
+                    id: uv_current_interaction_timer
+                    interval: 1000
+                    running: false
+                    repeat: true
+                    onTriggered: {
+                        if(parent.count == 0) running = false
+                        else parent.count -= 1;
+                        uv_current_interaction_countdown_label.text = parent.count;
+                    }
+                }
 
                 Rectangle {
 
@@ -172,10 +231,15 @@ ApplicationWindow {
                     y: -(radius/4)
                     color: "#80000000"
 
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: uv_current_interaction_timer.running = true;
+                    }
+
                     Text {
 
                         // the countdown itself
-                        id: uv_current_interaction_countdown
+                        id: uv_current_interaction_countdown_label
                         anchors.fill: parent
                         text: "47"
                         color: "#ffffff"
@@ -192,9 +256,10 @@ ApplicationWindow {
                     text: "trigger interaction"
                     color: "#ffffff"
                     width: parent.width
-                    height: parent.height
-                    y: height * 0.57
+                    height: parent.height * 0.2
+                    y: parent.height * 0.48
                     horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
                     font.pointSize: 27
                     //font.bold: true
                     textFormat: Text.PlainText
@@ -202,14 +267,17 @@ ApplicationWindow {
 
                 Text {
                     id: uv_current_interaction_description
-                    text: "smash your phone against the floor..."
+                    y: uv_current_interaction_title.height + uv_current_interaction_title.y
+                    text: "make a whip-like move with the phone in order to trigger the next note..."
+                    anchors.horizontalCenter: parent.horizontalCenter
                     color: "#ffffff"
-                    width: parent.width
-                    height: parent.height
-                    y: height * 0.75
+                    height: parent.height * 0.3
+                    width: parent.width * 0.9
                     horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
                     font.pointSize: 20
                     textFormat: Text.PlainText
+                    wrapMode: Text.WordWrap
                     //font.family: font_lato_light.name
                     antialiasing: true
                 }
@@ -217,6 +285,10 @@ ApplicationWindow {
         }
 
         Rectangle {
+
+            // the lower view, for hmi interaction modules
+            // modules should be put in separate files, and instantiated as children
+            // of the Rectangle
             id: lower_view
             width: parent.width
             height: parent.height/2
