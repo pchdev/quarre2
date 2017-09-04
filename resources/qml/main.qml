@@ -68,7 +68,16 @@ ApplicationWindow {
                 width: parent.width
                 height: parent.height*0.2
                 color: "#000000"
-                opacity: 0.9                
+                opacity: 0.9
+
+                states: [ State { name: "no-info"; when: no_info_button.pressed == true
+                        PropertyChanges { target: uv_header_section; height: parent.height }}
+                ]
+
+                transitions: [ Transition { from: ""; to: "no-info"; reversible: true
+                        ParallelAnimation { NumberAnimation { properties: "height";
+                                duration: 750; easing.type: Easing.InOutBack }}}
+                ]
 
                 function int_to_time(value) {
 
@@ -111,6 +120,11 @@ ApplicationWindow {
                     horizontalAlignment: Text.AlignHCenter
                     textFormat: Text.PlainText
                     font.family: font_lato_thin.name
+
+                    MouseArea {
+                        id: no_info_button
+                        anchors.fill: parent
+                    }
                 }
             }
 
@@ -125,7 +139,31 @@ ApplicationWindow {
                 width: parent.width
                 height: parent.height*0.3
                 y: uv_header_section.height
-                color: "#99001307"
+                color: "#141f1e"
+
+                // NEXT_INTERACTION STATES & TRANSITIONS:
+                // currently, four main states in the application:
+                // 1 - DEFAULT: for introduction and when there's both next & current interactions
+                // 2 - NO-NEXT: when there's no incoming interaction, hide the view
+                // 3 - NO-CURRENT: when no current interaction, view extends to full view
+                // 4 - NOTHING: same as no-next, not necessary to implement?
+                states: [ State { name: "no-next"; when: no_next_button.pressed == true
+                        PropertyChanges { target: uv_next_interaction_section; x: -width }},
+                    State { name: "no-current"; when: no_current_button.pressed == true
+                        PropertyChanges { target: uv_next_interaction_section; height: parent.height *0.8 }
+                        PropertyChanges { target: uv_next_interaction_section; opacity: 1 }}
+                ]
+
+                transitions: [ Transition { from: ""; to: "no-next"; reversible: true
+                        ParallelAnimation { NumberAnimation { properties: "x";
+                                duration: 750; easing.type: Easing.InOutBack }}},
+                    Transition { from: ""; to: "no-current"; reversible: true
+                        ParallelAnimation { NumberAnimation { properties: "height";
+                                duration: 1500; easing.type: Easing.OutBounce }}},
+                    Transition { from: "no-next"; to: "no-current"; reversible: true
+                        ParallelAnimation { NumberAnimation { properties: "height";
+                                duration: 1000; easing.type: Easing.InElastic }}}
+                ]
 
                 Timer {
                     id: uv_next_interaction_timer
@@ -150,6 +188,10 @@ ApplicationWindow {
                     font.pointSize: 30
                     font.bold: true
                     textFormat: Text.PlainText
+                    MouseArea {
+                        id: no_next_button
+                        anchors.fill: parent
+                    }
                 }
 
                 Text {
@@ -177,6 +219,7 @@ ApplicationWindow {
                     color: "#b3ffffff"
                     radius: width/2
                     x: parent.width * 0.725
+                    anchors.verticalCenter: parent.verticalCenter
 
                     MouseArea {
                         anchors.fill: parent
@@ -207,6 +250,24 @@ ApplicationWindow {
                 height: parent.height*0.5
                 y: height
                 color: "#e60d0000"
+
+                states: [ State { name: "no-next"; when: no_next_button.pressed == true
+                        PropertyChanges { target: uv_current_interaction_section; height: parent.height *0.8 }
+                        PropertyChanges { target: uv_current_interaction_section; y: parent.height * 0.2 }},
+                    State { name: "no-current"; when: no_current_button.pressed == true
+                        PropertyChanges { target: uv_current_interaction_section; opacity: 0 }}
+                ]
+
+                transitions: [ Transition { from: ""; to: "no-next"; reversible: true
+                        ParallelAnimation { NumberAnimation { properties: "height, y";
+                                duration: 750; easing.type: Easing.InOutBack }}},
+                    Transition { from: ""; to: "no-current"; reversible: true
+                        ParallelAnimation { NumberAnimation { properties: "opacity";
+                                duration: 500; easing.type: Easing.InOutSine }}},
+                    Transition { from: "no-next"; to: "no-current"; reversible: true
+                        ParallelAnimation { NumberAnimation { properties: "opacity";
+                                duration: 1000; easing.type: Easing.InElastic }}}
+                ]
 
                 Timer {
                     id: uv_current_interaction_timer
@@ -263,6 +324,11 @@ ApplicationWindow {
                     font.pointSize: 27
                     //font.bold: true
                     textFormat: Text.PlainText
+
+                    MouseArea {
+                        id: no_current_button
+                        anchors.fill: parent
+                    }
                 }
 
                 Text {
