@@ -21,6 +21,8 @@ set(QUARRE_REMOTE_QML_SRCS
     ${CMAKE_SOURCE_DIR}/main.qml
     ${CMAKE_SOURCE_DIR}/resources/qml/sensors.qml)
 
+add_subdirectory(thirdparty)
+
 add_executable(quarre-remote ${CMAKE_SOURCE_DIR}/main.cpp ${QUARRE_REMOTE_QML_SRCS})
 qt5_use_modules(quarre-remote Quick Core QuickControls2)
 
