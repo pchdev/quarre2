@@ -1,5 +1,6 @@
 # Qt user files
 *.user
+*.DS_Store
 
 # Built application files
 *.apk

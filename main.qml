@@ -27,12 +27,12 @@ ApplicationWindow {
 
     FontLoader {
         id: font_lato_thin
-        source: "lato/Lato-Thin.ttf"
+        source: "fonts/lato/Lato-Thin.ttf"
     }
 
     FontLoader {
         id: font_lato_light
-        source: "lato/Lato-Light.ttf"
+        source: "fonts/lato/Lato-Light.ttf"
     }
 
     Image {
@@ -42,7 +42,7 @@ ApplicationWindow {
         antialiasing: true
         anchors.fill: parent
         fillMode: Image.PreserveAspectCrop
-        source: "background/quarre.jpg"
+        source: "images/background/quarre.jpg"
 
         Rectangle {
 
@@ -70,7 +70,7 @@ ApplicationWindow {
                 color: "#000000"
                 opacity: 0.9
 
-                states: [ State { name: "no-info"; when: no_info_button.pressed == true
+                states: [ State { name: "no-info"; when: no_info_button.pressed === true
                         PropertyChanges { target: uv_header_section; height: parent.height }}
                 ]
 
@@ -366,7 +366,7 @@ ApplicationWindow {
                 id: teaser_claw
                 antialiasing: true
                 fillMode: Image.PreserveAspectCrop
-                source: "teaser/white.png"
+                source: "images/teaser/white.png"
                 x: parent.width/1.5
                 y: parent.height *0.1
                 opacity: 0.2
@@ -382,7 +382,7 @@ ApplicationWindow {
                 font.pointSize: 50
                 textFormat: Text.PlainText
                 color: "#ffffff"
-                text: "QUARRE"
+                text: "quarrè"
             }
         }
     }

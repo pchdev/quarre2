@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/lato">
-        <file>Lato-Thin.ttf</file>
-        <file>Lato-Light.ttf</file>
-    </qresource>
-</RCC>
