@@ -8,9 +8,10 @@
 
 #### Building qt5-android-clang version (currently 5.10.0) from github sources
 ```bash
-$ git clone --recursive https://github.com/qt/qt5.git
+$ git clone https://github.com/qt/qt5.git
 $ git checkout 5.10
 $ cd qt5
+$ ./init-repository
 $ ./configure -opensource -license-confirm -xplatform 'android-clang' -c++std c++14 \
               -nomake examples -nomake tests  \
               -android-ndk /your/path/to/ndk -android-sdk /your/path/to/sdk \
