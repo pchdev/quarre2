@@ -12,7 +12,11 @@ $ git clone --recursive https://github.com/qt/qt5.git
 $ git checkout 5.10
 $ cd qt5
 $ ./configure -opensource -license-confirm -xplatform 'android-clang' -c++std c++14 \
-              -nomake examples -nomake tests  -opengl es2
+              -nomake examples -nomake tests  \
+              -android-ndk /your/path/to/ndk -android-sdk /your/path/to/sdk \
+              -android-arch armeabi-v7a -android-ndk-platform android-21 \
+              -prefix /your/install/path/qt5-android-clang \
+              -no-warnings-are-errors -opengl es2
 $ make -j4
 $ make install
 ```
