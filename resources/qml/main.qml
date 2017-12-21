@@ -9,6 +9,7 @@ ApplicationWindow {
     visible:    true
     title:      qsTr("quarrè-remote")
 
+    // --------------------------------------------------------------------------------------------------
     // note: reference is based on Samsung S7
     property real refDPI: 576
     property real refHeight: 2560
@@ -18,35 +19,103 @@ ApplicationWindow {
     // MacBook Pro 9.2, late 2012 (13")
     // replace width with Screen.desktopAvailableWidth
     height: Screen.desktopAvailableHeight
-    width: 450
-    property real currDPI: 113
+    width: Screen.desktopAvailableWidth
+    property real currDPI: 576
 
     // refer to this when calculating font sizes
     property real ratio: Math.min(height/refHeight, width/refWidth)
     property real fontRatio: Math.min(height*refDPI/(currDPI*refHeight, width*refDPI/(currDPI*refWidth)))
 
+    // --------------------------------------------------------------------------------------------------
+
     FontLoader {
         id: font_lato_thin
-        source: "fonts/lato/Lato-Thin.ttf"
+        source: "lato/Lato-Thin.ttf"
     }
 
     FontLoader {
         id: font_lato_light
-        source: "fonts/lato/Lato-Light.ttf"
+        source: "lato/Lato-Light.ttf"
     }
 
-    Image {
+    // --------------------------------------------------------------------------------------------------
 
+    Ossia.OSCQueryServer {
+        id: device
+        name: "quarre-test-remote"
+    }
+
+    Ossia.Parameter {
+        id: scenario_start
+        node: "/scenario/start"
+        critical: true
+        valueType: Ossia.Type.Impulse
+    }
+
+    Ossia.Parameter {
+        // received whenever a problem has happened
+        // argument: error code (int)
+        id: scenario_stop
+        node: "/scenario/stop"
+        critical: true
+        valueType: Ossia.Type.Integer
+    }
+
+    Ossia.Parameter {
+        // argument: reason for pause (int)
+        id: scenario_pause
+        node: "/scenario/pause"
+        critical: true
+        valueType: Ossia.Type.Integer
+    }
+
+    Ossia.Parameter {
+        id: scenario_end
+        node: "/scenario/end"
+        critical: true
+        valueType: Ossia.Type.Impulse
+    }
+
+    Ossia.Parameter {
+        id: interactions_next_incoming
+        node: "/interactions/next/incoming"
+        critical: true
+        valueType: Ossia.Type.Vec3f
+    }
+
+    Ossia.Parameter {
+        id: interactions_next_begin
+        node: "/interactions/next/begin"
+        critical: true
+        valueType: Ossia.Type.Integer
+    }
+
+    Ossia.Parameter {
+        id: interactions_next_cancel
+        node: "/interactions/next/cancel"
+        critical: true
+        valueType: Ossia.Type.Integer
+    }
+
+    Ossia.Parameter {
+        id: interactions_current_end
+        node: "/interactions/current/end"
+        critical: true
+        valueType: Ossia.Type.Integer
+    }
+    // --------------------------------------------------------------------------------------------------
+
+    Image {
         // note that having low & high-dpi separate files would be a good idea
         id: quarre_background
         antialiasing: true
         anchors.fill: parent
         fillMode: Image.PreserveAspectCrop
-        source: "images/background/quarre.jpg"
+        source: "background/quarre.jpg"
 
         Rectangle {
-
-            // UPPER VIEW consists in 3 separate sections:
+            // UPPER VIEW
+            // consists in 3 separate sections:
             // 1- the timer, which is about 2/10th maybe of the upper view
             // 2- the next_interaction section, maybe 3/10th of the upper view
             // 3- the current_interaction section, 5/10th of the upper_view
@@ -59,14 +128,13 @@ ApplicationWindow {
             opacity: 0.7
 
             Rectangle {
-
                 // FIRST UPPER VIEW SECTION
                 // used to display time elapsed since the beginning of scenario
                 id: uv_header_section
 
                 property int count: 0
                 width: parent.width
-                height: parent.height*0.2
+                height: parent.height*0.1
                 color: "#000000"
                 opacity: 0.9
 
@@ -106,7 +174,6 @@ ApplicationWindow {
                 }
 
                 Text {
-
                     // THE TIMER
                     // gets started whenever the device receives
                     // a critical 'scenario start' message
@@ -114,7 +181,7 @@ ApplicationWindow {
                     id: uv_header_timer_label
                     text: "02:55"
                     color: "#ffffff"
-                    font.pointSize: 40
+                    font.pixelSize: 40
                     anchors.fill: parent
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
@@ -129,7 +196,6 @@ ApplicationWindow {
             }
 
             Rectangle {
-
                 // SECOND UPPER VIEW SECTION
                 // used to display next interactions
                 // it is composed of 3 elements: the 'NEXT' label
@@ -137,7 +203,7 @@ ApplicationWindow {
                 property int count: 5
                 id: uv_next_interaction_section
                 width: parent.width
-                height: parent.height*0.3
+                height: parent.height*0.2
                 y: uv_header_section.height
                 color: "#141f1e"
 
@@ -147,9 +213,9 @@ ApplicationWindow {
                 // 2 - NO-NEXT: when there's no incoming interaction, hide the view
                 // 3 - NO-CURRENT: when no current interaction, view extends to full view
                 // 4 - NOTHING: same as no-next, not necessary to implement?
-                states: [ State { name: "no-next"; when: no_next_button.pressed == true
+                states: [ State { name: "no-next"; when: no_next_button.pressed === true
                         PropertyChanges { target: uv_next_interaction_section; x: -width }},
-                    State { name: "no-current"; when: no_current_button.pressed == true
+                    State { name: "no-current"; when: no_current_button.pressed === true
                         PropertyChanges { target: uv_next_interaction_section; height: parent.height *0.8 }
                         PropertyChanges { target: uv_next_interaction_section; opacity: 1 }}
                 ]
@@ -195,7 +261,6 @@ ApplicationWindow {
                 }
 
                 Text {
-
                     // the title of the next incoming interaction
                     id: uv_next_interaction_title
                     text: "super spatialisation interaction"
@@ -211,7 +276,6 @@ ApplicationWindow {
                 }
 
                 Rectangle {
-
                     // the countdown circle element
                     id: uv_next_interaction_circle
                     width: parent.width*0.25
@@ -227,7 +291,6 @@ ApplicationWindow {
                     }
 
                     Text {
-
                         // the countdown display
                         id: uv_next_interaction_countdown_label
                         anchors.fill: parent
@@ -242,7 +305,6 @@ ApplicationWindow {
             }
 
             Rectangle {
-
                 // THIRD UPPER VIEW SECTION
                 id: uv_current_interaction_section
                 property int count: 47
@@ -282,7 +344,6 @@ ApplicationWindow {
                 }
 
                 Rectangle {
-
                     // current interaction countdown circle
                     id: uv_current_interaction_circle
                     width: parent.width*0.4
@@ -298,7 +359,6 @@ ApplicationWindow {
                     }
 
                     Text {
-
                         // the countdown itself
                         id: uv_current_interaction_countdown_label
                         anchors.fill: parent
@@ -351,7 +411,6 @@ ApplicationWindow {
         }
 
         Rectangle {
-
             // the lower view, for hmi interaction modules
             // modules should be put in separate files, and instantiated as children
             // of the Rectangle
@@ -366,7 +425,7 @@ ApplicationWindow {
                 id: teaser_claw
                 antialiasing: true
                 fillMode: Image.PreserveAspectCrop
-                source: "images/teaser/white.png"
+                source: "teaser/white.png"
                 x: parent.width/1.5
                 y: parent.height *0.1
                 opacity: 0.2
