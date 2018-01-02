@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include "cpp/oshdl.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -7,6 +8,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
 
+    quarre::platform_hdl os_hdl;
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;

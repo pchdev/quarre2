@@ -20,14 +20,10 @@ public:
     ~platform_hdl();
 
     void vibrate(int milliseconds)  const;
-    void light(int milliseconds)    const;
 
-protected slots:
-    void torch_timer_callback();
 
 private:
 #ifdef Q_OS_ANDROID
-    QTimer*                 m_torch_timer;
     QAndroidJniObject       m_wake_lock;
     QAndroidJniObject       m_vibrator;
     QAndroidJniObject       m_camera_manager;

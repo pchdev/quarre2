@@ -29,19 +29,21 @@ ApplicationWindow {
     // --------------------------------------------------------------------------------------------------
 
     FontLoader {
-        id: font_lato_thin
-        source: "lato/Lato-Thin.ttf"
-    }
-
-    FontLoader {
         id: font_lato_light
         source: "lato/Lato-Light.ttf"
     }
+
+    /*FontLoader {
+        id: font_lato_medium
+        source: "lato/Lato-Medium.ttf"
+    }*/
 
     // --------------------------------------------------------------------------------------------------
 
     Ossia.OSCQueryServer {
         id: device
+        oscPort: 1234
+        wsPort: 5678
         name: "quarre-test-remote"
     }
 
@@ -103,8 +105,10 @@ ApplicationWindow {
         critical: true
         valueType: Ossia.Type.Integer
     }
-    // --------------------------------------------------------------------------------------------------
 
+    Component.onCompleted: device.recreate(root)
+
+    // --------------------------------------------------------------------------------------------------
     Image {
         // note that having low & high-dpi separate files would be a good idea
         id: quarre_background
@@ -123,7 +127,7 @@ ApplicationWindow {
             // they're useful or not, or need to draw attention from the user
             id: upper_view
             width: parent.width
-            height: parent.height/2
+            height: parent.height * 0.45
             color: "#000000"
             opacity: 0.7
 
@@ -174,6 +178,23 @@ ApplicationWindow {
                 }
 
                 Text {
+                    // NAME OF THE CURRENT SCENARIO
+                    id: uv_header_scenario_label
+                    text: "quarrè"
+                    color: "#ffffff"
+                    font.pixelSize: 40
+                    textFormat: Text.PlainText
+                    font.family: font_lato_light.name
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignLeft
+                    anchors.fill: parent
+                    anchors.leftMargin: parent.width * 0.05
+                    anchors.topMargin: 0
+                    anchors.bottomMargin: 0
+                    antialiasing: true
+                }
+
+                Text {
                     // THE TIMER
                     // gets started whenever the device receives
                     // a critical 'scenario start' message
@@ -186,12 +207,28 @@ ApplicationWindow {
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     textFormat: Text.PlainText
-                    font.family: font_lato_thin.name
+                    font.family: font_lato_light.name
+                    antialiasing: true
 
                     MouseArea {
                         id: no_info_button
                         anchors.fill: parent
                     }
+                }
+
+                Text {
+                    // NAME OF THE CURRENT SCENE
+                    id: uv_header_scene_label
+                    text: "registration"
+                    color: "#ffffff"
+                    font.pixelSize: 40
+                    textFormat: Text.PlainText
+                    font.family: font_lato_light.name
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignRight
+                    anchors.fill: parent
+                    anchors.rightMargin: parent.width *0.05
+                    antialiasing: true
                 }
             }
 
@@ -203,7 +240,7 @@ ApplicationWindow {
                 property int count: 5
                 id: uv_next_interaction_section
                 width: parent.width
-                height: parent.height*0.2
+                height: parent.height*0.25
                 y: uv_header_section.height
                 color: "#141f1e"
 
@@ -251,7 +288,7 @@ ApplicationWindow {
                     height: parent.height
                     x: width*0.04
                     verticalAlignment: Text.AlignVCenter
-                    font.pointSize: 30
+                    font.pointSize: 20
                     font.bold: true
                     textFormat: Text.PlainText
                     MouseArea {
@@ -267,10 +304,14 @@ ApplicationWindow {
                     color: "#ffffff"
                     width: parent.width * 0.47
                     height: parent.height
-                    x: width*0.52
+                    anchors.fill: parent
+                    x: width*0.55
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
-                    font.pointSize: 20
+                    font.family: font_lato_light.name
+                    antialiasing: true
+                    font.pointSize: 12
+                    font.bold: false
                     textFormat: Text.PlainText
                     wrapMode: Text.WordWrap
                 }
@@ -278,11 +319,11 @@ ApplicationWindow {
                 Rectangle {
                     // the countdown circle element
                     id: uv_next_interaction_circle
-                    width: parent.width*0.25
-                    height: width
+                    width: parent.height * 0.8
+                    height: parent.height * 0.8
                     color: "#b3ffffff"
                     radius: width/2
-                    x: parent.width * 0.725
+                    x: parent.width * 0.8
                     anchors.verticalCenter: parent.verticalCenter
 
                     MouseArea {
@@ -298,7 +339,7 @@ ApplicationWindow {
                         color: "#000000"
                         verticalAlignment: Text.AlignVCenter
                         horizontalAlignment: Text.AlignHCenter
-                        font.pointSize: 35
+                        font.pointSize: 30
                         textFormat: Text.PlainText
                     }
                 }
@@ -309,13 +350,13 @@ ApplicationWindow {
                 id: uv_current_interaction_section
                 property int count: 47
                 width: parent.width
-                height: parent.height*0.5
-                y: height
+                height: parent.height*0.65
+                y: parent.height*0.35
                 color: "#e60d0000"
 
                 states: [ State { name: "no-next"; when: no_next_button.pressed == true
-                        PropertyChanges { target: uv_current_interaction_section; height: parent.height *0.8 }
-                        PropertyChanges { target: uv_current_interaction_section; y: parent.height * 0.2 }},
+                        PropertyChanges { target: uv_current_interaction_section; height: parent.height *0.9 }
+                        PropertyChanges { target: uv_current_interaction_section; y: parent.height * 0.1 }},
                     State { name: "no-current"; when: no_current_button.pressed == true
                         PropertyChanges { target: uv_current_interaction_section; opacity: 0 }}
                 ]
@@ -381,7 +422,7 @@ ApplicationWindow {
                     y: parent.height * 0.48
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
-                    font.pointSize: 27
+                    font.pointSize: 22
                     //font.bold: true
                     textFormat: Text.PlainText
 
@@ -401,10 +442,10 @@ ApplicationWindow {
                     width: parent.width * 0.9
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
-                    font.pointSize: 20
+                    font.pointSize: 13
                     textFormat: Text.PlainText
                     wrapMode: Text.WordWrap
-                    //font.family: font_lato_light.name
+                    font.family: font_lato_light.name
                     antialiasing: true
                 }
             }
@@ -416,8 +457,8 @@ ApplicationWindow {
             // of the Rectangle
             id: lower_view
             width: parent.width
-            height: parent.height/2
-            y: parent.height/2
+            height: parent.height * 0.55
+            y: parent.height * 0.45
             color: "#000000"
             opacity: 0.9
 
@@ -437,11 +478,12 @@ ApplicationWindow {
                 height: parent.height
                 horizontalAlignment: Text.AlignHCenter
                 y: parent.height*0.25
-                font.family: font_lato_thin.name
+                font.family: font_lato_light.name
                 font.pointSize: 50
                 textFormat: Text.PlainText
                 color: "#ffffff"
                 text: "quarrè"
+                antialiasing: true
             }
         }
     }

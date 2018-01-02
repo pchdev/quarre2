@@ -3,22 +3,12 @@
 
 using namespace quarre;
 
-platform_hdl::platform_hdl() :
-    m_flash_available(false),
-    m_torch_timer(new QTimer(this)) {
-
-    QObject::connect(m_torch_timer, SIGNAL(timeout()), this, SLOT(torchTimerCallback()));
-
+platform_hdl::platform_hdl()
+{
     // NEED TO INTEGRATE ANDROIDJNI ERROR MANAGEMENT!!
     /* ANDROID */
 
 #ifdef Q_OS_ANDROID
-
-    // CATCH TORCHMODE
-    QAndroidJniObject camera_string = QAndroidJniObject::fromString("camera");
-    QAndroidJniObject camera_activity = QAndroidJniObject::callStaticObjectMethod("org/qtproject/qt5/android/QtNative", "activity", "()Landroid/app/Activity;");
-    QAndroidJniObject camera_app_context = camera_activity.callObjectMethod("getApplicationContext", "()Landroid/content/Context;");
-    m_camera_manager = camera_app_context.callObjectMethod("getSystemService", "(Ljava/lang/String;)Ljava/lang/Object;", camera_string.object<jstring>());
 
     // CATCH VIBRATOR DEVICE
     QAndroidJniObject vibr_string = QAndroidJniObject::fromString("vibrator");
@@ -45,35 +35,15 @@ platform_hdl::platform_hdl() :
 
 }
 
-platform_hdl::~platform_hdl()
-{
-    delete m_torch_timer;
-}
+platform_hdl::~platform_hdl() {}
 
 #ifdef Q_OS_ANDROID
 
-void OSBridge::vibrate(int milliseconds) const
+void platform_hdl::vibrate(int milliseconds) const
 {
     jlong ms = milliseconds;
     jboolean has_vibrator = m_vibrator.callMethod<jboolean>("hasVibrator", "()Z");
     m_vibrator.callMethod<void>("vibrate", "(J)V", ms);
-}
-
-void OSBridge::light(int milliseconds) const
-{
-    // note, this only works if back camera is registered as the #0 id, need to check-it first
-    QAndroidJniObject back_camera_id = QAndroidJniObject::fromString("0");
-    jboolean on = true;
-    m_camera_manager.callMethod<void>("setTorchMode", "(Ljava/lang/String;Z)V", back_camera_id.object<jstring>(), on);
-    m_torch_timer->start(milliseconds);
-}
-
-void OSBridge::torchTimerCallback()
-{
-    QAndroidJniObject back_camera_id = QAndroidJniObject::fromString("0");
-    jboolean off = false;
-    m_camera_manager.callMethod<void>("setTorchMode", "(Ljava/lang/String;Z)V", back_camera_id.object<jstring>(), off);
-    m_torch_timer->stop();
 }
 
 #endif
