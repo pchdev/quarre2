@@ -2,14 +2,15 @@ import QtQuick 2.0
 import Ossia 1.0 as Ossia
 
 Item {
-
-    // OSSIA ----------------------------------------------------------------------------------------
+    property int oscPort: 1234
+    property int wsPort: 5678
+    property string deviceName: "quarre-remote"
 
     Ossia.OSCQueryServer {
         id: device
-        oscPort: 1234
-        wsPort: 5678
-        name: "quarre-test-remote"
+        oscPort: oscPort
+        wsPort: wsPort
+        name: deviceName
     }
 
     Ossia.Parameter {

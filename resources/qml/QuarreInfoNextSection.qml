@@ -6,11 +6,6 @@ Rectangle {
     // it is composed of 3 elements: the 'NEXT' label
     // the label of the next interaction to come
     property int count: 5
-    id: uv_next_interaction_section
-    width: parent.width
-    height: parent.height*0.25
-    y: uv_header_section.height
-    color: "#141f1e"
 
     // NEXT_INTERACTION STATES & TRANSITIONS:
     // currently, four main states in the application:

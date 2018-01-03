@@ -2,12 +2,7 @@ import QtQuick 2.0
 
 Rectangle {
     // THIRD UPPER VIEW SECTION
-    id: uv_current_interaction_section
     property int count: 47
-    width: parent.width
-    height: parent.height*0.65
-    y: parent.height*0.35
-    color: "#e60d0000"
 
     states: [ State { name: "no-next"; when: no_next_button.pressed == true
             PropertyChanges { target: uv_current_interaction_section; height: parent.height *0.9 }

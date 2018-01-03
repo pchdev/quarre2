@@ -8,7 +8,7 @@ Item {
             name: "CONNECTING"
             // application logo + connection wheel
             PropertyChanges {
-                target: uv_header_section
+                target: upper_view.header
                 height: root.height
             }
         },
@@ -17,7 +17,7 @@ Item {
             name: "CONNECTION_FAILED"
             // connection wheel stops turning, button to try reconnection appears
             PropertyChanges {
-                target: uv_header_section
+                target: upper_view.header
                 height: root.height
             }
         },

@@ -1,15 +1,9 @@
 import QtQuick 2.0
 
 Rectangle {
-
     // FIRST UPPER VIEW SECTION
     // used to display time elapsed since the beginning of scenario
-
     property int count: 0
-    width: parent.width
-    height: parent.height*0.1
-    color: "#000000"
-    opacity: 0.9
 
     function int_to_time(value) {
 

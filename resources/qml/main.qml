@@ -1,7 +1,6 @@
 import QtQuick 2.7
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.0
-import Ossia 1.0 as Ossia
 
 ApplicationWindow {
 
@@ -47,10 +46,14 @@ ApplicationWindow {
 
         property alias network: ossia_net
         property alias upper_view: upper_view
+        property alias lower_view: lower_view
 
         NetworkManager
         {
             id: ossia_net
+            deviceName: "quarre-remote"
+            oscPort: 1234
+            wsPort: 5678
         }
 
         ApplicationStates
@@ -88,6 +91,11 @@ ApplicationWindow {
                 QuarreLowerDefault
                 {
                     id: lower_default
+                    width: parent.width
+                    height: parent.height * 0.55
+                    y: parent.height * 0.45
+                    color: "#000000"
+                    opacity: 0.9
                 }
             }
         }
