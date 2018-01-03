@@ -2,5 +2,13 @@
     <qresource prefix="/">
         <file>Sensors.qml</file>
         <file>main.qml</file>
+        <file>NetworkManager.qml</file>
+        <file>QuarreInfoView.qml</file>
+        <file>QuarreInfoHeader.qml</file>
+        <file>QuarreInfoNextSection.qml</file>
+        <file>QuarreInfoCurrentSection.qml</file>
+        <file>QuarreLowerDefault.qml</file>
+        <file>ApplicationStates.qml</file>
+        <file>ApplicationTransitions.qml</file>
     </qresource>
 </RCC>
