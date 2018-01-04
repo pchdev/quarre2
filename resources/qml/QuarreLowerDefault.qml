@@ -1,6 +1,6 @@
 import QtQuick 2.0
 
-Rectangle {
+Item  {
     Image {
         id: teaser_claw
         antialiasing: true

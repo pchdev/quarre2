@@ -82,8 +82,8 @@ ApplicationWindow {
             QuarreInfoView
             {
                 id: upper_view
-                width: width
-                height: height * 0.45
+                width: parent.width
+                height: parent.height * 0.45
                 color: "#000000"
                 opacity: 0.7
             }
@@ -91,14 +91,16 @@ ApplicationWindow {
             Rectangle
             {
                 id: lower_view
+                y: upper_view.height
+                width: parent.width
+                height: parent.height * 0.55
+                color: "#000000"
+                opacity: 0.9
+
                 QuarreLowerDefault
                 {
                     id: lower_default
-                    width: parent.width
-                    height: parent.height * 0.55
-                    y: parent.height * 0.45
-                    color: "#000000"
-                    opacity: 0.9
+                    anchors.fill: parent
                 }
             }
         }
