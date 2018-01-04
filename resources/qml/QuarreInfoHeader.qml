@@ -10,11 +10,13 @@ Rectangle {
         var min = Math.floor(value/60), sec = value % 60;
         var min_str, sec_str;
 
-        if(min < 10) min_str = "0" + min.toString();
-        else min_str = min.toString();
+        if(min < 10)
+                min_str = "0" + min.toString();
+        else    min_str = min.toString();
 
-        if(sec < 10) sec_str = "0" + sec.toString();
-        else sec_str = sec.toString();
+        if(sec < 10)
+                sec_str = "0" + sec.toString();
+        else    sec_str = sec.toString();
 
         return min_str + ":" + sec_str;
     }

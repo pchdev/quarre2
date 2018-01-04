@@ -6,12 +6,12 @@ Item {
     property int wsPort: 5678
     property string deviceName: "quarre-remote"
 
-    Ossia.OSCQueryServer {
+   /* Ossia.OSCQueryServer {
         id: device
         oscPort: oscPort
         wsPort: wsPort
         name: deviceName
-    }
+    }*/
 
     Ossia.Parameter {
         id: scenario_start
@@ -72,6 +72,9 @@ Item {
         valueType: Ossia.Type.Integer
     }
 
-    Component.onCompleted: device.recreate(root)
+    Component.onCompleted: {
+        Ossia.SingleDevice.openOSCQueryServer(5678, 1234);
+        Ossia.SingleDevice.recreate(ossia_net);
+    }
 
 }

@@ -1,24 +1,23 @@
 import QtQuick 2.0
 
 Rectangle {
-    // THIRD UPPER VIEW SECTION
     property int count: 47
 
     Timer {
-        id: uv_current_interaction_timer
+        id: current_interaction_timer
         interval: 1000
         running: false
         repeat: true
         onTriggered: {
             if(parent.count == 0) running = false
             else parent.count -= 1;
-            uv_current_interaction_countdown_label.text = parent.count;
+            current_interaction_countdown_label.text = parent.count;
         }
     }
 
     Rectangle {
         // current interaction countdown circle
-        id: uv_current_interaction_circle
+        id: current_interaction_circle
         width: parent.width*0.4
         height: width
         radius: width/2
@@ -28,12 +27,12 @@ Rectangle {
 
         MouseArea {
             anchors.fill: parent
-            onClicked: uv_current_interaction_timer.running = true;
+            onClicked: current_interaction_timer.running = true;
         }
 
         Text {
             // the countdown itself
-            id: uv_current_interaction_countdown_label
+            id: current_interaction_countdown_label
             anchors.fill: parent
             text: "47"
             color: "#ffffff"
@@ -46,7 +45,7 @@ Rectangle {
     }
 
     Text {
-        id: uv_current_interaction_title
+        id: current_interaction_title
         text: "trigger interaction"
         color: "#ffffff"
         width: parent.width
@@ -55,7 +54,6 @@ Rectangle {
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         font.pointSize: 22
-        //font.bold: true
         textFormat: Text.PlainText
 
         MouseArea {
@@ -65,8 +63,8 @@ Rectangle {
     }
 
     Text {
-        id: uv_current_interaction_description
-        y: uv_current_interaction_title.height + uv_current_interaction_title.y
+        id: current_interaction_description
+        y: current_interaction_title.height + current_interaction_title.y
         text: "make a whip-like move with the phone in order to trigger the next note..."
         anchors.horizontalCenter: parent.horizontalCenter
         color: "#ffffff"
