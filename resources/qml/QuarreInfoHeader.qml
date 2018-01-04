@@ -20,19 +20,19 @@ Rectangle {
     }
 
     Timer {
-        id: uv_header_timer
+        id: header_timer
         interval: 1000
         running: true
         repeat: true
         onTriggered: {
-            uv_header_section.count += 1;
-            uv_header_timer_label.text = parent.int_to_time(parent.count);
+            parent.count += 1;
+            header_timer_label.text = parent.int_to_time(parent.count);
         }
     }
 
     Text {
         // NAME OF THE CURRENT SCENARIO
-        id: uv_header_scenario_label
+        id: header_scenario_label
         text: "quarrè"
         color: "#ffffff"
         font.pixelSize: 40
@@ -52,7 +52,7 @@ Rectangle {
         // gets started whenever the device receives
         // a critical 'scenario start' message
         // and stopped at 'scenario end' message
-        id: uv_header_timer_label
+        id: header_timer_label
         text: "02:55"
         color: "#ffffff"
         font.pixelSize: 40
@@ -71,7 +71,7 @@ Rectangle {
 
     Text {
         // NAME OF THE CURRENT SCENE
-        id: uv_header_scene_label
+        id: header_scene_label
         text: "registration"
         color: "#ffffff"
         font.pixelSize: 40

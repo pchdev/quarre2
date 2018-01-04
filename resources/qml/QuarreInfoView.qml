@@ -25,7 +25,7 @@ Rectangle {
         id: quarre_next_section
         width: parent.width
         height: parent.height*0.25
-        y: uv_header_section.height
+        y: quarre_header.height
         color: "#141f1e"
     }
 

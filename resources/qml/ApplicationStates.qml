@@ -2,7 +2,7 @@ import QtQuick 2.0
 
 Item {
 
-    parent.states: [
+    states: [
 
         State {
             name: "CONNECTING"
@@ -16,10 +16,10 @@ Item {
         State {
             name: "CONNECTION_FAILED"
             // connection wheel stops turning, button to try reconnection appears
-            PropertyChanges {
-                target: upper_view.header
+            /*PropertyChanges {
+                target:
                 height: root.height
-            }
+            }*/
         },
 
         State {
@@ -27,37 +27,37 @@ Item {
             // connection established
             // header takes the whole upper view
             // please wait until next event label
-            PropertyChanges {
+           /* PropertyChanges {
                 when: no_info_button.pressed === true
                 target: uv_header_section
                 height: uv_header_section.parent.height
-            }
+            }*/
         },
 
         State {
             name: "INCOMING_INTERACTION"
             // next section takes the upper ViewSection
             // NEXT label on top
-            PropertyChanges {
+            /*PropertyChanges {
                 target: uv_header_section
                 height: uv_header_section.parent.height * 0.1
-            }
+            }*/
         },
 
         State {
             name: "ACTIVE_INTERACTION"
-            PropertyChanges {
+            /*PropertyChanges {
                 target: uv_header_section
                 height: uv_header_section.parent.height * 0.1
-            }
+            }*/
         },
 
         State {
             name: "ACTIVE_AND_INCOMING_INTERACTIONS"
-            PropertyChanges {
+            /*PropertyChanges {
                 target: uv_header_section
                 height: uv_header_section.parent.height * 0.1
-            }
+            }*/
         }
     ]
 }

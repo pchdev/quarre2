@@ -59,6 +59,9 @@ ApplicationWindow {
         ApplicationStates
         {
             id: quarre_states
+            Component.onCompleted: {
+                quarre_application.states = quarre_states.states
+            }
         }
 
         ApplicationTransitions
