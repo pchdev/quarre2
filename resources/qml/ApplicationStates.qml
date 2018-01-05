@@ -82,6 +82,7 @@ Item {
                 target: upper_view.current
                 height: upper_view.height * 0.9
                 y: upper_view.header.height
+                visible: true
                 state: "FULL_VIEW"
             }
 
@@ -102,8 +103,10 @@ Item {
             PropertyChanges {
                 target: upper_view.next
                 height: upper_view.height * 0.25
+                visible: true
                 state: "REDUCED_VIEW"
             }
+
             PropertyChanges {
                 target: upper_view.current
                 height: upper_view.height * 0.65

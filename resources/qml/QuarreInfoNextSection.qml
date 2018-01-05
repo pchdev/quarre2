@@ -16,30 +16,38 @@ Rectangle {
                 target: next_interaction_label
                 verticalAlignment: Text.AlignTop
                 horizontalAlignment: Text.AlignHCenter
+                height: next.height * 0.15
                 text: "NEXT INTERACTION"
                 font.pointSize: 25
                 y: next_interaction_label.parent.height * 0.1
-                height: next.height * 0.15
                 x: 0
             }
 
             PropertyChanges {
                 target: next_interaction_circle
-                anchors.horizontalCenter: next.horizontalCenter
-                anchors.top: next_interaction_label.bottom
-                anchors.verticalCenter: undefined
                 height: next.height * 0.2
                 width: next.height * 0.2
                 radius: (next.width * 0.2)/2
                 x: 0
             }
 
+            AnchorChanges {
+                target: next_interaction_circle
+                anchors.horizontalCenter: next.horizontalCenter
+                anchors.top: next_interaction_label.bottom
+                anchors.verticalCenter: undefined
+            }
+
             PropertyChanges {
+                target: next_interaction_title
+                font.pointSize: 14
+                anchors.topMargin: next.height * 0.1
+            }
+
+            AnchorChanges {
                 target: next_interaction_title
                 anchors.top: next_interaction_circle.bottom
                 anchors.verticalCenter: undefined
-                anchors.topMargin: next.height * 0.1
-                font.pointSize: 14
             }
         },
 
@@ -48,21 +56,43 @@ Rectangle {
             PropertyChanges {
                 target: next_interaction_label
                 text: "NEXT"
+                font.pointSize: 20
                 verticalAlignment: Text.AlignVCenter
-                x: width * 0.04
+                x: next_interaction_label.width * 0.04
+            }
+
+            PropertyChanges {
+                target: next_interaction_title
+                width: next_interaction_title.parent.width * 0.47
+                height: next_interaction_title.parent.height
+                x: next_interaction_title.width*0.55
+                font.pointSize: 12
+            }
+
+            AnchorChanges {
+                target: next_interaction_title
+                anchors.top: next_interaction_title.parent.top
+                anchors.bottom: next_interaction_title.parent.bottom
+                anchors.left: next_interaction_title.parent.left
+                anchors.right: next_interaction_title.parent.right
             }
 
             PropertyChanges {
                 target: next_interaction_circle
-                anchors.horizontalCenter: next_interaction_label.horizontalCenter
-                anchors.top: next_interaction_label.bottom
-                height: next_interaction_circle.parent.height * 0.2
-                width: next_interaction_circle.parent.height * 0.2
-                radius: next_interaction_circle.width / 2
-                x: 0
+                width: next_interaction_circle.parent.height * 0.8
+                height: next_interaction_circle.parent.height * 0.8
+                radius: next_interaction_circle.width/2
+                x: next_interaction_circle.parent.width * 0.8
+            }
+
+            AnchorChanges {
+                target: next_interaction_circle
+                anchors.verticalCenter: next_interaction_circle.parent.verticalCenter
             }
         }
     ]
+
+    // ------------------------------------------------------------------------------------------------
 
     Timer {
         id: next_interaction_timer
@@ -87,10 +117,6 @@ Rectangle {
         font.pointSize: 20
         font.bold: true
         textFormat: Text.PlainText
-        MouseArea {
-            id: no_next_button
-            anchors.fill: parent
-        }
     }
 
     Text {
