@@ -7,8 +7,11 @@
         <file>QuarreInfoHeader.qml</file>
         <file>QuarreInfoNextSection.qml</file>
         <file>QuarreInfoCurrentSection.qml</file>
-        <file>QuarreLowerDefault.qml</file>
         <file>ApplicationStates.qml</file>
         <file>ApplicationTransitions.qml</file>
+        <file>QuarreModuleRegistration.qml</file>
+        <file>QuarreLowerDefault.qml</file>
+    </qresource>
+    <qresource prefix="/modules">
     </qresource>
 </RCC>

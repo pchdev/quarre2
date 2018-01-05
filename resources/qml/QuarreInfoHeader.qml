@@ -2,13 +2,12 @@ import QtQuick 2.0
 
 Rectangle {
     // FIRST UPPER VIEW SECTION
-    // used to display time elapsed since the beginning of scenario
-    property int count: 0
+    property alias  timer:       header_timer
+    property alias  scenario:    header_scenario_label
+    property alias  scene:       header_scene_label
+    property int    count:       0
 
-    property alias timer:       header_timer
-    property alias scenario:    header_scenario_label
-    property alias scene:       header_scene_label
-
+    //-------------------------------------------------------------------------------------------------------
     states: [
 
         State {
@@ -56,6 +55,8 @@ Rectangle {
         }
 
     ]
+
+    //-------------------------------------------------------------------------------------------------------
 
     function int_to_time(value) {
 
@@ -147,6 +148,45 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
         color: "#80000000"
+
+        SequentialAnimation {
+            running: true
+            loops: Animation.Infinite
+
+            ParallelAnimation {
+                NumberAnimation {
+                    target: header_circle
+                    property: "width"
+                    easing.type: Easing.InOutSine
+                    to: header_circle.parent.width * 0.35
+                    duration: 2000
+                }
+                NumberAnimation {
+                    target: header_circle
+                    property: "opacity"
+                    to: 0.1
+                    easing.type: Easing.InOutSine
+                    duration: 2000
+                }
+            }
+
+            ParallelAnimation {
+                NumberAnimation {
+                    target: header_circle
+                    property: "width"
+                    easing.type: Easing.InOutSine
+                    to: header_circle.parent.width * 0.4
+                    duration: 2000
+                }
+                NumberAnimation {
+                    target: header_circle
+                    property: "opacity"
+                    to: 1.0
+                    easing.type: Easing.InOutSine
+                    duration: 2000
+                }
+            }
+        }
     }
 
 }

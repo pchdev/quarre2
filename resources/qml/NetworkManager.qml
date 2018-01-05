@@ -13,6 +13,26 @@ Item {
         name: deviceName
     }*/
 
+    Ossia.Parameter {
+        id: scenario_name
+        node: "/scenario/name"
+        critical: true
+        valueType: Ossia.Type.String
+        onValueChanged: {
+            upper_view.header.scenario.text = value;
+        }
+    }
+
+    Ossia.Parameter {
+        id: scenario_scene_name
+        node: "/scenario/scene/name"
+        critical: true
+        valueType: Ossia.Type.String
+        onValueChanged: {
+            upper_view.header.scene.text = value;
+        }
+    }
+
     Ossia.Signal {
         id: scenario_start
         node: "/scenario/start"
@@ -43,7 +63,16 @@ Item {
         critical: true
         onTriggered: {
             upper_view.header.timer.stop();
+        }
+    }
+
+    Ossia.Signal {
+        id: scenario_reset
+        node: "/scenario/reset"
+        critical: true
+        onTriggered: {
             upper_view.header.count = 0;
+            upper_view.header.timer.stop();
         }
     }
 
