@@ -40,8 +40,8 @@ Item {
 
     SensorGesture {
         id: sensor_gesture
-        enabled: true
-        gestures: ["QtSensors.whip"]
+        enabled: false
+        gestures: []
         onDetected: {
             console.log(gesture);
         }

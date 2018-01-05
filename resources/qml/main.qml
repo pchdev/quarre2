@@ -42,10 +42,18 @@ ApplicationWindow {
         id:         quarre_application
         height:     parent.height
         width:      parent.width
+        focus:      true
 
         property alias network: ossia_net
         property alias upper_view: upper_view
         property alias lower_view: lower_view
+
+        // preventing back key to quit application
+        Keys.onReleased:
+        {
+            if(event.key === Qt.Key_Back)
+                event.accepted = true;
+        }
 
         NetworkManager
         {
