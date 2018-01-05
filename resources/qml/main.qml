@@ -55,6 +55,8 @@ ApplicationWindow {
             wsPort: 5678
         }
 
+        Sensors {}
+
         ApplicationStates
         {
             id: quarre_states

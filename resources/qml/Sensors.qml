@@ -4,21 +4,46 @@ import Ossia 1.0 as Ossia
 
 Item {
 
-    /*ProximityReading {
-        Ossia.Property on near {
-            node: '/phone/sensors/proximity'
+    Timer {
+        // sensor polling timer
+        id: sensor_poller
+        running: true
+        interval: 50
+        onTriggered: {
+            console.log(accel_sensor.reading.x);
+           // ossia_net.accelerometer_x.value = accel_sensor.reading.x;
+            //ossia_net.accelerometer_y.value = accel_sensor.reading.y;
+            //ossia_net.accelerometer_z.value = accel_sensor.reading.z;
         }
     }
 
-    IRProximityReading {
-        Ossia.Property on reflectance {
-            node: '/phone/sensors/ir-proximity'
-        }
+    Accelerometer {
+        id: accel_sensor
+        active: true
     }
 
-    LightReading {
-        Ossia.Property on illuminance {
-            node: '/phone/sensors/light'
+
+    ProximitySensor {
+        active: false
+
+    }
+
+    IRProximitySensor {
+        active: false
+
+    }
+
+    LightSensor {
+        active: false
+
+    }
+
+    SensorGesture {
+        id: sensor_gesture
+        enabled: true
+        gestures: ["QtSensors.whip"]
+        onDetected: {
+            console.log(gesture);
         }
-    }*/
+    }
 }

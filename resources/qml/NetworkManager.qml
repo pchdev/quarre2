@@ -77,7 +77,7 @@ Item {
         id: interactions_next_begin
         node: "/interactions/next/begin"
         critical: true
-        valueType: Ossia.Type.Integer
+        valueType: Ossia.Type.Int
 
         onValueChanged: {
 
@@ -98,13 +98,47 @@ Item {
         node: "/interactions/next/cancel"
         critical: true
         valueType: Ossia.Type.Int
+
+        onValueChanged: {
+            console.log(quarre_application.state);
+
+            if( quarre_application.state === "INCOMING_INTERACTION")
+            {
+                quarre_application.state = "IDLE";
+                upper_view.next.count = 0;
+                upper_view.next.timer.stop;
+            }
+            else if ( quarre_application.state === "ACTIVE_AND_INCOMING_INTERACTION")
+            {
+                quarre_application.state = "ACTIVE_INTERACTION";
+                upper_view.next.count = 0;
+                upper_view.next.timer.stop();
+            }
+
+        }
     }
 
     Ossia.Parameter {
         id: interactions_current_end
         node: "/interactions/current/end"
         critical: true
-        valueType: Ossia.Type.Integer
+        valueType: Ossia.Type.Int
+
+        onValueChanged: {
+
+            if(quarre_application.state === "ACTIVE_INTERACTION")
+            {
+                quarre_application.state = "IDLE";
+                upper_view.current.count = 0;
+                upper_view.current.timer.stop();
+            }
+            else if (quarre_application.state === "ACTIVE_AND_INCOMING_INTERACTION")
+            {
+                quarre_application.state = "INCOMING_INTERACTION";
+                upper_view.current.count = 0;
+                upper_view.current.timer.stop();
+            }
+        }
     }
 
     Component.onCompleted: {

@@ -28,6 +28,11 @@ Item {
             // header takes the whole upper view
             // please wait until next event label
             PropertyChanges {
+                target: upper_view
+                opacity: 0.77
+            }
+
+            PropertyChanges {
                 target: upper_view.header
                 height: upper_view.height
                 state: "FULL_VIEW"
