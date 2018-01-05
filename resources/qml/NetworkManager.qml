@@ -13,11 +13,11 @@ Item {
         name: deviceName
     }*/
 
-    Ossia.Parameter {
+    Ossia.Signal {
         id: scenario_start
         node: "/scenario/start"
         critical: true
-        valueType: Ossia.Type.Impulse
+        onTriggered: upper_view.header.timer.start();
     }
 
     Ossia.Parameter {
@@ -26,7 +26,7 @@ Item {
         id: scenario_stop
         node: "/scenario/stop"
         critical: true
-        valueType: Ossia.Type.Integer
+        valueType: Ossia.Type.Int
     }
 
     Ossia.Parameter {
@@ -34,14 +34,17 @@ Item {
         id: scenario_pause
         node: "/scenario/pause"
         critical: true
-        valueType: Ossia.Type.Integer
+        valueType: Ossia.Type.Int
     }
 
-    Ossia.Parameter {
+    Ossia.Signal {
         id: scenario_end
         node: "/scenario/end"
         critical: true
-        valueType: Ossia.Type.Impulse
+        onTriggered: {
+            upper_view.header.timer.stop();
+            upper_view.header.count = 0;
+        }
     }
 
     Ossia.Parameter {
@@ -49,6 +52,25 @@ Item {
         node: "/interactions/next/incoming"
         critical: true
         valueType: Ossia.Type.Vec3f
+        onValueChanged: {
+
+            console.log(quarre_application.state);
+
+            if(quarre_application.state === "IDLE")
+            {
+                quarre_application.state = "INCOMING_INTERACTION";
+                console.log("incoming interaction");
+            }
+
+            else if(quarre_application.state === "ACTIVE_INTERACTION")
+            {
+                quarre_application.state = "ACTIVE_AND_INCOMING_INTERACTION";
+                console.log("active and incoming interactions");
+            }
+
+            //upper_view.next.count = value[1];
+            upper_view.next.timer.start();
+        }
     }
 
     Ossia.Parameter {
@@ -56,13 +78,26 @@ Item {
         node: "/interactions/next/begin"
         critical: true
         valueType: Ossia.Type.Integer
+
+        onValueChanged: {
+
+            console.log(quarre_application.state);
+
+            if(     quarre_application.state === "IDLE" ||
+                    quarre_application.state === "INCOMING_INTERACTION")
+            {
+                quarre_application.state = "ACTIVE_INTERACTION";
+                upper_view.current.timer.start();
+                console.log("active interaction");
+            }
+        }
     }
 
     Ossia.Parameter {
         id: interactions_next_cancel
         node: "/interactions/next/cancel"
         critical: true
-        valueType: Ossia.Type.Integer
+        valueType: Ossia.Type.Int
     }
 
     Ossia.Parameter {

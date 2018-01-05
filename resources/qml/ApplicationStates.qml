@@ -27,37 +27,84 @@ Item {
             // connection established
             // header takes the whole upper view
             // please wait until next event label
-           /* PropertyChanges {
-                when: no_info_button.pressed === true
-                target: uv_header_section
-                height: uv_header_section.parent.height
-            }*/
+            PropertyChanges {
+                target: upper_view.header
+                height: upper_view.height
+                state: "FULL_VIEW"
+            }
+
+            PropertyChanges {
+                target: upper_view.next
+                visible: false
+            }
+            PropertyChanges {
+                target: upper_view.current
+                visible: false
+            }
         },
 
         State {
             name: "INCOMING_INTERACTION"
             // next section takes the upper ViewSection
-            // NEXT label on top
-            /*PropertyChanges {
-                target: uv_header_section
-                height: uv_header_section.parent.height * 0.1
-            }*/
+            PropertyChanges {
+                target: upper_view.header
+                height: upper_view.height * 0.1
+                state: "REDUCED_VIEW"
+
+            }
+
+            PropertyChanges {
+                target: upper_view.next
+                height: upper_view.height * 0.9
+                state: "FULL_VIEW"
+            }
+
+            PropertyChanges {
+                target: upper_view.current
+                visible: false
+            }
         },
 
         State {
             name: "ACTIVE_INTERACTION"
-            /*PropertyChanges {
-                target: uv_header_section
-                height: uv_header_section.parent.height * 0.1
-            }*/
+            PropertyChanges {
+                target: upper_view.header
+                height: upper_view.height * 0.1
+                state: "REDUCED_VIEW"
+            }
+
+            PropertyChanges {
+                target: upper_view.current
+                height: upper_view.height * 0.9
+                y: upper_view.header.height
+                state: "FULL_VIEW"
+            }
+
+            PropertyChanges {
+                target: upper_view.next
+                visible: false
+            }
         },
 
         State {
             name: "ACTIVE_AND_INCOMING_INTERACTIONS"
-            /*PropertyChanges {
-                target: uv_header_section
-                height: uv_header_section.parent.height * 0.1
-            }*/
+            PropertyChanges {
+                target: upper_view.header
+                height: upper_view.height * 0.1
+                state: "REDUCED_VIEW"
+            }
+
+            PropertyChanges {
+                target: upper_view.next
+                height: upper_view.height * 0.25
+                state: "REDUCED_VIEW"
+            }
+            PropertyChanges {
+                target: upper_view.current
+                height: upper_view.height * 0.65
+                y: upper_view.header.height + upper_view.next.height
+                state: "REDUCED_VIEW"
+            }
         }
     ]
 }

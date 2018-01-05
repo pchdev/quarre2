@@ -5,6 +5,22 @@ Rectangle {
     // used to display time elapsed since the beginning of scenario
     property int count: 0
 
+    property alias timer:       header_timer
+    property alias scenario:    header_scenario_label
+    property alias scene:       header_scene_label
+
+    states: [
+
+        State {
+            name: "FULL_VIEW"
+        },
+
+        State {
+            name: "REDUCED_VIEW"
+        }
+
+    ]
+
     function int_to_time(value) {
 
         var min = Math.floor(value/60), sec = value % 60;
@@ -24,7 +40,7 @@ Rectangle {
     Timer {
         id: header_timer
         interval: 1000
-        running: true
+        running: false
         repeat: true
         onTriggered: {
             parent.count += 1;
@@ -55,7 +71,7 @@ Rectangle {
         // a critical 'scenario start' message
         // and stopped at 'scenario end' message
         id: header_timer_label
-        text: "02:55"
+        text: "00:00"
         color: "#ffffff"
         font.pixelSize: 40
         anchors.fill: parent

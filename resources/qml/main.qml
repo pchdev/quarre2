@@ -40,7 +40,6 @@ ApplicationWindow {
     Item { //       QUARRE APPLICATION BASE
 
         id:         quarre_application
-        state:      "CONNECTING"
         height:     parent.height
         width:      parent.width
 
@@ -61,6 +60,7 @@ ApplicationWindow {
             id: quarre_states
             Component.onCompleted: {
                 quarre_application.states = quarre_states.states
+                quarre_application.state = "IDLE"
             }
         }
 

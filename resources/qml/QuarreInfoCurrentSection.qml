@@ -1,7 +1,20 @@
 import QtQuick 2.0
 
 Rectangle {
-    property int count: 47
+
+    property int count: 0
+    property alias timer: current_interaction_timer
+
+    states: [
+
+        State {
+            name: "FULL_VIEW"
+        },
+
+        State {
+            name: "REDUCED_VIEW"
+        }
+    ]
 
     Timer {
         id: current_interaction_timer
