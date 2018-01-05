@@ -77,6 +77,9 @@ ApplicationWindow {
         ApplicationTransitions
         {
             id: quarre_transitions
+            Component.onCompleted: {
+                quarre_application.transitions = quarre_transitions.transitions
+            }
         }
 
         //---------------------------------------------------------------------------------------------
@@ -105,12 +108,15 @@ ApplicationWindow {
                 width: parent.width
                 height: parent.height * 0.55
                 color: "#000000"
-                opacity: 0.9
+                opacity: 0.80
 
                 QuarreLowerDefault
                 {
                     id: lower_default
                     anchors.fill: parent
+                    opacity: 0.9
+                    color: "#000000"
+
                 }
             }
         }

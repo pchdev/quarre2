@@ -40,11 +40,11 @@ Item {
 
             PropertyChanges {
                 target: upper_view.next
-                visible: false
+                x: -upper_view.width
             }
             PropertyChanges {
                 target: upper_view.current
-                visible: false
+                x: -upper_view.width
             }
         },
 
@@ -61,6 +61,7 @@ Item {
             PropertyChanges {
                 target: upper_view.next
                 height: upper_view.height * 0.9
+                x: 0
                 state: "FULL_VIEW"
             }
 
