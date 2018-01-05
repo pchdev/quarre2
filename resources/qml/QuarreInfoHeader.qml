@@ -18,22 +18,36 @@ Rectangle {
                 height: header_scenario_label.font.pixelSize
                 anchors.fill: undefined
                 horizontalAlignment: Text.AlignHCenter
-                anchors.bottom: header_scene_label.top
                 anchors.leftMargin: 0
             }
+
+            AnchorChanges {
+                target: header_scenario_label
+                anchors.bottom: header_scene_label.top
+            }
+
             PropertyChanges {
                 target: header_scene_label
                 height: header_scene_label.font.pixelSize
                 anchors.fill: undefined
-                anchors.verticalCenter: header_scene_label.parent.verticalCenter
                 horizontalAlignment: Text.AlignHCenter
                 anchors.rightMargin: 0
             }
+
+            AnchorChanges {
+                target: header_scene_label
+                anchors.verticalCenter: header_scene_label.parent.verticalCenter
+            }
+
             PropertyChanges {
                 target: header_timer_label
                 height: header_timer_label.font.pixelSize
-                anchors.top: header_scene_label.bottom
                 anchors.fill: undefined
+            }
+
+            AnchorChanges {
+                target: header_timer_label
+                anchors.top: header_scene_label.bottom
             }
         },
 
