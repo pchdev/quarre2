@@ -9,6 +9,23 @@ Rectangle {
 
         State {
             name: "FULL_VIEW"
+            PropertyChanges {
+                target: current_interaction_circle
+                width: current.width * 0.38
+                height: current_interaction_circle.width
+                radius: current_interaction_circle.width/2
+                y: next.width * 0.0125
+            }
+
+            PropertyChanges {
+                target: current_interaction_title
+                y: current.width * 0.27
+            }
+
+            PropertyChanges {
+                target: current_interaction_description
+                y: current.width * 0.35
+            }
         },
 
         State {
@@ -47,7 +64,7 @@ Rectangle {
             // the countdown itself
             id: current_interaction_countdown_label
             anchors.fill: parent
-            text: "47"
+            text: "0"
             color: "#ffffff"
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter

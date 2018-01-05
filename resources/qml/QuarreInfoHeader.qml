@@ -13,6 +13,28 @@ Rectangle {
 
         State {
             name: "FULL_VIEW"
+            PropertyChanges {
+                target: header_scenario_label
+                height: header_scenario_label.font.pixelSize
+                anchors.fill: undefined
+                horizontalAlignment: Text.AlignHCenter
+                anchors.bottom: header_scene_label.top
+                anchors.leftMargin: 0
+            }
+            PropertyChanges {
+                target: header_scene_label
+                height: header_scene_label.font.pixelSize
+                anchors.fill: undefined
+                anchors.verticalCenter: header_scene_label.parent.verticalCenter
+                horizontalAlignment: Text.AlignHCenter
+                anchors.rightMargin: 0
+            }
+            PropertyChanges {
+                target: header_timer_label
+                height: header_timer_label.font.pixelSize
+                anchors.top: header_scene_label.bottom
+                anchors.fill: undefined
+            }
         },
 
         State {
@@ -100,6 +122,17 @@ Rectangle {
         anchors.fill: parent
         anchors.rightMargin: parent.width *0.05
         antialiasing: true
+    }
+
+    Rectangle {
+        // aesthetics
+        id: header_circle
+        width: parent.width*0.4
+        height: width
+        radius: width/2
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.horizontalCenter: parent.horizontalCenter
+        color: "#80000000"
     }
 
 }
