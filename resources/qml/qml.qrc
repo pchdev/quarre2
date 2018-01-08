@@ -11,7 +11,11 @@
         <file>ApplicationTransitions.qml</file>
         <file>QuarreModuleRegistration.qml</file>
         <file>QuarreLowerDefault.qml</file>
+        <file>QuarreModuleTouchSpat.qml</file>
+        <file>QuarreModuleSensorSpat.qml</file>
+        <file>QuarreModulePads.qml</file>
+        <file>QuarreModuleSliders.qml</file>
+        <file>Maths.js</file>
     </qresource>
-    <qresource prefix="/modules">
-    </qresource>
+    <qresource prefix="/modules"/>
 </RCC>

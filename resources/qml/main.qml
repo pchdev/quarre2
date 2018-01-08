@@ -37,7 +37,8 @@ ApplicationWindow {
 
     // --------------------------------------------------------------------------------------------------
 
-    Item { //       QUARRE APPLICATION BASE
+    Item
+    { //            QUARRE APPLICATION BASE
 
         id:         quarre_application
         height:     parent.height
@@ -110,13 +111,12 @@ ApplicationWindow {
                 color: "#000000"
                 opacity: 0.80
 
-                QuarreLowerDefault
+                QuarreModuleTouchSpat
                 {
                     id: lower_default
                     anchors.fill: parent
                     opacity: 0.9
                     color: "#000000"
-
                 }
             }
         }

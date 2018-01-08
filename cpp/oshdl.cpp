@@ -8,6 +8,7 @@ platform_hdl::platform_hdl()
     // NEED TO INTEGRATE ANDROIDJNI ERROR MANAGEMENT!!
     /* ANDROID */
 
+
 #ifdef Q_OS_ANDROID
 
     // CATCH VIBRATOR DEVICE

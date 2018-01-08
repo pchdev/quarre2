@@ -30,6 +30,24 @@ Item {
                     duration: 250
                 }
             }
+        },
+
+        Transition {
+            from: "INCOMING_INTERACTION"
+            to: "ACTIVE_INTERACTION"
+            reversible: true
+
+            ParallelAnimation {
+                NumberAnimation {
+                    target: upper_view.next
+                    property: "height"
+                    duration: 250
+                }
+
+            }
+
+
         }
+
     ]
 }
