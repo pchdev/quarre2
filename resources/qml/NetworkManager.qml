@@ -80,24 +80,22 @@ Item {
         id: interactions_next_incoming
         node: "/interactions/next/incoming"
         critical: true
+        // arguments are: x (interaction_index) y (interaction_length) z (countdown)
         valueType: Ossia.Type.Vec3f
         onValueChanged: {
-
-            console.log(quarre_application.state);
 
             if(quarre_application.state === "IDLE")
             {
                 quarre_application.state = "INCOMING_INTERACTION";
-                console.log("incoming interaction");
+
             }
 
             else if(quarre_application.state === "ACTIVE_INTERACTION")
             {
                 quarre_application.state = "ACTIVE_AND_INCOMING_INTERACTION";
-                console.log("active and incoming interactions");
             }
 
-            //upper_view.next.count = value[1];
+            upper_view.next.count = value.z;
             upper_view.next.timer.start();
         }
     }
@@ -106,18 +104,17 @@ Item {
         id: interactions_next_begin
         node: "/interactions/next/begin"
         critical: true
-        valueType: Ossia.Type.Int
+        valueType: Ossia.Type.Vec2f
 
         onValueChanged: {
-
-            console.log(quarre_application.state);
 
             if(     quarre_application.state === "IDLE" ||
                     quarre_application.state === "INCOMING_INTERACTION")
             {
                 quarre_application.state = "ACTIVE_INTERACTION";
+                upper_view.count = value.y;
                 upper_view.current.timer.start();
-                console.log("active interaction");
+                lower_view_stack.currentIndex = value.x;
             }
         }
     }
@@ -129,7 +126,6 @@ Item {
         valueType: Ossia.Type.Int
 
         onValueChanged: {
-            console.log(quarre_application.state);
 
             if( quarre_application.state === "INCOMING_INTERACTION")
             {
@@ -166,7 +162,7 @@ Item {
                 quarre_application.state = "INCOMING_INTERACTION";
                 upper_view.current.count = 0;
                 upper_view.current.timer.stop();
-            }
+            }            
         }
     }
 

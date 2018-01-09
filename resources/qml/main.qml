@@ -1,6 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.0
+import QtQuick.Layouts 1.3
 
 ApplicationWindow {
 
@@ -109,14 +110,19 @@ ApplicationWindow {
                 width: parent.width
                 height: parent.height * 0.55
                 color: "#000000"
-                opacity: 0.80
 
-                QuarreModuleTouchSpat
-                {
-                    id: lower_default
+                StackLayout {
+                    id: lower_view_stack
+                    currentIndex: 0
                     anchors.fill: parent
-                    opacity: 0.9
-                    color: "#000000"
+
+                    QuarreLowerDefault { opacity: 0.9 }
+                    QuarreModuleRegistration { opacity: 0.9 }
+                    QuarreModuleTouchSpat { opacity: 0.9 }
+                    QuarreModuleSensorSpat { opacity: 0.9 }
+                    QuarreModuleSliders { opacity: 0.9 }
+                    QuarreModulePads { opacity: 0.9 }
+                    QuarreModuleGestures { opacity: 0.9 }
                 }
             }
         }

@@ -42,11 +42,6 @@ Rectangle {
                     color: "gray"
                     x: SpatMaths.speakerpos_x(index, nspeakers)*octo_circle.width - radius
                     y: SpatMaths.speakerpos_y(index, nspeakers)*octo_circle.width - radius
-
-                    Component.onCompleted: {
-                        console.log(x);
-                        console.log(y);
-                    }
                 }
             }
 

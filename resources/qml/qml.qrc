@@ -16,6 +16,9 @@
         <file>QuarreModulePads.qml</file>
         <file>QuarreModuleSliders.qml</file>
         <file>Maths.js</file>
+        <file>QuarreModuleGestures.qml</file>
+        <file>QuarreModuleTransitions.qml</file>
+        <file>QuarreModuleTextViewer.qml</file>
     </qresource>
     <qresource prefix="/modules"/>
 </RCC>
