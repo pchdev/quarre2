@@ -102,8 +102,7 @@ ApplicationWindow {
                 id: upper_view
                 width: parent.width
                 height: parent.height * 0.45
-                color: "#000000"
-                opacity: 0.7
+                color: "black"
             }
 
             Rectangle
@@ -112,7 +111,8 @@ ApplicationWindow {
                 y: upper_view.height
                 width: parent.width
                 height: parent.height * 0.55
-                color: "#000000"
+                color: "black"
+                opacity: 0.9
 
                 StackLayout
                 {
@@ -120,7 +120,7 @@ ApplicationWindow {
                     currentIndex: 0
                     anchors.fill: parent
 
-                    QuarreLowerDefault { opacity: 0.9 }
+                    QuarreLowerDefault { color: "transparent" }
                     QuarreModuleRegistration { opacity: 0.9 }
                     QuarreModuleTouchSpat { opacity: 0.9 }
                     QuarreModuleSensorSpat { opacity: 0.9 }

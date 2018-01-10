@@ -4,7 +4,7 @@ import Ossia 1.0 as Ossia
 
 Item {
 
-    property list used_gestures: ["whip", "cover"]
+    property var used_gestures: ["whip", "cover"]
 
     SensorGesture {
         id: sensor_gesture
@@ -41,9 +41,7 @@ Item {
             }
 
             else if(!value && idx >= 0)
-            {
                 sensor_gesture.gestures.splice(idx, 1);
-            }
 
         }
     }
@@ -83,10 +81,7 @@ Item {
             }
 
             else if(!value && idx >= 0)
-            {
                 sensor_gesture.gestures.splice(idx, 1);
-            }
-
         }
     }
 

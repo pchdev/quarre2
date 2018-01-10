@@ -7,7 +7,7 @@ Rectangle {
     // the label of the next interaction to come
     property int count: 5
     property alias timer: next_interaction_timer
-    property alias title: next_interaction_title.title
+    property alias title: next_interaction_title.text
 
     states: [
 

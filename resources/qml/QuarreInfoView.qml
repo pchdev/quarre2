@@ -17,8 +17,7 @@ Rectangle {
         id: quarre_header
         width: parent.width
         height: parent.height*0.1
-        color: "#000000"
-        opacity: 0.9
+        color: "transparent"
     }
 
     QuarreInfoNextSection {

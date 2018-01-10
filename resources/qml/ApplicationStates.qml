@@ -29,7 +29,7 @@ Item {
             // please wait until next event label
             PropertyChanges {
                 target: upper_view
-                opacity: 0.77
+                opacity: 0.92
             }
 
             PropertyChanges {
