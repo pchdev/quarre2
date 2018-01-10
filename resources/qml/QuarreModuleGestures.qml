@@ -4,6 +4,8 @@ import Ossia 1.0 as Ossia
 
 Item {
 
+    property list used_gestures: ["whip", "cover"]
+
     SensorGesture {
         id: sensor_gesture
         enabled: false
@@ -100,8 +102,6 @@ Item {
         critical: true
     }
 
-
-
     Component.onCompleted: {
         var gestures = sensor_gesture.availableGestures
         for(var i = 0; i < gestures.length; ++i)
@@ -109,6 +109,8 @@ Item {
             console.log(gestures[i])
             if(gestures[i] === "QtSensors.whip")
                 gestures_whip_available.value = true
+            else if(gestures[i] === "QtSensors.cover")
+                gestures_cover_available.value = true
         }
     }
 }

@@ -57,6 +57,12 @@ ApplicationWindow {
                 event.accepted = true;
         }
 
+        InteractionManager
+        {
+            id: interaction_manager
+            path: "assets/interactions.json"
+        }
+
         NetworkManager
         {
             id: ossia_net
