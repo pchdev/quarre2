@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>Sensors.qml</file>
         <file>main.qml</file>
         <file>NetworkManager.qml</file>
         <file>QuarreInfoView.qml</file>

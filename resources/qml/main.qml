@@ -60,7 +60,6 @@ ApplicationWindow {
         InteractionManager
         {
             id: interaction_manager
-            path: "assets/interactions.json"
         }
 
         NetworkManager
@@ -70,8 +69,6 @@ ApplicationWindow {
             oscPort: 1234
             wsPort: 5678
         }
-
-        Sensors {}
 
         ApplicationStates
         {
@@ -117,7 +114,8 @@ ApplicationWindow {
                 height: parent.height * 0.55
                 color: "#000000"
 
-                StackLayout {
+                StackLayout
+                {
                     id: lower_view_stack
                     currentIndex: 0
                     anchors.fill: parent
