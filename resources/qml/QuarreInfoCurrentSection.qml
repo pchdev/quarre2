@@ -2,10 +2,10 @@ import QtQuick 2.0
 
 Rectangle {
 
-    property int count: 0
-    property alias timer: current_interaction_timer
-    property alias title: current_interaction_title.text
-    property alias description: current_interaction_description.text
+    property int    count:          0
+    property alias  timer:          current_interaction_timer
+    property alias  title:          current_interaction_title.text
+    property alias  description:    current_interaction_description.text
 
     states: [
 

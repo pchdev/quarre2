@@ -26,6 +26,7 @@ Rectangle {
         height: parent.height*0.25
         y: quarre_header.height
         color: "#141f1e"
+        opacity: 0.7
     }
 
     QuarreInfoCurrentSection {
@@ -33,6 +34,7 @@ Rectangle {
         width: parent.width
         height: parent.height*0.65
         y: parent.height*0.35
-        color: "#e60d0000"
+        color: "#110000"
+        opacity: 0.7
     }
 }

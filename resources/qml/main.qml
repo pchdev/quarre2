@@ -103,6 +103,7 @@ ApplicationWindow {
                 width: parent.width
                 height: parent.height * 0.45
                 color: "black"
+                opacity: 0.9
             }
 
             Rectangle
@@ -122,7 +123,7 @@ ApplicationWindow {
 
                     QuarreLowerDefault { color: "transparent" }
                     QuarreModuleRegistration { opacity: 0.9 }
-                    QuarreModuleTouchSpat { opacity: 0.9 }
+                    QuarreModuleTouchSpat { color: "transparent" }
                     QuarreModuleSensorSpat { opacity: 0.9 }
                     QuarreModuleSliders { opacity: 0.9 }
                     QuarreModulePads { opacity: 0.9 }

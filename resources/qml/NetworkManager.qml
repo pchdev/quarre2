@@ -21,7 +21,7 @@ Item {
         onValueChanged: {
             upper_view.header.scenario.text = value;
         }
-    }
+    }            
 
     Ossia.Parameter {
         id: scenario_scene_name

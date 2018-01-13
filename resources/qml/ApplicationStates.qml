@@ -55,7 +55,7 @@ Item {
                 target: upper_view.header
                 height: upper_view.height * 0.1
                 state: "REDUCED_VIEW"
-
+                color: "black"
             }
 
             PropertyChanges {
@@ -77,6 +77,7 @@ Item {
                 target: upper_view.header
                 height: upper_view.height * 0.1
                 state: "REDUCED_VIEW"
+                color: "black"
             }
 
             PropertyChanges {
@@ -99,6 +100,7 @@ Item {
                 target: upper_view.header
                 height: upper_view.height * 0.1
                 state: "REDUCED_VIEW"
+                color: "black"
             }
 
             PropertyChanges {
