@@ -1,10 +1,19 @@
 import QtQuick 2.0
 import Ossia 1.0 as Ossia
+import io.quarre.org 1.0
 
 Item {
     property int oscPort: 1234
     property int wsPort: 5678
     property string deviceName: "quarre-remote"
+
+    PlatformHdl {
+        id: os_hdl
+        Component.onCompleted: {
+            os_hdl.vibrate(100);
+            os_hdl.register_zeroconf(deviceName, "_oscjson._tcp", wsPort);
+        }
+    }
 
    /* Ossia.OSCQueryServer {
         id: device
@@ -107,6 +116,14 @@ Item {
         critical: true
         valueType: Ossia.Type.Int
         onValueChanged: interaction_manager.end_current();
+    }
+
+    Ossia.Parameter {
+        id: interactions_current_force
+        node: "/interactions/current/force"
+        critical: true
+        valueType: Ossia.Type.Int
+        onValueChanged: interaction_manager.force_current(value);
     }
 
     Component.onCompleted: {

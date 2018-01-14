@@ -5,46 +5,53 @@ using namespace quarre;
 
 platform_hdl::platform_hdl()
 {
-    // NEED TO INTEGRATE ANDROIDJNI ERROR MANAGEMENT!!
-    /* ANDROID */
-
 
 #ifdef Q_OS_ANDROID
 
-    // CATCH VIBRATOR DEVICE
-    QAndroidJniObject vibr_string = QAndroidJniObject::fromString("vibrator");
-    QAndroidJniObject vibr_activity = QAndroidJniObject::callStaticObjectMethod("org/qtproject/qt5/android/QtNative", "activity", "()Landroid/app/Activity;");
-    QAndroidJniObject vibr_app_context = vibr_activity.callObjectMethod("getApplicationContext", "()Landroid/content/Context;");
-    m_vibrator = vibr_app_context.callObjectMethod("getSystemService", "(Ljava/lang/String;)Ljava/lang/Object;", vibr_string.object<jstring>());
+    auto activity   = QAndroidJniObject::callStaticObjectMethod("org/qtproject/qt5/android/QtNative", "activity", "()Landroid/app/Activity;");
+    auto ctx        = activity.callObjectMethod("getApplicationContext", "()Landroid/content/Context;");
 
-    // CATCH & ACTIVATE WAKELOCK
-    QAndroidJniObject wl_activity = QAndroidJniObject::callStaticObjectMethod("org/qtproject/qt5/android/QtNative", "activity", "()Landroid/app/Activity;");
-    QAndroidJniObject service_name = QAndroidJniObject::getStaticObjectField<jstring>("android/content/Context", "POWER_SERVICE");
-    QAndroidJniObject power_mgr = wl_activity.callObjectMethod("getSystemService", "(Ljava/lang/String;)Ljava/lang/Object;", service_name.object<jobject>());
-    jint level_and_flags = QAndroidJniObject::getStaticField<jint>("android/os/PowerManager", "SCREEN_BRIGHT_WAKE_LOCK");
-    QAndroidJniObject tag = QAndroidJniObject::fromString("My Tag");
-    m_wake_lock = power_mgr.callObjectMethod("newWakeLock", "(ILjava/lang/String;)Landroid/os/PowerManager$WakeLock;", level_and_flags, tag.object<jstring>());
+    // -----------  VIBRATOR
+    auto vibstr     = QAndroidJniObject::fromString("vibrator");
+    m_vibrator      = ctx.callObjectMethod("getSystemService", "(Ljava/lang/String;)Ljava/lang/Object;", vibstr.object<jstring>());
 
-    if(m_wake_lock.isValid()) {
-        m_wake_lock.callMethod<void>("acquire", "()V");
-        qDebug() << "Locked device, cannot go to standby anymore";
-    } else { qDebug() << "Unable to lock device..!!";}
+    // ----------   WAKELOCK
+    auto powsvc     = QAndroidJniObject::getStaticObjectField<jstring>("android/content/Context", "POWER_SERVICE");
+    auto power_mgr  = activity.callObjectMethod("getSystemService", "(Ljava/lang/String;)Ljava/lang/Object;", powsvc.object<jstring>());
+    auto lnf        = QAndroidJniObject::getStaticField<jint>("android/os/PowerManager", "SCREEN_BRIGHT_WAKE_LOCK");
+    auto tag        = QAndroidJniObject::fromString("My Tag");
+    m_wakelock      = power_mgr.callObjectMethod("newWakeLock", "(ILjava/lang/String;)Landroid/os/PowerManager$WakeLock;", lnf, tag.object<jstring>());
+
+    if      (m_wakelock.isValid())
+            m_wakelock.callMethod<void>("acquire", "()V");
+    else    qDebug() << "Unable to lock device..!!";
 
 #endif
-
-    /* IOS ? */
 
 }
 
 platform_hdl::~platform_hdl() {}
 
 #ifdef Q_OS_ANDROID
-
 void platform_hdl::vibrate(int milliseconds) const
-{
-    jlong ms = milliseconds;
-    jboolean has_vibrator = m_vibrator.callMethod<jboolean>("hasVibrator", "()Z");
+{    
+    jboolean has_vibrator   = m_vibrator.callMethod<jboolean>("hasVibrator", "()Z");
+    jlong ms                = milliseconds;
+
     m_vibrator.callMethod<void>("vibrate", "(J)V", ms);
 }
 
+void platform_hdl::register_zeroconf(QString name, QString type, quint16 port)
+{
+    auto    sname           = QAndroidJniObject::fromString(name);
+    auto    stype           = QAndroidJniObject::fromString("_oscjson._tcp");
+    jint    sport           = port;
+
+    QAndroidJniObject zconf_hdl("org/quarre/remote/zconf_hdl");
+
+    zconf_hdl.callMethod<void>("register_service",
+                               "(Ljava/lang/String;Ljava/lang/String;I)V",
+                               sname.object<jstring>(), stype.object<jstring>(), sport);
+
+}
 #endif

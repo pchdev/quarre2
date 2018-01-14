@@ -1,7 +1,11 @@
 QT += quick sensors
 
-android: QT += androidextras
-CONFIG += c++11
+android: {
+    QT += androidextras
+    DEFINES += ANDROID
+}
+
+CONFIG += c++14
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -42,6 +46,7 @@ DISTFILES += \
     android/res/values/libs.xml \
     android/build.gradle \
     android/gradle/wrapper/gradle-wrapper.properties \
-    android/gradlew.bat
+    android/gradlew.bat \
+    android/src/org/quarre/remote/zconf_hdl.java
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
