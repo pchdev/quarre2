@@ -19,6 +19,7 @@
         <file>QuarreModuleTransitions.qml</file>
         <file>QuarreModuleTextViewer.qml</file>
         <file>InteractionManager.qml</file>
+        <file>QuarreModuleSensorsPlayground.qml</file>
     </qresource>
     <qresource prefix="/modules"/>
 </RCC>

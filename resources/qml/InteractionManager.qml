@@ -58,6 +58,13 @@ Item {
             quarre_application.state = "INCOMING_INTERACTION";
     }
 
+    function force_current(module_index)
+    {
+        quarre_application.state = "IDLE";
+        upper_view.header.scene.text = "playground";
+        lower_view_stack.currentIndex = module_index;
+    }
+
     function parse_interactions_file()
     {
         // no use for now
