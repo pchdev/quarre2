@@ -1,17 +1,17 @@
 import QtQuick 2.0
 import QtSensors 5.3
 import Ossia 1.0 as Ossia
+import "GesturesRoutine.js" as GesturesRoutine
 
 Item {
-
-    property var used_gestures: ["whip", "cover"]
 
     SensorGesture {
         id: sensor_gesture
         enabled: false
         gestures: []
         onDetected: {
-            console.log("detected");
+            ossia_net.oshdl.vibrate(250);
+            console.log("detected!");
             console.log(gesture);
             if(gesture === "whip")
                 gestures_whip_trigger.trigger();
@@ -29,25 +29,7 @@ Item {
         node: "/gestures/whip/active"
         valueType: Ossia.Type.Bool
         critical: true
-        onValueChanged: {
-
-            var idx = -1;
-            for(var i=0; i < sensor_gesture.gestures.length; ++i)
-            {
-                if(sensor_gesture.gestures[i] === "QtSensors.whip");
-                idx = i;
-            }
-
-            if(value && idx === -1)
-            {
-                sensor_gesture.gestures.push("QtSensors.whip");
-                sensor_gesture.enabled = true;
-            }
-
-            else if(!value && idx >= 0)
-                sensor_gesture.gestures.splice(idx, 1);
-
-        }
+        onValueChanged: GesturesRoutine.update(value, "QtSensors.whip", sensor_gesture.gestures);
     }
 
     Ossia.Parameter {
@@ -69,24 +51,7 @@ Item {
         node: "/gestures/cover/active"
         valueType: Ossia.Type.Bool
         critical: true
-        onValueChanged: {
-
-            var idx = -1;
-            for(var i=0; i < sensor_gesture.gestures.length; ++i)
-            {
-                if(sensor_gesture.gestures[i] === "QtSensors.cover");
-                idx = i;
-            }
-
-            if(value && idx === -1)
-            {
-                sensor_gesture.gestures.push("QtSensors.cover");
-                sensor_gesture.enabled = true;
-            }
-
-            else if(!value && idx >= 0)
-                sensor_gesture.gestures.splice(idx, 1);
-        }
+        onValueChanged: GesturesRoutine.update(value, "QtSensors.cover", sensor_gesture.gestures);
     }
 
     Ossia.Parameter {
@@ -108,24 +73,7 @@ Item {
         node: "/gestures/twist/active"
         valueType: Ossia.Type.Bool
         critical: true
-        onValueChanged: {
-
-            var idx = -1;
-            for(var i=0; i < sensor_gesture.gestures.length; ++i)
-            {
-                if(sensor_gesture.gestures[i] === "QtSensors.twist");
-                idx = i;
-            }
-
-            if(value && idx === -1)
-            {
-                sensor_gesture.gestures.push("QtSensors.twist");
-                sensor_gesture.enabled = true;
-            }
-
-            else if(!value && idx >= 0)
-                sensor_gesture.gestures.splice(idx, 1);
-        }
+        onValueChanged: GesturesRoutine.update(value, "QtSensors.twist", sensor_gesture.gestures);
     }
 
     Ossia.Parameter {

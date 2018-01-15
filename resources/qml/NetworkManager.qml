@@ -6,6 +6,7 @@ Item {
     property int oscPort: 1234
     property int wsPort: 5678
     property string deviceName: "quarre-remote"
+    property alias oshdl: os_hdl
 
     PlatformHdl {
         id: os_hdl
