@@ -21,6 +21,18 @@ Item {
                 gestures_twist_left_trigger.trigger();
             else if (gesture === "twistRight")
                 gestures_twist_right_trigger.trigger();
+            else if (gesture === "shakeUp")
+                gestures_shake_up_trigger.trigger();
+            else if (gesture === "shakeDown")
+                gestures_shake_down_trigger.trigger();
+            else if (gesture === "shakeLeft")
+                gestures_shake_left_trigger.trigger();
+            else if (gesture === "shakeRight")
+                gestures_shake_right_trigger.trigger();
+            else if (gesture === "pickup")
+                gestures_pickup_trigger.trigger();
+            else if (gesture === "turnover")
+                gestures_turnover_trigger.trigger();
         }
     }
 
@@ -66,6 +78,72 @@ Item {
         critical: true
     }
 
+    // --------------- pickup
+
+    Ossia.Parameter {
+        id: gestures_pickup_active
+        node: "/gestures/pickup/active"
+        valueType: Ossia.Type.Bool
+        critical: true
+        onValueChanged: GesturesRoutine.update(value, "QtSensors.pickup", sensor_gesture.gestures);
+    }
+
+    Ossia.Parameter {
+        id: gestures_pickup_available
+        node: "/gestures/pickup/available"
+        valueType: Ossia.Type.Bool
+    }
+
+    Ossia.Signal {
+        id: gestures_pickup_trigger
+        node: "/gestures/pickup/trigger"
+        critical: true
+    }
+
+    // --------------- freefall
+
+    Ossia.Parameter {
+        id: gestures_freefall_active
+        node: "/gestures/freefall/active"
+        valueType: Ossia.Type.Bool
+        critical: true
+        onValueChanged: GesturesRoutine.update(value, "QtSensors.freefall", sensor_gesture.gestures);
+    }
+
+    Ossia.Parameter {
+        id: gestures_freefall_available
+        node: "/gestures/freefall/available"
+        valueType: Ossia.Type.Bool
+    }
+
+    Ossia.Signal {
+        id: gestures_freefall_trigger
+        node: "/gestures/freefall/trigger"
+        critical: true
+    }
+
+    // --------------- turnover
+
+    Ossia.Parameter {
+        id: gestures_turnover_active
+        node: "/gestures/turnover/active"
+        valueType: Ossia.Type.Bool
+        critical: true
+        onValueChanged: GesturesRoutine.update(value, "QtSensors.turnover", sensor_gesture.gestures);
+    }
+
+    Ossia.Parameter {
+        id: gestures_turnover_available
+        node: "/gestures/turnover/available"
+        valueType: Ossia.Type.Bool
+    }
+
+    Ossia.Signal {
+        id: gestures_turnover_trigger
+        node: "/gestures/turnover/trigger"
+        critical: true
+    }
+
     // --------------- twist
 
     Ossia.Parameter {
@@ -94,6 +172,46 @@ Item {
         critical: true
     }
 
+    // --------------- shake
+
+    Ossia.Parameter {
+        id: gestures_shake_active
+        node: "/gestures/shake/active"
+        valueType: Ossia.Type.Bool
+        critical: true
+        onValueChanged: GesturesRoutine.update(value, "QtSensors.shake2", sensor_gesture.gestures);
+    }
+
+    Ossia.Parameter {
+        id: gestures_shake_available
+        node: "/gestures/shake/available"
+        valueType: Ossia.Type.Bool
+    }
+
+    Ossia.Signal {
+        id: gestures_shake_left_trigger
+        node: "/gestures/shake/left/trigger"
+        critical: true
+    }
+
+    Ossia.Signal {
+        id: gestures_shake_right_trigger
+        node: "/gestures/shake/right/trigger"
+        critical: true
+    }
+
+    Ossia.Signal {
+        id: gestures_shake_up_trigger
+        node: "/gestures/shake/up/trigger"
+        critical: true
+    }
+
+    Ossia.Signal {
+        id: gestures_shake_down_trigger
+        node: "/gestures/shake/down/trigger"
+        critical: true
+    }
+
     Component.onCompleted: {
         var gestures = sensor_gesture.availableGestures
         for(var i = 0; i < gestures.length; ++i)
@@ -105,6 +223,14 @@ Item {
                 gestures_cover_available.value = true;
             else if(gestures[i] === "QtSensors.twist")
                 gestures_twist_available.value = true;
+            else if(gestures[i] === "QtSensors.shake2")
+                gestures_shake_available.value = true;
+            else if (gestures[i] === "QtSensors.pickup")
+                gestures_pickup_available.value = true;
+            else if (gestures[i] === "QtSensors.freefall")
+                gestures_freefall_available.value = true;
+            else if (gestures[i] === "QtSensors.turnover")
+                gestures_turnover_available.value = true;
         }
     }
 }
