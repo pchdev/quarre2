@@ -44,14 +44,15 @@ void platform_hdl::vibrate(int milliseconds) const
 void platform_hdl::register_zeroconf(QString name, QString type, quint16 port)
 {
     auto    sname           = QAndroidJniObject::fromString(name);
-    auto    stype           = QAndroidJniObject::fromString("_oscjson._tcp");
+    auto    stype           = QAndroidJniObject::fromString(type);
     jint    sport           = port;
 
-    QAndroidJniObject zconf_hdl("org/quarre/remote/zconf_hdl");
+    QtAndroid::androidActivity().callMethod<void>("registerZConfHdl","()V");
 
-    zconf_hdl.callMethod<void>("register_service",
+    //QAndroidJniObject zconf_hdl("org/quarre/remote/zconf_hdl");
+    /*zconf_hdl.callMethod<void>("register_service",
                                "(Ljava/lang/String;Ljava/lang/String;I)V",
-                               sname.object<jstring>(), stype.object<jstring>(), sport);
+                               sname.object<jstring>(), stype.object<jstring>(), sport); */
 
 }
 #endif

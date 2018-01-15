@@ -47,6 +47,7 @@ DISTFILES += \
     android/build.gradle \
     android/gradle/wrapper/gradle-wrapper.properties \
     android/gradlew.bat \
-    android/src/org/quarre/remote/zconf_hdl.java
+    android/src/org/quarre/remote/ZConfRunnable.java \
+    android/src/org/quarre/remote/QuarreActivity.java
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
