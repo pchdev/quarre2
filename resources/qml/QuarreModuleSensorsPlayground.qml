@@ -20,6 +20,8 @@ Item {
                             sensors_rotation.reading.x,
                             sensors_rotation.reading.y,
                             sensors_rotation.reading.z);
+            if(sensors_proximity.active)
+                sensors_proximity_data.value = sensors_proximity.reading.near;
         }
     }
 
@@ -81,5 +83,34 @@ Item {
         id: sensors_rotation_data
         node: "/sensors/rotation/data"
         valueType: Ossia.Type.Vec3f
+    }
+
+    ProximitySensor {
+        id: sensors_proximity
+        active: false
+    }
+
+    Ossia.Parameter {
+        id: sensors_proximity_available
+        node: "/sensors/proximity/available"
+        valueType: Ossia.Type.Bool
+        value: sensors_proximity.connectedToBackend
+    }
+
+    Ossia.Parameter {
+        id: sensors_proximity_active
+        node: "/sensors/proximity/active"
+        valueType: Ossia.Type.Bool
+        onValueChanged: {
+            sensors_proximity.active = value;
+            if(!sensors_poll.running)
+                sensors_poll.running = true;
+        }
+    }
+
+    Ossia.Parameter {
+        id: sensors_proximity_data
+        node: "/sensors/proximity/near"
+        valueType: Ossia.Type.Bool
     }
 }

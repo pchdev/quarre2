@@ -3,14 +3,13 @@ function update(value, gesture, target_array) {
     var idx = -1;
     for(var i=0; i < target_array.length; ++i)
     {
-        if(target_array[i] === gesture);
-        idx = i;
+        if(target_array[i] === gesture)
+            idx = i;
     }
-
-    console.log(idx);
 
     if(value && idx === -1)
     {
+        sensor_gesture.enabled = false;
         target_array.push(gesture);
         sensor_gesture.enabled = true;
     }
