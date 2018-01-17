@@ -19,12 +19,19 @@ public:
     platform_hdl();
     ~platform_hdl();
 
-public slots:
+    static platform_hdl* hdl;
+    void emitServerDiscovered(QString hostaddr);
+
+signals:
+    void serverDiscovered(QString);
+
+public slots:    
     void vibrate(int milliseconds)  const;
     void register_zeroconf(QString name, QString type, quint16 port);
 
 private:
 #ifdef Q_OS_ANDROID
+
     QAndroidJniObject       m_vibrator;
     QAndroidJniObject       m_wakelock;
 #endif

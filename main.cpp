@@ -10,9 +10,7 @@ int main(int argc, char *argv[])
 #endif
 
     QGuiApplication app(argc, argv);
-
     qmlRegisterType<quarre::platform_hdl>("io.quarre.org", 1, 0, "PlatformHdl");
-
     QQmlApplicationEngine engine;
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

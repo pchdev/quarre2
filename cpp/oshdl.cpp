@@ -3,8 +3,22 @@
 
 using namespace quarre;
 
-platform_hdl::platform_hdl()
+platform_hdl* platform_hdl::hdl;
+
+void onServerDiscoveredNative(JNIEnv*, jobject)
 {
+    auto hostaddr = QAndroidJniObject::getStaticObjectField("org/quarre/remote/ZConfRunnable", "HOST_ADDR", "Ljava/lang/String;");
+    auto plat = platform_hdl::hdl;
+    plat->emitServerDiscovered(hostaddr.toString());
+}
+
+void platform_hdl::emitServerDiscovered(QString hostaddr)
+{
+    emit serverDiscovered(hostaddr);
+}
+
+platform_hdl::platform_hdl()
+{    
 
 #ifdef Q_OS_ANDROID
 
@@ -26,13 +40,27 @@ platform_hdl::platform_hdl()
             m_wakelock.callMethod<void>("acquire", "()V");
     else    qDebug() << "Unable to lock device..!!";
 
+    /*QAndroidJniEnvironment env;
+    auto java_class = env->FindClass("org/quarre/remote/NativeFunctions");
+
+    JNINativeMethod methods[] = {
+        {"onServerDiscoveredNative", "()V", (void*) onServerDiscoveredNative }
+    };
+
+    env->RegisterNatives(java_class, methods, sizeof(methods) / sizeof(methods[0]));*/
+
 #endif
+
+    hdl = this;
 
 }
 
 platform_hdl::~platform_hdl() {}
 
 #ifdef Q_OS_ANDROID
+
+#include <QMetaObject>
+
 void platform_hdl::vibrate(int milliseconds) const
 {    
     jboolean has_vibrator   = m_vibrator.callMethod<jboolean>("hasVibrator", "()Z");
@@ -48,11 +76,5 @@ void platform_hdl::register_zeroconf(QString name, QString type, quint16 port)
     jint    sport           = port;
 
     QtAndroid::androidActivity().callMethod<void>("registerZConfHdl","()V");
-
-    //QAndroidJniObject zconf_hdl("org/quarre/remote/zconf_hdl");
-    /*zconf_hdl.callMethod<void>("register_service",
-                               "(Ljava/lang/String;Ljava/lang/String;I)V",
-                               sname.object<jstring>(), stype.object<jstring>(), sport); */
-
 }
 #endif
