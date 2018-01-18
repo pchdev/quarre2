@@ -3,18 +3,27 @@
 
 using namespace quarre;
 
-platform_hdl* platform_hdl::hdl;
+platform_hdl* platform_hdl::singleton;
 
 void onServerDiscoveredNative(JNIEnv*, jobject)
 {
     auto hostaddr = QAndroidJniObject::getStaticObjectField("org/quarre/remote/ZConfRunnable", "HOST_ADDR", "Ljava/lang/String;");
-    auto plat = platform_hdl::hdl;
-    plat->emitServerDiscovered(hostaddr.toString());
+    auto platform = platform_hdl::singleton;
+    platform->setHostAddr(hostaddr.toString());
 }
 
-void platform_hdl::emitServerDiscovered(QString hostaddr)
+QString platform_hdl::hostAddr()
 {
-    emit serverDiscovered(hostaddr);
+    return m_hostAddr;
+}
+
+void platform_hdl::setHostAddr(QString addr)
+{
+    if(addr != m_hostAddr)
+    {
+        m_hostAddr = addr;
+        emit hostAddrChanged();
+    }
 }
 
 platform_hdl::platform_hdl()
@@ -40,18 +49,9 @@ platform_hdl::platform_hdl()
             m_wakelock.callMethod<void>("acquire", "()V");
     else    qDebug() << "Unable to lock device..!!";
 
-    /*QAndroidJniEnvironment env;
-    auto java_class = env->FindClass("org/quarre/remote/NativeFunctions");
-
-    JNINativeMethod methods[] = {
-        {"onServerDiscoveredNative", "()V", (void*) onServerDiscoveredNative }
-    };
-
-    env->RegisterNatives(java_class, methods, sizeof(methods) / sizeof(methods[0]));*/
-
 #endif
 
-    hdl = this;
+    singleton = this;
 
 }
 
@@ -77,4 +77,30 @@ void platform_hdl::register_zeroconf(QString name, QString type, quint16 port)
 
     QtAndroid::androidActivity().callMethod<void>("registerZConfHdl","()V");
 }
+
+JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* /*reserved*/)
+{
+    JNIEnv* env;
+    // get the JNIEnv pointer.
+    if (vm->GetEnv(reinterpret_cast<void**>(&env), JNI_VERSION_1_6) != JNI_OK)
+      return JNI_ERR;
+
+    JNINativeMethod methods[] = {
+        {"onServerDiscoveredNative", "()V", (void*) onServerDiscoveredNative }
+    };
+
+    // search for Java class which declares the native methods
+    jclass javaClass = env->FindClass("org/quarre/remote/NativeFunctions");
+    if (!javaClass)
+      return JNI_ERR;
+
+    // register our native methods
+    if (env->RegisterNatives(javaClass, methods,
+                          sizeof(methods) / sizeof(methods[0])) < 0) {
+      return JNI_ERR;
+    }
+
+    return JNI_VERSION_1_6;
+}
+
 #endif

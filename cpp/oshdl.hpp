@@ -14,24 +14,26 @@ namespace quarre {
 class platform_hdl : public QObject {
 
     Q_OBJECT
+    Q_PROPERTY(QString hostAddr READ hostAddr WRITE setHostAddr NOTIFY hostAddrChanged)
 
 public:
     platform_hdl();
     ~platform_hdl();
+    static platform_hdl* singleton;
 
-    static platform_hdl* hdl;
-    void emitServerDiscovered(QString hostaddr);
+    QString hostAddr();
+    void setHostAddr(QString addr);
 
 signals:
-    void serverDiscovered(QString);
+    void hostAddrChanged();
 
 public slots:    
     void vibrate(int milliseconds)  const;
     void register_zeroconf(QString name, QString type, quint16 port);
 
 private:
+    QString                 m_hostAddr;
 #ifdef Q_OS_ANDROID
-
     QAndroidJniObject       m_vibrator;
     QAndroidJniObject       m_wakelock;
 #endif
