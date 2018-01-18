@@ -216,7 +216,6 @@ Item {
         var gestures = sensor_gesture.availableGestures
         for(var i = 0; i < gestures.length; ++i)
         {
-            console.log(gestures[i])
             if(gestures[i] === "QtSensors.whip")
                 gestures_whip_available.value = true;
             else if(gestures[i] === "QtSensors.cover")

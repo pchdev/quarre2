@@ -9,12 +9,21 @@ void onServerDiscoveredNative(JNIEnv*, jobject)
 {
     auto hostaddr = QAndroidJniObject::getStaticObjectField("org/quarre/remote/ZConfRunnable", "HOST_ADDR", "Ljava/lang/String;");
     auto platform = platform_hdl::singleton;
-    platform->setHostAddr(hostaddr.toString());
+
+    auto hoststr = hostaddr.toString();
+    platform->setHostAddr(hoststr);
+    auto hostlist = hoststr.split(':');
+    platform->setPort(hostlist[1].toInt());
 }
 
-QString platform_hdl::hostAddr()
+QString platform_hdl::hostAddr() const
 {
     return m_hostAddr;
+}
+
+quint16 platform_hdl::port() const
+{
+    return m_port;
 }
 
 void platform_hdl::setHostAddr(QString addr)
@@ -24,6 +33,11 @@ void platform_hdl::setHostAddr(QString addr)
         m_hostAddr = addr;
         emit hostAddrChanged();
     }
+}
+
+void platform_hdl::setPort(quint16 port)
+{
+    m_port = port;
 }
 
 platform_hdl::platform_hdl()

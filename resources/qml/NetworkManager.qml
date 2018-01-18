@@ -7,6 +7,8 @@ Item {
     property int        wsPort: 5678
     property string     deviceName: "quarre-remote"
     property alias      oshdl: os_hdl
+    property int        slot: 0
+    property int        slot_plus_one: 0
 
     PlatformHdl {
         id: os_hdl
@@ -17,95 +19,125 @@ Item {
 
         // when quarre-server found
         onHostAddrChanged: {
+
             console.log("connecting...");
-            Ossia.SingleDevice.openOSCQueryClient(hostAddr, 5678);
-            Ossia.SingleDevice.recreate(ossia_net);
+            console.log(hostAddr);
+
+            Ossia.SingleDevice.openOSCQueryClient(hostAddr, oscPort);
+            Ossia.SingleDevice.remap(ossia_net);
+
+            // note: this should be handled by oscquery server
+            if(available_slot.value >= 0)
+            {
+                slot = available_slot.value;
+                upper_view.header.scene.text = "connected, id: " + slot;
+                Ossia.SingleDevice.remap(sensors_playground);
+
+                if      (available_slot.value === users_max.value - 1)
+                        slot_plus_one = -1;
+                else    slot_plus_one = slot+1;
+            }
+
+            else
+            {
+                upper_view.header.scene.text = "users max reached";
+            }
+
+            os_hdl.vibrate(100);
         }
     }
 
-    Ossia.Parameter {
+    Ossia.Callback {
+        id: users_max
+        node: '/slots/max'
+    }
+
+    Ossia.Callback {
+        id: available_slot
+        node: '/slots/available'
+    }
+
+    Ossia.Binding {
+        id: available_slot_send_back
+        node: '/slots/available'
+        on: slot_plus_one
+    }
+
+    Ossia.Callback {
         id: scenario_name
         node: "/scenario/name"
-        onValueChanged: {
-            upper_view.header.scenario.text = value;
-        }
+        onValueChanged: upper_view.header.scenario.text = value;
     }            
 
-    Ossia.Parameter {
+    Ossia.Callback {
         id: scenario_scene_name
         node: "/scenario/scene/name"
-        onValueChanged: {
-            upper_view.header.scene.text = value;
-        }
-    }
+        onValueChanged: upper_view.header.scene.text = value;
+    }    
 
-    Ossia.Signal {
+    Ossia.Callback {
         id: scenario_start
         node: "/scenario/start"
-        onTriggered: upper_view.header.timer.start();
+        onValueChanged: upper_view.header.timer.start();
     }
 
-    Ossia.Parameter {
+    Ossia.Callback {
         // received whenever a problem has happened
         // argument: error code (int)
         id: scenario_stop
         node: "/scenario/stop"
     }
 
-    Ossia.Parameter {
+    Ossia.Callback {
         // argument: reason for pause (int)
         id: scenario_pause
         node: "/scenario/pause"
     }
 
-    Ossia.Signal {
+    Ossia.Callback {
         id: scenario_end
         node: "/scenario/end"
-        onTriggered: upper_view.header.timer.stop();
+        onValueChanged: upper_view.header.timer.stop();
     }    
 
-    Ossia.Signal {
+    Ossia.Callback {
         id: scenario_reset
         node: "/scenario/reset"
-        onTriggered: {
+        onValueChanged: {
             upper_view.header.count = 0;
             upper_view.header.timer.stop();
         }
     }
 
-    Ossia.Parameter {
+    Ossia.Callback {
         id: interactions_next_incoming
         node: "/interactions/next/incoming"
         // arguments are: x (interaction_index) y (interaction_length) z (countdown)
         onValueChanged: interaction_manager.prepare_next(value);
     }
 
-    Ossia.Parameter {
+    Ossia.Callback {
         id: interactions_next_begin
         node: "/interactions/next/begin"
         onValueChanged: interaction_manager.trigger_next(value);
     }
 
-    Ossia.Parameter {
+    Ossia.Callback {
         id: interactions_next_cancel
         node: "/interactions/next/cancel"
         onValueChanged: interaction_manager.end_current();
     }
 
-    Ossia.Parameter {
+    Ossia.Callback {
         id: interactions_current_end
         node: "/interactions/current/end"
         onValueChanged: interaction_manager.end_current();
     }
 
-    Ossia.Parameter {
+    Ossia.Callback {
         id: interactions_current_force
         node: "/interactions/current/force"
         onValueChanged: interaction_manager.force_current(value);
-    }
-
-    Component.onCompleted: {
-
     }
 
 }
