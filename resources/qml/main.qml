@@ -124,7 +124,7 @@ ApplicationWindow {
                     QuarreLowerDefault { color: "transparent" }
                     QuarreModuleRegistration { opacity: 0.9 }
                     QuarreModuleSensorsPlayground { id: sensors_playground }
-                    QuarreModuleGestures { opacity: 0.9 }
+                    QuarreModuleGestures { id: gestures_playground; opacity: 0.9 }
 
                     //QuarreModuleTouchSpat { color: "transparent" }
                     //QuarreModuleSensorSpat { opacity: 0.9 }

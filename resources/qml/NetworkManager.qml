@@ -31,7 +31,9 @@ Item {
             {
                 slot = available_slot.value;
                 upper_view.header.scene.text = "connected, id: " + slot;
+
                 Ossia.SingleDevice.remap(sensors_playground);
+                Ossia.SingleDevice.remap(gestures_playground);
 
                 if      (available_slot.value === users_max.value - 1)
                         slot_plus_one = -1;
