@@ -8,10 +8,12 @@ Item {
     property string     deviceName: "quarre-remote"
     property alias      oshdl: os_hdl
     property int        slot: 0
-    property int        slot_plus_one: 0
+    property bool       connected: false
 
     PlatformHdl {
+
         id: os_hdl
+
         Component.onCompleted: {
             os_hdl.vibrate(100);
             os_hdl.register_zeroconf(deviceName, "_oscjson._tcp", wsPort);
@@ -30,23 +32,27 @@ Item {
             if(available_slot.value >= 0)
             {
                 slot = available_slot.value;
+                connected = true;
                 upper_view.header.scene.text = "connected, id: " + slot;
-
                 Ossia.SingleDevice.remap(sensors_playground);
                 Ossia.SingleDevice.remap(gestures_playground);
-
-                if      (available_slot.value === users_max.value - 1)
-                        slot_plus_one = -1;
-                else    slot_plus_one = slot+1;
+                sensors_playground.connected = true;
+                gestures_playground.connected = true;
             }
 
             else
             {
-                upper_view.header.scene.text = "users max reached";
+                upper_view.header.scene.text = "max users reached";
             }
 
             os_hdl.vibrate(100);
         }
+    }    
+
+    Ossia.Binding {
+        id: connected_binding
+        node: '/user/' + ossia_net.slot + '/connected'
+        on: ossia_net.connected
     }
 
     Ossia.Callback {
@@ -113,32 +119,32 @@ Item {
 
     Ossia.Callback {
         id: interactions_next_incoming
-        node: "/interactions/next/incoming"
+        node: '/user/' + ossia_net.slot + '/interactions/next/incoming'
         // arguments are: x (interaction_index) y (interaction_length) z (countdown)
         onValueChanged: interaction_manager.prepare_next(value);
     }
 
     Ossia.Callback {
         id: interactions_next_begin
-        node: "/interactions/next/begin"
+        node: '/user/' + ossia_net.slot + '/interactions/next/begin'
         onValueChanged: interaction_manager.trigger_next(value);
     }
 
     Ossia.Callback {
         id: interactions_next_cancel
-        node: "/interactions/next/cancel"
+        node: '/user/' + ossia_net.slot + '/interactions/next/cancel'
         onValueChanged: interaction_manager.end_current();
     }
 
     Ossia.Callback {
         id: interactions_current_end
-        node: "/interactions/current/end"
+        node: '/user/' + ossia_net.slot + '/interactions/current/end'
         onValueChanged: interaction_manager.end_current();
     }
 
     Ossia.Callback {
         id: interactions_current_force
-        node: "/interactions/current/force"
+        node: '/user/' + ossia_net.slot + '/interactions/current/force'
         onValueChanged: interaction_manager.force_current(value);
     }
 

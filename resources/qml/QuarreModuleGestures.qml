@@ -3,7 +3,9 @@ import QtSensors 5.3
 import Ossia 1.0 as Ossia
 import "GesturesRoutine.js" as GesturesRoutine
 
-Item {
+Rectangle {
+
+    property bool connected: false
 
     property bool whip_available: false
     property bool cover_available: false
@@ -212,11 +214,11 @@ Item {
         on: shake_down_trigger
     }
 
-    Component.onCompleted: {
+    onConnectedChanged: {
         var gestures = sensor_gesture.availableGestures
         for(var i = 0; i < gestures.length; ++i)
         {
-            if(gestures[i] === "QtSensors.whip") whip_available = true;
+            if(gestures[i]  === "QtSensors.whip") whip_available = true;
             else if(gestures[i] === "QtSensors.cover") cover_available = true;
             else if(gestures[i] === "QtSensors.twist") twist_available = true;
             else if(gestures[i] === "QtSensors.shake2") shake_available = true;

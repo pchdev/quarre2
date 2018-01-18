@@ -2,7 +2,9 @@ import QtQuick 2.0
 import QtSensors 5.3
 import Ossia 1.0 as Ossia
 
-Item {
+Rectangle {
+
+    property bool connected: false
 
     property bool accelerometer_available: false
     property var  accelerometer_data: Qt.vector3d(0.0, 0.0, 0.0)
@@ -12,6 +14,20 @@ Item {
 
     property bool proximity_available: false
     property bool proximity_data: false
+
+    Text {
+        id: sensor_display
+        width: parent.width
+        height: parent.height
+        horizontalAlignment: Text.AlignHCenter
+        y: parent.height*0.25
+        font.family: font_lato_light.name
+        font.pointSize: 50
+        textFormat: Text.PlainText
+        color: "#ffffff"
+        text: "quarrè"
+        antialiasing: true
+    }
 
     Timer {
         id: sensors_poll;
@@ -34,9 +50,20 @@ Item {
         }
     }
 
+    onConnectedChanged: {
+        accelerometer_available = sensors_accelerometer.connectedToBackend
+        rotation_available = sensors_rotation.connectedToBackend
+        proximity_available = sensors_proximity.connectedToBackend
+    }
+
+    Ossia.Binding {
+        id: sensors_accelerometer_available
+        node: '/user/' + ossia_net.slot + '/sensors/accelerometer/available'
+        on: accelerometer_available
+    }
+
     Accelerometer {
         id: sensors_accelerometer
-        Component.onCompleted: accelerometer_available = connectedToBackend;
     }
 
     Ossia.Callback {
@@ -47,12 +74,6 @@ Item {
             if(value && !sensors_poll.running)
                 sensors_poll.running = true;
         }
-    }
-
-    Ossia.Binding {
-        id: sensors_accelerometer_available
-        node: '/user/' + ossia_net.slot + '/sensors/accelerometer/available'
-        on: accelerometer_available
     }
 
     Ossia.Binding {
