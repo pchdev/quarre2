@@ -22,6 +22,8 @@ Item {
         // when quarre-server found
         onHostAddrChanged: {
 
+            if(hostAddr === "ws://") return;
+
             console.log("connecting...");
             console.log(hostAddr);
 
@@ -53,6 +55,15 @@ Item {
         id: connected_binding
         node: '/user/' + ossia_net.slot + '/connected'
         on: ossia_net.connected
+    }
+
+    Ossia.Callback {
+        id: server_quit
+        node: '/server/quit'
+        onValueChanged: {
+            upper_view.header.scene.text = "disconnected";
+            os_hdl.hostAddr = "ws://"
+        }
     }
 
     Ossia.Callback {
