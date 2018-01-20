@@ -33,6 +33,7 @@ Item {
             // note: this should be handled by oscquery server
             if(available_slot.value >= 0)
             {
+                console.log("attributing slot");
                 slot = available_slot.value;
                 connected = true;
                 upper_view.header.scene.text = "connected, id: " + slot;
@@ -61,8 +62,12 @@ Item {
         id: server_quit
         node: '/server/quit'
         onValueChanged: {
-            upper_view.header.scene.text = "disconnected";
-            os_hdl.hostAddr = "ws://"
+            if(value !== 0)
+            {
+                console.log("server has quit");
+                upper_view.header.scene.text = "disconnected";
+                os_hdl.hostAddr = "ws://"
+            }
         }
     }
 

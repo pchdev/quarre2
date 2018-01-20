@@ -11,7 +11,7 @@ ApplicationWindow {
 
     // --------------------------------------------------------------------------------------------------
     // note: reference is based on Samsung S7
-    property real refDPI: 576
+    property real refPd: 17.06700379266751
     property real refHeight: 2560
     property real refWidth: 1440
 
@@ -20,11 +20,13 @@ ApplicationWindow {
     // replace width with Screen.desktopAvailableWidth
     height: Screen.desktopAvailableHeight
     width: Screen.desktopAvailableWidth
-    property real currDPI: 576
+    property real currPd: Screen.pixelDensity
 
     // refer to this when calculating font sizes
     property real ratio: Math.min(height/refHeight, width/refWidth)
-    property real fontRatio: Math.min(height*refDPI/(currDPI*refHeight, width*refDPI/(currDPI*refWidth)))
+    property real fontRatio: Math.min(height*refPd/(currPd*refHeight, width*refPd/(currPd*refWidth)))
+
+    Component.onCompleted: console.log(currPd);
 
     FontLoader {
         id: font_lato_light
@@ -113,7 +115,7 @@ ApplicationWindow {
                 width: parent.width
                 height: parent.height * 0.55
                 color: "black"
-                opacity: 0.9
+                opacity: 0.75
 
                 StackLayout
                 {
