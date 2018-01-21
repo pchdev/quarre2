@@ -26,7 +26,7 @@ ApplicationWindow {
     property real ratio: Math.min(height/refHeight, width/refWidth)
     property real fontRatio: Math.min(height*refPd/(currPd*refHeight, width*refPd/(currPd*refWidth)))
 
-    Component.onCompleted: console.log(currPd);
+    Component.onCompleted: console.log(fontRatio);
 
     FontLoader {
         id: font_lato_light

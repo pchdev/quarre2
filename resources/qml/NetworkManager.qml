@@ -1,14 +1,35 @@
 import QtQuick 2.0
 import Ossia 1.0 as Ossia
 import io.quarre.org 1.0
+import QtQuick.Controls 1.2
+import QtQuick.Dialogs 1.2
 
 Item {
+
     property int        oscPort: 1234
     property int        wsPort: 5678
     property string     deviceName: "quarre-remote"
     property alias      oshdl: os_hdl
     property int        slot: 0
     property bool       connected: false
+    property string     username: ""
+
+    Dialog {
+        id: username_dialog
+        visible: false
+        title: "type-in your name"
+        standardButtons: StandardButton.Ok
+
+        onAccepted: {
+            username = dialog_text.text;
+            upper_view.header.scene.text = dialog_text.text;
+        }
+
+        TextField {
+            id: dialog_text
+            placeholderText: qsTr("Enter name")
+        }
+    }
 
     PlatformHdl {
 
@@ -33,7 +54,6 @@ Item {
             // note: this should be handled by oscquery server
             if(available_slot.value >= 0)
             {
-                console.log("attributing slot");
                 slot = available_slot.value;
                 connected = true;
                 upper_view.header.scene.text = "connected, id: " + slot;
@@ -41,21 +61,26 @@ Item {
                 Ossia.SingleDevice.remap(gestures_playground);
                 sensors_playground.connected = true;
                 gestures_playground.connected = true;
+                os_hdl.register_user_id(slot);
+                username_dialog.open();
             }
 
-            else
-            {
-                upper_view.header.scene.text = "max users reached";
-            }
+            else upper_view.header.scene.text = "max users reached";
 
             os_hdl.vibrate(100);
         }
-    }    
+    }
 
     Ossia.Binding {
         id: connected_binding
         node: '/user/' + ossia_net.slot + '/connected'
         on: ossia_net.connected
+    }
+
+    Ossia.Binding {
+        id: username_binding
+        node: '/user/' + ossia_net.slot + '/name'
+        on: ossia_net.username
     }
 
     Ossia.Callback {
@@ -67,6 +92,8 @@ Item {
                 console.log("server has quit");
                 upper_view.header.scene.text = "disconnected";
                 os_hdl.hostAddr = "ws://"
+                connected = false;
+                username = "";
             }
         }
     }
@@ -102,6 +129,7 @@ Item {
     Ossia.Callback {
         id: scenario_start
         node: "/scenario/start"
+        value: 0
         onValueChanged: upper_view.header.timer.start();
     }
 

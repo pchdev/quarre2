@@ -117,11 +117,6 @@ Rectangle {
         textFormat: Text.PlainText
         font.family: font_lato_light.name
         antialiasing: true
-
-        MouseArea {
-            id: no_info_button
-            anchors.fill: parent
-        }
     }
 
     Text {
@@ -148,6 +143,32 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
         color: "#80000000"
+
+        Timer {
+            id: mousetimer
+            running: false
+            interval: 1500
+            repeat: false
+            onTriggered: {
+                if(mousearea.pressed)
+                {
+                    console.log("quitting");
+                    ossia_net.username = "";
+                    ossia_net.connected = false;
+                    ossia_net.oshdl.vibrate(200);
+                    Qt.quit();
+                }
+            }
+        }
+
+        MouseArea {
+            id: mousearea;
+            anchors.fill: parent
+            onClicked: {
+                mousetimer.start();
+                ossia_net.oshdl.vibrate(100);
+            }
+        }
 
         SequentialAnimation {
             running: true

@@ -6,7 +6,6 @@ import android.content.Context;
 import android.net.nsd.NsdServiceInfo;
 import android.net.nsd.NsdManager;
 import android.net.nsd.NsdManager.RegistrationListener;
-import android.net.wifi.WifiManager;
 import android.util.Log;
 
 public class ZConfRunnable implements Runnable
@@ -22,20 +21,22 @@ public class ZConfRunnable implements Runnable
     private NsdManager                          m_nsdmanager;
     private NsdManager.RegistrationListener     m_reglistener;
     private NsdManager.DiscoveryListener        m_discolistener;
-    private NsdManager.ResolveListener          m_resolvelistener;
-
+    private NsdManager.ResolveListener          m_resolvelistener;    
 
     @Override
     public void run() {
         // called on Android UI Thread
         this.discoverServer("quarre-server", "_oscjson._tcp");
+        USER_ID = -1;
         //this.registerService("quarre-remote", "_oscjson._tcp", 5678);
     }
 
-    public static int port;
+    public static int PORT;
+    public static int USER_ID;
     public static String service_name;
     public static String service_type;
     public static String HOST_ADDR;
+    public static String IP;
 
     public void discoverServer(String name, String type)
     {
@@ -53,10 +54,14 @@ public class ZConfRunnable implements Runnable
             {
                 Log.d("ZCONF", "Resolve succeeded");
 
-                String host = "ws:/" + service.getHost().toString()
-                                     + ":" + service.getPort();
+                String ip = service.getHost().toString();
+                int port = service.getPort();
+
+                String host = "ws:/" + ip + ":" + port;
 
                 Log.d("ZCONF", host);
+                IP = ip.substring(1);
+                PORT = port;
                 HOST_ADDR = host;
                 NativeFunctions.onServerDiscoveredNative();
             }

@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include "cpp/oshdl.hpp"
 #include <QObject>
+#include <QQmlComponent>
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +17,8 @@ int main(int argc, char *argv[])
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;
+
+    QObject::connect(&engine, SIGNAL(quit()), &app, SLOT(quit()));
 
     return app.exec();
 }

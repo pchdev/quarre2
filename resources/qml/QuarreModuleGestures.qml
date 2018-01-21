@@ -27,6 +27,37 @@ Rectangle {
     property bool freefall_trigger: false
     property bool turnover_trigger: false
 
+    Text {
+        id: gesture_label
+        width: parent.width
+        height: parent.height
+        horizontalAlignment: Text.AlignHCenter
+        y: parent.height*0.25
+        font.family: font_lato_light.name
+        font.pointSize: 50 * root.fontRatio
+        textFormat: Text.PlainText
+        color: "#ffffff"
+        text: "no gesture"
+        antialiasing: true
+    }
+
+    Text {
+        id: gesture_description
+        y: parent.height/2
+        text: ""
+        anchors.horizontalCenter: parent.horizontalCenter
+        color: "#ffffff"
+        height: parent.height/2
+        width: parent.width * 0.9
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignTop
+        font.pointSize: 14 * root.fontRatio
+        textFormat: Text.PlainText
+        wrapMode: Text.WordWrap
+        font.family: font_lato_light.name
+        antialiasing: true
+    }
+
     SensorGesture {
         id: sensor_gesture
         enabled: false
@@ -56,7 +87,11 @@ Rectangle {
     Ossia.Callback {
         id: gestures_whip_active
         node: "/user/" + ossia_net.slot + "/gestures/whip/active"
-        onValueChanged: GesturesRoutine.update(value, "QtSensors.whip", sensor_gesture.gestures);
+        onValueChanged: {
+            GesturesRoutine.update(value, "QtSensors.whip", sensor_gesture.gestures);
+            gesture_label.text = "whip"
+            gesture_description.text = "raise your phone, and make a quick move downward"
+        }
     }
 
     Ossia.Binding {
@@ -76,7 +111,11 @@ Rectangle {
     Ossia.Callback {
         id: gestures_cover_active
         node: "/user/" + ossia_net.slot + "/gestures/cover/active"
-        onValueChanged: GesturesRoutine.update(value, "QtSensors.cover", sensor_gesture.gestures);
+        onValueChanged: {
+            GesturesRoutine.update(value, "QtSensors.cover", sensor_gesture.gestures);
+            gesture_label.text = "cover"
+            gesture_description.text = "cover the screen of your phone with the palm of your hand"
+        }
     }
 
     Ossia.Binding {
@@ -97,7 +136,11 @@ Rectangle {
     Ossia.Callback {
         id: gestures_pickup_active
         node: "/user/" + ossia_net.slot + "/gestures/pickup/active"
-        onValueChanged: GesturesRoutine.update(value, "QtSensors.pickup", sensor_gesture.gestures);
+        onValueChanged: {
+            GesturesRoutine.update(value, "QtSensors.pickup", sensor_gesture.gestures);
+            gesture_label.text = "pickup"
+            gesture_description.text = "put your phone flat on your hand or on a surface, raise it towards you"
+        }
     }
 
     Ossia.Binding {
@@ -117,7 +160,11 @@ Rectangle {
     Ossia.Callback {
         id: gestures_freefall_active
         node: "/user/" + ossia_net.slot + "/gestures/freefall/active"
-        onValueChanged: GesturesRoutine.update(value, "QtSensors.freefall", sensor_gesture.gestures);
+        onValueChanged: {
+            GesturesRoutine.update(value, "QtSensors.freefall", sensor_gesture.gestures);
+            gesture_label.text = "freefall"
+            gesture_description.text = "let your phone drop from one hand to another, like you were juggling"
+        }
     }
 
     Ossia.Binding {
@@ -137,7 +184,11 @@ Rectangle {
     Ossia.Callback {
         id: gestures_turnover_active
         node: "/user/" + ossia_net.slot + "/gestures/turnover/active"
-        onValueChanged: GesturesRoutine.update(value, "QtSensors.turnover", sensor_gesture.gestures);
+        onValueChanged: {
+            GesturesRoutine.update(value, "QtSensors.turnover", sensor_gesture.gestures);
+            gesture_label.text = "turnover"
+            gesture_description.text = "turn your phone flat downward, close to the palm of your hand"
+        }
     }
 
     Ossia.Binding {
@@ -157,7 +208,11 @@ Rectangle {
     Ossia.Callback {
         id: gestures_twist_active
         node: "/user/" + ossia_net.slot + "/gestures/twist/active"
-        onValueChanged: GesturesRoutine.update(value, "QtSensors.twist", sensor_gesture.gestures);
+        onValueChanged: {
+            GesturesRoutine.update(value, "QtSensors.twist", sensor_gesture.gestures);
+            gesture_label.text = "twist"
+            gesture_description.text = "twist your phone on the left or on the right, then immediately get it back on flat position"
+        }
     }
 
     Ossia.Binding {
@@ -183,7 +238,11 @@ Rectangle {
     Ossia.Callback {
         id: gestures_shake_active
         node: "/user/" + ossia_net.slot + "/gestures/shake/active"
-        onValueChanged: GesturesRoutine.update(value, "QtSensors.shake", sensor_gesture.gestures);
+        onValueChanged: {
+            GesturesRoutine.update(value, "QtSensors.shake", sensor_gesture.gestures);
+            gesture_label.text = "shake"
+            gesture_description.text = "shake your phone very firmly and quickly"
+        }
     }
 
     Ossia.Binding {

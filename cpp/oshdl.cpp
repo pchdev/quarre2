@@ -16,6 +16,17 @@ void onServerDiscoveredNative(JNIEnv*, jobject)
     platform->setPort(hostlist[1].toInt());
 }
 
+void onRemoteQuitNative(JNIEnv*, jobject)
+{
+    auto platform = platform_hdl::singleton;
+    platform->application_quit();
+}
+
+void platform_hdl::application_quit()
+{
+    emit remoteQuit();
+}
+
 QString platform_hdl::hostAddr() const
 {
     return m_hostAddr;
@@ -75,6 +86,12 @@ platform_hdl::~platform_hdl() {}
 
 #include <QMetaObject>
 
+void platform_hdl::register_user_id(quint16 id)
+{
+    jint user_id = id;
+    QAndroidJniObject::setStaticField<jint>("org/quarre/remote/ZConfRunnable", "USER_ID", user_id);
+}
+
 void platform_hdl::vibrate(int milliseconds) const
 {    
     jboolean has_vibrator   = m_vibrator.callMethod<jboolean>("hasVibrator", "()Z");
@@ -100,7 +117,8 @@ JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* /*reserved*/)
       return JNI_ERR;
 
     JNINativeMethod methods[] = {
-        {"onServerDiscoveredNative", "()V", (void*) onServerDiscoveredNative }
+        {"onServerDiscoveredNative", "()V", (void*) onServerDiscoveredNative },
+        {"onRemoteQuitNative", "()V", (void*) onRemoteQuitNative }
     };
 
     // search for Java class which declares the native methods

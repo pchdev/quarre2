@@ -22,18 +22,21 @@ public:
     ~platform_hdl();
     static platform_hdl* singleton;
 
+    void application_quit();
     QString hostAddr() const;
     quint16 port() const;
     void setHostAddr(QString addr);
     void setPort(quint16 port);
 
 signals:
+    void remoteQuit();
     void hostAddrChanged();
     void disconnected();
 
 public slots:    
     void vibrate(int milliseconds)  const;
     void register_zeroconf(QString name, QString type, quint16 port);
+    void register_user_id(quint16 id);
 
 private:
     QString                 m_hostAddr;

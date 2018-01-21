@@ -1,4 +1,4 @@
-QT += quick sensors
+QT += quick sensors websockets
 
 android: {
     QT += androidextras
