@@ -27,6 +27,9 @@ Rectangle {
     property bool freefall_trigger: false
     property bool turnover_trigger: false
 
+    property bool swipe_data: false;
+    property bool swipe_active: false;
+
     Text {
         id: gesture_label
         width: parent.width
@@ -271,6 +274,37 @@ Rectangle {
         id: gestures_shake_down_trigger
         node: "/user/" + ossia_net.slot + "/gestures/shake/down/trigger"
         on: shake_down_trigger
+    }
+
+    // SWIPE
+
+    Ossia.Callback {
+        id: gestures_swipe_active
+        node: "/user/" + ossia_net.slot + "/gestures/swipe/active"
+        onValueChanged: {
+            swipe_active = value;
+            gesture_label.text = "swipe";
+            gesture_description.text = "swipe-left or right the bottom half-screen"
+        }
+    }
+
+    Ossia.Binding {
+        id: gestures_swipe
+        node: "/user/" + ossia_net.slot + "/gestures/swipe/trigger"
+        on: swipe_data
+    }
+
+    SwipeArea {
+        anchors.fill: parent
+        onSwipeLeft: {
+            if(swipe_active) swipe_data = !swipe_data;
+            ossia_net.oshdl.vibrate(100);
+        }
+
+        onSwipeRight: {
+            if(swipe_active) swipe_data = !swipe_data;
+            ossia_net.oshdl.vibrate(100);
+        }
     }
 
     onConnectedChanged: {

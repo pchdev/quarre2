@@ -1,6 +1,8 @@
 import QtQuick 2.0
+import Ossia 1.0 as Ossia
 
 Rectangle  {
+
     Image {
         id: teaser_claw
         antialiasing: true
@@ -18,7 +20,7 @@ Rectangle  {
         horizontalAlignment: Text.AlignHCenter
         y: parent.height*0.25
         font.family: font_lato_light.name
-        font.pointSize: 50
+        font.pointSize: 50 * root.fontRatio
         textFormat: Text.PlainText
         color: "#ffffff"
         text: "quarrè"

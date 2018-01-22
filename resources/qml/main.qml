@@ -11,22 +11,20 @@ ApplicationWindow {
 
     // --------------------------------------------------------------------------------------------------
     // note: reference is based on Samsung S7
-    property real refPd: 17.06700379266751
-    property real refHeight: 2560
-    property real refWidth: 1440
+    property real refPd: 17.067
+    property real refHeight: 1848
+    property real refWidth: 1080
 
     // for the purpose of testing on macOS:
     // MacBook Pro 9.2, late 2012 (13")
     // replace width with Screen.desktopAvailableWidth
-    height: Screen.desktopAvailableHeight
-    width: Screen.desktopAvailableWidth
+    height: Screen.height
+    width: Screen.width
     property real currPd: Screen.pixelDensity
 
     // refer to this when calculating font sizes
     property real ratio: Math.min(height/refHeight, width/refWidth)
-    property real fontRatio: Math.min(height*refPd/(currPd*refHeight, width*refPd/(currPd*refWidth)))
-
-    Component.onCompleted: console.log(fontRatio);
+    property real fontRatio: Math.min(height*refPd/(currPd*refHeight), width*refPd/(currPd*refWidth))
 
     FontLoader {
         id: font_lato_light
@@ -123,7 +121,7 @@ ApplicationWindow {
                     currentIndex: 0
                     anchors.fill: parent
 
-                    QuarreLowerDefault { color: "transparent" }
+                    QuarreLowerDefault { id: lower_default; color: "transparent" }
                     QuarreModuleRegistration { opacity: 0.9 }
                     QuarreModuleSensorsPlayground { color: "transparent"; id: sensors_playground }
                     QuarreModuleGestures { id: gestures_playground; color: "transparent" }

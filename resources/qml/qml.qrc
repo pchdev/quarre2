@@ -21,6 +21,7 @@
         <file>InteractionManager.qml</file>
         <file>QuarreModuleSensorsPlayground.qml</file>
         <file>GesturesRoutine.js</file>
+        <file>SwipeArea.qml</file>
     </qresource>
     <qresource prefix="/modules"/>
 </RCC>

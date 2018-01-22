@@ -59,8 +59,10 @@ Item {
                 upper_view.header.scene.text = "connected, id: " + slot;
                 Ossia.SingleDevice.remap(sensors_playground);
                 Ossia.SingleDevice.remap(gestures_playground);
-                sensors_playground.connected = true;
-                gestures_playground.connected = true;
+
+                sensors_playground.connected    = true;
+                gestures_playground.connected   = true;
+
                 os_hdl.register_user_id(slot);
                 username_dialog.open();
             }
