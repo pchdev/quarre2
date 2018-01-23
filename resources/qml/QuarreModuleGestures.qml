@@ -17,8 +17,10 @@ Rectangle {
 
     property bool whip_trigger: false
     property bool cover_trigger: false
+    property bool twist_trigger: false
     property bool twist_left_trigger: false
     property bool twist_right_trigger: false
+    property bool shake_trigger: false
     property bool shake_left_trigger: false
     property bool shake_right_trigger: false
     property bool shake_up_trigger: false
@@ -73,8 +75,10 @@ Rectangle {
 
             if(gesture === "whip") whip_trigger = !whip_trigger;
             else if (gesture === "cover") cover_trigger = !cover_trigger;
+            else if (gesture === "twist") twist_trigger = !twist_trigger;
             else if (gesture === "twistLeft") twist_left_trigger = !twist_left_trigger;
             else if (gesture === "twistRight") twist_right_trigger = !twist_right_trigger;
+            else if (gesture === "shake") shake_trigger = !shake_trigger;
             else if (gesture === "shakeUp") shake_up_trigger = !shake_up_trigger;
             else if (gesture === "shakeDown") shake_down_trigger = !shake_down_trigger;
             else if (gesture === "shakeLeft") shake_left_trigger = !shake_left_trigger;
@@ -225,6 +229,12 @@ Rectangle {
     }
 
     Ossia.Binding {
+        id: gestures_twist_trigger
+        node: "/user/" + ossia_net.slot + "/gestures/twist/trigger"
+        on: twist_trigger
+    }
+
+    Ossia.Binding {
         id: gestures_twist_left_trigger
         node: "/user/" + ossia_net.slot + "/gestures/twist/left/trigger"
         on: twist_left_trigger
@@ -252,6 +262,12 @@ Rectangle {
         id: gestures_shake_available
         node: "/user/" + ossia_net.slot + "/gestures/shake/available"
         on: shake_available
+    }
+
+    Ossia.Binding {
+        id: gestures_shake_trigger
+        node: "/user/" + ossia_net.slot + "/gestures/shake/trigger"
+        on: shake_trigger
     }
 
     Ossia.Binding {

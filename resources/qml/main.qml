@@ -121,10 +121,10 @@ ApplicationWindow {
                     currentIndex: 0
                     anchors.fill: parent
 
+                    QuarreModuleGestures { id: gestures_playground; color: "transparent" }
                     QuarreLowerDefault { id: lower_default; color: "transparent" }
                     QuarreModuleRegistration { opacity: 0.9 }
                     QuarreModuleSensorsPlayground { color: "transparent"; id: sensors_playground }
-                    QuarreModuleGestures { id: gestures_playground; color: "transparent" }
 
                     //QuarreModuleTouchSpat { color: "transparent" }
                     //QuarreModuleSensorSpat { opacity: 0.9 }
