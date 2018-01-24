@@ -90,7 +90,7 @@ Rectangle {
         id: header_scenario_label
         text: "quarrè"
         color: "#ffffff"
-        font.pixelSize: 40
+        font.pixelSize: 40 * root.fontRatio
         textFormat: Text.PlainText
         font.family: font_lato_light.name
         verticalAlignment: Text.AlignVCenter
@@ -110,7 +110,7 @@ Rectangle {
         id: header_timer_label
         text: "00:00"
         color: "#ffffff"
-        font.pixelSize: 40
+        font.pixelSize: 40 * root.fontRatio
         anchors.fill: parent
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
@@ -124,7 +124,7 @@ Rectangle {
         id: header_scene_label
         text: "registration"
         color: "#ffffff"
-        font.pixelSize: 40
+        font.pixelSize: 40 * root.fontRatio
         textFormat: Text.PlainText
         font.family: font_lato_light.name
         verticalAlignment: Text.AlignVCenter
@@ -152,7 +152,6 @@ Rectangle {
             onTriggered: {
                 if(mousearea.pressed)
                 {
-                    console.log("quitting");
                     ossia_net.username = "";
                     ossia_net.connected = false;
                     ossia_net.oshdl.vibrate(200);
