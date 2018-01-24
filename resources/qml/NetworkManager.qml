@@ -190,7 +190,7 @@ Item {
 
     Ossia.Callback {
         id: interactions_current_force
-        node: '/user/' + ossia_net.slot + '/interactions/current/force'
+        node: '/user/' + ossia_net.slot + '/interactions/force'
         onValueChanged: interaction_manager.force_current(value);
     }
 

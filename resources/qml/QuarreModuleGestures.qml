@@ -39,7 +39,7 @@ Rectangle {
         horizontalAlignment: Text.AlignHCenter
         y: parent.height*0.25
         font.family: font_lato_light.name
-        font.pointSize: 50 * root.fontRatio
+        font.pointSize: 40 * root.fontRatio
         textFormat: Text.PlainText
         color: "#ffffff"
         text: "no gesture"
@@ -57,7 +57,6 @@ Rectangle {
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignTop
         font.pointSize: 14 * root.fontRatio
-        textFormat: Text.PlainText
         wrapMode: Text.WordWrap
         font.family: font_lato_light.name
         antialiasing: true
@@ -91,8 +90,11 @@ Rectangle {
 
     Ossia.Callback {
         id: ossia_gesture_title
-        node: "/user" + ossia_net.slot + "/gestures/current/title"
-        onValueChanged: gesture_label.text = value
+        node: "/user/" + ossia_net.slot + "/gestures/current/title"
+        onValueChanged: {
+            gesture_label.text = value;
+            ossia_net.oshdl.vibrate(100);
+        }
     }
 
     Ossia.Callback {
