@@ -286,7 +286,6 @@ Rectangle {
         node: "/user/" + ossia_net.slot + "/gestures/swipe/active"
         onValueChanged: {
             swipe_active = value;
-            swipe_area.focus = true;
         }
     }
 
@@ -302,11 +301,25 @@ Rectangle {
         onSwipeLeft: {
             if(swipe_active) swipe_data = !swipe_data;
             ossia_net.oshdl.vibrate(100);
+            swipe_area.focus = true;
+            swipe_area.prevX = 0;
+            swipe_area.prevY = 0;
+            swipe_area.velocityX = 0;
+            swipe_area.velocityY = 0;
+            swipe_area.startX = 0;
+            swipe_area.startY = 0;
         }
 
         onSwipeRight: {
             if(swipe_active) swipe_data = !swipe_data;
             ossia_net.oshdl.vibrate(100);
+            swipe_area.focus = true;
+            swipe_area.prevX = 0;
+            swipe_area.prevY = 0;
+            swipe_area.velocityX = 0;
+            swipe_area.velocityY = 0;
+            swipe_area.startX = 0;
+            swipe_area.startY = 0;
         }
     }
 
