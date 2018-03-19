@@ -32,7 +32,7 @@ $ cd libossia
 ```bash
 $ mkdir build
 $ cd build
-$ cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=../CMake/android_toolchain.cmake -DOSSIA_PD=OFF -DOSSIA_MAX=OFF -DOSSIA_PYTHON=OFF -DOSSIA_QT=ON -DOSSIA_QML=ON -DOSSIA_STATIC=OFF -DOSSIA_DNSSD=OFF -DCMAKE_INSTALL_PREFIX=../../libossia-install-android-clang
+$ cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=/path/to/qt-android/lib/cmake/Qt5 -DCMAKE_TOOLCHAIN_FILE=../CMake/android_toolchain.cmake -DOSSIA_PD=OFF -DOSSIA_MAX=OFF -DOSSIA_PYTHON=OFF -DOSSIA_QT=ON -DOSSIA_QML=ON -DOSSIA_STATIC=OFF -DOSSIA_DNSSD=OFF -DCMAKE_INSTALL_PREFIX=../../libossia-install-android-clang
 $ make -j4
 $ make install
 ```
