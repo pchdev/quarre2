@@ -22,11 +22,11 @@ public:
     ~platform_hdl();
     static platform_hdl* singleton;
 
-    void application_quit();
-    QString hostAddr() const;
-    quint16 port() const;
-    void setHostAddr(QString addr);
-    void setPort(quint16 port);
+    void        application_quit();
+    QString     hostAddr() const;
+    quint16     port() const;
+    void        setHostAddr(QString addr);
+    void        setPort(quint16 port);
 
 signals:
     void remoteQuit();

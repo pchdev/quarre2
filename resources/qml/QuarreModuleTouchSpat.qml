@@ -1,23 +1,34 @@
 import QtQuick 2.0
 import "Maths.js" as SpatMaths
+import Ossia 1.0 as Ossia
 
 Rectangle {
 
     property int interaction_id: 0
     property int nspeakers: 8
     property int nsources: 1
+    property var touchpoints: Qt.vector2d(0, 0)
+
+    Ossia.Binding
+    {
+        id: touchpoints_data
+        node: '/user/' + ossia_net.slot + '/touch/positions'
+        on: touchpoints
+    }
 
     MultiPointTouchArea {
         property var selected_sources: []
         maximumTouchPoints: nsources
         anchors.fill: parent
 
-        onPressed: {
-
-
+        onPressed:
+        {
+            for(var i = 0; i < touchPoints.length; ++i)
+                touchpoints = Qt.vector2d(touchPoints[i].x/width, 1 - touchPoints[i].y/height);
         }
 
-        onUpdated: {
+        onUpdated:
+        {
 
         }
 

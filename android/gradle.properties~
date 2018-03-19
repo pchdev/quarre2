@@ -4,6 +4,6 @@
 # as it contains information specific to your local configuration.
 
 androidBuildToolsVersion=27.0.2
-androidCompileSdkVersion=21
+androidCompileSdkVersion=23
 buildDir=.build
 qt5AndroidDir=/usr/local/opt/qt-android/src/android/java

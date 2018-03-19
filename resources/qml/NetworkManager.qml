@@ -1,8 +1,9 @@
 import QtQuick 2.0
 import Ossia 1.0 as Ossia
-import io.quarre.org 1.0
+import Quarre 1.0
+
 import QtQuick.Controls 1.2
-import QtQuick.Dialogs 1.2
+import QtQuick.Dialogs 1.3
 
 Item {
 
@@ -10,35 +11,51 @@ Item {
     property int        wsPort: 5678
     property string     deviceName: "quarre-remote"
     property alias      oshdl: os_hdl
+    property alias      client: ossia_client
     property int        slot: 0
     property bool       connected: false
-    property string     username: ""
 
-    Dialog {
-        id: username_dialog
-        visible: false
-        title: "type-in your name"
-        standardButtons: StandardButton.Ok
+    Ossia.OSCQueryClient //---------------------------------------------------------QUERY_CLIENT
+    {
+        id: ossia_client
 
-        onAccepted: {
-            username = dialog_text.text;
-            upper_view.header.scene.text = dialog_text.text;
+        onClientConnected:
+        {
+            if(available_slot.value >= 0)
+            {
+                slot = available_slot.value;
+                connected = true;
+                upper_view.header.scene.text = "connected, id: " + slot;
+
+                ossia_client.remap(sensors_playground);
+                ossia_client.remap(gestures_playground);
+                ossia_client.remap(touchspat);
+
+                sensors_playground.connected    = true;
+                gestures_playground.connected   = true;
+
+                os_hdl.register_user_id(slot);
+            }
+
+            else upper_view.header.scene.text = "max users reached";
+
+            os_hdl.vibrate(100);
         }
 
-        TextField {
-            id: dialog_text
-            placeholderText: qsTr("Enter name")
+        onClientDisconnected:
+        {
+            connected           = false;
+            os_hdl.hostAddr     = "ws://";
         }
+
     }
 
-    PlatformHdl {
-
+    PlatformHdl //---------------------------------------------------------ZCONF+VIBRATOR
+    {
         id: os_hdl
 
-        Component.onCompleted: {
-            os_hdl.vibrate(100);
+        Component.onCompleted:
             os_hdl.register_zeroconf(deviceName, "_oscjson._tcp", wsPort);
-        }
 
         // when quarre-server found
         onHostAddrChanged: {
@@ -48,149 +65,135 @@ Item {
             console.log("connecting...");
             console.log(hostAddr);
 
-            Ossia.SingleDevice.openOSCQueryClient(hostAddr, oscPort);
-            Ossia.SingleDevice.remap(ossia_net);
-
-            // note: this should be handled by oscquery server
-            if(available_slot.value >= 0)
-            {
-                slot = available_slot.value;
-                connected = true;
-                upper_view.header.scene.text = "connected, id: " + slot;
-                Ossia.SingleDevice.remap(sensors_playground);
-                Ossia.SingleDevice.remap(gestures_playground);
-
-                sensors_playground.connected    = true;
-                gestures_playground.connected   = true;
-
-                os_hdl.register_user_id(slot);
-                username_dialog.open();
-            }
-
-            else upper_view.header.scene.text = "max users reached";
-
-            os_hdl.vibrate(100);
+            ossia_client.openOSCQueryClient(hostAddr, oscPort);
+            ossia_client.remap(ossia_net);
         }
     }
 
-    Ossia.Binding {
-        id: connected_binding
-        node: '/user/' + ossia_net.slot + '/connected'
-        on: ossia_net.connected
+    Ossia.Binding //---------------------------------------------------------CLIENT_CONNECTED
+    {
+
+        id:         connected_binding
+        device:     ossia_client
+
+        node:       '/user/' + ossia_net.slot + '/connected'
+        on:         ossia_net.connected
     }
 
-    Ossia.Binding {
-        id: username_binding
-        node: '/user/' + ossia_net.slot + '/name'
-        on: ossia_net.username
+    Ossia.Callback //---------------------------------------------------------AVAILABLE_SLOT
+    {
+        id:         available_slot
+        device:     ossia_client
+        node:       '/slots/available'
     }
 
-    Ossia.Callback {
-        id: server_quit
-        node: '/server/quit'
-        onValueChanged: {
-            if(value !== 0)
-            {
-                console.log("server has quit");
-                upper_view.header.scene.text = "disconnected";
-                os_hdl.hostAddr = "ws://"
-                connected = false;
-                username = "";
-            }
-        }
-    }
+    Ossia.Callback //---------------------------------------------------------SCENARIO_NAME
+    {
+        id:         scenario_name
+        device:     ossia_client
+        node:       "/scenario/name"
 
-    Ossia.Callback {
-        id: users_max
-        node: '/slots/max'
-    }
-
-    Ossia.Callback {
-        id: available_slot
-        node: '/slots/available'
-    }
-
-    Ossia.Binding {
-        id: available_slot_send_back
-        node: '/slots/available'
-        on: slot_plus_one
-    }
-
-    Ossia.Callback {
-        id: scenario_name
-        node: "/scenario/name"
         onValueChanged: upper_view.header.scenario.text = value;
     }            
 
-    Ossia.Callback {
-        id: scenario_scene_name
-        node: "/scenario/scene/name"
+    Ossia.Callback //---------------------------------------------------------SCENE_NAME
+    {
+        id:         scenario_scene_name
+        device:     ossia_client
+        node:       "/scenario/scene/name"
+
         onValueChanged: upper_view.header.scene.text = value;
     }    
 
-    Ossia.Callback {
-        id: scenario_start
-        node: "/scenario/start"
-        value: 0
+    Ossia.Callback //---------------------------------------------------------SCENARIO_START
+    {
+        id:         scenario_start
+        device:     ossia_client
+        node:       "/scenario/start"
+
         onValueChanged: upper_view.header.timer.start();
     }
 
-    Ossia.Callback {
+    Ossia.Callback //---------------------------------------------------------SCENARIO_STOP
+    {
         // received whenever a problem has happened
         // argument: error code (int)
-        id: scenario_stop
-        node: "/scenario/stop"
+        id:         scenario_stop
+        device:     ossia_client
+        node:       "/scenario/stop"
     }
 
-    Ossia.Callback {
-        // argument: reason for pause (int)
-        id: scenario_pause
-        node: "/scenario/pause"
+    Ossia.Callback //---------------------------------------------------------SCENARIO_PAUSE
+    {
+        //          argument: reason for pause (int)
+        id:         scenario_pause
+        device:     ossia_client
+        node:       "/scenario/pause"
     }
 
-    Ossia.Callback {
-        id: scenario_end
-        node: "/scenario/end"
+    Ossia.Callback //---------------------------------------------------------SCENARIO_END
+    {
+        id:         scenario_end
+        device:     ossia_client
+        node:       "/scenario/end"
+
         onValueChanged: upper_view.header.timer.stop();
     }    
 
-    Ossia.Callback {
-        id: scenario_reset
-        node: "/scenario/reset"
+    Ossia.Callback //---------------------------------------------------------SCENARIO_RESET
+    {
+        id:         scenario_reset
+        device:     ossia_client
+        node:       "/scenario/reset"
+
         onValueChanged: {
             upper_view.header.count = 0;
             upper_view.header.timer.stop();
         }
     }
 
-    Ossia.Callback {
-        id: interactions_next_incoming
-        node: '/user/' + ossia_net.slot + '/interactions/next/incoming'
-        // arguments are: x (interaction_index) y (interaction_length) z (countdown)
+    Ossia.Callback //---------------------------------------------------------INTERACTION_INCOMING
+    {
+        id:         interactions_next_incoming
+        device:     ossia_client
+        node:       '/user/' + ossia_net.slot + '/interactions/next/incoming'
+
         onValueChanged: interaction_manager.prepare_next(value);
     }
 
-    Ossia.Callback {
-        id: interactions_next_begin
-        node: '/user/' + ossia_net.slot + '/interactions/next/begin'
+    Ossia.Callback //---------------------------------------------------------INTERACTION_BEGIN
+    {
+        id:         interactions_next_begin
+        device:     ossia_client
+        node:       '/user/' + ossia_net.slot + '/interactions/next/begin'
+
         onValueChanged: interaction_manager.trigger_next(value);
     }
 
-    Ossia.Callback {
-        id: interactions_next_cancel
-        node: '/user/' + ossia_net.slot + '/interactions/next/cancel'
+    Ossia.Callback //---------------------------------------------------------INTERACTION_CANCEL
+    {
+        id:         interactions_next_cancel
+        device:     ossia_client
+        node:       '/user/' + ossia_net.slot + '/interactions/next/cancel'
+
         onValueChanged: interaction_manager.end_current();
     }
 
-    Ossia.Callback {
-        id: interactions_current_end
-        node: '/user/' + ossia_net.slot + '/interactions/current/end'
+    Ossia.Callback //---------------------------------------------------------INTERACTION_END
+    {
+        id:         interactions_current_end
+        device:     ossia_client
+        node:       '/user/' + ossia_net.slot + '/interactions/current/end'
+
         onValueChanged: interaction_manager.end_current();
     }
 
-    Ossia.Callback {
-        id: interactions_current_force
-        node: '/user/' + ossia_net.slot + '/interactions/force'
+    Ossia.Callback //---------------------------------------------------------INTERACTION_FORCE
+    {
+        id:         interactions_current_force
+        device:     ossia_client
+        node:       '/user/' + ossia_net.slot + '/interactions/force'
+
         onValueChanged: interaction_manager.force_current(value);
     }
 

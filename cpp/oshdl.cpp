@@ -112,7 +112,6 @@ void platform_hdl::register_zeroconf(QString name, QString type, quint16 port)
 JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* /*reserved*/)
 {
     JNIEnv* env;
-    // get the JNIEnv pointer.
     if (vm->GetEnv(reinterpret_cast<void**>(&env), JNI_VERSION_1_6) != JNI_OK)
       return JNI_ERR;
 
@@ -121,12 +120,10 @@ JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* /*reserved*/)
         {"onRemoteQuitNative", "()V", (void*) onRemoteQuitNative }
     };
 
-    // search for Java class which declares the native methods
     jclass javaClass = env->FindClass("org/quarre/remote/NativeFunctions");
     if (!javaClass)
       return JNI_ERR;
 
-    // register our native methods
     if (env->RegisterNatives(javaClass, methods,
                           sizeof(methods) / sizeof(methods[0])) < 0) {
       return JNI_ERR;

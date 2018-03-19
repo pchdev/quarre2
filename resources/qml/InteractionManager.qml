@@ -15,8 +15,8 @@ Item {
 
         if(quarre_application.state === "IDLE")
         {
-            quarre_application.state = "INCOMING_INTERACTION";
-            lower_view_stack.currentIndex = arglist[0];
+            quarre_application.state        = "INCOMING_INTERACTION";
+            lower_view_stack.currentIndex   = arglist[0];
             //! TODO: gray it out to show that module is inactive
         }
 
@@ -30,9 +30,9 @@ Item {
         // arg1: interaction length
         // arg2: title
         // arg3: description
-        upper_view.current.title = arglist[2];
-        upper_view.current.description = arglist[3];
-        upper_view.current.count = arglist[1]
+        upper_view.current.title            = arglist[2];
+        upper_view.current.count            = arglist[1]
+        upper_view.current.description      = arglist[3];
         upper_view.current.timer.start();
 
         upper_view.next.title = ""
@@ -46,9 +46,9 @@ Item {
 
     function end_current()
     {
-        upper_view.current.title = "";
-        upper_view.current.description = "";
-        upper_view.current.count = 0;
+        upper_view.current.title            = "";
+        upper_view.current.description      = "";
+        upper_view.current.count            = 0;
         upper_view.current.timer.stop();
 
         if(quarre_application.state === "ACTIVE_INTERACTION")
@@ -60,9 +60,9 @@ Item {
 
     function force_current(module_index)
     {
-        quarre_application.state = "IDLE";
-        upper_view.header.scene.text = "playground";
-        lower_view_stack.currentIndex = module_index;
+        quarre_application.state        = "IDLE";
+        upper_view.header.scene.text    = "playground";
+        lower_view_stack.currentIndex   = module_index;
     }
 
     function parse_interactions_file()

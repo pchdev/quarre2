@@ -46,9 +46,9 @@ ApplicationWindow {
         width:      parent.width
         focus:      true
 
-        property alias network: ossia_net
-        property alias upper_view: upper_view
-        property alias lower_view: lower_view
+        property alias network:     ossia_net
+        property alias upper_view:  upper_view
+        property alias lower_view:  lower_view
 
         // preventing back key to quit application
         Keys.onReleased:
@@ -64,16 +64,19 @@ ApplicationWindow {
 
         NetworkManager
         {
-            id: ossia_net
-            deviceName: "quarre-remote"
-            oscPort: 1234
-            wsPort: 5678
+            id:             ossia_net
+            deviceName:     "quarre-remote"
+
+            oscPort:        1234
+            wsPort:         5678
         }
 
         ApplicationStates
         {
             id: quarre_states
-            Component.onCompleted: {
+
+            Component.onCompleted:
+            {
                 quarre_application.states = quarre_states.states
                 quarre_application.state = "IDLE"
             }
@@ -82,7 +85,9 @@ ApplicationWindow {
         ApplicationTransitions
         {
             id: quarre_transitions
-            Component.onCompleted: {
+
+            Component.onCompleted:
+            {
                 quarre_application.transitions = quarre_transitions.transitions
             }
         }
@@ -99,21 +104,21 @@ ApplicationWindow {
 
             QuarreInfoView
             {
-                id: upper_view
-                width: parent.width
-                height: parent.height * 0.45
-                color: "black"
-                opacity: 0.9
+                id:         upper_view
+                width:      parent.width
+                height:     parent.height * 0.45
+                color:      "black"
+                opacity:    0.9
             }
 
-            Rectangle
+            Rectangle //------------------------------------------------------ INTERACTION_MODULES
             {
-                id: lower_view
-                y: upper_view.height
-                width: parent.width
-                height: parent.height * 0.55
-                color: "black"
-                opacity: 0.75
+                id:         lower_view
+                y:          upper_view.height
+                width:      parent.width
+                height:     parent.height * 0.55
+                color:      "black"
+                opacity:    0.75
 
                 StackLayout
                 {
@@ -121,12 +126,19 @@ ApplicationWindow {
                     currentIndex: 0
                     anchors.fill: parent
 
+                    QuarreModuleTextViewer
+                    {
+                        id:         textviewer
+                        color:      "transparent"
+                        file:       "assets:/arbre-integral-textes.json"
+                    }
+
+                    QuarreModuleTouchSpat { id: touchspat; color: "transparent" }
                     QuarreModuleGestures { id: gestures_playground; color: "transparent" }
                     QuarreLowerDefault { id: lower_default; color: "transparent" }
                     QuarreModuleRegistration { opacity: 0.9 }
                     QuarreModuleSensorsPlayground { color: "transparent"; id: sensors_playground }
 
-                    //QuarreModuleTouchSpat { color: "transparent" }
                     //QuarreModuleSensorSpat { opacity: 0.9 }
                     //QuarreModuleSliders { opacity: 0.9 }
                     //QuarreModulePads { opacity: 0.9 }
