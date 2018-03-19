@@ -32,7 +32,7 @@ $ cd libossia
 ```bash
 $ mkdir build
 $ cd build
-$ cmake .. -DCMAKE_TOOLCHAIN_FILE=../CMake/android_toolchain.cmake -DOSSIA_PD=OFF -DOSSIA_MAX=OFF -DOSSIA_PYTHON=OFF -DOSSIA_QT=ON -DOSSIA_QML=ON -DOSSIA_STATIC=OFF -DOSSIA_DNSSD=OFF -DCMAKE_INSTALL_PREFIX=../../libossia-install-android-clang
+$ cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=../CMake/android_toolchain.cmake -DOSSIA_PD=OFF -DOSSIA_MAX=OFF -DOSSIA_PYTHON=OFF -DOSSIA_QT=ON -DOSSIA_QML=ON -DOSSIA_STATIC=OFF -DOSSIA_DNSSD=OFF -DCMAKE_INSTALL_PREFIX=../../libossia-install-android-clang
 $ make -j4
 $ make install
 ```
@@ -41,11 +41,3 @@ $ make install
 ```bash
 $ cp libossia-install-android-clang/Ossia /your/install/path/to/qt5-android/qml
 ```
-
-#### Building quarre2-remote application
-```bash
-$ cd quarre2
-$ mkdir build
-$ cd build
-$ cmake .. -DCMAKE_PREFIX_PATH=/your/path/to/qt5-android-clang -DOSSIA_ROOT=/your/path/to/libossia-install-android-clang
-$ make -j4
