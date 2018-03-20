@@ -13,8 +13,10 @@ Item {
         if ( arglist[0] === undefined )
             return;
 
-        upper_view.next.title = arglist[3];
-        upper_view.next.count = arglist[2];
+        upper_view.next.title           = arglist[3];
+        upper_view.next.count           = arglist[2];
+        upper_view.next.description     = arglist[4];
+
         upper_view.next.timer.start();
 
         if(quarre_application.state === "IDLE")
@@ -25,7 +27,7 @@ Item {
         }
 
         else if(quarre_application.state === "ACTIVE_INTERACTION")
-            quarre_application.state = "ACTIVE_AND_INCOMING_INTERACTION";
+            quarre_application.state = "ACTIVE_AND_INCOMING_INTERACTIONS";
     }
 
     function trigger_next(arglist)
@@ -62,7 +64,7 @@ Item {
         if(quarre_application.state === "ACTIVE_INTERACTION")
             quarre_application.state = "IDLE";
 
-        else if (quarre_application.state === "ACTIVE_AND_INCOMING_INTERACTION")
+        else if (quarre_application.state === "ACTIVE_AND_INCOMING_INTERACTIONS")
             quarre_application.state = "INCOMING_INTERACTION";
     }
 
@@ -71,22 +73,5 @@ Item {
         quarre_application.state        = "IDLE";
         upper_view.header.scene.text    = "playground";
         lower_view_stack.currentIndex   = module_index;
-    }
-
-    function parse_interactions_file()
-    {
-        // no use for now
-        var xhr = new XMLHttpRequest;
-        xhr.open("GET", path);
-        xhr.onreadystatechange = function()
-        {
-            if(xhr.readyState === XMLHttpRequest.DONE)
-            {
-                var jsonstr = xhr.responseText;
-                jsonobj = JSON.parse(jsonstr);
-            }
-        };
-
-        xhr.send();
     }
 }

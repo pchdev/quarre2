@@ -37,6 +37,38 @@ Rectangle {
         State //--------------------------------------------------- STATE_REDUCED_VIEW
         {
             name: "REDUCED_VIEW"
+
+            PropertyChanges
+            {
+                target: title_background
+                y: current.width * 0.25
+            }
+
+            PropertyChanges
+            {
+                target: current_interaction_title
+                y: current.width * 0.25
+            }
+
+            PropertyChanges
+            {
+                target: current_interaction_countdown_label
+                font.pointSize: 45 * root.fontRatio
+            }
+
+            PropertyChanges
+            {
+                target: current_interaction_description
+                y: current.width * 0.29
+            }
+
+            PropertyChanges
+            {
+                target: current_interaction_circle
+                width: parent.width*0.33
+                height: parent.width*0.33
+                radius: width/2
+            }
         }
     ]
 
@@ -86,8 +118,8 @@ Rectangle {
     {
         id:             background_color
 
-        color:          "#3a0505"
-        opacity:        0.2
+        color:          "#670909"
+        opacity:        0.3
         anchors.fill:   parent
     }
 
@@ -124,6 +156,7 @@ Rectangle {
 
     Rectangle //------------------------------------------------------------- INFO_RECT_BG
     {
+        id: title_background
         color: "black"
         opacity: 0.35
         width: parent.width

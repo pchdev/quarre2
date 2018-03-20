@@ -168,7 +168,7 @@ Rectangle
         onValueChanged:
         {
             cursor = value;
-            text_viewer.text = ai_texts[cursor];
+            text_viewer.text = ai_texts[value];
         }
     }
 

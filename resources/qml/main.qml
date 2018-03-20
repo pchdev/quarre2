@@ -75,8 +75,13 @@ ApplicationWindow {
             Component.onCompleted:
             {
                 quarre_application.states = quarre_states.states
-                quarre_application.state = "INCOMING_INTERACTION"
+                quarre_application.state = "IDLE"
             }
+        }
+
+        onStateChanged:
+        {
+            console.log(state);
         }
 
         ApplicationTransitions
@@ -141,8 +146,10 @@ ApplicationWindow {
                 }
             }
 
+
             Rectangle //-------------------------------------------------------------- AI_GODMODE
             {
+                id: ai_godmode
                 width: parent.width*0.3
                 height: parent.width*0.3
                 radius: width/2
@@ -158,9 +165,11 @@ ApplicationWindow {
                     horizontalAlignment: Text.AlignHCenter
                     text: "AI"
                     color: "white"
-                    font.pointSize: 25 * root.fontRatio
+                    font.pointSize: 30 * root.fontRatio
                 }
             }
+
+
         }
     }
 }

@@ -24,8 +24,6 @@ Item {
             slot            = available_slot.value;
             connected       = true;
 
-            console.log(slot);
-
             upper_view.header.scene.color   = "white";
             upper_view.header.scene.text    = "registered";
 
@@ -46,7 +44,7 @@ Item {
 
             connected           = false;
             os_hdl.hostAddr     = "ws://";
-            os_hdl.vibrate(100);
+            os_hdl.vibrate(500);
         }
 
     }
@@ -109,7 +107,6 @@ Item {
         onValueChanged:
         {
             if ( value == undefined || value == "" ) return;
-            console.log(value);
             upper_view.header.scene.text = value;
         }
     }    
