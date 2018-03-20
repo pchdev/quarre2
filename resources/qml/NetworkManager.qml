@@ -47,7 +47,6 @@ Item {
             connected           = false;
             os_hdl.hostAddr     = "ws://";
             os_hdl.vibrate(100);
-            os_hdl.vibrate(100);
         }
 
     }
@@ -94,7 +93,11 @@ Item {
         device:     ossia_client
         node:       "/scenario/name"
 
-        onValueChanged: upper_view.header.scenario.text = value;
+        onValueChanged:
+        {
+            if ( value == undefined || value == "" ) return;
+            upper_view.header.scenario.text = value;
+        }
     }            
 
     Ossia.Callback //---------------------------------------------------------SCENE_NAME
@@ -105,6 +108,7 @@ Item {
 
         onValueChanged:
         {
+            if ( value == undefined || value == "" ) return;
             console.log(value);
             upper_view.header.scene.text = value;
         }

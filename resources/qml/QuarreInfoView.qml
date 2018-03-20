@@ -13,28 +13,29 @@ Rectangle {
     property alias header:      quarre_header
     property alias current:     quarre_current_section
 
-    QuarreInfoHeader {
-        id: quarre_header
-        width: parent.width
-        height: parent.height*0.1
-        color: "transparent"
+    QuarreInfoHeader //------------------------------------ HEADER_VIEW
+    {
+        id:         quarre_header
+        width:      parent.width
+        height:     parent.height*0.1
+        color:      "transparent"
     }
 
-    QuarreInfoNextSection {
-        id: quarre_next_section
-        width: parent.width
-        height: parent.height*0.25
-        y: quarre_header.height
-        color: "#141f1e"
-        opacity: 0.7
+    QuarreInfoNextSection //-------------------------------- NEXT_INTERACTION_VIEW
+    {
+        id:         quarre_next_section
+        width:      parent.width
+        height:     parent.height*0.25
+        y:          quarre_header.height
+        color:      "transparent"
     }
 
-    QuarreInfoCurrentSection {
-        id: quarre_current_section
-        width: parent.width
-        height: parent.height*0.65
-        y: parent.height*0.35
-        color: "#110000"
-        opacity: 0.7
+    QuarreInfoCurrentSection  //---------------------------- CURRENT_INTERACTION_VIEW
+    {
+        id:         quarre_current_section
+        width:      parent.width
+        height:     parent.height*0.65
+        y:          parent.height*0.35
+        color:      "transparent"
     }
 }

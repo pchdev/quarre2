@@ -11,20 +11,24 @@ Rectangle {
 
     states: [
 
-        State {
+        State
+        {
             name: "FULL_VIEW"
-            PropertyChanges {
+
+            PropertyChanges
+            {
                 target: next_interaction_label
                 verticalAlignment: Text.AlignTop
                 horizontalAlignment: Text.AlignHCenter
                 height: next.height * 0.15
                 text: "NEXT INTERACTION"
-                font.pointSize: 25
+                font.pointSize: 25 * root.fontRatio
                 y: next_interaction_label.parent.height * 0.1
                 x: 0
             }
 
-            PropertyChanges {
+            PropertyChanges
+            {
                 target: next_interaction_circle
                 height: next.height * 0.2
                 width: next.height * 0.2
@@ -32,45 +36,53 @@ Rectangle {
                 x: 0
             }
 
-            AnchorChanges {
+            AnchorChanges
+            {
                 target: next_interaction_circle
                 anchors.horizontalCenter: next.horizontalCenter
                 anchors.top: next_interaction_label.bottom
                 anchors.verticalCenter: undefined
             }
 
-            PropertyChanges {
+            PropertyChanges
+            {
                 target: next_interaction_title
                 font.pointSize: 14
                 anchors.topMargin: next.height * 0.1
             }
 
-            AnchorChanges {
+            AnchorChanges
+            {
                 target: next_interaction_title
                 anchors.top: next_interaction_circle.bottom
                 anchors.verticalCenter: undefined
             }
         },
 
-        State {
+        State
+        {
             name: "REDUCED_VIEW"
-            PropertyChanges {
+
+            PropertyChanges
+            {
                 target: next_interaction_label
                 text: "NEXT"
-                font.pointSize: 20
+                font.pointSize: 20 * root.fontRatio
                 verticalAlignment: Text.AlignVCenter
                 x: next_interaction_label.width * 0.04
             }
 
-            PropertyChanges {
+            PropertyChanges
+            {
                 target: next_interaction_title
                 width: next_interaction_title.parent.width * 0.47
                 height: next_interaction_title.parent.height
                 x: next_interaction_title.width*0.55
-                font.pointSize: 12
+                font.pointSize: 12 * root.fontRatio
             }
 
-            AnchorChanges {
+            AnchorChanges
+            {
                 target: next_interaction_title
                 anchors.top: next_interaction_title.parent.top
                 anchors.bottom: next_interaction_title.parent.bottom
@@ -78,7 +90,8 @@ Rectangle {
                 anchors.right: next_interaction_title.parent.right
             }
 
-            PropertyChanges {
+            PropertyChanges
+            {
                 target: next_interaction_circle
                 width: next_interaction_circle.parent.height * 0.8
                 height: next_interaction_circle.parent.height * 0.8
@@ -86,16 +99,16 @@ Rectangle {
                 x: next_interaction_circle.parent.width * 0.8
             }
 
-            AnchorChanges {
+            AnchorChanges
+            {
                 target: next_interaction_circle
                 anchors.verticalCenter: next_interaction_circle.parent.verticalCenter
             }
         }
     ]
 
-    // ------------------------------------------------------------------------------------------------
-
-    Timer {
+    Timer //---------------------------------------------------------------------- TIMER
+    {
         id: next_interaction_timer
         interval: 1000
         running: false
@@ -107,7 +120,15 @@ Rectangle {
         }
     }
 
-    Text {
+    Rectangle //----------------------------------------------------------------- BACKGROUND
+    {
+        anchors.fill:   parent
+        color:          "#141f1e"
+        opacity:        0.2
+    }
+
+    Text //---------------------------------------------------------------------- NEXT_LABEL
+    {
         id: next_interaction_label
         text: "NEXT"
         color: "#ffffff"
@@ -115,15 +136,16 @@ Rectangle {
         height: parent.height
         x: width*0.04
         verticalAlignment: Text.AlignVCenter
-        font.pointSize: 20
+        font.pointSize: 20 * root.fontRatio
         font.bold: true
         textFormat: Text.PlainText
     }
 
-    Text {
+    Text  //---------------------------------------------------------------------- TITLE
+    {
         // the title of the next incoming interaction
         id: next_interaction_title
-        text: "super spatialisation interaction"
+        text: ""
         color: "#ffffff"
         width: parent.width * 0.47
         height: parent.height
@@ -133,13 +155,14 @@ Rectangle {
         horizontalAlignment: Text.AlignHCenter
         font.family: font_lato_light.name
         antialiasing: true
-        font.pointSize: 12
+        font.pointSize: 12 * root.fontRatio
         font.bold: false
         textFormat: Text.PlainText
         wrapMode: Text.WordWrap
     }
 
-    Rectangle {
+    Rectangle //---------------------------------------------------------------------- CIRCLE
+    {
         // the countdown circle element
         id: next_interaction_circle
         width: parent.height * 0.8
@@ -149,7 +172,8 @@ Rectangle {
         x: parent.width * 0.8
         anchors.verticalCenter: parent.verticalCenter
 
-        Text {
+        Text //---------------------------------------------------------------------- COUNTDOWN_LABEL
+        {
             // the countdown display
             id: next_interaction_countdown_label
             anchors.fill: parent
@@ -157,7 +181,7 @@ Rectangle {
             color: "#000000"
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
-            font.pointSize: 30
+            font.pointSize: 30 * root.fontRatio
             textFormat: Text.PlainText
         }
     }

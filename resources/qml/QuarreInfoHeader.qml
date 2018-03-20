@@ -121,7 +121,8 @@ Rectangle {
         antialiasing: true
     }
 
-    Text {
+    Text
+    {
         // NAME OF THE CURRENT SCENE
         id: header_scene_label
         text: "registration"

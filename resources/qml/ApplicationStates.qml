@@ -15,7 +15,6 @@ Item {
 
         State {
             name: "CONNECTION_FAILED"
-            // connection wheel stops turning, button to try reconnection appears
             /*PropertyChanges {
                 target:
                 height: root.height
@@ -46,6 +45,13 @@ Item {
                 target: upper_view.current
                 x: -upper_view.width
             }
+
+            PropertyChanges
+            {
+                target: lower_view
+                opacity: 0.75
+            }
+
         },
 
         State {
@@ -69,6 +75,12 @@ Item {
                 target: upper_view.current
                 visible: false
             }
+
+            PropertyChanges
+            {
+                target: lower_view
+                opacity: 0.9
+            }
         },
 
         State {
@@ -91,6 +103,12 @@ Item {
             PropertyChanges {
                 target: upper_view.next
                 visible: false
+            }
+
+            PropertyChanges
+            {
+                target: lower_view
+                opacity: 0.9
             }
         },
 

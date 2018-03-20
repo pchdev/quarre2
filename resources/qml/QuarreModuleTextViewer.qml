@@ -165,6 +165,11 @@ Rectangle
         id:         text_callback
         device:     ossia_net.client
         node:       "/user/" + ossia_net.slot + "/text-viewer/cursor/set"
+        onValueChanged:
+        {
+            cursor = value;
+            text_viewer.text = ai_texts[cursor];
+        }
     }
 
     Ossia.Binding
@@ -182,16 +187,16 @@ Rectangle
         {
             if ( mouseX >= width*0.7 )
             {
-                if ( cursor == ai_texts.length-2 )
-                     cursor = 0;
-                else cursor++;
+                cursor++;
+                if ( cursor > ai_texts.length-1 )
+                    cursor = 0;
             }
 
             else if ( mouseX <= width*0.3 )
             {
-                if ( cursor == 0 )
-                    cursor = ai_texts.length-1
-                else cursor--;
+                cursor--;
+                if ( cursor < 0 )
+                    cursor = ai_texts.length-1;
             }
 
             text_viewer.text = ai_texts[cursor];

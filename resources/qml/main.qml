@@ -23,8 +23,8 @@ ApplicationWindow {
     property real currPd: Screen.pixelDensity
 
     // refer to this when calculating font sizes
-    property real ratio: Math.min(height/refHeight, width/refWidth)
-    property real fontRatio: Math.min(height*refPd/(currPd*refHeight), width*refPd/(currPd*refWidth))
+    property real ratio:        Math.min(height/refHeight, width/refWidth)
+    property real fontRatio:    Math.min(height*refPd/(currPd*refHeight), width*refPd/(currPd*refWidth))
 
     FontLoader {
         id: font_lato_light
@@ -75,7 +75,7 @@ ApplicationWindow {
             Component.onCompleted:
             {
                 quarre_application.states = quarre_states.states
-                quarre_application.state = "IDLE"
+                quarre_application.state = "INCOMING_INTERACTION"
             }
         }
 
@@ -108,17 +108,6 @@ ApplicationWindow {
                 opacity:    0.9
             }
 
-            /*Image
-            {
-                id: ai_logo
-                antialiasing: true
-                source: "misc/ai.png"
-                width: sourceSize.width*2
-                height: sourceSize.height*2
-                y: upper_view.height - height/2
-                anchors.horizontalCenter: parent.horizontalCenter
-            }*/
-
             Rectangle //------------------------------------------------------ INTERACTION_MODULES
             {
                 id:         lower_view
@@ -149,6 +138,27 @@ ApplicationWindow {
                     //QuarreModuleSensorSpat { opacity: 0.9 }
                     //QuarreModuleSliders { opacity: 0.9 }
                     //QuarreModulePads { opacity: 0.9 }
+                }
+            }
+
+            Rectangle //-------------------------------------------------------------- AI_GODMODE
+            {
+                width: parent.width*0.3
+                height: parent.width*0.3
+                radius: width/2
+                color: "black"
+                anchors.horizontalCenter: parent.horizontalCenter
+                y: upper_view.height - width/2
+                opacity: 0.5
+
+                Text
+                {
+                    anchors.fill: parent
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    text: "AI"
+                    color: "white"
+                    font.pointSize: 25 * root.fontRatio
                 }
             }
         }
