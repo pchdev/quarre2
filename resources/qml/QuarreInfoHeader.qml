@@ -74,7 +74,8 @@ Rectangle {
         return min_str + ":" + sec_str;
     }
 
-    Timer {
+    Timer
+    {
         id: header_timer
         interval: 1000
         running: false
@@ -85,10 +86,11 @@ Rectangle {
         }
     }
 
-    Text {
+    Text
+    {
         // NAME OF THE CURRENT SCENARIO
         id: header_scenario_label
-        text: "quarrè"
+        text: "arbre-intégral"
         color: "#ffffff"
         font.pixelSize: 40 * root.fontRatio
         textFormat: Text.PlainText

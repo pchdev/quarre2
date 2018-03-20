@@ -21,6 +21,8 @@ Item {
 
         onClientConnected:
         {
+            console.log(available_slot.value)
+
             if(available_slot.value >= 0)
             {
                 slot = available_slot.value;
@@ -33,8 +35,6 @@ Item {
 
                 sensors_playground.connected    = true;
                 gestures_playground.connected   = true;
-
-                os_hdl.register_user_id(slot);
             }
 
             else upper_view.header.scene.text = "max users reached";

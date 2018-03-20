@@ -111,6 +111,17 @@ ApplicationWindow {
                 opacity:    0.9
             }
 
+            /*Image
+            {
+                id: ai_logo
+                antialiasing: true
+                source: "misc/ai.png"
+                width: sourceSize.width*2
+                height: sourceSize.height*2
+                y: upper_view.height - height/2
+                anchors.horizontalCenter: parent.horizontalCenter
+            }*/
+
             Rectangle //------------------------------------------------------ INTERACTION_MODULES
             {
                 id:         lower_view
@@ -130,7 +141,6 @@ ApplicationWindow {
                     {
                         id:         textviewer
                         color:      "transparent"
-                        file:       "assets:/arbre-integral-textes.json"
                     }
 
                     QuarreModuleTouchSpat { id: touchspat; color: "transparent" }

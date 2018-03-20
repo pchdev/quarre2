@@ -4,6 +4,7 @@ import "GesturesRoutine.js" as GesturesRoutine
 
 Item
 {
+
     property bool available:    false
     property bool active:       false
     property bool trigger:      false
@@ -15,7 +16,11 @@ Item
         var index       = gestures.indexOf("QtSensors." + name);
 
         if ( index >= 0 ) available = true;
+    }
 
+    function recognized()
+    {
+        trigger = !trigger;
     }
 
     Ossia.Callback // -------------------------------------------------------------------- ACTIVE
