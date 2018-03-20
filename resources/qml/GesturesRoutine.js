@@ -21,6 +21,4 @@ function update(value, gesture, target_array) {
         if(target_array.length !== 0)
             sensor_gesture.enabled = true;
     }
-
-    console.log(target_array);
 }

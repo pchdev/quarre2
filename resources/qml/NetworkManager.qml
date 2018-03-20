@@ -7,8 +7,6 @@ import QtQuick.Dialogs 1.3
 
 Item {
 
-    property int        oscPort: 1234
-    property int        wsPort: 5678
     property string     deviceName: "quarre-remote"
     property alias      oshdl: os_hdl
     property alias      client: ossia_client
@@ -17,35 +15,39 @@ Item {
 
     Ossia.OSCQueryClient //---------------------------------------------------------QUERY_CLIENT
     {
-        id: ossia_client
+        id:         ossia_client
 
         onClientConnected:
         {
-            console.log(available_slot.value)
+            console.log(ip);
 
-            if(available_slot.value >= 0)
-            {
-                slot = available_slot.value;
-                connected = true;
-                upper_view.header.scene.text = "connected, id: " + slot;
+            slot            = available_slot.value;
+            connected       = true;
 
-                ossia_client.remap(sensors_playground);
-                ossia_client.remap(gestures_playground);
-                ossia_client.remap(touchspat);
+            console.log(slot);
 
-                sensors_playground.connected    = true;
-                gestures_playground.connected   = true;
-            }
+            upper_view.header.scene.color   = "white";
+            upper_view.header.scene.text    = "registered";
 
-            else upper_view.header.scene.text = "max users reached";
+            sensors_playground.connected    = true;
+            gestures_playground.connected   = true;
+
+            ossia_client.remap(ossia_net);
 
             os_hdl.vibrate(100);
         }
 
         onClientDisconnected:
         {
+            console.log         ( "client disconnected: ", ip );
+
+            upper_view.header.scene.text    = "disconnected";
+            upper_view.header.scene.color   = "red";
+
             connected           = false;
             os_hdl.hostAddr     = "ws://";
+            os_hdl.vibrate(100);
+            os_hdl.vibrate(100);
         }
 
     }
@@ -55,7 +57,7 @@ Item {
         id: os_hdl
 
         Component.onCompleted:
-            os_hdl.register_zeroconf(deviceName, "_oscjson._tcp", wsPort);
+            os_hdl.register_zeroconf(deviceName, "_oscjson._tcp", ossia_client.localPort);
 
         // when quarre-server found
         onHostAddrChanged: {
@@ -63,10 +65,8 @@ Item {
             if(hostAddr === "ws://") return;
 
             console.log("connecting...");
-            console.log(hostAddr);
+            ossia_client.openOSCQueryClient(hostAddr, ossia_client.localPort)
 
-            ossia_client.openOSCQueryClient(hostAddr, oscPort);
-            ossia_client.remap(ossia_net);
         }
     }
 
@@ -84,6 +84,7 @@ Item {
     {
         id:         available_slot
         device:     ossia_client
+        value:      0
         node:       '/slots/available'
     }
 
@@ -102,7 +103,11 @@ Item {
         device:     ossia_client
         node:       "/scenario/scene/name"
 
-        onValueChanged: upper_view.header.scene.text = value;
+        onValueChanged:
+        {
+            console.log(value);
+            upper_view.header.scene.text = value;
+        }
     }    
 
     Ossia.Callback //---------------------------------------------------------SCENARIO_START

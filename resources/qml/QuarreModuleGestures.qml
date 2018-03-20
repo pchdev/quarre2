@@ -130,6 +130,6 @@ Rectangle {
         id:     gestures;
         model:  gesture_list_addresses
 
-        QuarreGesture { name: model }
+        QuarreGesture { name: modelData }
     }
 }

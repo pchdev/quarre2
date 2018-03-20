@@ -66,9 +66,6 @@ ApplicationWindow {
         {
             id:             ossia_net
             deviceName:     "quarre-remote"
-
-            oscPort:        1234
-            wsPort:         5678
         }
 
         ApplicationStates

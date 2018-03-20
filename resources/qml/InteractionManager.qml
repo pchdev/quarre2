@@ -9,6 +9,10 @@ Item {
         // arg2: countdown length
         // arg3: title
         // arg4: description
+
+        if ( arglist[0] === undefined )
+            return;
+
         upper_view.next.title = arglist[3];
         upper_view.next.count = arglist[2];
         upper_view.next.timer.start();
@@ -30,6 +34,10 @@ Item {
         // arg1: interaction length
         // arg2: title
         // arg3: description
+
+        if ( arglist[0] === undefined )
+            return;
+
         upper_view.current.title            = arglist[2];
         upper_view.current.count            = arglist[1]
         upper_view.current.description      = arglist[3];

@@ -164,15 +164,13 @@ Rectangle
     {
         id:         text_callback
         device:     ossia_net.client
-        node:       "/user/" + ossia_net.slot + "/text-viewer/cursor"
-
-        onValueChanged: cursor = value;
+        node:       "/user/" + ossia_net.slot + "/text-viewer/cursor/set"
     }
 
     Ossia.Binding
     {
         device:     ossia_net.client
-        node:       "/user/" + ossia_net.slot + "/text-viewer/cursor"
+        node:       "/user/" + ossia_net.slot + "/text-viewer/cursor/get"
         on:         cursor
     }
 
@@ -184,22 +182,19 @@ Rectangle
         {
             if ( mouseX >= width*0.7 )
             {
-                cursor++;
-                if ( cursor == ai_texts.length ) cursor = 0
+                if ( cursor == ai_texts.length-2 )
+                     cursor = 0;
+                else cursor++;
             }
+
             else if ( mouseX <= width*0.3 )
             {
-                cursor--;
-                if ( cursor == -1 ) cursor = ai_texts.length-1
+                if ( cursor == 0 )
+                    cursor = ai_texts.length-1
+                else cursor--;
             }
 
             text_viewer.text = ai_texts[cursor];
         }
     }
-
-    Component.onCompleted:
-    {
-
-    }
-
 }
