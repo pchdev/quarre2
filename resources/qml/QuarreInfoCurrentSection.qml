@@ -6,6 +6,7 @@ Rectangle {
     property alias  timer:          current_interaction_timer
     property alias  title:          current_interaction_title.text
     property alias  description:    current_interaction_description.text
+    property alias countdown:       current_interaction_countdown_label.text
 
     states: [
 
@@ -83,34 +84,43 @@ Rectangle {
 
         onTriggered:
         {
-            if(parent.count == 0) running = false
-            else parent.count -= 1;
-            current_interaction_countdown_label.text = parent.count;
+            if  ( parent.count == -1 )
+                current_interaction_countdown_label.text = "inf";
+
+            else if ( parent.count == 0 )
+                      running = false
+            else
+            {
+                parent.count -= 1;
+                current_interaction_countdown_label.text = parent.count;
+            }
         }
     }
 
     SequentialAnimation // ---------------------------------------------------- COUNTDOWN_ANIMATION
     {
 
-        id: title_xfade
-        loops: Animation.Infinite
+        id:         title_xfade
+        loops:      Animation.Infinite
 
         NumberAnimation
         {
-            target: current_interaction_countdown_label
-            property: "opacity"
-            from: 1.0
-            to: 0.1
-            duration: 1000
+            target:     current_interaction_countdown_label
+
+            property:   "opacity"
+            from:       1.0
+            to:         0.1
+            duration:   1000
         }
 
         NumberAnimation
         {
-            target: current_interaction_countdown_label
-            property: "opacity"
-            from: 0.1
-            to: 1.0
-            duration: 1000
+            target:     current_interaction_countdown_label
+
+            property:   "opacity"
+            from:       0.1
+            to:         1.0
+            duration:   1000
         }
     }
 
@@ -126,6 +136,7 @@ Rectangle {
     Rectangle //----------------------------------------------------------- CIRCLE
     {
         id:         current_interaction_circle
+
         width:      parent.width*0.4
         height:     width
         radius:     width/2
@@ -142,10 +153,12 @@ Rectangle {
         Text
         {
             // the countdown itself
-            id: current_interaction_countdown_label
+            id:         current_interaction_countdown_label
+
+            text:       "0"
+            color:      "#ffffff"
+
             anchors.fill: parent
-            text: "0"
-            color: "#ffffff"
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
             font.pointSize: 55 * root.fontRatio
@@ -156,22 +169,25 @@ Rectangle {
 
     Rectangle //------------------------------------------------------------- INFO_RECT_BG
     {
-        id: title_background
-        color: "black"
-        opacity: 0.35
-        width: parent.width
-        height: parent.height *0.5
-        y: current.width * 0.35
+        id:         title_background
+
+        color:      "black"
+        opacity:    0.35
+        width:      parent.width
+        height:     parent.height *0.5
+        y:          current.width * 0.35
     }
 
     Text //---------------------------------------------------------------- CURRENT_TITLE
     {
-        id: current_interaction_title
-        text: "trigger interaction"
-        color: "#ffffff"
-        width: parent.width
-        height: parent.height * 0.2
-        y: parent.height * 0.55
+        id:         current_interaction_title
+
+        text:       "trigger interaction"
+        color:      "#ffffff"
+        width:      parent.width
+        height:     parent.height * 0.2
+        y:          parent.height * 0.55
+
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         font.pointSize: 22 * root.fontRatio
@@ -187,13 +203,16 @@ Rectangle {
 
     Text //---------------------------------------------------------------- CURRENT_DESCRIPTION
     {
-        id: current_interaction_description
-        y: current_interaction_title.height + current_interaction_title.y
-        text: "no description"
+        id:         current_interaction_description
+
+        y:          current_interaction_title.height + current_interaction_title.y
+        color:      "#ffffff"
+        text:       "no description"
+        height:     parent.height * 0.3
+        width:      parent.width * 0.9
+
         anchors.horizontalCenter: parent.horizontalCenter
-        color: "#ffffff"
-        height: parent.height * 0.3
-        width: parent.width * 0.9
+
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         font.pointSize: 13 * root.fontRatio

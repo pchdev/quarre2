@@ -10,6 +10,7 @@ Rectangle
     property alias timer: next_interaction_timer
     property alias title: next_interaction_title.text
     property alias description: next_interaction_description.text
+    property alias countdown: next_interaction_countdown_label.text
 
     states: [
 
@@ -102,10 +103,10 @@ Rectangle
             {
                 target:     next_interaction_title
 
-                anchors.top: next_interaction_title.parent.top
-                anchors.bottom: next_interaction_title.parent.bottom
-                anchors.left: next_interaction_title.parent.left
-                anchors.right: next_interaction_title.parent.right
+                anchors.top:        next_interaction_title.parent.top
+                anchors.bottom:     next_interaction_title.parent.bottom
+                anchors.left:       next_interaction_title.parent.left
+                anchors.right:      next_interaction_title.parent.right
             }
 
             PropertyChanges
@@ -145,9 +146,17 @@ Rectangle
 
         onTriggered:
         {
-            if(parent.count == 0) running = false
-            else parent.count -= 1;
-            next_interaction_countdown_label.text = parent.count;
+            if ( parent.count == -1)
+                next_interaction_countdown_label.text = "inf";
+
+            else if ( parent.count == 0 )
+                running = false;
+
+            else
+            {
+                parent.count -= 1;
+                next_interaction_countdown_label.text = parent.count;
+            }
         }
     }
 

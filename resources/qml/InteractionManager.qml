@@ -13,8 +13,15 @@ Item {
         if ( arglist[0] === undefined )
             return;
 
+        if  ( arglist[2] === "inf" )
+        {
+            upper_view.next.count = -1;
+            upper_view.next.countdown = "inf";
+        }
+
+        else upper_view.next.count      = arglist[2];
+
         upper_view.next.title           = arglist[3];
-        upper_view.next.count           = arglist[2];
         upper_view.next.description     = arglist[4];
 
         upper_view.next.timer.start();
@@ -28,6 +35,8 @@ Item {
 
         else if(quarre_application.state === "ACTIVE_INTERACTION")
             quarre_application.state = "ACTIVE_AND_INCOMING_INTERACTIONS";
+
+        ossia_net.oshdl.vibrate(200);
     }
 
     function trigger_next(arglist)
@@ -40,8 +49,15 @@ Item {
         if ( arglist[0] === undefined )
             return;
 
+        if  ( arglist[1] === "inf" )
+        {
+            upper_view.current.count = -1;
+            upper_view.current.countdown = "inf";
+        }
+
+        else upper_view.current.count       = arglist[1];
+
         upper_view.current.title            = arglist[2];
-        upper_view.current.count            = arglist[1]
         upper_view.current.description      = arglist[3];
         upper_view.current.timer.start();
 
@@ -52,6 +68,8 @@ Item {
         if(quarre_application.state === "IDLE" ||
            quarre_application.state === "INCOMING_INTERACTION")
            quarre_application.state = "ACTIVE_INTERACTION";
+
+        ossia_net.oshdl.vibrate(300);
     }
 
     function end_current()
@@ -66,6 +84,8 @@ Item {
 
         else if (quarre_application.state === "ACTIVE_AND_INCOMING_INTERACTIONS")
             quarre_application.state = "INCOMING_INTERACTION";
+
+        ossia_net.oshdl.vibrate(100);
     }
 
     function force_current(module_index)
