@@ -8,7 +8,7 @@ Rectangle
     "Persiste, perce, aisselle \n magnétique, embryon clair, \n dans le feu desséché, vers le \n haut.",
     "Perfore, plonge, instance du \n dépli, ébauche du fractal, \n sombre veine sous la glace, \n vers le bas.",
 
-    "Quand est perdu le meilleur \n du noyau, ce symétrique \n éblouissement, cet endogène \n vital retourné par l'obscur, \n subitement-débourreviser fait loi.",
+    "Quand est perdu le meilleur \n du noyau, ce symétrique \n éblouissement, cet endogène \n vital retourné par l'obscur, \n subdiviser fait loi.",
     "Est-il d'autres choix ? \n Franchir trois dimensions \n d'un seul coup de ciseaux ? \n Tant contient de fini la crosse \n d'une fougère",
     "Resiter même aux graisses de \n l'humus. Tenir encore un peu \n à la clarté. Jouer l'envergure. \n Agripper les failles, le roc.",
     "Vient le consentement à \n l'élan, la chute dans l'opacité \n sans odeur, l'euphorie \n silencieuse du foret. Est-il un \n autre centre ?",

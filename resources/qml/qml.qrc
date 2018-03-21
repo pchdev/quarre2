@@ -23,6 +23,10 @@
         <file>GesturesRoutine.js</file>
         <file>SwipeArea.qml</file>
         <file>QuarreGesture.qml</file>
+        <file>QuarreReaperControl.qml</file>
+        <file>QuarrePad.qml</file>
+        <file>QuarreSlider.qml</file>
+        <file>QuarreTrackControl.qml</file>
     </qresource>
     <qresource prefix="/modules"/>
 </RCC>

@@ -2,6 +2,7 @@ import QtQuick 2.7
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
+import Ossia 1.0 as Ossia
 
 ApplicationWindow {
 
@@ -79,11 +80,6 @@ ApplicationWindow {
             }
         }
 
-        onStateChanged:
-        {
-            console.log(state);
-        }
-
         ApplicationTransitions
         {
             id: quarre_transitions
@@ -128,17 +124,24 @@ ApplicationWindow {
                     currentIndex: 0
                     anchors.fill: parent
 
+                    QuarreReaperControl
+                    {
+                        id:         rcontrol
+                        color:      "transparent"
+                    }
+
                     QuarreModuleTextViewer
                     {
                         id:         textviewer
                         color:      "transparent"
                     }
 
-                    QuarreModuleTouchSpat { id: touchspat; color: "transparent" }
-                    QuarreModuleGestures { id: gestures_playground; color: "transparent" }
-                    QuarreLowerDefault { id: lower_default; color: "transparent" }
-                    QuarreModuleRegistration { opacity: 0.9 }
-                    QuarreModuleSensorsPlayground { color: "transparent"; id: sensors_playground }
+
+//                    QuarreModuleTouchSpat { id: touchspat; color: "transparent" }
+//                    QuarreModuleGestures { id: gestures_playground; color: "transparent" }
+//                    QuarreLowerDefault { id: lower_default; color: "transparent" }
+//                    QuarreModuleRegistration { opacity: 0.9 }
+//                    QuarreModuleSensorsPlayground { color: "transparent"; id: sensors_playground }
 
                     //QuarreModuleSensorSpat { opacity: 0.9 }
                     //QuarreModuleSliders { opacity: 0.9 }
@@ -149,6 +152,9 @@ ApplicationWindow {
 
             Rectangle //-------------------------------------------------------------- AI_GODMODE
             {
+
+                property bool godmode: false;
+
                 id: ai_godmode
                 width: parent.width*0.3
                 height: parent.width*0.3
@@ -166,6 +172,23 @@ ApplicationWindow {
                     text: "AI"
                     color: "white"
                     font.pointSize: 30 * root.fontRatio
+                }
+
+                Ossia.Binding
+                {
+                    device: ossia_net.client
+                    node: "/user/" + ossia_net.slot + "/godmode"
+                    on: ai_godmode.godmode
+                }
+
+                MouseArea
+                {
+                    anchors.fill: parent
+                    onClicked:
+                    {
+                        ai_godmode.godmode = !ai_godmode.godmode;
+                        ossia_net.oshdl.vibrate(200);
+                    }
                 }
             }
 

@@ -1,6 +1,7 @@
 import QtQuick 2.0
 
-Rectangle {
+Rectangle
+{
     // FIRST UPPER VIEW SECTION
     property alias  timer:       header_timer
     property alias  scenario:    header_scenario_label
@@ -10,9 +11,12 @@ Rectangle {
     //-------------------------------------------------------------------------------------------------------
     states: [
 
-        State {
+        State
+        {
             name: "FULL_VIEW"
-            PropertyChanges {
+
+            PropertyChanges
+            {
                 target: header_scenario_label
                 height: header_scenario_label.font.pixelSize
                 anchors.fill: undefined
@@ -20,12 +24,14 @@ Rectangle {
                 anchors.leftMargin: 0
             }
 
-            AnchorChanges {
+            AnchorChanges
+            {
                 target: header_scenario_label
                 anchors.bottom: header_scene_label.top
             }
 
-            PropertyChanges {
+            PropertyChanges
+            {
                 target: header_scene_label
                 height: header_scene_label.font.pixelSize
                 anchors.fill: undefined
@@ -33,24 +39,28 @@ Rectangle {
                 anchors.rightMargin: 0
             }
 
-            AnchorChanges {
+            AnchorChanges
+            {
                 target: header_scene_label
                 anchors.verticalCenter: header_scene_label.parent.verticalCenter
             }
 
-            PropertyChanges {
+            PropertyChanges
+            {
                 target: header_timer_label
                 height: header_timer_label.font.pixelSize
                 anchors.fill: undefined
             }
 
-            AnchorChanges {
+            AnchorChanges
+            {
                 target: header_timer_label
                 anchors.top: header_scene_label.bottom
             }
         },
 
-        State {
+        State
+        {
             name: "REDUCED_VIEW"
         }
 
@@ -104,7 +114,8 @@ Rectangle {
         antialiasing: true
     }
 
-    Text {
+    Text
+    {
         // THE TIMER
         // gets started whenever the device receives
         // a critical 'scenario start' message
@@ -137,54 +148,36 @@ Rectangle {
         antialiasing: true
     }
 
-    Rectangle {
-        // aesthetics
-        id: header_circle
-        width: parent.width*0.4
-        height: width
-        radius: width/2
+    Rectangle
+    {
+        id:         header_circle
+
+        width:      parent.width*0.4
+        height:     width
+        radius:     width/2
+        color:      "#80000000"
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
-        color: "#80000000"
 
-        Timer {
-            id: mousetimer
-            running: false
-            interval: 1500
-            repeat: false
-            onTriggered: {
-                if(mousearea.pressed)
-                {
-                    ossia_net.username = "";
-                    ossia_net.connected = false;
-                    ossia_net.oshdl.vibrate(200);
-                    Qt.quit();
-                }
-            }
-        }
 
-        MouseArea {
-            id: mousearea;
-            anchors.fill: parent
-            onClicked: {
-                mousetimer.start();
-                ossia_net.oshdl.vibrate(100);
-            }
-        }
-
-        SequentialAnimation {
+        SequentialAnimation
+        {
             running: true
             loops: Animation.Infinite
 
-            ParallelAnimation {
-                NumberAnimation {
+            ParallelAnimation
+            {
+                NumberAnimation
+                {
                     target: header_circle
                     property: "width"
                     easing.type: Easing.InOutSine
                     to: header_circle.parent.width * 0.35
                     duration: 2000
                 }
-                NumberAnimation {
+
+                NumberAnimation
+                {
                     target: header_circle
                     property: "opacity"
                     to: 0.1
@@ -193,15 +186,19 @@ Rectangle {
                 }
             }
 
-            ParallelAnimation {
-                NumberAnimation {
+            ParallelAnimation
+            {
+                NumberAnimation
+                {
                     target: header_circle
                     property: "width"
                     easing.type: Easing.InOutSine
                     to: header_circle.parent.width * 0.4
                     duration: 2000
                 }
-                NumberAnimation {
+
+                NumberAnimation
+                {
                     target: header_circle
                     property: "opacity"
                     to: 1.0
