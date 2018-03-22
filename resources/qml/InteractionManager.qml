@@ -88,6 +88,21 @@ Item {
         ossia_net.oshdl.vibrate(100);
     }
 
+    function reset()
+    {
+        upper_view.current.title            = "";
+        upper_view.current.description      = "";
+        upper_view.current.count            = 0;
+        upper_view.current.timer.stop();
+
+        upper_view.next.title            = "";
+        upper_view.next.description      = "";
+        upper_view.next.count            = 0;
+        upper_view.next.timer.stop();
+
+        quarre_application.state        = "IDLE";
+    }
+
     function force_current(module_index)
     {
         quarre_application.state        = "IDLE";

@@ -4,8 +4,8 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 import Ossia 1.0 as Ossia
 
-ApplicationWindow {
-
+ApplicationWindow
+{
     id:         root
     visible:    true
     title:      qsTr("quarrè-remote")
@@ -100,18 +100,21 @@ ApplicationWindow {
             fillMode: Image.PreserveAspectCrop
             source: "background/quarre.jpg"
 
-            QuarreInfoView
+            QuarreInfoView //------------------------------------------------- UPPER_VIEW
             {
                 id:         upper_view
+
                 width:      parent.width
                 height:     parent.height * 0.45
                 color:      "black"
                 opacity:    0.9
+
             }
 
             Rectangle //------------------------------------------------------ INTERACTION_MODULES
             {
                 id:         lower_view
+
                 y:          upper_view.height
                 width:      parent.width
                 height:     parent.height * 0.55
@@ -124,53 +127,44 @@ ApplicationWindow {
                     currentIndex: 0
                     anchors.fill: parent
 
-                    QuarreReaperControl
+                    /*QuarreReaperControl
                     {
                         id:         rcontrol
                         color:      "transparent"
-                    }
+                    }*/
 
                     QuarreModuleTextViewer
                     {
                         id:         textviewer
                         color:      "transparent"
                     }
-
-
-//                    QuarreModuleTouchSpat { id: touchspat; color: "transparent" }
-//                    QuarreModuleGestures { id: gestures_playground; color: "transparent" }
-//                    QuarreLowerDefault { id: lower_default; color: "transparent" }
-//                    QuarreModuleRegistration { opacity: 0.9 }
-//                    QuarreModuleSensorsPlayground { color: "transparent"; id: sensors_playground }
-
-                    //QuarreModuleSensorSpat { opacity: 0.9 }
-                    //QuarreModuleSliders { opacity: 0.9 }
-                    //QuarreModulePads { opacity: 0.9 }
                 }
             }
-
 
             Rectangle //-------------------------------------------------------------- AI_GODMODE
             {
 
+                id:         ai_godmode
+
                 property bool godmode: false;
 
-                id: ai_godmode
-                width: parent.width*0.3
-                height: parent.width*0.3
-                radius: width/2
-                color: "black"
+                width:      parent.width*0.3
+                height:     parent.width*0.3
+                radius:     width/2
+                color:      "white"
+                y:          upper_view.height - width/2
+                opacity:    0.5
+
                 anchors.horizontalCenter: parent.horizontalCenter
-                y: upper_view.height - width/2
-                opacity: 0.5
 
                 Text
                 {
+                    id: ai_godmode_txt
                     anchors.fill: parent
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
                     text: "AI"
-                    color: "white"
+                    color: "black"
                     font.pointSize: 30 * root.fontRatio
                 }
 
@@ -184,15 +178,20 @@ ApplicationWindow {
                 MouseArea
                 {
                     anchors.fill: parent
-                    onClicked:
+                    onPressed:
                     {
                         ai_godmode.godmode = !ai_godmode.godmode;
-                        ossia_net.oshdl.vibrate(200);
+                        ossia_net.oshdl.vibrate(100);
                     }
                 }
             }
-
-
         }
+    }
+
+    Rectangle
+    {
+        id: flash
+        anchors.fill: parent
+        opacity: 0
     }
 }

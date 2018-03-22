@@ -35,26 +35,28 @@ Item {
                 opacity: 0.8
             }
 
-            PropertyChanges
+            PropertyChanges //--------------------------- HEADER
             {
                 target: upper_view.header
                 height: upper_view.height
                 state: "FULL_VIEW"
             }
 
-            PropertyChanges
+            PropertyChanges //--------------------------- NEXT
             {
                 target: upper_view.next
                 x: -upper_view.width
+                state: "REDUCED_VIEW"
             }
 
-            PropertyChanges
+            PropertyChanges //--------------------------- CURRENT
             {
                 target: upper_view.current
-                x: -upper_view.width
+                x: upper_view.width
+                state: "FULL_VIEW"
             }
 
-            PropertyChanges
+            PropertyChanges //--------------------------- LOWER
             {
                 target: lower_view
                 opacity: 0.75
@@ -67,7 +69,7 @@ Item {
             name: "INCOMING_INTERACTION"
             // next section takes the upper ViewSection
 
-            PropertyChanges
+            PropertyChanges //--------------------------- HEADER
             {
                 target: upper_view.header
                 height: upper_view.height * 0.1
@@ -75,7 +77,7 @@ Item {
                 color: "black"
             }
 
-            PropertyChanges
+            PropertyChanges //--------------------------- NEXT
             {
                 target: upper_view.next
                 height: upper_view.height * 0.9
@@ -83,13 +85,14 @@ Item {
                 state: "FULL_VIEW"
             }
 
-            PropertyChanges
+            PropertyChanges //--------------------------- CURRENT
             {
                 target: upper_view.current
-                visible: false
+                x: upper_view.width
+                y: upper_view.header.height
             }
 
-            PropertyChanges
+            PropertyChanges //--------------------------- LOWER
             {
                 target: lower_view
                 opacity: 0.9
@@ -100,7 +103,7 @@ Item {
         {
             name: "ACTIVE_INTERACTION"
 
-            PropertyChanges
+            PropertyChanges //--------------------------- HEADER
             {
                 target: upper_view.header
                 height: upper_view.height * 0.1
@@ -108,19 +111,20 @@ Item {
                 color: "black"
             }
 
-            PropertyChanges
+            PropertyChanges //--------------------------- CURRENT
             {
                 target: upper_view.current
                 height: upper_view.height * 0.9
+                x: 0
                 y: upper_view.header.height
-                visible: true
                 state: "FULL_VIEW"
             }
 
-            PropertyChanges
+            PropertyChanges //--------------------------- NEXT
             {
                 target: upper_view.next
-                visible: false
+                x: -upper_view.width
+                state: "REDUCED_VIEW"
             }
 
             PropertyChanges
@@ -154,6 +158,7 @@ Item {
             {
                 target: upper_view.current
                 height: upper_view.height * 0.65
+                x: 0
                 y: upper_view.header.height + upper_view.next.height
                 state: "REDUCED_VIEW"
             }

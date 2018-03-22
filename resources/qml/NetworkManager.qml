@@ -27,11 +27,10 @@ Item {
             upper_view.header.scene.color   = "white";
             upper_view.header.scene.text    = "registered";
 
-            sensors_playground.connected    = true;
-            gestures_playground.connected   = true;
+            //sensors_playground.connected    = true;
+            //gestures_playground.connected   = true;
 
             ossia_client.remap(ossia_net);
-
             os_hdl.vibrate(100);
         }
 
@@ -107,7 +106,20 @@ Item {
         onValueChanged:
         {
             if ( value == undefined || value == "" ) return;
+
             upper_view.header.scene.text = value;
+
+            if ( value === "introduction" )
+            {
+                ai_godmode.color = "white";
+                ai_godmode_txt.color = "black";
+            }
+
+            else if ( value === "login" )
+            {
+                ai_godmode.color = "black";
+                ai_godmode_txt.color = "white";
+            }
         }
     }    
 
@@ -117,7 +129,11 @@ Item {
         device:     ossia_client
         node:       "/scenario/start"
 
-        onValueChanged: upper_view.header.timer.start();
+        onValueChanged:
+        {
+            if  ( value != 0 )
+                upper_view.header.timer.start();
+        }
     }
 
     Ossia.Callback //---------------------------------------------------------SCENARIO_STOP
@@ -127,6 +143,11 @@ Item {
         id:         scenario_stop
         device:     ossia_client
         node:       "/scenario/stop"
+
+        onValueChanged:
+        {
+            upper_view.header.timer.stop();
+        }
     }
 
     Ossia.Callback //---------------------------------------------------------SCENARIO_PAUSE
@@ -152,7 +173,9 @@ Item {
         device:     ossia_client
         node:       "/scenario/reset"
 
-        onValueChanged: {
+        onValueChanged:
+        {
+            if ( value == 0 ) return;
             upper_view.header.count = 0;
             upper_view.header.timer.stop();
         }
@@ -201,6 +224,19 @@ Item {
         node:       '/user/' + ossia_net.slot + '/interactions/force'
 
         onValueChanged: interaction_manager.force_current(value);
+    }
+
+    Ossia.Callback //---------------------------------------------------------INTERACTION_FORCE
+    {
+        id:         interactions_reset
+        device:     ossia_client
+        node:       '/user/' + ossia_net.slot + '/interactions/reset'
+
+        onValueChanged:
+        {
+            if ( value != 0 )
+                interaction_manager.reset();
+        }
     }
 
 }

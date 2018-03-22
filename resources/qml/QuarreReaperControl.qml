@@ -13,7 +13,7 @@ Rectangle
         currentIndex: 0
 
         QuarreTrackControl { track_index: 0 }
-        QuarreTrackControl { track_index: 1 }
-        QuarreTrackControl { track_index: 2 }
+        //QuarreTrackControl { track_index: 1 }
+        //QuarreTrackControl { track_index: 2 }
     }
 }

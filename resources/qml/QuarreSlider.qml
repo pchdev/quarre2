@@ -11,36 +11,25 @@ Item
     Slider
     {
         id: control
+        value: 0.5
 
         background: Rectangle
         {
-            implicitWidth: base.width*0.6
-            implicitHeight: base.width*0.05
+            implicitWidth: base.width
+            implicitHeight: base.height*0.9
             radius: 10
             color: "gray"
             anchors.verticalCenter: parent.verticalCenter
-
         }
 
         handle: Rectangle
         {
-            implicitWidth: base.width*0.1
+            implicitWidth: base.height
             implicitHeight: implicitWidth
             radius: implicitHeight/2
             border.color: "black"
             border.width: 1
             x: control.leftPadding + control.visualPosition * (control.availableWidth - width)
-
-            Text
-            {
-                id: slidertxt
-                anchors.fill: parent
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
-                text: "" + slider_index
-                font.pointSize: 30*root.fontRatio
-                color: "black"
-            }
         }
     }
 

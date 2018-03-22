@@ -8,12 +8,25 @@ Item
     width:  parent.width
     height: parent.height
 
-    Column
+    QuarrePad
     {
-        spacing: 10
+        pad_index:  track_index
+        width:      base.width*0.25
+        height:     base.height*0.25
+        y:          base.height*0.2
+
+        anchors.horizontalCenter: parent.horizontalCenter
+    }
+
+    QuarreSlider
+    {
+        slider_index: track_index
+        width: base.width*0.6
+        height: base.height*0.1
+
+        y: base.height*0.6
+
         anchors.horizontalCenter: parent.horizontalCenter
 
-        QuarrePad { pad_index: track_index; width: base.width; height: base.height }
-        //QuarreSlider { slider_index: track_index; width: base.width; height: base.height }
     }
 }
