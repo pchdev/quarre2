@@ -5,9 +5,6 @@ Item
     property int track_index
     id: base
 
-    width:  parent.width
-    height: parent.height
-
     QuarrePad
     {
         pad_index:  track_index

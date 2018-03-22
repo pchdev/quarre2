@@ -10,6 +10,8 @@ Item {
     property string     deviceName: "quarre-remote"
     property alias      oshdl: os_hdl
     property alias      client: ossia_client
+    property alias      pads: pads
+    property alias      sliders: sliders
     property int        slot: 0
     property bool       connected: false
 
@@ -19,9 +21,9 @@ Item {
 
         onClientConnected:
         {
-            console.log(ip);
+            console.log     ( ip )
 
-            slot            = available_slot.value;
+            slot            = 0;
             connected       = true;
 
             upper_view.header.scene.color   = "white";
@@ -30,6 +32,7 @@ Item {
             //sensors_playground.connected    = true;
             //gestures_playground.connected   = true;
 
+            //ossia_client.recreate(ossia_net);
             ossia_client.remap(ossia_net);
             os_hdl.vibrate(100);
         }
@@ -43,7 +46,7 @@ Item {
 
             connected           = false;
             os_hdl.hostAddr     = "ws://";
-            os_hdl.vibrate(500);
+            os_hdl.vibrate      ( 500 );
         }
 
     }
@@ -236,6 +239,35 @@ Item {
         {
             if ( value != 0 )
                 interaction_manager.reset();
+        }
+    }
+
+    Repeater //--------------------------------------------------------- PADS
+    {
+        id: pads
+        model: 16
+
+        Ossia.Binding
+        {
+            property bool active: false
+
+            device:     ossia_client
+            node:       "/user/" + ossia_net.slot + "/pads/" + index + "/active"
+            on:         active
+        }
+    }
+
+    Repeater //--------------------------------------------------------- SLIDERS
+    {
+        id: sliders
+        model: 16
+
+        Ossia.Binding
+        {
+            property real value: 0.5
+            device: ossia_client
+            node: "/user/" + ossia_net.slot + "/sliders/" + index + "/value"
+            on: value
         }
     }
 

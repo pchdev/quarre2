@@ -12,8 +12,29 @@ Rectangle
         anchors.fill: parent
         currentIndex: 0
 
-        QuarreTrackControl { track_index: 0 }
-        //QuarreTrackControl { track_index: 1 }
-        //QuarreTrackControl { track_index: 2 }
+        Repeater
+        {
+            model: 16
+
+            Loader
+            {
+                active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem
+                sourceComponent: QuarreTrackControl
+                {
+                    width:          base.width
+                    height:         base.height
+                    track_index:    index
+
+                    Component.onCompleted:
+                    {
+                        console.log("created: " + index)
+                    }
+                    Component.onDestruction:
+                    {
+                        console.log("destroyed: " + index)
+                    }
+                }
+            }
+        }
     }
 }

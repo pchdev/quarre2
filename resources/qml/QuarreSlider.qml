@@ -31,12 +31,8 @@ Item
             border.width: 1
             x: control.leftPadding + control.visualPosition * (control.availableWidth - width)
         }
-    }
 
-    Ossia.Binding
-    {
-        device: ossia_net.client
-        node: "/user/" + ossia_net.slot + "/sliders/" + slider_index + "/value"
-        on: control.value
+        onValueChanged:
+            ossia_net.sliders.itemAt(slider_index).value = value;
     }
 }

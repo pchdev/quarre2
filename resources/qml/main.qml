@@ -127,11 +127,11 @@ ApplicationWindow
                     currentIndex: 0
                     anchors.fill: parent
 
-                    /*QuarreReaperControl
+                    QuarreReaperControl
                     {
                         id:         rcontrol
                         color:      "transparent"
-                    }*/
+                    }
 
                     QuarreModuleTextViewer
                     {

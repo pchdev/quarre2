@@ -16,13 +16,6 @@ Rectangle
 
     color: inactive_color
 
-    Ossia.Binding
-    {
-        device: ossia_net.client
-        node: "/user/" + ossia_net.slot + "/pads/" + pad_index + "/active"
-        on: active
-    }
-
     Text
     {
         id: padtxt
@@ -50,6 +43,8 @@ Rectangle
                     pad.color       = active_color;
                     pad.active      = true;
                 }
+
+                ossia_net.pads.itemAt(pad_index).active = pad.active;
             }
         }
     }
