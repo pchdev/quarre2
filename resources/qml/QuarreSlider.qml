@@ -11,7 +11,7 @@ Item
     Slider
     {
         id: control
-        value: 0.5
+        value: ossia_net.sliders.itemAt(slider_index).value
 
         background: Rectangle
         {

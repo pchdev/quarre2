@@ -6,7 +6,7 @@ Rectangle
     id: pad
 
     property int pad_index;
-    property bool active: false
+    property bool active: ossia_net.pads.itemAt(pad_index).active
 
     property string active_color:           "white"
     property string inactive_color:         "#294a51"
@@ -14,7 +14,7 @@ Rectangle
     property string active_txt_color:       "black"
     property string inactive_txt_color:     "white"
 
-    color: inactive_color
+    color: active ? active_color : inactive_color
 
     Text
     {
@@ -24,7 +24,7 @@ Rectangle
         horizontalAlignment: Text.AlignHCenter
         text: "" + pad_index
         font.pointSize: 30*root.fontRatio
-        color: inactive_txt_color
+        color: active ? active_txt_color : inactive_txt_color
 
         MouseArea
         {

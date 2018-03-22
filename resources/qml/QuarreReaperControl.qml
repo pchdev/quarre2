@@ -24,15 +24,6 @@ Rectangle
                     width:          base.width
                     height:         base.height
                     track_index:    index
-
-                    Component.onCompleted:
-                    {
-                        console.log("created: " + index)
-                    }
-                    Component.onDestruction:
-                    {
-                        console.log("destroyed: " + index)
-                    }
                 }
             }
         }
