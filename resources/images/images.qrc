@@ -5,4 +5,5 @@
     <qresource prefix="/teaser">
         <file>white.png</file>
     </qresource>
+    <qresource prefix="/misc"/>
 </RCC>
