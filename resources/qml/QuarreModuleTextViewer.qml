@@ -5,23 +5,23 @@ Rectangle
 {
     property int cursor: 0
     property var ai_texts: [
-    "Persiste, perce, aisselle \n magnétique, embryon clair, \n dans le feu desséché, vers le \n haut.",
-    "Perfore, plonge, instance du \n dépli, ébauche du fractal, \n sombre veine sous la glace, \n vers le bas.",
+    "Persiste, perce, aisselle \n magnétique, embryon clair, \n dans le feu desséché, vers le \n haut.",                                                // 0
+    "Perfore, plonge, instance du \n dépli, ébauche du fractal, \n sombre veine sous la glace, \n vers le bas.",                                        // 1
 
-    "Quand est perdu le meilleur \n du noyau, ce symétrique \n éblouissement, cet endogène \n vital retourné par l'obscur, \n subdiviser fait loi.",
-    "Est-il d'autres choix ? \n Franchir trois dimensions \n d'un seul coup de ciseaux ? \n Tant contient de fini la crosse \n d'une fougère",
-    "Resiter même aux graisses de \n l'humus. Tenir encore un peu \n à la clarté. Jouer l'envergure. \n Agripper les failles, le roc.",
-    "Vient le consentement à \n l'élan, la chute dans l'opacité \n sans odeur, l'euphorie \n silencieuse du foret. Est-il un \n autre centre ?",
+    "Quand est perdu le meilleur \n du noyau, ce symétrique \n éblouissement, cet endogène \n vital retourné par l'obscur, \n subdiviser fait loi.",    // 2
+    "Est-il d'autres choix ? \n Franchir trois dimensions \n d'un seul coup de ciseaux ? \n Tant contient de fini la crosse \n d'une fougère",          // 3
+    "Resiter même aux graisses de \n l'humus. Tenir encore un peu \n à la clarté. Jouer l'envergure. \n Agripper les failles, le roc.",                 // 4
+    "Vient le consentement à \n l'élan, la chute dans l'opacité \n sans odeur, l'euphorie \n silencieuse du foret. Est-il un \n autre centre ?",        // 5
 
-    "Cendres. Dans l'urne. Dernier \n arbre. Toutes ses faines. \n Eteintes.",
-    "Neige. Sur le sol nu. La \n baguette. Saule. Trace deux \n lignes. Coupées. A l'angle \n droit.",
-    "Pluie. Le style. Cyprès. \n Prélève. Un nouveau signe. \n Façonne. Un cinquième \n élément. Bois.",
-    "Pollen. Petit tas. Dans un bol. \n L'essaim migre. Aux aiguilles. \n Cèdre.",
-    "Grêle. L'origine. Un \n pommier. Ses baies. Vulves. \n Ses pépins. Verges.",
-    "Poussière. Un poteau. Dressé. \n Pour le savoir. Gorge sèche. \n Chargé de figues. A \n l'équilibre.",
-    "Copeaux. A l'intérieur. \n Châtaignier. D'autres sons. \n Erotisent. Un passage",
-    "Murmures. Humides. Dans le \n méandre. Noyer. Chaque \n esprit. Son rituel. Son Icario.",
-    "Flammèches. L'idée de miroir. \n D'axe. Dessouchée. Orme \n défunt. Jonchée asymétrique.",
+    "Cendres. Dans l'urne. Dernier \n arbre. Toutes ses faines. \n Eteintes.",                                                                          // 6
+    "Neige. Sur le sol nu. La \n baguette. Saule. Trace deux \n lignes. Coupées. A l'angle \n droit.",                                                  // 7
+    "Pluie. Le style. Cyprès. \n Prélève. Un nouveau signe. \n Façonne. Un cinquième \n élément. Bois.",                                                // 8
+    "Pollen. Petit tas. Dans un bol. \n L'essaim migre. Aux aiguilles. \n Cèdre.",                                                                      // 9
+    "Grêle. L'origine. Un \n pommier. Ses baies. Vulves. \n Ses pépins. Verges.",                                                                       // 10
+    "Poussière. Un poteau. Dressé. \n Pour le savoir. Gorge sèche. \n Chargé de figues. A \n l'équilibre.",                                             // 11
+    "Copeaux. A l'intérieur. \n Châtaignier. D'autres sons. \n Erotisent. Un passage",                                                                  // 12
+    "Murmures. Humides. Dans le \n méandre. Noyer. Chaque \n esprit. Son rituel. Son Icario.",                                                          // 13
+    "Flammèches. L'idée de miroir. \n D'axe. Dessouchée. Orme \n défunt. Jonchée asymétrique.",                                                         // 14
     "Flocons, Lente patience. Des \n forges. Enfante au pied du \n pin. L'hypothèse. Le retour.",
     "Rythmes. Le grand oeuvre. \n Pariétal. N'a pas suscité. De \n chêne. Mais. Andouillers. \n Ecarts de doigts.",
     "Rires. Etreinte blanche. \n Bouleau. Surgit. Par \n l'enchevêtrement. Des \n tunnels. Sucée. La sève \n désigne. L'accès.",

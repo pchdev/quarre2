@@ -6,7 +6,7 @@ Rectangle
     id: pad
 
     property int pad_index;
-    property bool active: ossia_net.pads.itemAt(pad_index).active
+    property bool active: false
 
     property string active_color:           "white"
     property string inactive_color:         "#294a51"
