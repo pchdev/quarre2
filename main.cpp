@@ -11,7 +11,8 @@ int main(int argc, char *argv[])
 #endif
 
     QGuiApplication app(argc, argv);
-    qmlRegisterType<quarre::platform_hdl>("Quarre", 1, 0, "PlatformHdl");
+    qmlRegisterType<quarre::platform_hdl>   ( "Quarre", 1, 0, "PlatformHdl" );
+
     QQmlApplicationEngine engine;
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

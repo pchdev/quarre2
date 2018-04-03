@@ -48,7 +48,6 @@ Item {
             os_hdl.hostAddr     = "ws://";
             os_hdl.vibrate      ( 500 );
         }
-
     }
 
     PlatformHdl //---------------------------------------------------------ZCONF+VIBRATOR
@@ -109,20 +108,7 @@ Item {
         onValueChanged:
         {
             if ( value == undefined || value == "" ) return;
-
             upper_view.header.scene.text = value;
-
-            if ( value === "introduction" )
-            {
-                ai_godmode.color = "white";
-                ai_godmode_txt.color = "black";
-            }
-
-            else if ( value === "login" )
-            {
-                ai_godmode.color = "black";
-                ai_godmode_txt.color = "white";
-            }
         }
     }    
 

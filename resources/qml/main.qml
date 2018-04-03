@@ -126,63 +126,6 @@ ApplicationWindow
                     id: lower_view_stack
                     currentIndex: 0
                     anchors.fill: parent
-
-                    QuarreReaperControl
-                    {
-                        id:         rcontrol
-                        color:      "transparent"
-                    }
-
-                    QuarreModuleTextViewer
-                    {
-                        id:         textviewer
-                        color:      "transparent"
-                    }
-                }
-            }
-
-            Rectangle //-------------------------------------------------------------- AI_GODMODE
-            {
-
-                id:         ai_godmode
-
-                property bool godmode: false;
-
-                width:      parent.width*0.3
-                height:     parent.width*0.3
-                radius:     width/2
-                color:      "white"
-                y:          upper_view.height - width/2
-                opacity:    0.5
-
-                anchors.horizontalCenter: parent.horizontalCenter
-
-                Text
-                {
-                    id: ai_godmode_txt
-                    anchors.fill: parent
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
-                    text: "AI"
-                    color: "black"
-                    font.pointSize: 30 * root.fontRatio
-                }
-
-                Ossia.Binding
-                {
-                    device: ossia_net.client
-                    node: "/user/" + ossia_net.slot + "/godmode"
-                    on: ai_godmode.godmode
-                }
-
-                MouseArea
-                {
-                    anchors.fill: parent
-                    onPressed:
-                    {
-                        ai_godmode.godmode = !ai_godmode.godmode;
-                        ossia_net.oshdl.vibrate(100);
-                    }
                 }
             }
         }

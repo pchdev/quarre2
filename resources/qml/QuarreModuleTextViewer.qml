@@ -4,8 +4,7 @@ import Ossia 1.0 as Ossia
 Rectangle
 {
     property int cursor: 0
-    property var texts: [
-];
+    property var texts: [];
 
     Text //------------------------------------------------ TEXT_VIEWER
     {

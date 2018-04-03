@@ -168,12 +168,6 @@ Item {
                 target: lower_view
                 opacity: 0.9
             }
-
-            PropertyChanges //---------------------------------------- GODMODE
-            {
-                target: ai_godmode
-                y: upper_view.height
-            }
         }
     ]
 }
