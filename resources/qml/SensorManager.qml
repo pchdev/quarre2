@@ -18,23 +18,6 @@ Rectangle {
     property bool       compass_available: false
     property real       compass_data: 0
 
-    Text //--------------------------------------------------------------------------- DISPLAY
-    {
-        id:         sensor_display
-        y:          parent.height*0.25
-        width:      parent.width
-        height:     parent.height
-        color:      "#ffffff"
-        text:       "quarrè"
-
-        horizontalAlignment:    Text.AlignHCenter
-        font.family:            font_lato_light.name
-        font.pointSize:         50
-        textFormat:             Text.PlainText
-
-        antialiasing: true
-    }
-
     Timer //------------------------------------------------------------------------- SENSOR_POLL
     {
         id:         sensors_poll;

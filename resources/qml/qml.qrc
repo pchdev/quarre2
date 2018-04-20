@@ -14,16 +14,18 @@
         <file>ModulePads.qml</file>
         <file>ModuleSliders.qml</file>
         <file>Maths.js</file>
-        <file>Gestures.qml</file>
+        <file>GestureManager.qml</file>
         <file>ModuleSceneTransitions.qml</file>
         <file>ModuleTextViewer.qml</file>
         <file>InteractionManager.qml</file>
-        <file>Sensors.qml</file>
+        <file>SensorManager.qml</file>
         <file>GesturesRoutine.js</file>
         <file>SwipeArea.qml</file>
-        <file>Gesture.qml</file>
+        <file>QuarreGesture.qml</file>
         <file>QuarrePad.qml</file>
         <file>QuarreSlider.qml</file>
+        <file>ModuleGesture.qml</file>
+        <file>QuarreSensor.qml</file>
     </qresource>
     <qresource prefix="/modules"/>
 </RCC>
