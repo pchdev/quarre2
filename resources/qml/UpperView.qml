@@ -13,7 +13,7 @@ Rectangle {
     property alias header:      quarre_header
     property alias current:     quarre_current_section
 
-    QuarreInfoHeader //------------------------------------ HEADER_VIEW
+    HeaderView //------------------------------------ HEADER_VIEW
     {
         id:         quarre_header
         width:      parent.width
@@ -21,7 +21,7 @@ Rectangle {
         color:      "transparent"
     }
 
-    QuarreInfoNextSection //-------------------------------- NEXT_INTERACTION_VIEW
+    NextInteractionView //-------------------------------- NEXT_INTERACTION_VIEW
     {
         id:         quarre_next_section
         width:      parent.width
@@ -30,7 +30,7 @@ Rectangle {
         color:      "transparent"
     }
 
-    QuarreInfoCurrentSection  //---------------------------- CURRENT_INTERACTION_VIEW
+    CurrentInteractionView  //---------------------------- CURRENT_INTERACTION_VIEW
     {
         id:         quarre_current_section
         width:      parent.width

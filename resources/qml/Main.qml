@@ -100,7 +100,7 @@ ApplicationWindow
             fillMode: Image.PreserveAspectCrop
             source: "background/quarre.jpg"
 
-            QuarreInfoView //------------------------------------------------- UPPER_VIEW
+            UpperView //------------------------------------------------- UPPER_VIEW
             {
                 id:         upper_view
 

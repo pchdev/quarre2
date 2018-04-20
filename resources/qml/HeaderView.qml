@@ -100,7 +100,7 @@ Rectangle
     {
         // NAME OF THE CURRENT SCENARIO
         id: header_scenario_label
-        text: "arbre-intégral"
+        text: "quarrè"
         color: "#ffffff"
         font.pixelSize: 40 * root.fontRatio
         textFormat: Text.PlainText

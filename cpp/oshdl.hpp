@@ -29,6 +29,8 @@ class platform_hdl : public QObject {
     void        setHostAddr             ( QString addr );
     void        setPort                 ( quint16 port );
 
+    Q_INVOKABLE QString device_address  ( );
+
     signals: // ------------------------------------------
 
     void remoteQuit                     ( );

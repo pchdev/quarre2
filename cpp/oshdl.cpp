@@ -1,5 +1,6 @@
 #include "oshdl.hpp"
 #include <QDebug>
+#include <QNetworkInterface>
 
 using namespace quarre;
 
@@ -80,11 +81,27 @@ platform_hdl::platform_hdl()
 
 }
 
+QString platform_hdl::device_address()
+{
+    for ( const auto& addr : QNetworkInterface::allAddresses())
+    {
+        if ( addr.protocol() == QAbstractSocket::IPv4Protocol &&
+             addr != QHostAddress(QHostAddress::LocalHost))
+            if ( addr.toString().startsWith("192"))
+                 return addr.toString();
+    }
+
+    return "";
+}
+
 platform_hdl::~platform_hdl() {}
 
 #ifdef Q_OS_ANDROID
 
 #include <QMetaObject>
+
+
+
 
 void platform_hdl::register_user_id(quint16 id)
 {

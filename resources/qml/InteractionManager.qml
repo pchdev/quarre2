@@ -4,25 +4,25 @@ Item {
 
     function prepare_next(arglist)
     {
-        // arg0: module_id
-        // arg1: interaction length
-        // arg2: countdown length
-        // arg3: title
-        // arg4: description
+        // arg0: title
+        // arg1: description
+        // arg2: module
+        // arg3: length
+        // arg4: countdown
 
         if ( arglist[0] === undefined )
             return;
 
-        if  ( arglist[2] === "inf" )
+        if  ( arglist[4] === "inf" )
         {
             upper_view.next.count = -1;
             upper_view.next.countdown = "inf";
         }
 
-        else upper_view.next.count      = arglist[2];
+        else upper_view.next.count      = arglist[4];
 
-        upper_view.next.title           = arglist[3];
-        upper_view.next.description     = arglist[4];
+        upper_view.next.title           = arglist[0];
+        upper_view.next.description     = arglist[1];
 
         upper_view.next.timer.start();
 
@@ -41,24 +41,24 @@ Item {
 
     function trigger_next(arglist)
     {
-        // arg0: module id
-        // arg1: interaction length
-        // arg2: title
-        // arg3: description
+        // arg0: title
+        // arg1: description
+        // arg2: module
+        // arg3: length
 
         if ( arglist[0] === undefined )
             return;
 
-        if  ( arglist[1] === "inf" )
+        if  ( arglist[3] === "inf" )
         {
             upper_view.current.count = -1;
             upper_view.current.countdown = "inf";
         }
 
-        else upper_view.current.count       = arglist[1];
+        else upper_view.current.count       = arglist[3];
 
-        upper_view.current.title            = arglist[2];
-        upper_view.current.description      = arglist[3];
+        upper_view.current.title            = arglist[0];
+        upper_view.current.description      = arglist[1];
         upper_view.current.timer.start();
 
         upper_view.next.title = ""

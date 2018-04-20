@@ -8,10 +8,12 @@ import QtQuick.Dialogs 1.3
 Item {
 
     property string     deviceName: "quarre-remote"
-    property alias      oshdl: os_hdl
-    property alias      client: ossia_client
-    property alias      pads: pads
-    property alias      sliders: sliders
+    property string     deviceAddress: ""
+
+    property alias      oshdl:      os_hdl
+    property alias      client:     ossia_client
+    property alias      pads:       pads
+    property alias      sliders:    sliders
     property int        slot: 0
     property bool       connected: false
 
@@ -31,7 +33,6 @@ Item {
 
             //sensors_playground.connected    = true;
             //gestures_playground.connected   = true;
-
             //ossia_client.recreate(ossia_net);
             ossia_client.remap(ossia_net);
             os_hdl.vibrate(100);
@@ -55,35 +56,40 @@ Item {
         id: os_hdl
 
         Component.onCompleted:
+        {
             os_hdl.register_zeroconf(deviceName, "_oscjson._tcp", ossia_client.localPort);
+            deviceAddress = os_hdl.device_address();
+        }
 
         // when quarre-server found
-        onHostAddrChanged: {
-
+        onHostAddrChanged:
+        {
             if(hostAddr === "ws://") return;
-
             console.log("connecting...");
             ossia_client.openOSCQueryClient(hostAddr, ossia_client.localPort)
-
         }
-    }
-
-    Ossia.Binding //---------------------------------------------------------CLIENT_CONNECTED
-    {
-
-        id:         connected_binding
-        device:     ossia_client
-
-        node:       '/user/' + ossia_net.slot + '/connected'
-        on:         ossia_net.connected
     }
 
     Ossia.Callback //---------------------------------------------------------AVAILABLE_SLOT
     {
-        id:         available_slot
+        id:         user_ids
         device:     ossia_client
         value:      0
-        node:       '/slots/available'
+        node:       '/connections/ids'
+
+        onValueChanged:
+        {
+            for ( var i = 0; i < value.length; ++i )
+            {
+                if ( typeof value[i] === "string" &&
+                     value[i].startsWith(deviceAddress) )
+                {
+                    slot = value[i+1];
+                    console.log(slot);
+                    return;
+                }
+            }
+        }
     }
 
     Ossia.Callback //---------------------------------------------------------SCENARIO_NAME
@@ -110,7 +116,8 @@ Item {
             if ( value == undefined || value == "" ) return;
             upper_view.header.scene.text = value;
         }
-    }    
+    }
+
 
     Ossia.Callback //---------------------------------------------------------SCENARIO_START
     {
@@ -176,7 +183,11 @@ Item {
         device:     ossia_client
         node:       '/user/' + ossia_net.slot + '/interactions/next/incoming'
 
-        onValueChanged: interaction_manager.prepare_next(value);
+        onValueChanged:
+        {
+            console.log(value);
+            interaction_manager.prepare_next(value);
+        }
     }
 
     Ossia.Callback //---------------------------------------------------------INTERACTION_BEGIN
