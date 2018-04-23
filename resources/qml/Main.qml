@@ -90,8 +90,8 @@ ApplicationWindow
             }
         }
 
-        GestureManager      { }
-        SensorManager       { }
+        GestureManager  { id: gesture_manager }
+        SensorManager   { id: sensor_manager }
 
         //---------------------------------------------------------------------------------------------
         Image

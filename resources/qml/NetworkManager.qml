@@ -24,24 +24,17 @@ Item {
         onClientConnected:
         {
             console.log     ( ip )
-
-            slot            = 0;
             connected       = true;
 
             upper_view.header.scene.color   = "white";
             upper_view.header.scene.text    = "registered";
 
-            //sensors_playground.connected    = true;
-            //gestures_playground.connected   = true;
-            //ossia_client.recreate(ossia_net);
-            ossia_client.remap(ossia_net);
-            os_hdl.vibrate(100);
+            ossia_client.remap  ( ossia_net );
+            os_hdl.vibrate      ( 100 );
         }
 
         onClientDisconnected:
         {
-            console.log         ( "client disconnected: ", ip );
-
             upper_view.header.scene.text    = "disconnected";
             upper_view.header.scene.color   = "red";
 
@@ -61,7 +54,7 @@ Item {
             deviceAddress = os_hdl.device_address();
         }
 
-        // when quarre-server found
+        // when quarre-server found -------------------------------------------------------
         onHostAddrChanged:
         {
             if(hostAddr === "ws://") return;
@@ -82,10 +75,14 @@ Item {
             for ( var i = 0; i < value.length; ++i )
             {
                 if ( typeof value[i] === "string" &&
-                     value[i].startsWith(deviceAddress) )
+                     value[i].startsWith( deviceAddress ) )
                 {
-                    slot = value[i+1];
-                    console.log(slot);
+                    slot = value [ i+1 ];
+                    ossia_client.remap  ( ossia_net )
+                    console.log         ( "attributed slot: ", slot );
+
+                    gesture_manager.connected = true;
+                    sensor_manager.connected = true;
                     return;
                 }
             }
