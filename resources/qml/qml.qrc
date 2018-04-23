@@ -25,7 +25,6 @@
         <file>QuarrePad.qml</file>
         <file>QuarreSlider.qml</file>
         <file>ModuleGesture.qml</file>
-        <file>QuarreSensor.qml</file>
     </qresource>
     <qresource prefix="/modules"/>
 </RCC>

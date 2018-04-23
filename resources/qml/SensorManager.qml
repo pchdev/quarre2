@@ -7,16 +7,20 @@ Rectangle {
     property bool       connected: false
 
     property bool       accelerometer_available: false
-    property vector3d   accelerometer_data: Qt.vector3d(0.0, 0.0, 0.0)
+    property vector3d   accelerometer_xyz_data: Qt.vector3d(0.0, 0.0, 0.0)
+    property real       accelerometer_x_data : 0.0
+    property real       accelerometer_y_data : 0.0
+    property real       accelerometer_z_data : 0.0
 
     property bool       rotation_available: false
-    property vector3d   rotation_data: Qt.vector3d(0.0, 0.0, 0.0)
+    property vector3d   rotation_xyz_data: Qt.vector3d(0.0, 0.0, 0.0)
+    property real       rotation_x_data : 0.0
+    property real       rotation_y_data : 0.0
+    property real       rotation_z_data : 0.0
 
     property bool       proximity_available: false
-    property bool       proximity_data: false
+    property bool       proximity_close_data: false
 
-    property bool       compass_available: false
-    property real       compass_data: 0
 
     Timer //------------------------------------------------------------------------- SENSOR_POLL
     {
@@ -27,21 +31,46 @@ Rectangle {
 
         onTriggered:
         {
+            // TO BE IMPROVED..
+            if ( sensors_accelerometer_xyz_poll.value )
+            {
+                accelerometer_xyz_data = Qt.vector3d(
+                            sensors_accelerometer.reading.x,
+                            sensors_accelerometer.reading.y,
+                            sensors_accelerometer.reading.z );
+            }
+            else if ( sensors_accelerometer_x_poll.value )
+               accelerometer_x_data = sensors_accelerometer.reading.x;
 
-            if(sensors_accelerometer_active.value)
-                accelerometer_data = Qt.vector3d(sensors_accelerometer.reading.x,
-                                                 sensors_accelerometer.reading.y,
-                                                 sensors_accelerometer.reading.z);
-            if(sensors_rotation_active.value)
-                rotation_data = Qt.vector3d(sensors_rotation.reading.x,
-                                            sensors_rotation.reading.y,
-                                            sensors_rotation.reading.z);
+            else if ( sensors_accelerometer_y_poll.value )
+                accelerometer_y_data = sensors_accelerometer.reading.y;
 
-            if(sensors_proximity_active.value)
-                proximity_data = sensors_proximity.reading.near;
+            else if ( sensors_accelerometer_z_poll.value )
+                accelerometer_z_data = sensors_accelerometer.reading.z;
 
-            if(sensors_compass_active.value)
-                compass_data = sensors_compass.reading.azimuth;
+            if ( sensors_rotation_xyz_poll.value )
+            {
+                rotation_xyz_data = Qt.vector3d(
+                            sensors_rotation.reading.x,
+                            sensors_rotation.reading.y,
+                            sensors_rotation.reading.z );
+            }
+            else if ( sensors_rotation_x_poll.value )
+                rotation_x_data = sensors_rotation.reading.x;
+
+            else if ( sensors_rotation_y_poll.value )
+                rotation_y_data = sensors_rotation.reading.y;
+
+            else if ( sensors_rotation_z_poll.value )
+                rotation_z_data = sensors_rotation.reading.z;
+
+            if ( sensors_proximity_close_poll.value )
+                proximity_close_data = sensors_proximity.reading.near;
+
+            if ( !sensors_accelerometer.active &&
+                    !sensors_rotation.active &&
+                    !sensors_proximity.active )
+                running = false;
         }
     }
 
@@ -50,7 +79,6 @@ Rectangle {
         accelerometer_available     = sensors_accelerometer.connectedToBackend
         rotation_available          = sensors_rotation.connectedToBackend
         proximity_available         = sensors_proximity.connectedToBackend
-        compass_available           = sensors_compass.connectedToBackend
     }
 
     Accelerometer //---------------------------------------------------------------- ACCELEROMETER
@@ -60,32 +88,136 @@ Rectangle {
 
     Ossia.Binding
     {
-        id:     sensors_accelerometer_available
-        node:   '/user/' + ossia_net.slot + '/sensors/accelerometer/available'
-
-        on:     accelerometer_available
+        id:         sensors_accelerometer_available
+        device:     ossia_net.client
+        node:       ossia_net.get_user_base_address() + '/sensors/accelerometer/available'
+        on:         accelerometer_available
     }
 
     Ossia.Callback
     {
-        id:         sensors_accelerometer_active
-        node:       '/user/' + ossia_net.slot + '/sensors/accelerometer/active'
+        id:         sensors_accelerometer_xyz_poll
+        device:     ossia_net.client
+        node:       ossia_net.get_user_base_address() + '/sensors/accelerometer/xyz/poll'
+
+        onValueChanged:
+        {
+            // there can only be one data polling at the same time
+            // meaning if you want to poll several axis simultaneously, you have to poll this one
+            sensors_accelerometer.active = value;
+
+            if ( value )
+            {
+                sensors_accelerometer_x_poll.value = false;
+                sensors_accelerometer_y_poll.value = false;
+                sensors_accelerometer_z_poll.value = false;
+
+                if ( !sensors_poll.running )
+                    sensors_poll.running = true;
+            }
+        }
+    }
+
+    Ossia.Callback
+    {
+        id:         sensors_accelerometer_x_poll
+        device:     ossia_net.client
+        node:       ossia_net.get_user_base_address() + '/sensors/accelerometer/x/poll'
 
         onValueChanged:
         {
             sensors_accelerometer.active = value;
-            if(value && !sensors_poll.running)
-                sensors_poll.running = true;
+
+            if ( value )
+            {
+                sensors_accelerometer_xyz_poll.value = false;
+                sensors_accelerometer_y_poll.value = false;
+                sensors_accelerometer_z_poll.value = false;
+
+                if ( !sensors_poll.running )
+                    sensors_poll.running = true;
+            }
+        }
+    }
+
+    Ossia.Callback
+    {
+        id:         sensors_accelerometer_y_poll
+        device:     ossia_net.client
+        node:       ossia_net.get_user_base_address() + '/sensors/accelerometer/y/poll'
+
+        onValueChanged:
+        {
+            sensors_accelerometer.active = value;
+
+            if ( value )
+            {
+                sensors_accelerometer_x_poll.value = false;
+                sensors_accelerometer_xyz_poll.value = false;
+                sensors_accelerometer_z_poll.value = false;
+
+                if ( !sensors_poll.running )
+                    sensors_poll.running = true;
+            }
+        }
+    }
+
+    Ossia.Callback
+    {
+        id:         sensors_accelerometer_z_poll
+        device:     ossia_net.client
+        node:       ossia_net.get_user_base_address() + '/sensors/accelerometer/z/poll'
+
+        onValueChanged:
+        {
+            sensors_accelerometer.active = value;
+
+            if ( value )
+            {
+                sensors_accelerometer_x_poll.value = false;
+                sensors_accelerometer_y_poll.value = false;
+                sensors_accelerometer_xyz_poll.value = false;
+
+                if ( !sensors_poll.running )
+                    sensors_poll.running = true;
+            }
         }
     }
 
     Ossia.Binding
     {
-        id:         sensors_accelerometer_data
+        id:         sensors_accelerometer_xyz_data
         device:     ossia_net.client
-        node:       '/user/' + ossia_net.slot + '/sensors/accelerometer/data'
+        node:       ossia_net.get_user_base_address()+ '/sensors/accelerometer/xyz/data'
 
-        on:         accelerometer_data;
+        on:         accelerometer_xyz_data;
+    }
+
+    Ossia.Binding
+    {
+        id:         sensors_accelerometer_x_data
+        device:     ossia_net.client
+        node:       ossia_net.get_user_base_address()+ '/sensors/accelerometer/x/data'
+
+        on:         accelerometer_x_data;
+    }
+
+    Ossia.Binding
+    {
+        id:         sensors_accelerometer_y_data
+        device:     ossia_net.client
+        node:       ossia_net.get_user_base_address()+ '/sensors/accelerometer/y/data'
+
+        on:         accelerometer_y_data;
+    }
+
+    Ossia.Binding
+    {
+        id:         sensors_accelerometer_z_data
+        device:     ossia_net.client
+        node:       ossia_net.get_user_base_address()+ '/sensors/accelerometer/z/data'
+
+        on:         accelerometer_z_data;
     }
 
     RotationSensor //---------------------------------------------------------------- ROTATION
@@ -94,36 +226,136 @@ Rectangle {
         active:     false
     }
 
+    Ossia.Binding
+    {
+        id:         sensors_rotation_available
+        device:     ossia_net.client
+        node:       ossia_net.get_user_base_address() + '/sensors/rotation/available'
+        on:         rotation_available
+    }
+
     Ossia.Callback
     {
-        id:         sensors_rotation_active
+        id:         sensors_rotation_xyz_poll
         device:     ossia_net.client
-        node:       '/user/' + ossia_net.slot + '/sensors/rotation/active'
+        node:       ossia_net.get_user_base_address() + '/sensors/rotation/xyz/poll'
 
         onValueChanged:
         {
             sensors_rotation.active = value;
-            if(value && !sensors_poll.running)
-                sensors_poll.running = true;
+
+            if ( value )
+            {
+                sensors_rotation_x_poll.value = false;
+                sensors_rotation_y_poll.value = false;
+                sensors_rotation_z_poll.value = false;
+
+                if ( !sensors_poll.running )
+                    sensors_poll.running = true;
+            }
+        }
+    }
+
+    Ossia.Callback
+    {
+        id:         sensors_rotation_x_poll
+        device:     ossia_net.client
+        node:       ossia_net.get_user_base_address() + '/sensors/rotation/x/poll'
+
+        onValueChanged:
+        {
+            sensors_rotation.active = value;
+
+            if ( value )
+            {
+                sensors_rotation_xyz_poll.value = false;
+                sensors_rotation_y_poll.value = false;
+                sensors_rotation_z_poll.value = false;
+
+                if ( !sensors_poll.running )
+                    sensors_poll.running = true;
+            }
+        }
+    }
+
+    Ossia.Callback
+    {
+        id:         sensors_rotation_y_poll
+        device:     ossia_net.client
+        node:       ossia_net.get_user_base_address() + '/sensors/rotation/y/poll'
+
+        onValueChanged:
+        {
+            sensors_rotation.active = value;
+
+            if ( value )
+            {
+                sensors_rotation_x_poll.value = false;
+                sensors_rotation_xyz_poll.value = false;
+                sensors_rotation_z_poll.value = false;
+
+                if ( !sensors_poll.running )
+                    sensors_poll.running = true;
+            }
+        }
+    }
+
+    Ossia.Callback
+    {
+        id:         sensors_rotation_z_poll
+        device:     ossia_net.client
+        node:       ossia_net.get_user_base_address() + '/sensors/rotation/z/poll'
+
+        onValueChanged:
+        {
+            sensors_rotation.active = value;
+
+            if ( value )
+            {
+                sensors_rotation_x_poll.value = false;
+                sensors_rotation_y_poll.value = false;
+                sensors_rotation_xyz_poll.value = false;
+
+                if ( !sensors_poll.running )
+                    sensors_poll.running = true;
+            }
         }
     }
 
     Ossia.Binding
     {
-        id:         sensors_rotation_available
+        id:         sensors_rotation_xyz_data
         device:     ossia_net.client
-        node:       '/user/' + ossia_net.slot + '/sensors/rotation/available'
+        node:       ossia_net.get_user_base_address()+ '/sensors/rotation/xyz/data'
 
-        on:         rotation_available
+        on:         rotation_xyz_data;
     }
 
     Ossia.Binding
     {
-        id:         sensors_rotation_data
+        id:         sensors_rotation_x_data
         device:     ossia_net.client
-        node:       '/user/' + ossia_net.slot + '/sensors/rotation/data'
+        node:       ossia_net.get_user_base_address()+ '/sensors/rotation/x/data'
 
-        on:         rotation_data
+        on:         rotation_x_data;
+    }
+
+    Ossia.Binding
+    {
+        id:         sensors_rotation_y_data
+        device:     ossia_net.client
+        node:       ossia_net.get_user_base_address()+ '/sensors/rotation/y/data'
+
+        on:         rotation_y_data;
+    }
+
+    Ossia.Binding
+    {
+        id:         sensors_rotation_z_data
+        device:     ossia_net.client
+        node:       ossia_net.get_user_base_address()+ '/sensors/rotation/z/data'
+
+        on:         rotation_z_data;
     }
 
     ProximitySensor //---------------------------------------------------------------- PROXIMITY
@@ -134,9 +366,9 @@ Rectangle {
 
     Ossia.Callback
     {
-        id:         sensors_proximity_active
+        id:         sensors_proximity_close_poll
         device:     ossia_net.client
-        node:       '/user/' + ossia_net.slot + '/sensors/proximity/active'
+        node:       ossia_net.get_user_base_address() + '/sensors/proximity/close/poll'
 
         onValueChanged:
         {
@@ -150,55 +382,16 @@ Rectangle {
     {
         id:         sensors_proximity_available
         device:     ossia_net.client
-        node:       '/user/' + ossia_net.slot + '/sensors/proximity/available'
+        node:       ossia_net.get_user_base_address() + '/sensors/proximity/available'
 
         on:         proximity_available
     }
 
     Ossia.Binding
     {
-        id:         sensors_proximity_data
+        id:         sensors_proximity_close_data
         device:     ossia_net.client
-        node:       '/user/' + ossia_net.slot + '/sensors/proximity/data'
+        node:       ossia_net.get_user_base_address() + '/sensors/proximity/close/data'
 
         on:         proximity_data
     }
-
-    Compass
-    {
-        id: sensors_compass
-        active: false
-    }
-
-    Ossia.Binding
-    {
-        id:         sensors_compass_available
-        device:     ossia_net.client
-        node:       '/user/' + ossia_net.slot + '/sensors/compass/available'
-
-        on:         compass_available
-    }
-
-    Ossia.Binding
-    {
-        id:         sensors_compass_data
-        device:     ossia_net.client
-        node:       '/user/' + ossia_net.slot + '/sensors/compass/data'
-
-        on:         compass_data
-    }
-
-    Ossia.Callback
-    {
-        id:         sensors_compass_active
-        node:       '/user/' + ossia_net.slot + '/sensors/compass/active'
-        device:     ossia_net.client
-
-        onValueChanged:
-        {
-            sensors_compass.active = value;
-            if(value && !sensors_poll.running)
-                sensors_poll.running = true;
-        }
-    }
-}

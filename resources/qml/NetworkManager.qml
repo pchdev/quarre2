@@ -17,6 +17,11 @@ Item {
     property int        slot: 0
     property bool       connected: false
 
+    function get_user_base_address()
+    {
+        return '/user/' + slot
+    }
+
     Ossia.OSCQueryClient //---------------------------------------------------------QUERY_CLIENT
     {
         id:         ossia_client
