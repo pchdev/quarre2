@@ -129,6 +129,15 @@ ApplicationWindow
                     id: lower_view_stack
                     currentIndex: 0
                     anchors.fill: parent
+
+                    ModuleDefault { color: "transparent" }
+                    ModuleSceneTransitions { color: "transparent" }
+                    ModuleGesture { color: "transparent" }
+                    ModulePads { color: "transparent" }
+                    ModuleSliders { color: "transparent" }
+                    ModuleStrings { color: "transparent" }
+                    ModuleTouchSpatialization { color: "transparent" }
+                    ModuleSensorSpatialization { color: "transparent" }
                 }
             }
         }

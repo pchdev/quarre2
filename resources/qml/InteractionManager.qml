@@ -65,6 +65,18 @@ Item {
         upper_view.next.count = 0;
         upper_view.next.timer.stop();
 
+        switch ( arglist[2] )
+        {
+        case "Default": lower_view_stack.currentIndex = 0; break;
+        case "Transition": lower_view_stack.currentIndex = 1; break;
+        case "Gesture": lower_view_stack.currentIndex = 2; break;
+        case "Pads": lower_view_stack.currentIndex = 3; break;
+        case "Sliders": lower_view_stack.currentIndex = 4; break;
+        case "Strings": lower_view_stack.currentIndex = 5; break;
+        case "TouchSpatialization": lower_view_stack.currentIndex = 6; break;
+        case "SensorSpatialization": lower_view_stack.currentIndex = 7; break;
+        }
+
         if(quarre_application.state === "IDLE" ||
            quarre_application.state === "INCOMING_INTERACTION")
            quarre_application.state = "ACTIVE_INTERACTION";
@@ -85,6 +97,7 @@ Item {
         else if (quarre_application.state === "ACTIVE_AND_INCOMING_INTERACTIONS")
             quarre_application.state = "INCOMING_INTERACTION";
 
+        lower_view_stack.currentIndex = 0;
         ossia_net.oshdl.vibrate(100);
     }
 

@@ -1,6 +1,6 @@
 import QtQuick 2.0
 
-Item
+Rectangle
 {
     property int num_pads: 16
     id: module
