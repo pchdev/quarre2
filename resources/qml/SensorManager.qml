@@ -90,7 +90,7 @@ Rectangle {
     {
         id:         sensors_accelerometer_available
         device:     ossia_net.client
-        node:       ossia_net.get_user_base_address() + '/sensors/accelerometer/available'
+        node:       ossia_net.get_user_base_address() + '/sensors/accelerometers/available'
         on:         accelerometer_available
     }
 
@@ -98,7 +98,7 @@ Rectangle {
     {
         id:         sensors_accelerometer_xyz_poll
         device:     ossia_net.client
-        node:       ossia_net.get_user_base_address() + '/sensors/accelerometer/xyz/poll'
+        node:       ossia_net.get_user_base_address() + '/sensors/accelerometers/xyz/poll'
 
         onValueChanged:
         {
@@ -122,7 +122,7 @@ Rectangle {
     {
         id:         sensors_accelerometer_x_poll
         device:     ossia_net.client
-        node:       ossia_net.get_user_base_address() + '/sensors/accelerometer/x/poll'
+        node:       ossia_net.get_user_base_address() + '/sensors/accelerometers/x/poll'
 
         onValueChanged:
         {
@@ -144,7 +144,7 @@ Rectangle {
     {
         id:         sensors_accelerometer_y_poll
         device:     ossia_net.client
-        node:       ossia_net.get_user_base_address() + '/sensors/accelerometer/y/poll'
+        node:       ossia_net.get_user_base_address() + '/sensors/accelerometers/y/poll'
 
         onValueChanged:
         {
@@ -166,7 +166,7 @@ Rectangle {
     {
         id:         sensors_accelerometer_z_poll
         device:     ossia_net.client
-        node:       ossia_net.get_user_base_address() + '/sensors/accelerometer/z/poll'
+        node:       ossia_net.get_user_base_address() + '/sensors/accelerometers/z/poll'
 
         onValueChanged:
         {
@@ -188,7 +188,7 @@ Rectangle {
     {
         id:         sensors_accelerometer_xyz_data
         device:     ossia_net.client
-        node:       ossia_net.get_user_base_address()+ '/sensors/accelerometer/xyz/data'
+        node:       ossia_net.get_user_base_address()+ '/sensors/accelerometers/xyz/data'
 
         on:         accelerometer_xyz_data;
     }
@@ -197,7 +197,7 @@ Rectangle {
     {
         id:         sensors_accelerometer_x_data
         device:     ossia_net.client
-        node:       ossia_net.get_user_base_address()+ '/sensors/accelerometer/x/data'
+        node:       ossia_net.get_user_base_address()+ '/sensors/accelerometers/x/data'
 
         on:         accelerometer_x_data;
     }
@@ -206,7 +206,7 @@ Rectangle {
     {
         id:         sensors_accelerometer_y_data
         device:     ossia_net.client
-        node:       ossia_net.get_user_base_address()+ '/sensors/accelerometer/y/data'
+        node:       ossia_net.get_user_base_address()+ '/sensors/accelerometers/y/data'
 
         on:         accelerometer_y_data;
     }
@@ -215,7 +215,7 @@ Rectangle {
     {
         id:         sensors_accelerometer_z_data
         device:     ossia_net.client
-        node:       ossia_net.get_user_base_address()+ '/sensors/accelerometer/z/data'
+        node:       ossia_net.get_user_base_address()+ '/sensors/accelerometers/z/data'
 
         on:         accelerometer_z_data;
     }
@@ -395,3 +395,4 @@ Rectangle {
 
         on:         proximity_data
     }
+}

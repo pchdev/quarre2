@@ -127,7 +127,7 @@ Item {
         device:     ossia_client
         node:       "/scenario/start"
 
-        onValueChanged:
+        onSetValue_sig:
         {
             if  ( value != 0 )
                 upper_view.header.timer.start();
@@ -142,7 +142,7 @@ Item {
         device:     ossia_client
         node:       "/scenario/stop"
 
-        onValueChanged:
+        onSetValue_sig:
         {
             upper_view.header.timer.stop();
         }
@@ -162,7 +162,7 @@ Item {
         device:     ossia_client
         node:       "/scenario/end"
 
-        onValueChanged: upper_view.header.timer.stop();
+        onSetValue_sig: upper_view.header.timer.stop();
     }    
 
     Ossia.Callback //---------------------------------------------------------SCENARIO_RESET
@@ -171,9 +171,8 @@ Item {
         device:     ossia_client
         node:       "/scenario/reset"
 
-        onValueChanged:
+        onSetValue_sig:
         {
-            if ( value == 0 ) return;
             upper_view.header.count = 0;
             upper_view.header.timer.stop();
         }
@@ -183,7 +182,7 @@ Item {
     {
         id:         interactions_next_incoming
         device:     ossia_client
-        node:       '/user/' + ossia_net.slot + '/interactions/next/incoming'
+        node:       get_user_base_address() + '/interactions/next/incoming'
 
         onValueChanged:
         {
@@ -196,7 +195,7 @@ Item {
     {
         id:         interactions_next_begin
         device:     ossia_client
-        node:       '/user/' + ossia_net.slot + '/interactions/next/begin'
+        node:       get_user_base_address() + '/interactions/next/begin'
 
         onValueChanged: interaction_manager.trigger_next(value);
     }
@@ -205,7 +204,7 @@ Item {
     {
         id:         interactions_next_cancel
         device:     ossia_client
-        node:       '/user/' + ossia_net.slot + '/interactions/next/cancel'
+        node:       get_user_base_address() + '/interactions/next/cancel'
 
         onValueChanged: interaction_manager.end_current();
     }
@@ -214,16 +213,16 @@ Item {
     {
         id:         interactions_current_end
         device:     ossia_client
-        node:       '/user/' + ossia_net.slot + '/interactions/current/end'
+        node:       get_user_base_address() + '/interactions/current/end'
 
-        onValueChanged: interaction_manager.end_current();
+        onSetValue_sig:  interaction_manager.end_current();
     }
 
     Ossia.Callback //---------------------------------------------------------INTERACTION_FORCE
     {
         id:         interactions_current_force
         device:     ossia_client
-        node:       '/user/' + ossia_net.slot + '/interactions/force'
+        node:       get_user_base_address() + '/interactions/force'
 
         onValueChanged: interaction_manager.force_current(value);
     }
@@ -232,7 +231,7 @@ Item {
     {
         id:         interactions_reset
         device:     ossia_client
-        node:       '/user/' + ossia_net.slot + '/interactions/reset'
+        node:       get_user_base_address() + '/interactions/reset'
 
         onValueChanged:
         {
@@ -251,7 +250,7 @@ Item {
             property bool active: false
 
             device:     ossia_client
-            node:       "/user/" + ossia_net.slot + "/pads/" + index + "/active"
+            node:       get_user_base_address() + "/pads/" + index + "/active"
             on:         active
         }
     }
@@ -265,7 +264,7 @@ Item {
         {
             property real value: 0.5
             device: ossia_client
-            node: "/user/" + ossia_net.slot + "/sliders/" + index + "/value"
+            node: get_user_base_address() + "/sliders/" + index + "/value"
             on: value
         }
     }
