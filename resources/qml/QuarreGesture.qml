@@ -4,7 +4,6 @@ import "GesturesRoutine.js" as GesturesRoutine
 
 Item
 {
-
     property bool available:    false
     property bool active:       false
     property bool trigger:      false
@@ -27,7 +26,7 @@ Item
     {
         id:         parameter_active
         device:     ossia_net.client
-        node:       "/user/" + ossia_net.slot + "/gestures/" + name + "/active"
+        node:       ossia_net.get_user_base_address() +"/gestures/"+name+"/poll"
 
         onValueChanged:
             GesturesRoutine.update(value, "QtSensors." + name, sensor_gesture.gestures);
@@ -37,7 +36,7 @@ Item
     {
         id:         parameter_available
         device:     ossia_net.client
-        node:       "/user/" + ossia_net.slot + "/gestures/" + name + "/available"
+        node:       ossia_net.get_user_base_address() + "/gestures/"+name+"/available"
 
         on:         available
     }
@@ -46,7 +45,7 @@ Item
     {
         id:         parameter_trigger
         device:     ossia_net.client
-        node:       "/user/" + ossia_net.slot + "/gestures/" + name + "/trigger"
+        node:       ossia_net.get_user_base_address() + "/gestures/"+name+"/trigger"
 
         on:         trigger
     }
