@@ -13,6 +13,8 @@ Item {
         if ( arglist[0] === undefined )
             return;
 
+        ossia_net.oshdl.vibrate(200);
+
         if  ( arglist[4] === "inf" )
         {
             upper_view.next.count = -1;
@@ -35,8 +37,6 @@ Item {
 
         else if(quarre_application.state === "ACTIVE_INTERACTION")
             quarre_application.state = "ACTIVE_AND_INCOMING_INTERACTIONS";
-
-        ossia_net.oshdl.vibrate(200);
     }
 
     function trigger_next(arglist)
@@ -68,17 +68,17 @@ Item {
         switch ( arglist[2] )
         {
         case "Default": lower_view_stack.currentIndex = 0; break;
-        case "Transition": lower_view_stack.currentIndex = 1; break;
-        case "Gesture": lower_view_stack.currentIndex = 2; break;
-        case "Pads": lower_view_stack.currentIndex = 3; break;
-        case "Sliders": lower_view_stack.currentIndex = 4; break;
-        case "Strings": lower_view_stack.currentIndex = 5; break;
-        case "TouchSpatialization": lower_view_stack.currentIndex = 6; break;
-        case "SensorSpatialization": lower_view_stack.currentIndex = 7; break;
+        case "Transition": lower_view_stack.currentIndex = 2; break;
+        case "Gesture": lower_view_stack.currentIndex = 3; break;
+        case "Pads": lower_view_stack.currentIndex = 4; break;
+        case "Sliders": lower_view_stack.currentIndex = 5; break;
+        case "Strings": lower_view_stack.currentIndex = 6; break;
+        case "TouchSpatialization": lower_view_stack.currentIndex = 7; break;
+        case "SensorSpatialization": lower_view_stack.currentIndex = 8; break;
         }
 
-        if(quarre_application.state === "IDLE" ||
-           quarre_application.state === "INCOMING_INTERACTION")
+        if ( quarre_application.state === "IDLE" ||
+           quarre_application.state === "INCOMING_INTERACTION" )
            quarre_application.state = "ACTIVE_INTERACTION";
 
         ossia_net.oshdl.vibrate(300);
@@ -91,13 +91,13 @@ Item {
         upper_view.current.count            = 0;
         upper_view.current.timer.stop();
 
-        if(quarre_application.state === "ACTIVE_INTERACTION")
+        if ( quarre_application.state === "ACTIVE_INTERACTION" )
             quarre_application.state = "IDLE";
 
-        else if (quarre_application.state === "ACTIVE_AND_INCOMING_INTERACTIONS")
+        else if ( quarre_application.state === "ACTIVE_AND_INCOMING_INTERACTIONS" )
             quarre_application.state = "INCOMING_INTERACTION";
 
-        lower_view_stack.currentIndex = 0;
+        lower_view_stack.currentIndex = 1;
         ossia_net.oshdl.vibrate(100);
     }
 

@@ -26,6 +26,7 @@
         <file>QuarreSlider.qml</file>
         <file>ModuleGesture.qml</file>
         <file>ModuleStrings.qml</file>
+        <file>ModuleIdle.qml</file>
     </qresource>
     <qresource prefix="/modules"/>
 </RCC>

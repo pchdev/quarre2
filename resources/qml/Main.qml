@@ -130,13 +130,15 @@ ApplicationWindow
                     currentIndex: 0
                     anchors.fill: parent
 
+                    ModuleTouchSpatialization { color: "transparent" }
                     ModuleDefault { color: "transparent" }
+                    ModuleIdle { color: "transparent" }
                     ModuleSceneTransitions { color: "transparent" }
                     ModuleGesture { color: "transparent" }
                     ModulePads { color: "transparent" }
                     ModuleSliders { color: "transparent" }
                     ModuleStrings { color: "transparent" }
-                    ModuleTouchSpatialization { color: "transparent" }
+                    //ModuleTouchSpatialization { color: "transparent" }
                     ModuleSensorSpatialization { color: "transparent" }
                 }
             }

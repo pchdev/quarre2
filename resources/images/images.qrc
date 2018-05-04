@@ -5,5 +5,7 @@
     <qresource prefix="/teaser">
         <file>white.png</file>
     </qresource>
-    <qresource prefix="/misc"/>
+    <qresource prefix="/modules">
+        <file>rose2.png</file>
+    </qresource>
 </RCC>
