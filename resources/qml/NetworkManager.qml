@@ -209,6 +209,22 @@ Item {
         onValueChanged: interaction_manager.end_current();
     }
 
+    Ossia.Binding //---------------------------------------------------------NEXT_COUNTDOWN
+    {
+        id:         interactions_next_countdown
+        device:     ossia_client
+        node:       get_user_base_address() + '/interactions/next/countdown'
+        on:         upper_view.next.count
+    }
+
+    Ossia.Binding //---------------------------------------------------------CURRENT_COUNTDOWN
+    {
+        id:         interactions_current_countdown
+        device:     ossia_client
+        node:       get_user_base_address() + '/interactions/current/countdown'
+        on:         upper_view.current.count
+    }
+
     Ossia.Callback //---------------------------------------------------------INTERACTION_END
     {
         id:         interactions_current_end

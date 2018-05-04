@@ -7,12 +7,13 @@ Rectangle {
     property int interaction_id: 0
     property int nspeakers: 8
     property int nsources: 1
-    property var touchpoints: Qt.vector2d(0, 0)
+    property vector2d touchpoints: Qt.vector2d(0, 0)
 
     Ossia.Binding
     {
         id: touchpoints_data
-        node: '/user/' + ossia_net.slot + '/touch/positions'
+        device: ossia_net.client
+        node: ossia_net.get_user_base_address() + '/controllers/xy/0/data'
         on: touchpoints
     }
 
@@ -32,7 +33,8 @@ Rectangle {
 
         }
 
-        Rectangle {
+        Rectangle
+        {
             id: octo_circle            
             height: parent.height *0.9
             width: height
