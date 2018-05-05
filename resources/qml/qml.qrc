@@ -27,6 +27,7 @@
         <file>ModuleGesture.qml</file>
         <file>ModuleStrings.qml</file>
         <file>ModuleIdle.qml</file>
+        <file>ModuleVote.qml</file>
     </qresource>
     <qresource prefix="/modules"/>
 </RCC>

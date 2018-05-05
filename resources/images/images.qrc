@@ -7,5 +7,6 @@
     </qresource>
     <qresource prefix="/modules">
         <file>rose2.png</file>
+        <file>arrow.png</file>
     </qresource>
 </RCC>
