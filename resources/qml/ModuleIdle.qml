@@ -7,15 +7,15 @@ Rectangle
     {
         id:     quarre_idle_text
         color:  "#ffffff"
-        text:   "veuillez patienter jusqu'à la prochaine interaction"
+        text:   "veuillez patienter \n jusqu'à la \n prochaine interaction"
 
-        y:      parent.height*0.25
         width:  parent.width
         height: parent.height
         horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
 
         font.family:    font_lato_light.name
-        font.pointSize: root.fontRatio * 50
+        font.pointSize: root.fontRatio * 30
         textFormat:     Text.PlainText
         antialiasing:   true
         wrapMode:       Text.WordWrap
@@ -25,6 +25,7 @@ Rectangle
     {
         id:     title_xfade
         loops:  Animation.Infinite
+        running: true
 
         NumberAnimation
         {
@@ -32,7 +33,7 @@ Rectangle
             property: "opacity"
             from: 1.0
             to: 0.1
-            duration: 1000
+            duration: 2500
         }
 
         NumberAnimation
@@ -41,8 +42,7 @@ Rectangle
             property: "opacity"
             from: 0.1
             to: 1.0
-            duration: 1000
+            duration: 2500
         }
     }
-
 }

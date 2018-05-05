@@ -3,7 +3,8 @@ import Ossia 1.0 as Ossia
 
 Rectangle  {
 
-    Image {
+    Image
+    {
         id: teaser_claw
         antialiasing: true
         fillMode: Image.PreserveAspectCrop
@@ -13,7 +14,8 @@ Rectangle  {
         opacity: 0.2
     }
 
-    Text {
+    Text
+    {
         id: quarre_log
         width: parent.width
         height: parent.height
@@ -25,5 +27,30 @@ Rectangle  {
         color: "#ffffff"
         text: "quarrè"
         antialiasing: true
+    }
+
+    SequentialAnimation // ---------------------------------------------------- COUNTDOWN_ANIMATION
+    {
+        id:     title_xfade
+        loops:  Animation.Infinite
+        running: true
+
+        NumberAnimation
+        {
+            target: quarre_log
+            property: "opacity"
+            from: 1.0
+            to: 0.1
+            duration: 5000
+        }
+
+        NumberAnimation
+        {
+            target: quarre_log
+            property: "opacity"
+            from: 0.1
+            to: 1.0
+            duration: 5000
+        }
     }
 }

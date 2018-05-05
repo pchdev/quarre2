@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import "Maths.js" as SpatMaths
 import Ossia 1.0 as Ossia
+import QtGraphicalEffects 1.0
 
 Rectangle
 {
@@ -21,12 +22,61 @@ Rectangle
 
     Image
     {
-        // note that having low & high-dpi separate files would be a good idea
         id: rose_bg
         antialiasing: true
         anchors.fill: parent
-        fillMode: Image.PreserveAspectCrop
-        source: "modules/rose2.jpg"
+        fillMode: Image.PreserveAspectFit
+        source: "modules/rose2.png"
+
+        transform: Scale
+        {
+            id: scale
+            origin.x: width/2
+            origin.y: height/2
+        }
+    }
+
+    SequentialAnimation
+    {
+        running: true
+        loops: Animation.Infinite
+
+        ParallelAnimation
+        {
+            NumberAnimation
+            {
+                target: scale
+                property: "xScale"
+                from: 1.0; to: 0.9
+                duration: 10000
+            }
+
+            NumberAnimation
+            {
+                target: scale
+                property: "yScale"
+                from: 1.0; to: 0.9
+                duration: 10000
+            }
+        }
+
+        ParallelAnimation
+        {
+            NumberAnimation
+            {
+                target: scale
+                property: "xScale"
+                from: 0.9; to: 1.0
+                duration: 10000
+            }
+            NumberAnimation
+            {
+                target: scale
+                property: "yScale"
+                from: 0.9; to: 1.0
+                duration: 10000
+            }
+        }
     }
 
     MultiPointTouchArea
@@ -48,6 +98,7 @@ Rectangle
                     touch_animation.running = false;
 
                 touch_animation.running = true;
+                ossia_net.oshdl.vibrate(50);
             }
         }
 
@@ -56,6 +107,7 @@ Rectangle
             id: touch_animation_circle
             color: "transparent"
             border.color: "white"
+            border.width: 5
             x: rtouchpoints.x - width/2
             y: rtouchpoints.y - height/2
         }

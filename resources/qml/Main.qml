@@ -76,7 +76,7 @@ ApplicationWindow
             Component.onCompleted:
             {
                 quarre_application.states = quarre_states.states
-                quarre_application.state = "IDLE"
+                quarre_application.state = "ACTIVE_INTERACTION"
             }
         }
 
@@ -130,7 +130,6 @@ ApplicationWindow
                     currentIndex: 0
                     anchors.fill: parent
 
-                    ModuleTouchSpatialization { color: "transparent" }
                     ModuleDefault { color: "transparent" }
                     ModuleIdle { color: "transparent" }
                     ModuleSceneTransitions { color: "transparent" }
@@ -138,7 +137,7 @@ ApplicationWindow
                     ModulePads { color: "transparent" }
                     ModuleSliders { color: "transparent" }
                     ModuleStrings { color: "transparent" }
-                    //ModuleTouchSpatialization { color: "transparent" }
+                    ModuleTouchSpatialization { color: "#232426"; opacity: 0.8 }
                     ModuleSensorSpatialization { color: "transparent" }
                 }
             }
