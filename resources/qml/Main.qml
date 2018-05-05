@@ -11,6 +11,7 @@ ApplicationWindow
     title:      qsTr("quarrè-remote")
 
     // --------------------------------------------------------------------------------------------------
+
     // note: reference is based on Samsung S7
     property real refPd: 17.067
     property real refHeight: 1848
@@ -40,7 +41,7 @@ ApplicationWindow
     // --------------------------------------------------------------------------------------------------
 
     Item
-    { //            QUARRE APPLICATION BASE
+    { //            QUARRE_APPLICATION_BASE
 
         id:         quarre_application
         height:     parent.height
@@ -85,15 +86,14 @@ ApplicationWindow
             id: quarre_transitions
 
             Component.onCompleted:
-            {
                 quarre_application.transitions = quarre_transitions.transitions
-            }
         }
 
         GestureManager  { id: gesture_manager }
         SensorManager   { id: sensor_manager }
 
         //---------------------------------------------------------------------------------------------
+
         Image
         {
             // note that having low & high-dpi separate files would be a good idea

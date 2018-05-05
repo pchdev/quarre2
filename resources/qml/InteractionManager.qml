@@ -21,7 +21,11 @@ Item {
             upper_view.next.countdown = "inf";
         }
 
-        else upper_view.next.count      = arglist[4];
+        else
+        {
+            upper_view.next.countdown  = arglist[4];
+            upper_view.next.count      = arglist[4];
+        }
 
         upper_view.next.title           = arglist[0];
         upper_view.next.description     = arglist[1];
@@ -55,7 +59,11 @@ Item {
             upper_view.current.countdown = "inf";
         }
 
-        else upper_view.current.count       = arglist[3];
+        else
+        {
+            upper_view.current.count        = arglist[3];
+            upper_view.current.countdown    = arglist[3];
+        }
 
         upper_view.current.title            = arglist[0];
         upper_view.current.description      = arglist[1];
