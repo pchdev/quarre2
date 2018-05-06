@@ -62,6 +62,7 @@ Item {
                 if ( gesture === gesture_list_qt[i] )
                     gestures.itemAt(i).recognized();
 
+            module_gesture.animation.running = true;
             ossia_net.oshdl.vibrate( 200 );
         }
     }

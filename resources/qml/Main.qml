@@ -134,8 +134,8 @@ ApplicationWindow
                     ModuleIdle { color: "transparent" }
                     ModuleSceneTransitions { color: "transparent" }
                     ModuleVote { color: "transparent" }
-                    ModuleGesture { color: "transparent" }
                     ModulePads { color: "transparent" }
+                    ModuleGesture { id: module_gesture; color: "transparent" }
                     ModuleSliders { color: "transparent" }
                     ModuleStrings { color: "transparent" }
                     ModuleTouchSpatialization { color: "#232426"; opacity: 0.8 }

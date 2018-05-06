@@ -4,10 +4,51 @@ import Ossia 1.0 as Ossia
 Rectangle
 {
 
+    property string target: ""
+    property alias animation: trigger_animation
+
+    onTargetChanged:
+    {
+        if  ( target == "whip" )
+        {
+            gesture_label.text = "Frappe verticale"
+            gesture_description.text = "exécutez un geste peu ample, mais sec, vers le bas, l'appareil vibrera si le geste est reconnu.";
+        }
+
+        else if ( target == "cover" )
+        {
+            gesture_label.text = "Paume flottante"
+            gesture_description.text = "approchez la paume de votre main à 3 ou 4 cm de l'appareil, maintenez jusqu'à ce que l'appareil vibre.";
+        }
+
+        else if ( target == "shake" )
+        {
+            gesture_label.text = "Agiter"
+            gesture_description.text = "agitez le téléphone sèchement et fermement de gauche à droite ou de bas en haut, jusqu'à ce que l'appareil vibre.";
+        }
+    }
+
+    Text //------------------------------------------------ GESTURE_LABEL
+    {
+        id:         gesture_label
+        y:          parent.height*0.05
+        width:      parent.width
+        height:     parent.height
+        color:      "#ffffff"
+        text:       "aucun geste cible"
+
+        horizontalAlignment:    Text.AlignHCenter
+        font.family:            font_lato_light.name
+        font.pointSize:         34 * root.fontRatio
+        textFormat:             Text.PlainText
+
+        antialiasing: true
+    }
+
     Text //------------------------------------------------ GESTURE_DESCRIPTION
     {
         id:         gesture_description
-        y:          parent.height/2
+        y:          parent.height * 0.2
         text:       ""
         color:      "#ffffff"
         height:     parent.height/2
@@ -22,43 +63,61 @@ Rectangle
         antialiasing:               true
     }
 
-    Text //------------------------------------------------ GESTURE_LABEL
+    Rectangle
     {
-        id:         gesture_label
-        y:          parent.height*0.25
-        width:      parent.width
-        height:     parent.height
-        color:      "#ffffff"
-        text:       "no gesture"
-
-        horizontalAlignment:    Text.AlignHCenter
-        font.family:            font_lato_light.name
-        font.pointSize:         40 * root.fontRatio
-        textFormat:             Text.PlainText
-
-        antialiasing: true
+        id: trigger_animation_circle
+        color: "transparent"
+        border.color: "white"
+        border.width: 5
+        x: parent.width/2 - width/2
+        y: parent.height/2 - height/2
     }
 
-    Ossia.Callback //----------------------------------------------------------------- TITLE
+    ParallelAnimation
     {
-        id:         ossia_gesture_title
-        device:     ossia_net.client
-        node:       "/user/" + ossia_net.slot + "/gestures/current/title"
-
-        onValueChanged:
+        id: trigger_animation
+        NumberAnimation
         {
-            gesture_label.text = value;
-            ossia_net.oshdl.vibrate(100);
+            target: trigger_animation_circle
+            property: "width"
+            from: 0
+            to: parent.width
+            duration: 1250
+        }
+        NumberAnimation
+        {
+            target: trigger_animation_circle
+            property: "height"
+            from: 0
+            to: parent.width
+            duration: 1250
+        }
+        NumberAnimation
+        {
+            target: trigger_animation_circle
+            property: "radius"
+            from: 0
+            to: parent.width*0.5
+            duration: 1250
+        }
+        SequentialAnimation
+        {
+            NumberAnimation
+            {
+                target: trigger_animation_circle
+                property: "opacity"
+                from: 0
+                to: 0.8
+                duration: 625
+            }
+            NumberAnimation
+            {
+                target: trigger_animation_circle
+                property: "opacity"
+                from: 0.8
+                to: 0
+                duration: 625
+            }
         }
     }
-
-    Ossia.Callback //----------------------------------------------------------------- DESCRIPTION
-    {
-        id:         ossia_gesture_description
-        device:     ossia_net.client
-        node:       "/user/" + ossia_net.slot + "/gestures/current/description"
-
-        onValueChanged: gesture_description.text = value
-    }
-
 }

@@ -29,7 +29,10 @@ Item
         node:       ossia_net.get_user_base_address() +"/gestures/"+name+"/poll"
 
         onValueChanged:
+        {
             GesturesRoutine.update(value, "QtSensors." + name, sensor_gesture.gestures);
+            if ( value ) module_gesture.target = name;
+        }
     }
 
     Ossia.Binding // -------------------------------------------------------------------- AVAILABLE
