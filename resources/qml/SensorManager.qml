@@ -25,7 +25,7 @@ Rectangle {
     Timer //------------------------------------------------------------------------- SENSOR_POLL
     {
         id:         sensors_poll;
-        running:    true
+        running:    false
         repeat:     true
         interval:   50
 
@@ -223,7 +223,7 @@ Rectangle {
     RotationSensor //---------------------------------------------------------------- ROTATION
     {
         id:         sensors_rotation
-        active:     true
+        active:     false
     }
 
     Ossia.Binding
@@ -305,7 +305,6 @@ Rectangle {
         id:         sensors_rotation_z_poll
         device:     ossia_net.client
         node:       ossia_net.get_user_base_address() + '/sensors/rotation/z/poll'
-        value:      true
 
         onValueChanged:
         {

@@ -193,12 +193,6 @@ Rectangle
         font.pointSize: 22 * root.fontRatio
         textFormat: Text.PlainText
         font.family: font_lato_light.name
-
-        MouseArea
-        {
-            id: no_current_button
-            anchors.fill: parent
-        }
     }
 
     Text //---------------------------------------------------------------- CURRENT_DESCRIPTION
