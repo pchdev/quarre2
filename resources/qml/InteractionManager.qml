@@ -77,12 +77,13 @@ Item {
         {
         case "Default": lower_view_stack.currentIndex = 0; break;
         case "Transition": lower_view_stack.currentIndex = 2; break;
-        case "Gesture": lower_view_stack.currentIndex = 3; break;
-        case "Pads": lower_view_stack.currentIndex = 4; break;
-        case "Sliders": lower_view_stack.currentIndex = 5; break;
-        case "Strings": lower_view_stack.currentIndex = 6; break;
-        case "TouchSpatialization": lower_view_stack.currentIndex = 7; break;
-        case "SensorSpatialization": lower_view_stack.currentIndex = 8; break;
+        case "Vote" : lower_view_stack.currentIndex = 3; break;
+        case "Gesture": lower_view_stack.currentIndex = 4; break;
+        case "Pads": lower_view_stack.currentIndex = 5; break;
+        case "Sliders": lower_view_stack.currentIndex = 6; break;
+        case "Strings": lower_view_stack.currentIndex = 7; break;
+        case "TouchSpatialization": lower_view_stack.currentIndex = 8; break;
+        case "SensorSpatialization": lower_view_stack.currentIndex = 9; break;
         }
 
         if ( quarre_application.state === "IDLE" ||

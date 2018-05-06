@@ -8,5 +8,7 @@
     <qresource prefix="/modules">
         <file>rose2.png</file>
         <file>arrow.png</file>
+        <file>mountain.png</file>
+        <file>tree.png</file>
     </qresource>
 </RCC>
