@@ -59,29 +59,29 @@ ApplicationWindow
                 event.accepted = true;
         }
 
-        InteractionManager
+        InteractionManager //---------------------------------------------------- INTERACTIONS
         {
             id: interaction_manager
         }
 
-        NetworkManager
+        NetworkManager //-------------------------------------------------------- NETWORK
         {
             id:             ossia_net
             deviceName:     "quarre-remote"
         }
 
-        ApplicationStates
+        ApplicationStates //------------------------------------------------------ MAIN_STATES
         {
             id: quarre_states
 
             Component.onCompleted:
             {
                 quarre_application.states = quarre_states.states
-                quarre_application.state = "ACTIVE_INTERACTION"
+                quarre_application.state = "IDLE"
             }
         }
 
-        ApplicationTransitions
+        ApplicationTransitions //------------------------------------------------ MAIN_TRANSITIONS
         {
             id: quarre_transitions
 
@@ -90,11 +90,9 @@ ApplicationWindow
         }
 
         GestureManager  { id: gesture_manager }
-        SensorManager   { id: sensor_manager }
+        SensorManager   { id: sensor_manager }        
 
-        //---------------------------------------------------------------------------------------------
-
-        Image
+        Image //----------------------------------------------------------------- GUI
         {
             // note that having low & high-dpi separate files would be a good idea
             id: quarre_background
@@ -103,7 +101,7 @@ ApplicationWindow
             fillMode: Image.PreserveAspectCrop
             source: "background/quarre.jpg"
 
-            UpperView //------------------------------------------------- UPPER_VIEW
+            UpperView //------------------------------------------------------ UPPER_VIEW
             {
                 id:         upper_view
 
@@ -130,9 +128,9 @@ ApplicationWindow
                     currentIndex: 0
                     anchors.fill: parent
 
-//                    ModuleDefault { color: "transparent" }
-//                    ModuleIdle { color: "transparent" }
-//                    ModuleSceneTransitions { color: "transparent" }
+                    ModuleDefault { color: "transparent" }
+                    ModuleIdle { color: "transparent" }
+                    ModuleSceneTransitions { color: "transparent" }
                     ModuleVote { color: "transparent" }
                     ModuleGesture { id: module_gesture; color: "transparent" }
                     ModulePads { color: "transparent" }
@@ -140,6 +138,48 @@ ApplicationWindow
                     ModuleStrings { color: "transparent" }
                     ModuleTouchSpatialization { color: "#232426"; opacity: 0.8 }
                     ModuleSensorSpatialization { color: "transparent" }
+                    ModuleTutorial { }
+                }
+
+                Rectangle //------------------------------------------------ INACTIVE_RECT
+                {
+                    id: grey_out_stack
+                    anchors.fill: parent
+                    color: "#2f302f"
+                    opacity: 0.0
+
+                    Text
+                    {
+                        id:         inactive_text
+                        text:       "inactif, en attente..."
+                        color:      "#ffffff"
+                        wrapMode:   Text.WordWrap
+                        anchors.fill: parent
+
+                        horizontalAlignment:  Text.AlignHCenter
+                        verticalAlignment:    Text.AlignVCenter
+                        font.pointSize:       18 * root.fontRatio
+                        font.family:          font_lato_light.name
+                        antialiasing:         true
+                    }
+                }
+
+                NumberAnimation //----------------------------------------- INACTIVE_ANIMATION
+                {
+                    id: grey_animation_in
+                    target: grey_out_stack
+                    property: "opacity"
+                    from: 0.0; to: 0.7;
+                    duration: 1000
+                }
+
+                NumberAnimation
+                {
+                    id: grey_animation_out
+                    target: grey_out_stack
+                    property: "opacity"
+                    from: 0.7; to: 0.0;
+                    duration: 1000
                 }
             }
         }

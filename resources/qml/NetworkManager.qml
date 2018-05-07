@@ -98,7 +98,7 @@ Item {
     {
         id:         scenario_name
         device:     ossia_client
-        node:       "/scenario/name"
+        node:       "/common/scenario/name"
 
         onValueChanged:
         {
@@ -111,7 +111,7 @@ Item {
     {
         id:         scenario_scene_name
         device:     ossia_client
-        node:       "/scenario/scene/name"
+        node:       "/common/scenario/scene/name"
 
         onValueChanged:
         {
@@ -125,7 +125,7 @@ Item {
     {
         id:         scenario_start
         device:     ossia_client
-        node:       "/scenario/start"
+        node:       "/common/scenario/start"
 
         onSetValue_sig:
         {
@@ -140,7 +140,7 @@ Item {
         // argument: error code (int)
         id:         scenario_stop
         device:     ossia_client
-        node:       "/scenario/stop"
+        node:       "/common/scenario/stop"
 
         onSetValue_sig:
         {
@@ -153,14 +153,14 @@ Item {
         //          argument: reason for pause (int)
         id:         scenario_pause
         device:     ossia_client
-        node:       "/scenario/pause"
+        node:       "/common/scenario/pause"
     }
 
     Ossia.Callback //---------------------------------------------------------SCENARIO_END
     {
         id:         scenario_end
         device:     ossia_client
-        node:       "/scenario/end"
+        node:       "/common/scenario/end"
 
         onSetValue_sig: upper_view.header.timer.stop();
     }    
@@ -169,7 +169,7 @@ Item {
     {
         id:         scenario_reset
         device:     ossia_client
-        node:       "/scenario/reset"
+        node:       "/common/scenario/reset"
 
         onSetValue_sig:
         {

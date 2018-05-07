@@ -3,9 +3,17 @@ import Ossia 1.0 as Ossia
 
 Rectangle
 {
-
     property string target: ""
     property alias animation: trigger_animation
+
+    onEnabledChanged:
+    {
+        if ( !enabled )
+        {
+            gesture_label.text = "non-déterminé";
+            gesture_description.text = "veuillez patienter jusqu'à l'activation de l'interaction";
+        }
+    }
 
     onTargetChanged:
     {
