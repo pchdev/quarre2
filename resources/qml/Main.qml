@@ -138,6 +138,7 @@ ApplicationWindow
                     ModuleStrings { color: "transparent" }
                     ModuleTouchSpatialization { color: "#232426"; opacity: 0.8 }
                     ModuleSensorSpatialization { color: "transparent" }
+                    ModuleTouchTrajectories { color: "#232426"; opacity: 0.8 }
                     ModuleTutorial { }
                 }
 

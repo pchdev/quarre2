@@ -10,7 +10,7 @@ Rectangle
     {
         if ( !enabled )
         {
-            gesture_label.text = "non-déterminé";
+            gesture_label.text = "indéterminé";
             gesture_description.text = "veuillez patienter jusqu'à l'activation de l'interaction";
         }
     }

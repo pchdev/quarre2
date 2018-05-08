@@ -29,6 +29,7 @@
         <file>ModuleIdle.qml</file>
         <file>ModuleVote.qml</file>
         <file>ModuleTutorial.qml</file>
+        <file>ModuleTouchTrajectories.qml</file>
     </qresource>
     <qresource prefix="/modules"/>
 </RCC>

@@ -1,14 +1,10 @@
 import QtQuick 2.0
-import "Maths.js" as SpatMaths
 import Ossia 1.0 as Ossia
-import QtGraphicalEffects 1.0
 
 Rectangle
 {
     id: root
-    property int interaction_id: 0
-    property int nspeakers: 8
-    property int nsources: 1
+
     property vector2d touchpoints: Qt.vector2d(0, 0)
     property vector2d rtouchpoints: Qt.vector2d(0, 0)
 
