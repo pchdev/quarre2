@@ -54,7 +54,7 @@ Rectangle
     {
         id:         trajectory_trigger
         device:     ossia_net.client
-        node:       ossia_net.get_user_base_address() + '/controllers/xy/0/trigger'
+        node:       ossia_net.get_user_base_address() + '/controllers/trajectories/trigger'
         on:         trigger
     }
 

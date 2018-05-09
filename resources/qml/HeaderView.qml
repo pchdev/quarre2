@@ -136,7 +136,7 @@ Rectangle
     {
         // NAME OF THE CURRENT SCENE
         id: header_scene_label
-        text: "registration"
+        text: "connecting"
         color: "#ffffff"
         font.pixelSize: 40 * root.fontRatio
         textFormat: Text.PlainText

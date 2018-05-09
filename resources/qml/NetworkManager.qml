@@ -32,7 +32,8 @@ Item {
             connected       = true;
 
             upper_view.header.scene.color   = "white";
-            upper_view.header.scene.text    = "registered";
+            upper_view.header.scene.text    = "connected";
+            quarre_application.state        = "IDLE";
 
             ossia_client.remap  ( ossia_net );
             os_hdl.vibrate      ( 100 );
@@ -42,6 +43,7 @@ Item {
         {
             upper_view.header.scene.text    = "disconnected";
             upper_view.header.scene.color   = "red";
+            quarre_application.state        = "DISCONNECTED"
 
             connected           = false;
             os_hdl.hostAddr     = "ws://";
@@ -186,7 +188,6 @@ Item {
 
         onValueChanged:
         {
-            console.log(value);
             interaction_manager.prepare_next(value);
         }
     }

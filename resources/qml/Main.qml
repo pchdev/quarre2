@@ -77,7 +77,7 @@ ApplicationWindow
             Component.onCompleted:
             {
                 quarre_application.states = quarre_states.states
-                quarre_application.state = "IDLE"
+                quarre_application.state = "DISCONNECTED"
             }
         }
 

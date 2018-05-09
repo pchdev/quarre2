@@ -4,6 +4,37 @@ Item {
 
     transitions: [
 
+        Transition
+        {
+            from: "DISCONNECTED"; to: "IDLE";
+            reversible: true
+
+            ParallelAnimation
+            {
+                NumberAnimation
+                {
+                    target: upper_view
+                    property: "height"
+                    duration: 1000
+                }
+
+                NumberAnimation
+                {
+                    target: upper_view.header
+                    property: "height"
+                    duration: 1000
+                }
+
+                NumberAnimation
+                {
+                    target: lower_view
+                    property: "y"
+                    duration: 1000
+                }
+            }
+
+        },
+
         Transition // -------------------------------------------------- IDLE_TO_INCOMING
         {
             from: "IDLE"

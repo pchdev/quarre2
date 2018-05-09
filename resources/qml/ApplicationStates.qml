@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.Window 2.2
 
 Item {
 
@@ -6,21 +7,45 @@ Item {
 
         State
         {
-            name: "CONNECTING"
+            name: "DISCONNECTED"
             // application logo + connection wheel
-            PropertyChanges {
+            PropertyChanges
+            {
+                target: upper_view.header
+                state: "FULL_VIEW"
+            }
+
+            PropertyChanges
+            {
+                target: upper_view
+                height: root.height
+            }
+
+            PropertyChanges
+            {
                 target: upper_view.header
                 height: root.height
             }
-        },
 
-        State
-        {
-            name: "CONNECTION_FAILED"
-            /*PropertyChanges {
-                target:
-                height: root.height
-            }*/
+            PropertyChanges
+            {
+                target: lower_view
+                y: root.height
+            }
+
+            PropertyChanges //--------------------------- NEXT
+            {
+                target: upper_view.next
+                x: -upper_view.width
+                state: "REDUCED_VIEW"
+            }
+
+            PropertyChanges //--------------------------- CURRENT
+            {
+                target: upper_view.current
+                x: upper_view.width
+                state: "FULL_VIEW"
+            }
         },
 
         State //-------------------------------------------------------------- IDLE_STATE
@@ -33,6 +58,12 @@ Item {
             {
                 target: upper_view
                 opacity: 0.8
+            }
+
+            PropertyChanges
+            {
+                target: upper_view
+                height: root.height * 0.45
             }
 
             PropertyChanges //--------------------------- HEADER
@@ -60,6 +91,7 @@ Item {
             {
                 target: lower_view
                 opacity: 0.75
+                y: upper_view.height
             }
 
         },
