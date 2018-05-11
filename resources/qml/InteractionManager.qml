@@ -47,6 +47,7 @@ Item
         case "TouchSpatialization": new_stack_index = 8; break;
         case "SensorSpatialization": new_stack_index = 9; break;
         case "TouchTrajectories": new_stack_index = 10; break;
+        case "TouchBirds": new_stack_index = 10; break;
         }
 
         if ( quarre_application.state === "IDLE" )
@@ -106,6 +107,7 @@ Item
         case "TouchSpatialization": lower_view_stack.currentIndex = 8; break;
         case "SensorSpatialization": lower_view_stack.currentIndex = 9; break;
         case "TouchTrajectories": lower_view_stack.currentIndex = 10; break;
+        case "TouchBirds": lower_view_stack.currentIndex = 11; break;
         }
 
         if ( grey_out_stack.opacity == 0.7 )
