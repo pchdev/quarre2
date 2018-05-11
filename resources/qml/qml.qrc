@@ -30,6 +30,9 @@
         <file>ModuleVote.qml</file>
         <file>ModuleTutorial.qml</file>
         <file>ModuleTouchTrajectories.qml</file>
+        <file>ModuleTouchBirds.qml</file>
+        <file>SpatializationSphere.qml</file>
+        <file>QuarreBird.qml</file>
     </qresource>
     <qresource prefix="/modules"/>
 </RCC>
