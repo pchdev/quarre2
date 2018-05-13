@@ -33,8 +33,9 @@ Rectangle
             onPressed:
             {
                 if ( !bird_rect.paused ) return;
-                touchbirds_root.current_id = number_id;
-                touchbirds_root.current_position = Qt.vector2d(
+
+                touchbirds_root.trigger = Qt.vector3d(
+                            number_id,
                             (bird_rect.x + bird_rect.width/2)/touchbirds_root.width,
                             (bird_rect.y + bird_rect.height/2)/touchbirds_root.height );
 

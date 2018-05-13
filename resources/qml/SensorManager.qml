@@ -62,7 +62,14 @@ Rectangle {
                 rotation_y_data = sensors_rotation.reading.y;
 
             else if ( sensors_rotation_z_poll.value )
-                rotation_z_data = sensors_rotation.reading.z;
+            {
+                var offseted = sensors_rotation.reading.z + sensors_rotation_z_offset.value;
+
+                if ( offseted > 180 ) offseted -= 360;
+                else if ( offseted < -180 ) offseted += 360;
+
+                rotation_z_data = offseted;
+            }
 
             if ( sensors_proximity_close_poll.value )
                 proximity_close_data = sensors_proximity.reading.near;
@@ -356,6 +363,13 @@ Rectangle {
         node:       ossia_net.get_user_base_address()+ '/sensors/rotation/z/data'
 
         on:         rotation_z_data;
+    }
+
+    Ossia.Callback
+    {
+        id:         sensors_rotation_z_offset
+        device:     ossia_net.client
+        node:       '/common/sensors/rotation/offset'
     }
 
     ProximitySensor //---------------------------------------------------------------- PROXIMITY
