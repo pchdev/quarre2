@@ -14,8 +14,8 @@ public class ZConfRunnable implements Runnable
     private Context m_context;
     public ZConfRunnable(Activity activity, Context ctx)
     {
-        m_activity = activity;
-        m_context = ctx;
+        m_activity  = activity;
+        m_context   = ctx;
     }
 
     private NsdManager                          m_nsdmanager;
@@ -24,25 +24,39 @@ public class ZConfRunnable implements Runnable
     private NsdManager.ResolveListener          m_resolvelistener;    
 
     @Override
-    public void run() {
+    public void run()
+    {
         // called on Android UI Thread
-        this.discoverServer("quarre-server", "_oscjson._tcp");
-        USER_ID = -1;
-        //this.registerService("quarre-remote", "_oscjson._tcp", 5678);
+        SINGLETON = this;
     }
 
-    public static int PORT;
-    public static int USER_ID;
-    public static String service_name;
-    public static String service_type;
     public static String HOST_ADDR;
     public static String IP;
+    public static int PORT;
+    public static ZConfRunnable SINGLETON;
+
+    public static void startServerDiscovery()
+    {
+        SINGLETON.discoverServer("quarre-server", "_oscjson._tcp");
+    }
+
+    public static void stopServerDiscovery()
+    {
+        SINGLETON.stopDiscovery();
+    }
+
+    public void stopDiscovery()
+    {
+       m_nsdmanager.stopServiceDiscovery(m_discolistener);
+    }
 
     public void discoverServer(String name, String type)
     {
-        m_nsdmanager = (NsdManager) m_context.getSystemService(Context.NSD_SERVICE);
+        Log.d("ZCONF", "discoverServer...");
 
-        m_resolvelistener = new NsdManager.ResolveListener() {
+        m_nsdmanager        = (NsdManager) m_context.getSystemService(Context.NSD_SERVICE);
+        m_resolvelistener   = new NsdManager.ResolveListener()
+        {
             @Override
             public void onResolveFailed(NsdServiceInfo service, int error_code)
             {
@@ -54,25 +68,26 @@ public class ZConfRunnable implements Runnable
             {
                 Log.d("ZCONF", "Resolve succeeded");
 
-                String ip = service.getHost().toString();
-                int port = service.getPort();
-
+                String ip   = service.getHost().toString();
+                int port    = service.getPort();
                 String host = "ws:/" + ip + ":" + port;
 
-                Log.d("ZCONF", host);
-                IP = ip.substring(1);
-                PORT = port;
-                HOST_ADDR = host;
+                IP          = ip.substring(1);
+                PORT        = port;
+                HOST_ADDR   = host;
+
                 NativeFunctions.onServerDiscoveredNative();
             }
         };
 
-        m_discolistener = new NsdManager.DiscoveryListener() {
-
+        m_discolistener = new NsdManager.DiscoveryListener()
+        {
             @Override
-            public void onDiscoveryStarted(String regType) {
+            public void onDiscoveryStarted(String regType)
+            {
                 Log.d("ZCONF", "Service discovery started");
             }
+
             @Override
             public void onServiceFound(NsdServiceInfo service)
             {
@@ -82,21 +97,25 @@ public class ZConfRunnable implements Runnable
                     m_nsdmanager.resolveService(service, m_resolvelistener);
                 }
             }
+
             @Override
             public void onServiceLost(NsdServiceInfo service)
             {
                 Log.d("ZCONF", "Service disconnected: " + service.getServiceName());
             }
+
             @Override
             public void onDiscoveryStopped(String serviceType)
             {
                 Log.d("ZCONF", "Discovery stopped");
             }
+
             @Override
             public void onStartDiscoveryFailed(String serviceType, int errorCode)
             {
                 m_nsdmanager.stopServiceDiscovery(this);
             }
+
             @Override
             public void onStopDiscoveryFailed(String serviceType, int errorCode)
             {
@@ -105,41 +124,5 @@ public class ZConfRunnable implements Runnable
         };
 
         m_nsdmanager.discoverServices(type, NsdManager.PROTOCOL_DNS_SD, m_discolistener);
-    }
-
-    public void registerService(String name, String type, int port)
-    {        
-        NsdServiceInfo service_info = new NsdServiceInfo();
-        service_info.setServiceName(name);
-        service_info.setServiceType(type);
-        service_info.setPort(port);
-
-        m_nsdmanager = (NsdManager) m_context.getSystemService(Context.NSD_SERVICE);
-        m_reglistener = new NsdManager.RegistrationListener() {
-
-            @Override
-            public void onServiceRegistered(NsdServiceInfo serviceInfo) {
-
-            }
-
-            @Override
-            public void onRegistrationFailed(NsdServiceInfo serviceInfo, int errorCode) {
-
-            }
-
-            @Override
-            public void onServiceUnregistered(NsdServiceInfo arg0) {
-
-            }
-
-            @Override
-            public void onUnregistrationFailed(NsdServiceInfo serviceInfo, int errorCode) {
-
-            }
-
-        };
-
-        m_nsdmanager.registerService(service_info, NsdManager.PROTOCOL_DNS_SD, m_reglistener);        
-
     }
 }

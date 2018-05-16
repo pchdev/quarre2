@@ -1,32 +1,13 @@
 #include "oshdl.hpp"
 #include <QDebug>
 #include <QNetworkInterface>
+#include <QFile>
+#include <QIODevice>
 
 using namespace quarre;
 
 platform_hdl* platform_hdl::singleton;
 
-void onServerDiscoveredNative(JNIEnv*, jobject)
-{
-    auto hostaddr = QAndroidJniObject::getStaticObjectField("org/quarre/remote/ZConfRunnable", "HOST_ADDR", "Ljava/lang/String;");
-    auto platform = platform_hdl::singleton;
-
-    auto hoststr = hostaddr.toString();
-    platform->setHostAddr(hoststr);
-    auto hostlist = hoststr.split(':');
-    platform->setPort(hostlist[1].toInt());
-}
-
-void onRemoteQuitNative(JNIEnv*, jobject)
-{
-    auto platform = platform_hdl::singleton;
-    platform->application_quit();
-}
-
-void platform_hdl::application_quit()
-{
-    emit remoteQuit();
-}
 
 QString platform_hdl::hostAddr() const
 {
@@ -87,34 +68,11 @@ QString platform_hdl::device_address()
     {
         if ( addr.protocol() == QAbstractSocket::IPv4Protocol &&
              addr != QHostAddress(QHostAddress::LocalHost))
-            if ( addr.toString().startsWith("192"))
+            if ( addr.toString().startsWith("192") || addr.toString().startsWith("10"))
                  return addr.toString();
     }
 
     return "";
-}
-
-platform_hdl::~platform_hdl() {}
-
-#ifdef Q_OS_ANDROID
-
-#include <QMetaObject>
-
-
-
-
-void platform_hdl::register_user_id(quint16 id)
-{
-    jint user_id = id;
-    QAndroidJniObject::setStaticField<jint>("org/quarre/remote/ZConfRunnable", "USER_ID", user_id);
-}
-
-void platform_hdl::vibrate(int milliseconds) const
-{    
-    jboolean has_vibrator   = m_vibrator.callMethod<jboolean>("hasVibrator", "()Z");
-    jlong ms                = milliseconds;
-
-    m_vibrator.callMethod<void>("vibrate", "(J)V", ms);
 }
 
 void platform_hdl::register_zeroconf(QString name, QString type, quint16 port)
@@ -126,6 +84,65 @@ void platform_hdl::register_zeroconf(QString name, QString type, quint16 port)
     QtAndroid::androidActivity().callMethod<void>("registerZConfHdl","()V");
 }
 
+void platform_hdl::start_discovery()
+{
+    QAndroidJniObject::callStaticMethod<void>(
+                "org/quarre/remote/ZConfRunnable", "startServerDiscovery");
+}
+
+void platform_hdl::stop_discovery()
+{
+    QAndroidJniObject::callStaticMethod<void>(
+                "org/quarre/remote/ZConfRunnable", "stopServerDiscovery");
+}
+
+void platform_hdl::write_last_known_server_address(QString address)
+{
+    QFile address_file  ( "server_address.txt" );
+    address_file.open   ( QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text );
+    QTextStream out     ( &address_file );
+
+    out << address;
+    address_file.close  ( );
+}
+
+QString platform_hdl::read_last_known_server_address()
+{
+    QFile address_file  ( "server_address.txt" );
+    if ( address_file.open   ( QIODevice::ReadOnly | QIODevice::Text ) );
+    {
+        QTextStream in      ( &address_file );
+        return in.readAll   ( );
+    }
+
+    return "";
+}
+
+platform_hdl::~platform_hdl() {}
+
+#ifdef Q_OS_ANDROID // ---------------------------------------------------------------------------------------
+#include <QMetaObject>
+
+void onServerDiscoveredNative(JNIEnv*, jobject)
+{
+    auto hostaddr = QAndroidJniObject::getStaticObjectField(
+                "org/quarre/remote/ZConfRunnable", "HOST_ADDR", "Ljava/lang/String;");
+
+    auto platform   = platform_hdl::singleton;
+    auto hoststr    = hostaddr.toString();
+    platform        ->setHostAddr(hoststr);
+
+    platform->write_last_known_server_address(hoststr);
+}
+
+void platform_hdl::vibrate(int milliseconds) const
+{    
+    jboolean has_vibrator   = m_vibrator.callMethod<jboolean>("hasVibrator", "()Z");
+    jlong ms                = milliseconds;
+
+    m_vibrator.callMethod<void>("vibrate", "(J)V", ms);
+}
+
 JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* /*reserved*/)
 {
     JNIEnv* env;
@@ -133,15 +150,14 @@ JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* /*reserved*/)
       return JNI_ERR;
 
     JNINativeMethod methods[] = {
-        {"onServerDiscoveredNative", "()V", (void*) onServerDiscoveredNative },
-        {"onRemoteQuitNative", "()V", (void*) onRemoteQuitNative }
+        {"onServerDiscoveredNative", "()V", (void*) onServerDiscoveredNative }
     };
 
     jclass javaClass = env->FindClass("org/quarre/remote/NativeFunctions");
     if (!javaClass)
       return JNI_ERR;
 
-    if (env->RegisterNatives(javaClass, methods,
+    if ( env->RegisterNatives(javaClass, methods,
                           sizeof(methods) / sizeof(methods[0])) < 0) {
       return JNI_ERR;
     }

@@ -15,7 +15,9 @@ Item {
     property alias      pads:       pads
     property alias      sliders:    sliders
     property int        slot: 0
-    property bool       connected: false
+
+    property bool       connected:      false
+    property bool       discovering:    false
 
     function get_user_base_address()
     {
@@ -35,8 +37,14 @@ Item {
             upper_view.header.scene.text    = "connected";
             quarre_application.state        = "IDLE";
 
-            ossia_client.remap  ( ossia_net );
-            os_hdl.vibrate      ( 100 );
+            ossia_client.remap      ( ossia_net );
+            os_hdl.vibrate          ( 100 );
+
+            if ( discovering )
+            {
+                os_hdl.stop_discovery ( )
+                discovering = false;
+            }
         }
 
         onClientDisconnected:
@@ -46,8 +54,29 @@ Item {
             quarre_application.state        = "DISCONNECTED"
 
             connected           = false;
-            os_hdl.hostAddr     = "ws://";
             os_hdl.vibrate      ( 500 );
+            os_hdl.hostAddr     = "";
+
+            os_hdl.start_discovery ( )
+            discovering = true;
+        }
+    }
+
+    Timer //----------------------------------------------------------------TIMEOUT_TIMER
+    {
+        id:         timeout;
+        interval:   5000
+        running:    false
+        repeat:     false
+
+        onTriggered:
+        {
+            if ( !connected )
+            {
+                os_hdl.hostAddr = "";
+                os_hdl.start_discovery();
+                discovering = true;
+            }
         }
     }
 
@@ -55,18 +84,32 @@ Item {
     {
         id: os_hdl
 
-        Component.onCompleted:
-        {
-            os_hdl.register_zeroconf(deviceName, "_oscjson._tcp", ossia_client.localPort);
+        function connect()
+        {            
+            os_hdl.register_zeroconf("bla", "bla", 3243);
             deviceAddress = os_hdl.device_address();
+            var lksa = read_last_known_server_address();
+
+            if ( lksa !== "" )
+            {
+                hostAddr = lksa;
+                // try 5s, or else activate zeroconf;
+                timeout.running = true;
+            }
+
+            else
+            {
+                start_discovery ( );
+                discovering = true;
+            }
         }
 
         // when quarre-server found -------------------------------------------------------
         onHostAddrChanged:
         {
-            if(hostAddr === "ws://") return;
-            console.log("connecting...");
-            ossia_client.openOSCQueryClient(hostAddr, ossia_client.localPort)
+            if ( hostAddr === "" ) return;
+            ossia_client.openOSCQueryClient ( hostAddr, ossia_client.localPort )
+            write_last_known_server_address ( hostAddr );
         }
     }
 
@@ -88,8 +131,8 @@ Item {
                     ossia_client.remap  ( ossia_net )
                     console.log         ( "attributed slot: ", slot );
 
-                    gesture_manager.connected = true;
-                    sensor_manager.connected = true;
+                    gesture_manager.connected   = true;
+                    sensor_manager.connected    = true;
                     return;
                 }
             }

@@ -14,16 +14,4 @@ public class QuarreActivity extends QtActivity {
     public void registerZConfHdl() {
         runOnUiThread(new ZConfRunnable(this, getApplicationContext()));
     }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d("ACTIVITY", "stopping");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d("ACTIVITY", "destroy");
-    }
 }

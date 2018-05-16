@@ -68,7 +68,7 @@ Rectangle {
                 if ( offseted > 180 ) offseted -= 360;
                 else if ( offseted < -180 ) offseted += 360;
 
-                rotation_z_data = offseted;
+                rotation_z_data = -offseted;
             }
 
             if ( sensors_proximity_close_poll.value )

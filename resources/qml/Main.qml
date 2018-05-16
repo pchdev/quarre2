@@ -65,20 +65,15 @@ ApplicationWindow
             id: interaction_manager
         }
 
-        NetworkManager //-------------------------------------------------------- NETWORK
-        {
-            id:             ossia_net
-            deviceName:     "quarre-remote"
-        }
-
         ApplicationStates //------------------------------------------------------ MAIN_STATES
         {
             id: quarre_states
 
             Component.onCompleted:
             {
-                quarre_application.states = quarre_states.states
-                quarre_application.state = "DISCONNECTED"
+                quarre_application.states   = quarre_states.states
+                quarre_application.state    = "DISCONNECTED"
+                ossia_net.oshdl.connect     ( );
             }
         }
 
@@ -88,6 +83,12 @@ ApplicationWindow
 
             Component.onCompleted:
                 quarre_application.transitions = quarre_transitions.transitions
+        }
+
+        NetworkManager //-------------------------------------------------------- NETWORK
+        {
+            id:             ossia_net
+            deviceName:     "quarre-remote"
         }
 
         GestureManager  { id: gesture_manager }
