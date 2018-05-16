@@ -75,27 +75,20 @@ Rectangle
         }
     }
 
-    MultiPointTouchArea
+    MouseArea
     {
-        property var selected_sources: []
-        maximumTouchPoints: nsources
         anchors.fill: parent
 
         onPressed:
         {
-            for ( var i = 0; i < touchPoints.length; ++i )
-            {
-                rtouchpoints = Qt.vector2d(touchPoints[i].x, touchPoints[i].y);
-                touchpoints = Qt.vector2d(
-                            touchPoints[i].x/width,
-                            1-touchPoints[i].y/height );
+            rtouchpoints = Qt.vector2d  ( mouseX, mouseY );
+            touchpoints = Qt.vector2d   ( mouseX/width, 1-mouseY/height );
 
-                if ( touch_animation.running )
-                    touch_animation.running = false;
+            if ( touch_animation.running )
+                touch_animation.running = false;
 
-                touch_animation.running = true;
-                ossia_net.oshdl.vibrate(50);
-            }
+            touch_animation.running = true;
+            ossia_net.oshdl.vibrate(50);
         }
 
         Rectangle

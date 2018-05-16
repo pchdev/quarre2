@@ -28,7 +28,8 @@ ApplicationWindow
     property real ratio:        Math.min(height/refHeight, width/refWidth)
     property real fontRatio:    Math.min(height*refPd/(currPd*refHeight), width*refPd/(currPd*refWidth))
 
-    FontLoader {
+    FontLoader
+    {
         id: font_lato_light
         source: "lato/Lato-Light.ttf"
     }

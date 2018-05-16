@@ -3,6 +3,7 @@ import QtQuick 2.0
 Rectangle
 {
     // FIRST UPPER VIEW SECTION
+    property alias  timer_label: header_timer_label
     property alias  timer:       header_timer
     property alias  scenario:    header_scenario_label
     property alias  scene:       header_scene_label
@@ -102,16 +103,15 @@ Rectangle
         id: header_scenario_label
         text: "quarrè"
         color: "#ffffff"
-        font.pixelSize: 40 * root.fontRatio
-        textFormat: Text.PlainText
-        font.family: font_lato_light.name
+
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignLeft
         anchors.fill: parent
         anchors.leftMargin: parent.width * 0.05
-        anchors.topMargin: 0
-        anchors.bottomMargin: 0
-        antialiasing: true
+
+        textFormat: Text.PlainText
+        font.pointSize: 16 * root.fontRatio
+        font.family: font_lato_light.name
     }
 
     Text
@@ -123,13 +123,13 @@ Rectangle
         id: header_timer_label
         text: "00:00"
         color: "#ffffff"
-        font.pixelSize: 40 * root.fontRatio
+
         anchors.fill: parent
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
         textFormat: Text.PlainText
+        font.pointSize: 16 * root.fontRatio
         font.family: font_lato_light.name
-        antialiasing: true
     }
 
     Text
@@ -138,14 +138,15 @@ Rectangle
         id: header_scene_label
         text: "connecting"
         color: "#ffffff"
-        font.pixelSize: 40 * root.fontRatio
+
         textFormat: Text.PlainText
-        font.family: font_lato_light.name
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignRight
         anchors.fill: parent
         anchors.rightMargin: parent.width *0.05
-        antialiasing: true
+
+        font.pointSize: 16 * root.fontRatio
+        font.family: font_lato_light.name
     }
 
     Rectangle
