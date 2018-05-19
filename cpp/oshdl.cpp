@@ -68,8 +68,13 @@ QString platform_hdl::device_address()
     {
         if ( addr.protocol() == QAbstractSocket::IPv4Protocol &&
              addr != QHostAddress(QHostAddress::LocalHost))
-            if ( addr.toString().startsWith("192") || addr.toString().startsWith("10"))
-                 return addr.toString();
+        {
+            if ( addr.toString().split(".")[0] != "10")
+            {
+                qDebug() << addr.toString();
+                return addr.toString();
+            }
+        }
     }
 
     return "";
@@ -109,7 +114,7 @@ void platform_hdl::write_last_known_server_address(QString address)
 QString platform_hdl::read_last_known_server_address()
 {
     QFile address_file  ( "server_address.txt" );
-    if ( address_file.open   ( QIODevice::ReadOnly | QIODevice::Text ) );
+    if ( address_file.open ( QIODevice::ReadOnly | QIODevice::Text ) );
     {
         QTextStream in      ( &address_file );
         return in.readAll   ( );

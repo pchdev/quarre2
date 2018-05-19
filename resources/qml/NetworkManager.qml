@@ -241,7 +241,11 @@ Item {
         device:     ossia_client
         node:       get_user_base_address() + '/interactions/next/begin'
 
-        onValueChanged: interaction_manager.trigger_next(value);
+        onValueChanged:
+        {
+            console.log(value)
+            interaction_manager.trigger_next(value);
+        }
     }
 
     Ossia.Callback //---------------------------------------------------------INTERACTION_CANCEL
@@ -250,7 +254,7 @@ Item {
         device:     ossia_client
         node:       get_user_base_address() + '/interactions/next/cancel'
 
-        onValueChanged: interaction_manager.end_current();
+        onSetValue_sig: interaction_manager.cancel_incoming();
     }
 
     Ossia.Binding //---------------------------------------------------------NEXT_COUNTDOWN
@@ -275,7 +279,13 @@ Item {
         device:     ossia_client
         node:       get_user_base_address() + '/interactions/current/end'
 
-        onSetValue_sig:  interaction_manager.end_current();
+        onSetValue_sig:
+        {
+            if ( quarre_application.status === "INCOMING")
+                interaction_manager.cancel_incoming();
+
+            interaction_manager.end_current();
+        }
     }
 
     Ossia.Callback //---------------------------------------------------------INTERACTION_FORCE

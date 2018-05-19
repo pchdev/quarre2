@@ -110,7 +110,7 @@ Rectangle
         anchors.leftMargin: parent.width * 0.05
 
         textFormat: Text.PlainText
-        font.pointSize: 16 * root.fontRatio
+        font.pointSize: 14 * root.fontRatio
         font.family: font_lato_light.name
     }
 
@@ -128,7 +128,7 @@ Rectangle
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
         textFormat: Text.PlainText
-        font.pointSize: 16 * root.fontRatio
+        font.pointSize: 14 * root.fontRatio
         font.family: font_lato_light.name
     }
 
@@ -145,7 +145,7 @@ Rectangle
         anchors.fill: parent
         anchors.rightMargin: parent.width *0.05
 
-        font.pointSize: 16 * root.fontRatio
+        font.pointSize: 14 * root.fontRatio
         font.family: font_lato_light.name
     }
 

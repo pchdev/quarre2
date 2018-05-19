@@ -14,12 +14,19 @@ Rectangle {
 
     property bool       rotation_available: false
     property vector3d   rotation_xyz_data: Qt.vector3d(0.0, 0.0, 0.0)
+
+    property real       sensors_rotation_z_offset: 0
     property real       rotation_x_data : 0.0
     property real       rotation_y_data : 0.0
     property real       rotation_z_data : 0.0
 
     property bool       proximity_available: false
     property bool       proximity_close_data: false
+
+    function calibrate_north()
+    {
+        sensors_rotation_z_offset = -sensors_rotation.reading.z;
+    }
 
 
     Timer //------------------------------------------------------------------------- SENSOR_POLL
@@ -63,7 +70,7 @@ Rectangle {
 
             else if ( sensors_rotation_z_poll.value )
             {
-                var offseted = sensors_rotation.reading.z + sensors_rotation_z_offset.value;
+                var offseted = sensors_rotation.reading.z + sensors_rotation_z_offset;
 
                 if ( offseted > 180 ) offseted -= 360;
                 else if ( offseted < -180 ) offseted += 360;
@@ -365,13 +372,6 @@ Rectangle {
         on:         rotation_z_data;
     }
 
-    Ossia.Callback
-    {
-        id:         sensors_rotation_z_offset
-        device:     ossia_net.client
-        node:       '/common/sensors/rotation/offset'
-    }
-
     ProximitySensor //---------------------------------------------------------------- PROXIMITY
     {
         id:         sensors_proximity
@@ -407,6 +407,6 @@ Rectangle {
         device:     ossia_net.client
         node:       ossia_net.get_user_base_address() + '/sensors/proximity/close/data'
 
-        on:         proximity_data
+        on:         proximity_close_data
     }
 }

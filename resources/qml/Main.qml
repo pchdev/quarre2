@@ -39,6 +39,12 @@ ApplicationWindow
         source: "lato/Lato-Medium.ttf"
     }*/
 
+    onClosing:
+    {
+        console.log("closing");
+        close.accepted = true;
+    }
+
     // --------------------------------------------------------------------------------------------------
 
     Item

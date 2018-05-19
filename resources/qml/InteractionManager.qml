@@ -170,4 +170,9 @@ Item
         upper_view.header.scene.text    = "playground";
         lower_view_stack.currentIndex   = module_index;
     }
+
+    function cancel_incoming ( )
+    {
+        quarre_application.state        = "IDLE";
+    }
 }
