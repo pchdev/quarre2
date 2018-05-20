@@ -33,6 +33,8 @@
         <file>ModuleTouchBirds.qml</file>
         <file>SpatializationSphere.qml</file>
         <file>QuarreBird.qml</file>
+        <file>ModuleXRotation.qml</file>
+        <file>ModuleMicrophoneBlow.qml</file>
     </qresource>
     <qresource prefix="/modules"/>
 </RCC>

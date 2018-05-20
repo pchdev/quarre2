@@ -1,4 +1,4 @@
-QT += quick sensors websockets
+QT += quick sensors websockets multimedia
 
 android: {
     QT += androidextras
@@ -19,9 +19,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += main.cpp \
-    cpp/oshdl.cpp
+    cpp/oshdl.cpp \
+    cpp/audio_hdl.cpp
 
-HEADERS += cpp/oshdl.hpp
+HEADERS += cpp/oshdl.hpp \
+    cpp/audio_hdl.hpp
 
 RESOURCES += \
     resources/qml/qml.qrc \
