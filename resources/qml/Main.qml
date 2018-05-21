@@ -131,19 +131,19 @@ ApplicationWindow
                     currentIndex: 0
                     anchors.fill: parent
 
-//                    ModuleDefault { color: "transparent" }
-//                    ModuleIdle { color: "transparent" }
-//                    ModuleSceneTransitions { color: "transparent" }
-//                    ModuleVote { color: "transparent" }
-//                    ModuleGesture { id: module_gesture; color: "transparent" }
-//                    ModulePads { color: "transparent" }
-//                    ModuleSliders { color: "transparent" }
-//                    ModuleStrings { color: "transparent" }
-//                    ModuleTouchSpatialization { color: "#232426"; opacity: 0.8 }
-//                    ModuleSensorSpatialization { color: "transparent" }
-//                    ModuleTouchTrajectories { color: "#232426"; opacity: 0.8 }
-//                    ModuleTouchBirds { color: "#232426"; opacity: 0.8 }
-//                    ModuleXRotation { color: "transparent" }
+                    ModuleDefault { color: "transparent" }
+                    ModuleIdle { color: "transparent" }
+                    ModuleSceneTransitions { color: "transparent" }
+                    ModuleVote { color: "transparent" }
+                    ModuleGesture { id: module_gesture; color: "transparent" }
+                    ModulePads { color: "transparent" }
+                    ModuleSliders { color: "transparent" }
+                    ModuleStrings { color: "transparent" }
+                    ModuleTouchSpatialization { color: "#232426"; opacity: 0.8 }
+                    ModuleSensorSpatialization { color: "transparent" }
+                    ModuleTouchTrajectories { color: "#232426"; opacity: 0.8 }
+                    ModuleTouchBirds { color: "#232426"; opacity: 0.8 }
+                    ModuleXRotation { color: "transparent" }
                     ModuleMicrophoneBlow { color: "transparent" }
                     ModuleTutorial { }
                 }

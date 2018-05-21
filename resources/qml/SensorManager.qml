@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtSensors 5.3
 import Ossia 1.0 as Ossia
+import Quarre 1.0 as Quarre
 
 Rectangle {
 
@@ -22,6 +23,11 @@ Rectangle {
 
     property bool       proximity_available: false
     property bool       proximity_close_data: false
+
+    property bool       microphone_available: false
+    //property real       microphone_raw_data: 0.0
+    property real       microphone_rms_data: 0.0
+
 
     function calibrate_north()
     {
@@ -81,9 +87,13 @@ Rectangle {
             if ( sensors_proximity_close_poll.value )
                 proximity_close_data = sensors_proximity.reading.near;
 
+            if ( sensors_microphone_rms_poll.value )
+                microphone_rms_data = sensors_microphone.rms
+
             if ( !sensors_accelerometer.active &&
                     !sensors_rotation.active &&
-                    !sensors_proximity.active )
+                    !sensors_proximity.active &&
+                    !sensors_microphone.active )
                 running = false;
         }
     }
@@ -93,6 +103,45 @@ Rectangle {
         accelerometer_available     = sensors_accelerometer.connectedToBackend
         rotation_available          = sensors_rotation.connectedToBackend
         proximity_available         = sensors_proximity.connectedToBackend
+        microphone_available        = true;
+    }
+
+
+    Quarre.AudioHdl //-------------------------------------------------------------- MICROPHONE
+    {
+        id: sensors_microphone
+    }
+
+    Ossia.Callback
+    {
+        id:         sensors_microphone_rms_poll
+        device:     ossia_net.client
+        node:       ossia_net.get_user_base_address() + '/sensors/microphone/rms/poll'
+
+        onValueChanged:
+        {
+            sensors_microphone.active = value;
+            if ( value && !sensors_poll.running )
+                sensors_poll.running = true;
+        }
+    }
+
+    Ossia.Binding
+    {
+        id:         sensors_microphone_available
+        device:     ossia_net.client
+        node:       ossia_net.get_user_base_address() + '/sensors/microphone/available'
+
+        on:         microphone_available
+    }
+
+    Ossia.Binding
+    {
+        id:         sensors_proximity_rms_data
+        device:     ossia_net.client
+        node:       ossia_net.get_user_base_address() + '/sensors/microphone/rms/data'
+
+        on:         microphone_rms_data
     }
 
     Accelerometer //---------------------------------------------------------------- ACCELEROMETER

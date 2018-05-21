@@ -29,6 +29,17 @@ qint64 audio_hdl::readData(char *data, qint64 maxlen)
     return 0;
 }
 
+void audio_hdl::set_active ( bool active )
+{
+    if ( active && !m_active )
+        m_input->start(this);
+
+    else if ( !active && m_active )
+        m_input->stop();
+
+    m_active = active;
+}
+
 qint64 audio_hdl::writeData(const char *data, qint64 len)
 {
     qint64 res = 0;
@@ -39,7 +50,7 @@ qint64 audio_hdl::writeData(const char *data, qint64 len)
         data    += 2;
     }
 
-    m_rms = sqrt(1.f/256.f*res);
+    m_rms = sqrt(1.f/256.f*res)/20000.f;
     return 256;
 }
 

@@ -108,6 +108,9 @@ Item
         case "SensorSpatialization": lower_view_stack.currentIndex = 9; break;
         case "TouchTrajectories": lower_view_stack.currentIndex = 10; break;
         case "TouchBirds": lower_view_stack.currentIndex = 11; break;
+        case "XRotation": lower_view_stack.currentIndex = 12; break;
+        case "BreathControl": lower_view_stack.currentIndex = 13; break;
+
         }
 
         if ( grey_out_stack.opacity == 0.7 )
