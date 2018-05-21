@@ -5,6 +5,7 @@ Rectangle
 {
     id: frame
     anchors.fill: parent
+    color: "transparent"
 
     property int choice: 0
 

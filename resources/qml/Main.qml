@@ -4,6 +4,11 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 import Ossia 1.0 as Ossia
 
+import "application"
+import "modules"
+import "engine"
+import "views"
+
 ApplicationWindow
 {
     id:         root
@@ -61,10 +66,10 @@ ApplicationWindow
                 event.accepted = true;
         }
 
-        InteractionManager //---------------------------------------------------- INTERACTIONS
-        {
-            id: interaction_manager
-        }
+        InteractionManager      { id: interaction_manager }
+        GestureManager          { id: gesture_manager }
+        SensorManager           { id: sensor_manager }
+        NetworkManager          { id: ossia_net; deviceName: "quarre-remote" }
 
         ApplicationStates //------------------------------------------------------ MAIN_STATES
         {
@@ -74,7 +79,6 @@ ApplicationWindow
             {
                 quarre_application.states   = quarre_states.states
                 quarre_application.state    = "DISCONNECTED"
-                ossia_net.oshdl.connect     ( );
             }
         }
 
@@ -85,15 +89,6 @@ ApplicationWindow
             Component.onCompleted:
                 quarre_application.transitions = quarre_transitions.transitions
         }
-
-        NetworkManager //-------------------------------------------------------- NETWORK
-        {
-            id:             ossia_net
-            deviceName:     "quarre-remote"
-        }
-
-        GestureManager  { id: gesture_manager }
-        SensorManager   { id: sensor_manager }        
 
         Image //----------------------------------------------------------------- GUI
         {
@@ -125,27 +120,13 @@ ApplicationWindow
                 color:      "black"
                 opacity:    0.75
 
-                StackLayout
-                {
-                    id: lower_view_stack
-                    currentIndex: 0
-                    anchors.fill: parent
+                ModuleBreathControl {}
 
-                    ModuleDefault { color: "transparent" }
-                    ModuleIdle { color: "transparent" }
-                    ModuleSceneTransitions { color: "transparent" }
-                    ModuleVote { color: "transparent" }
-                    ModuleGesture { id: module_gesture; color: "transparent" }
-                    ModulePads { color: "transparent" }
-                    ModuleSliders { color: "transparent" }
-                    ModuleStrings { color: "transparent" }
-                    ModuleTouchSpatialization { color: "#232426"; opacity: 0.8 }
-                    ModuleSensorSpatialization { color: "transparent" }
-                    ModuleTouchTrajectories { color: "#232426"; opacity: 0.8 }
-                    ModuleTouchBirds { color: "#232426"; opacity: 0.8 }
-                    ModuleXRotation { color: "transparent" }
-                    ModuleMicrophoneBlow { color: "transparent" }
-                    ModuleTutorial { }
+                Loader
+                {
+                    id: module_loader
+                    anchors.fill: parent
+                    source: "ModuleDefault.qml"
                 }
 
                 Rectangle //------------------------------------------------ INACTIVE_RECT

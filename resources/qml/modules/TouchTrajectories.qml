@@ -3,7 +3,9 @@ import Ossia 1.0 as Ossia
 
 Rectangle
 {
-    id: root
+    id:         root
+    color:      "#232426"
+    opacity:    0.8
 
     property int recording_phase:   0;
     property int sending_phase:     0;

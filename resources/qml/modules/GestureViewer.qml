@@ -5,6 +5,7 @@ Rectangle
 {
     property string target: ""
     property alias animation: trigger_animation
+    color: "transparent"
 
     onEnabledChanged:
     {

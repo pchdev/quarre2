@@ -19,9 +19,9 @@ Item {
     property bool       connected:      false
     property bool       discovering:    false
 
-    function get_user_base_address()
+    function format_user_parameter(str)
     {
-        return '/user/' + slot
+        return '/user/' + slot + str
     }
 
     Ossia.OSCQueryClient //---------------------------------------------------------QUERY_CLIENT
@@ -292,7 +292,7 @@ Item {
     {
         id:         interactions_current_force
         device:     ossia_client
-        node:       get_user_base_address() + '/interactions/force'
+        node:       get_user_base_address() + '/interactions/current/force'
 
         onValueChanged: interaction_manager.force_current(value);
     }

@@ -3,7 +3,9 @@ import Ossia 1.0 as Ossia
 
 Rectangle
 {
-    id: root
+    id:         root
+    color:      "#232426"
+    opacity:    0.8
 
     property vector2d touchpoints: Qt.vector2d(0, 0)
     property vector2d rtouchpoints: Qt.vector2d(0, 0)

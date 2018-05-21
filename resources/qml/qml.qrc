@@ -1,40 +1,45 @@
 <RCC>
     <qresource prefix="/">
+
         <file>Main.qml</file>
-        <file>NetworkManager.qml</file>
-        <file>UpperView.qml</file>
-        <file>HeaderView.qml</file>
-        <file>NextInteractionView.qml</file>
-        <file>CurrentInteractionView.qml</file>
-        <file>ApplicationStates.qml</file>
-        <file>ApplicationTransitions.qml</file>
-        <file>ModuleDefault.qml</file>
-        <file>ModuleTouchSpatialization.qml</file>
-        <file>ModuleSensorSpatialization.qml</file>
-        <file>ModulePads.qml</file>
-        <file>ModuleSliders.qml</file>
-        <file>Maths.js</file>
-        <file>GestureManager.qml</file>
-        <file>ModuleSceneTransitions.qml</file>
-        <file>ModuleTextViewer.qml</file>
-        <file>InteractionManager.qml</file>
-        <file>SensorManager.qml</file>
-        <file>GesturesRoutine.js</file>
-        <file>SwipeArea.qml</file>
-        <file>QuarreGesture.qml</file>
-        <file>QuarrePad.qml</file>
-        <file>QuarreSlider.qml</file>
-        <file>ModuleGesture.qml</file>
-        <file>ModuleStrings.qml</file>
-        <file>ModuleIdle.qml</file>
-        <file>ModuleVote.qml</file>
-        <file>ModuleTutorial.qml</file>
-        <file>ModuleTouchTrajectories.qml</file>
-        <file>ModuleTouchBirds.qml</file>
-        <file>SpatializationSphere.qml</file>
-        <file>QuarreBird.qml</file>
-        <file>ModuleXRotation.qml</file>
-        <file>ModuleMicrophoneBlow.qml</file>
+
+        <file>application/ApplicationStates.qml</file>
+        <file>application/ApplicationTransitions.qml</file>
+
+        <file>engine/Gesture.qml</file>
+        <file>engine/GestureManager.qml</file>
+        <file>engine/GesturesRoutine.js</file>
+        <file>engine/InteractionManager.qml</file>
+        <file>engine/NetworkManager.qml</file>
+        <file>engine/SensorManager.qml</file>
+
+        <file>views/UpperView.qml</file>
+        <file>views/HeaderView.qml</file>
+        <file>views/CurrentInteractionView.qml</file>
+        <file>views/NextInteractionView.qml</file>
+
+        <file>modules/BreathControl.qml</file>
+        <file>modules/Default.qml</file>
+        <file>modules/GestureViewer.qml</file>
+        <file>modules/Idle.qml</file>
+        <file>modules/Pads.qml</file>
+        <file>modules/SceneTransitions.qml</file>
+        <file>modules/Sliders.qml</file>
+        <file>modules/Strings.qml</file>
+        <file>modules/TextViewer.qml</file>
+        <file>modules/TouchBirds.qml</file>
+        <file>modules/TouchTrajectories.qml</file>
+        <file>modules/TouchXY.qml</file>
+        <file>modules/Tutorial.qml</file>
+        <file>modules/Vote.qml</file>
+        <file>modules/XRotation.qml</file>
+        <file>modules/YRotation.qml</file>
+        <file>modules/ZRotation.qml</file>
+
+        <file>modules/items/QuarreBird.qml</file>
+        <file>modules/items/QuarrePad.qml</file>
+        <file>modules/items/QuarreSlider.qml</file>
+        <file>modules/items/SpatializationSphere.qml</file>
+
     </qresource>
-    <qresource prefix="/modules"/>
 </RCC>

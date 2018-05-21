@@ -1,9 +1,11 @@
 import QtQuick 2.0
+import "items"
 
 Rectangle
 {
     property int num_pads: 16
     id: module
+    color: "transparent"
 
     Grid
     {

@@ -1,9 +1,11 @@
 import QtQuick 2.0
 import Ossia 1.0 as Ossia
+import "items"
 
 Rectangle
 {
     id: touchbirds_root
+    color: "#232426"; opacity: 0.8
 
     property vector3d trigger: Qt.vector3d(0, 0, 0)
 
