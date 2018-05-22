@@ -8,8 +8,8 @@ Item
     property var gestures: [ "whip", "cover", "turnover", "shake" ]
     property alias backend: sensor_gesture
 
-    SensorGesture { id: sensor_gesture }
-    Repeater { id: gesture_array; model: gestures; Gesture { name: modelData }}
+    SensorGesture { id: sensor_gesture; onDetected: { ossia_net.oshdl.vibrate(100) } }
+    Repeater { id: gesture_array; model: gestures; Gesture { name: modelData } }
 
     onConnectedChanged:
     {

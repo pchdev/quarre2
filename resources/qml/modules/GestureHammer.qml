@@ -3,11 +3,10 @@ import Ossia 1.0 as Ossia
 
 GestureViewer
 {
-
     property bool trigger: false
 
     title:          "Frappe verticale"
-    gestures:       [ "whip" ]
+    gestures:       [ "QtSensors.whip" ]
 
     description:    "Effectuer un geste sec, peu ample, vers le bas,
  comme un marteau. L'appareil doit être à plat (et non sur la tranche)"
@@ -17,7 +16,7 @@ GestureViewer
     Connections
     {
         target: gesture_manager.backend
-        onDetected: trigger = !trigger;
+        onDetected: { trigger = !trigger; trigger_animation.running = true }
     }
 
     Ossia.Binding

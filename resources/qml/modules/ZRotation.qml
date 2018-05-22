@@ -1,9 +1,43 @@
 import QtQuick 2.0
+import Ossia 1.0 as Ossia
 
 Rectangle
 {
+    property real xdata: 0.0
+    property real offset: 0.0
+
     anchors.fill: parent
     color: "transparent"
+
+    onEnabledChanged:
+    {
+        sensor_manager.rotation.enabled = enabled;
+        polling_timer.running = enabled;
+    }
+
+    Timer
+    {
+        id: polling_timer
+        interval: 50
+        repeat: true
+
+        onTriggered:
+        {
+            var offseted = sensor_manager.rotation.reading.z + offset;
+            if ( offseted > 180 ) offseted -=360;
+            else if ( offseted < -180 ) offseted += 360;
+
+            xdata = -offseted;
+        }
+
+    }
+
+    Ossia.Binding
+    {
+        device: ossia_net.client
+        node: ossia_net.format_user_parameter("/modules/sensors/rotation/z/angle")
+        on: xdata
+    }
 
     Image
     {
@@ -19,7 +53,7 @@ Rectangle
         MouseArea
         {
             anchors.fill: parent
-            onPressed: sensor_manager.calibrate_north();
+            onPressed: offset = -sensor_manager.rotation.reading.z;
         }
 
         transform: [
@@ -29,7 +63,7 @@ Rectangle
                 id: rotation
                 origin.x: parent.width/2
                 origin.y: parent.height/2
-                angle: sensor_manager.rotation.reading.z
+                angle: xdata
             },
 
             Scale
@@ -47,7 +81,7 @@ Rectangle
     {
         id:         rotation_print
 
-        text:       "rotation: " + Math.floor(sensor_manager.rotation.reading.z) + " degrees"
+        text:       "rotation: " + Math.floor(xdata) + " degrees"
         color:      "#ffffff"
         width:      parent.width
         height:     parent.height * 0.2

@@ -6,7 +6,7 @@ GestureViewer
     property bool trigger: false
 
     title:          "Paume flottante"
-    gestures:       [ "cover" ]
+    gestures:       [ "QtSensors.cover" ]
 
     description:    "Placer votre main tendue au dessus de le partie haute de l'appareil.
  Celui-ci doit être tenu à plat."

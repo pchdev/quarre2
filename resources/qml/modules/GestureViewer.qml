@@ -6,12 +6,14 @@ Rectangle
     property alias animation: trigger_animation
     property alias title: gesture_label.text
     property alias description: gesture_description.text
-    property string gestures: [ ]
+    property var gestures: [ ]
 
     onEnabledChanged:
     {
         if ( enabled ) gesture_manager.backend.gestures = gestures;
         else gesture_manager.backend.gestures = [ ];
+
+        gesture_manager.backend.enabled = enabled;
     }
 
     color: "transparent"

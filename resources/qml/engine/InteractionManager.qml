@@ -93,7 +93,6 @@ Item
 
     function end_current()
     {
-        console.log("end");
         upper_view.current.title            = "";
         upper_view.current.description      = "";
         upper_view.current.count            = 0;

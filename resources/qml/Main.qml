@@ -71,8 +71,6 @@ ApplicationWindow
         SensorManager           { id: sensor_manager }
         NetworkManager          { id: ossia_net; deviceName: "quarre-remote" }
 
-        onStateChanged: { console.log(state) }
-
         ApplicationStates //------------------------------------------------------ MAIN_STATES
         {
             id: quarre_states
