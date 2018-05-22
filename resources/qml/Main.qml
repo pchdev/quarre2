@@ -43,7 +43,7 @@ ApplicationWindow
     {
         console.log("closing");
         close.accepted = true;
-    }
+    }    
 
     // --------------------------------------------------------------------------------------------------
 
@@ -71,6 +71,8 @@ ApplicationWindow
         SensorManager           { id: sensor_manager }
         NetworkManager          { id: ossia_net; deviceName: "quarre-remote" }
 
+        onStateChanged: { console.log(state) }
+
         ApplicationStates //------------------------------------------------------ MAIN_STATES
         {
             id: quarre_states
@@ -79,6 +81,7 @@ ApplicationWindow
             {
                 quarre_application.states   = quarre_states.states
                 quarre_application.state    = "DISCONNECTED"
+                ossia_net.oshdl.connect();
             }
         }
 
@@ -120,13 +123,11 @@ ApplicationWindow
                 color:      "black"
                 opacity:    0.75
 
-                ModuleBreathControl {}
-
                 Loader
                 {
                     id: module_loader
                     anchors.fill: parent
-                    source: "ModuleDefault.qml"
+                    source: "modules/Default.qml"
                 }
 
                 Rectangle //------------------------------------------------ INACTIVE_RECT

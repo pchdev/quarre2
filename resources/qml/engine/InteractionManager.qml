@@ -37,7 +37,7 @@ Item
         {
             quarre_application.state    = "INCOMING_INTERACTION";
             grey_animation_in.running   = true;
-            module_loader.source        = "Module" + arglist[2] + ".qml"
+            module_loader.source        = "../modules/" + arglist[2] + ".qml"
             module_loader.item.enabled  = false;
         }
 
@@ -81,7 +81,7 @@ Item
         if ( grey_out_stack.opacity == 0.7 )
             grey_animation_out.running = true;
 
-        module_loader.item.enable = true
+        module_loader.item.enabled = true
 
         if ( quarre_application.state === "IDLE" ||
            quarre_application.state === "INCOMING_INTERACTION" )
@@ -93,6 +93,7 @@ Item
 
     function end_current()
     {
+        console.log("end");
         upper_view.current.title            = "";
         upper_view.current.description      = "";
         upper_view.current.count            = 0;
@@ -101,7 +102,7 @@ Item
         if ( quarre_application.state === "ACTIVE_INTERACTION" )
         {
             quarre_application.state    = "IDLE";
-            module_loader.source        = "ModuleIdle.qml"
+            module_loader.source        = "../modules/Idle.qml"
         }
 
         else if ( quarre_application.state === "ACTIVE_AND_INCOMING_INTERACTIONS" )
@@ -109,7 +110,7 @@ Item
             quarre_application.state = "INCOMING_INTERACTION";
             if ( module_on_hold != "" )
             {
-                module_loader.source = "Module" + module_on_hold + ".qml"
+                module_loader.source = "../modules/" + module_on_hold + ".qml"
                 grey_animation_in.running = true;
             }
         }
@@ -122,21 +123,25 @@ Item
         upper_view.current.title            = "";
         upper_view.current.description      = "";
         upper_view.current.count            = 0;
-        upper_view.current.timer.stop();
+        upper_view.current.timer.stop       ( );
 
         upper_view.next.title            = "";
         upper_view.next.description      = "";
         upper_view.next.count            = 0;
-        upper_view.next.timer.stop();
+        upper_view.next.timer.stop      ( );
 
         quarre_application.state        = "IDLE";
     }
 
     function force_current ( module_name )
     {
+        if ( module_name === "" ||
+             module_name === undefined )
+             return;
+
         quarre_application.state        = "IDLE";
         upper_view.header.scene.text    = "playground";
-        module_loader.source            = "Module" + module_name + ".qml"
+        module_loader.source            = "../modules/" + module_name + ".qml"
     }
 
     function cancel_incoming ( )

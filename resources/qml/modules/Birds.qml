@@ -4,22 +4,18 @@ import "items"
 
 Rectangle
 {
-    id: touchbirds_root
-    color: "#232426"; opacity: 0.8
+    id:         touchbirds_root
+    color:      "#232426"
+    opacity:    0.8
 
-    property vector3d trigger: Qt.vector3d(0, 0, 0)
-
-    property var birds: [
-        "fauvette",
-        "pic-vert",
-        "loriot",
-        "rossignol" ]
+    property vector3d trigger:  Qt.vector3d(0, 0, 0)
+    property var birds: ["fauvette", "pic-vert", "loriot", "rossignol"]
 
     Ossia.Binding
     {
         id:         touch_points_trigger
         device:     ossia_net.client
-        node:       ossia_net.get_user_base_address() + '/controllers/birds/trigger'
+        node:       ossia_net.format_user_parameter('/modules/birds/trigger')
         on:         trigger
     }
 
@@ -28,7 +24,6 @@ Rectangle
         Repeater
         {
             model: birds
-
             QuarreBird
             {
                 name: modelData

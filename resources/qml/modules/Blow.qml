@@ -6,8 +6,8 @@ Rectangle
 {
     color: "transparent"
 
-    property bool trigger: false
-    property real rms: 0.0
+    property bool trigger:  false
+    property real rms:      0.0
 
     onEnabledChanged:
     {
@@ -25,7 +25,7 @@ Rectangle
     Ossia.Binding //--------------------------------------------------------------------- TRIGGER
     {
         device:     ossia_net.client
-        node:       ossia_net.format_user_parameter ("/modules/breathcontrol/trigger")
+        node:       ossia_net.format_user_parameter("/modules/blow/trigger")
         on:         rms > 0.5
     }
 

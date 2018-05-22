@@ -3,39 +3,18 @@ import Ossia 1.0 as Ossia
 
 Rectangle
 {
-    property string target: ""
     property alias animation: trigger_animation
-    color: "transparent"
+    property alias title: gesture_label.text
+    property alias description: gesture_description.text
+    property string gestures: [ ]
 
     onEnabledChanged:
     {
-        if ( !enabled )
-        {
-            gesture_label.text = "indéterminé";
-            gesture_description.text = "veuillez patienter jusqu'à l'activation de l'interaction";
-        }
+        if ( enabled ) gesture_manager.backend.gestures = gestures;
+        else gesture_manager.backend.gestures = [ ];
     }
 
-    onTargetChanged:
-    {
-        if  ( target == "whip" )
-        {
-            gesture_label.text = "Frappe verticale"
-            gesture_description.text = "exécutez un geste peu ample, mais sec, vers le bas, l'appareil vibrera si le geste est reconnu.";
-        }
-
-        else if ( target == "cover" )
-        {
-            gesture_label.text = "Paume flottante"
-            gesture_description.text = "approchez la paume de votre main à 3 ou 4 cm de l'appareil, maintenez jusqu'à ce que l'appareil vibre.";
-        }
-
-        else if ( target == "shake" )
-        {
-            gesture_label.text = "Agiter"
-            gesture_description.text = "agitez le téléphone sèchement et fermement de gauche à droite ou de bas en haut, jusqu'à ce que l'appareil vibre.";
-        }
-    }
+    color: "transparent"
 
     Text //------------------------------------------------ GESTURE_LABEL
     {
@@ -44,7 +23,7 @@ Rectangle
         width:      parent.width
         height:     parent.height
         color:      "#ffffff"
-        text:       "aucun geste cible"
+        text:       ""
 
         horizontalAlignment:    Text.AlignHCenter
         font.family:            font_lato_light.name

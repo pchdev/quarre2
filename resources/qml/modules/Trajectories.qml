@@ -56,7 +56,7 @@ Rectangle
     {
         id:         trajectory_trigger
         device:     ossia_net.client
-        node:       ossia_net.get_user_base_address() + '/controllers/trajectories/trigger'
+        node:       ossia_net.format_user_parameter('/modules/trajectories/trigger')
         on:         trigger
     }
 
@@ -64,7 +64,7 @@ Rectangle
     {
         id:         trajectory_data
         device:     ossia_net.client
-        node:       ossia_net.get_user_base_address() + '/controllers/xy/0/data'
+        node:       ossia_net.format_user_parameter('/modules/trajectories/position')
         on:         current_send_data
     }
 

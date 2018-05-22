@@ -21,7 +21,7 @@ Rectangle
             PropertyChanges
             {
                 target:     next_interaction_label
-                text:       "NEXT INTERACTION"
+                text:       "PROCHAINE INTERACTION"
 
                 verticalAlignment: Text.AlignTop
                 horizontalAlignment: Text.AlignHCenter

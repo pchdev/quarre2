@@ -22,7 +22,7 @@ Rectangle
             {
                 id: rotation
                 axis { x: 0; y: 0; z: 1 }
-                angle: sensor_manager.rotation_x_data
+                angle: sensor_manager.rotation.reading.x
             },
 
             Scale
@@ -40,7 +40,7 @@ Rectangle
     {
         id:         rotation_print
 
-        text:       "rotation: " + Math.floor(sensor_manager.rotation_x_data) + " degrees"
+        text:       "rotation: " + Math.floor(sensor_manager.rotation.reading.x) + " degrees"
         color:      "#ffffff"
         width:      parent.width
         height:     parent.height * 0.2

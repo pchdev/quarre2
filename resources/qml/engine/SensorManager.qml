@@ -26,28 +26,30 @@ Rectangle {
 
     Quarre.AudioHdl //-------------------------------------------------------------- MICROPHONE
     {
-        id: sensors_microphone
+        id:         sensors_microphone
+        active:     false
     }
 
     Ossia.Binding
     {
         id:         sensors_microphone_available
         device:     ossia_net.client
-        node:       ossia_net.get_user_base_address() + '/sensors/microphone/available'
+        node:       ossia_net.format_user_parameter('/sensors/microphone/available')
 
         on:         microphone_available
     }
 
     Accelerometer //---------------------------------------------------------------- ACCELEROMETER
     {
-        id: sensors_accelerometer
+        id:         sensors_accelerometer
+        active:     false
     }
 
     Ossia.Binding
     {
         id:         sensors_accelerometer_available
         device:     ossia_net.client
-        node:       ossia_net.get_user_base_address() + '/sensors/accelerometers/available'
+        node:       ossia_net.format_user_parameter('/sensors/accelerometers/available')
         on:         accelerometer_available
     }
 
@@ -62,7 +64,7 @@ Rectangle {
     {
         id:         sensors_rotation_available
         device:     ossia_net.client
-        node:       ossia_net.get_user_base_address() + '/sensors/rotation/available'
+        node:       ossia_net.format_user_parameter('/sensors/rotation/available')
         on:         rotation_available
     }
 
@@ -76,7 +78,7 @@ Rectangle {
     {
         id:         sensors_proximity_available
         device:     ossia_net.client
-        node:       ossia_net.get_user_base_address() + '/sensors/proximity/available'
+        node:       ossia_net.format_user_parameter('/sensors/proximity/available')
 
         on:         proximity_available
     }

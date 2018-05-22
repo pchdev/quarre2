@@ -11,7 +11,7 @@ Rectangle
         id: teaser_claw
         antialiasing: true
         fillMode: Image.PreserveAspectCrop
-        source: "teaser/white.png"
+        source: "qrc:/teaser/white.png"
         x: parent.width/1.5
         y: parent.height *0.1
         opacity: 0.2

@@ -10,7 +10,7 @@ Item
         antialiasing: true
         anchors.fill: parent
         fillMode: Image.PreserveAspectFit
-        source: "modules/rose2.png"
+        source: "qrc:/modules/rose2.png"
 
         transform: Scale
         {
