@@ -4,29 +4,33 @@ import Ossia 1.0 as Ossia
 
 Rectangle
 {
+    id: module
     color: "transparent"
 
-    property bool trigger:  false
     property real rms:      0.0
 
     onEnabledChanged:
     {
         sensor_manager.microphone.active    = enabled;
-        polling_timer.running               = enabled;
+        polling_timer.running               = enabled;        
     }
 
     Timer //-----------------------------------------------------------------------------
     {
         id:             polling_timer
         interval:       50
-        onTriggered:    rms = sensor_manager.microphone.rms;
-    }
-
-    Ossia.Binding //--------------------------------------------------------------------- TRIGGER
-    {
-        device:     ossia_net.client
-        node:       ossia_net.format_user_parameter("/modules/blow/trigger")
-        on:         rms > 0.5
+        repeat:         true
+        onTriggered:
+        {
+            rms = sensor_manager.microphone.rms;
+            if ( rms > 0.4 && !ossia_modules.gestures_blow_trigger)
+            {
+                ossia_modules.gestures_blow_trigger = true;
+                ossia_net.oshdl.vibrate(50);
+            }
+            else if ( rms < 0.4 && ossia_modules.gestures_blow_trigger )
+                 ossia_modules.gestures_blow_trigger = false;
+        }
     }
 
     // -------------------------------------------------------------------------------------------

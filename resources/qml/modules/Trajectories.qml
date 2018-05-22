@@ -11,10 +11,7 @@ Rectangle
     property int recording_phase:   0;
     property int sending_phase:     0;
     property var trajectory:        []
-    property bool trigger:          false
     property int trajectory_size:   0;
-
-    property vector2d current_send_data: Qt.vector2d(0, 0);
 
     Timer
     {
@@ -43,7 +40,7 @@ Rectangle
 
         onTriggered:
         {
-            current_send_data = trajectory[sending_phase];
+            ossia_modules.touch_trajectories_position = trajectory[sending_phase];
             sending_phase++;
 
             trajectory_canvas.requestPaint();
@@ -51,22 +48,6 @@ Rectangle
             if ( sending_phase >= trajectory_size )
                 running = false;
         }
-    }
-
-    Ossia.Binding
-    {
-        id:         trajectory_trigger
-        device:     ossia_net.client
-        node:       ossia_net.format_user_parameter('/modules/trajectories/trigger')
-        on:         trigger
-    }
-
-    Ossia.Binding
-    {
-        id:         trajectory_data
-        device:     ossia_net.client
-        node:       ossia_net.format_user_parameter('/modules/trajectories/position')
-        on:         current_send_data
     }
 
     SpatializationSphere { }
@@ -88,7 +69,7 @@ Rectangle
         {
             // send trigger
             // start sender timer, poll recorded data
-            trigger = !trigger;
+            ossia_modules.touch_trajectories_trigger = !ossia_modules.touch_trajectories_trigger;
             record_timer.running = false;
             send_timer.running = true;
         }
@@ -101,8 +82,8 @@ Rectangle
             {
                 var ctx = trajectory_canvas.getContext('2d');
                 var w = trajectory_canvas.width * 0.1
-                var x = current_send_data.x * trajectory_canvas.width - w;
-                var y = current_send_data.y * trajectory_canvas.height - w;
+                var x = ossia_modules.touch_trajectories_position.x * trajectory_canvas.width - w;
+                var y = ossia_modules.touch_trajectories_position.y * trajectory_canvas.height - w;
 
                 ctx.strokeStyle = "#ffffff";
                 ctx.ellipse(x,y,w,w);

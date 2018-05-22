@@ -10,7 +10,7 @@ Rectangle
         id: arrow
         antialiasing: true
         anchors.fill: parent
-        source: "modules/arrow.png"
+        source: "qrc:/modules/arrow.png"
         fillMode: Image.PreserveAspectFit
 
         x: parent.width/2

@@ -12,7 +12,7 @@
         <file>views/HeaderView.qml</file>
         <file>views/CurrentInteractionView.qml</file>
         <file>views/NextInteractionView.qml</file>
-        <file>modules/Blow.qml</file>
+        <file>modules/GestureBlow.qml</file>
         <file>modules/Default.qml</file>
         <file>modules/GestureViewer.qml</file>
         <file>modules/Idle.qml</file>
@@ -36,5 +36,6 @@
         <file>modules/GestureHammer.qml</file>
         <file>modules/GesturePalm.qml</file>
         <file>modules/GestureShake.qml</file>
+        <file>modules/OssiaModuleParameters.qml</file>
     </qresource>
 </RCC>

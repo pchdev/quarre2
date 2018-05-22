@@ -6,19 +6,10 @@ Rectangle
     anchors.fill: parent
     color: "transparent"
 
-    property real xdata: 0.0
-
     onEnabledChanged:
     {
         sensor_manager.rotation.enabled = enabled;
         polling_timer.running = enabled;
-    }
-
-    Ossia.Binding
-    {
-        device: ossia_net.client
-        node: ossia_net.format_user_parameter("/modules/rotation/x/angle")
-        on: xdata
     }
 
     Timer
@@ -27,7 +18,7 @@ Rectangle
         interval: 50
         repeat: true
 
-        onTriggered: xdata = sensor_manager.rotation.reading.x
+        onTriggered: sensors_rotation_x_angle = sensor_manager.rotation.reading.x
 
     }
 
@@ -36,7 +27,7 @@ Rectangle
         id: arrow
         antialiasing: true
         anchors.fill: parent
-        source: "modules/arrow.png"
+        source: "qrc:/modules/arrow.png"
         fillMode: Image.PreserveAspectFit
 
         x: parent.width/2
@@ -48,7 +39,7 @@ Rectangle
             {
                 id: rotation
                 axis { x: 0; y: 0; z: 1 }
-                angle: xdata
+                angle: sensors_rotation_x_angle
             },
 
             Scale

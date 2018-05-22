@@ -8,16 +8,7 @@ Rectangle
     color:      "#232426"
     opacity:    0.8
 
-    property vector2d touchpoints: Qt.vector2d(0, 0)
     property vector2d rtouchpoints: Qt.vector2d(0, 0)
-
-    Ossia.Binding
-    {
-        id:         touchpoints_data
-        device:     ossia_net.client
-        node:       ossia_net.get_user_base_address() + '/modules/xytouch/trigger'
-        on:         touchpoints
-    }
 
     SpatializationSphere {}
 
@@ -28,7 +19,7 @@ Rectangle
         onPressed:
         {
             rtouchpoints = Qt.vector2d  ( mouseX, mouseY );
-            touchpoints = Qt.vector2d   ( mouseX/width, 1-mouseY/height );
+            ossia_modules.touch_xy_points = Qt.vector2d   ( mouseX/width, 1-mouseY/height );
 
             if ( touch_animation.running )
                 touch_animation.running = false;

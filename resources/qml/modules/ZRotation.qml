@@ -3,7 +3,6 @@ import Ossia 1.0 as Ossia
 
 Rectangle
 {
-    property real xdata: 0.0
     property real offset: 0.0
 
     anchors.fill: parent
@@ -11,7 +10,7 @@ Rectangle
 
     onEnabledChanged:
     {
-        sensor_manager.rotation.enabled = enabled;
+        sensor_manager.rotation.active = enabled;
         polling_timer.running = enabled;
     }
 
@@ -27,16 +26,9 @@ Rectangle
             if ( offseted > 180 ) offseted -=360;
             else if ( offseted < -180 ) offseted += 360;
 
-            xdata = -offseted;
+            ossia_modules.sensors_rotation_z_angle = -offseted;
         }
 
-    }
-
-    Ossia.Binding
-    {
-        device: ossia_net.client
-        node: ossia_net.format_user_parameter("/modules/sensors/rotation/z/angle")
-        on: xdata
     }
 
     Image
@@ -44,7 +36,7 @@ Rectangle
         id: arrow
         antialiasing: true
         anchors.fill: parent
-        source: "modules/arrow.png"
+        source: "qrc:/modules/arrow.png"
         fillMode: Image.PreserveAspectFit
 
         x: parent.width/2
@@ -63,7 +55,7 @@ Rectangle
                 id: rotation
                 origin.x: parent.width/2
                 origin.y: parent.height/2
-                angle: xdata
+                angle: ossia_modules.sensors_rotation_z_angle
             },
 
             Scale
@@ -81,7 +73,7 @@ Rectangle
     {
         id:         rotation_print
 
-        text:       "rotation: " + Math.floor(xdata) + " degrees"
+        text:       "rotation: " + Math.floor(ossia_modules.sensors_rotation_z_angle) + " degrees"
         color:      "#ffffff"
         width:      parent.width
         height:     parent.height * 0.2

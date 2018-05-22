@@ -3,7 +3,7 @@ import Ossia 1.0 as Ossia
 
 GestureViewer
 {
-    property bool trigger: false
+    id: viewer
 
     title:          "Frappe verticale"
     gestures:       [ "QtSensors.whip" ]
@@ -16,13 +16,10 @@ GestureViewer
     Connections
     {
         target: gesture_manager.backend
-        onDetected: { trigger = !trigger; trigger_animation.running = true }
-    }
-
-    Ossia.Binding
-    {
-        device:     ossia_net.client
-        node:       ossia_net.format_user_parameter('/modules/gestures/hammer/trigger')
-        on:         trigger
+        onDetected:
+        {
+            ossia_modules.gestures_hammer_trigger = ossia_modules.gestures_hammer_trigger;
+            trigger_animation.running = true
+        }
     }
 }

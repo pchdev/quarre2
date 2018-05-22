@@ -70,6 +70,7 @@ ApplicationWindow
         GestureManager          { id: gesture_manager }
         SensorManager           { id: sensor_manager }
         NetworkManager          { id: ossia_net; deviceName: "quarre-remote" }
+        OssiaModuleParameters   { id: ossia_modules }
 
         ApplicationStates //------------------------------------------------------ MAIN_STATES
         {
