@@ -18,7 +18,7 @@ GestureViewer
         target: gesture_manager.backend
         onDetected:
         {
-            ossia_modules.gestures_hammer_trigger = ossia_modules.gestures_hammer_trigger;
+            ossia_modules.gestures_hammer_trigger = !ossia_modules.gestures_hammer_trigger;
             trigger_animation.running = true
         }
     }

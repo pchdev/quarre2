@@ -19,7 +19,6 @@ Item
         id:         parameter_available
         device:     ossia_net.client
         node:       ossia_net.format_user_parameter("/gestures/"+name+"/available")
-
         on:         available
     }
 

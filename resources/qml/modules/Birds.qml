@@ -19,8 +19,6 @@ Rectangle
             {
                 name: modelData
                 number_id: index
-                x: 0.5
-                y: 0.3
             }
         }
     }

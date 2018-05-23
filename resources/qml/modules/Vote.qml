@@ -12,7 +12,7 @@ Rectangle
     Ossia.Binding
     {
         device: ossia_net.client
-        node:   ossia_net.get_user_base_address()+'/vote/choice';
+        node:   ossia_net.format_user_parameter('/vote/choice');
         on:     choice
     }
 

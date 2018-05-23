@@ -15,10 +15,7 @@ Item {
     property bool       connected:      false
     property bool       discovering:    false
 
-    function format_user_parameter(str)
-    {
-        return '/user/' + slot + str
-    }
+    function format_user_parameter(str) { return '/user/' + slot + str }
 
     Ossia.OSCQueryClient //---------------------------------------------------------QUERY_CLIENT
     {
@@ -184,10 +181,7 @@ Item {
         device:     ossia_client
         node:       "/common/scenario/stop"
 
-        onSetValue_sig:
-        {
-            upper_view.header.timer.stop();
-        }
+        onSetValue_sig: upper_view.header.timer.stop();
     }
 
     Ossia.Callback //---------------------------------------------------------SCENARIO_PAUSE

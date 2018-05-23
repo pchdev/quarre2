@@ -141,10 +141,23 @@ Item
         quarre_application.state        = "IDLE";
         upper_view.header.scene.text    = "playground";
         module_loader.source            = "../modules/" + module_name + ".qml"
+
+        ossia_net.oshdl.vibrate(50);
     }
 
     function cancel_incoming ( )
     {
-        quarre_application.state        = "IDLE";
+        if ( quarre_application.state === "INCOMING_INTERACTION")
+            quarre_application.state = "IDLE";
+
+        else if ( quarre_application.state === "ACTIVE_AND_INCOMING_INTERACTIONS")
+            quarre_application.state = "ACTIVE_INTERACTION";
+
+        upper_view.next.title            = "";
+        upper_view.next.description      = "";
+        upper_view.next.count            = 0;
+        upper_view.next.timer.stop      ( );
+
+        ossia_net.oshdl.vibrate(50);
     }
 }

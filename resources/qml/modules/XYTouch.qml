@@ -19,7 +19,7 @@ Rectangle
         onPressed:
         {
             rtouchpoints = Qt.vector2d  ( mouseX, mouseY );
-            ossia_modules.touch_xy_points = Qt.vector2d   ( mouseX/width, 1-mouseY/height );
+            ossia_modules.touch_xy_points = Qt.vector2d ( mouseX/width, 1-mouseY/height );
 
             if ( touch_animation.running )
                 touch_animation.running = false;

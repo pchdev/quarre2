@@ -3,11 +3,11 @@ import Ossia 1.0 as Ossia
 
 Rectangle
 {
-    property alias animation: trigger_animation
-    property alias title: gesture_label.text
-    property alias description: gesture_description.text
-    property alias trigger_animation: trigger_animation
-    property var gestures: [ ]
+    property alias animation:           trigger_animation
+    property alias title:               gesture_label.text
+    property alias description:         gesture_description.text
+    property alias trigger_animation:   trigger_animation
+    property var gestures:              [ ]
 
     onEnabledChanged:
     {

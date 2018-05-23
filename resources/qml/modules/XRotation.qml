@@ -18,7 +18,7 @@ Rectangle
         interval: 50
         repeat: true
 
-        onTriggered: sensors_rotation_x_angle = sensor_manager.rotation.reading.x
+        onTriggered: ossia_modules.sensors_rotation_x_angle = sensor_manager.rotation.reading.x
 
     }
 
@@ -39,7 +39,7 @@ Rectangle
             {
                 id: rotation
                 axis { x: 0; y: 0; z: 1 }
-                angle: sensors_rotation_x_angle
+                angle: ossia_modules.sensors_rotation_x_angle
             },
 
             Scale
@@ -57,17 +57,17 @@ Rectangle
     {
         id:         rotation_print
 
-        text:       "rotation: " + Math.floor(xdata) + " degrees"
+        text:       "rotation: " + Math.floor(ossia_modules.sensors_rotation_x_angle) + " degrees"
         color:      "#ffffff"
         width:      parent.width
         height:     parent.height * 0.2
         y:          parent.height * 0.2
 
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
-        font.pointSize: 16 * root.fontRatio
-        textFormat: Text.PlainText
-        font.family: font_lato_light.name
+        horizontalAlignment:    Text.AlignHCenter
+        verticalAlignment:      Text.AlignVCenter
+        font.pointSize:         16 * root.fontRatio
+        textFormat:             Text.PlainText
+        font.family:            font_lato_light.name
     }
 }
 

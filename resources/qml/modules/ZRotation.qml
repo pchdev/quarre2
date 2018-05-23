@@ -79,11 +79,11 @@ Rectangle
         height:     parent.height * 0.2
         y:          parent.height * 0.2
 
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
-        font.pointSize: 16 * root.fontRatio
-        textFormat: Text.PlainText
-        font.family: font_lato_light.name
+        horizontalAlignment:    Text.AlignHCenter
+        verticalAlignment:      Text.AlignVCenter
+        font.pointSize:         16 * root.fontRatio
+        textFormat:             Text.PlainText
+        font.family:            font_lato_light.name
     }
 
     Text //---------------------------------------------------------------- ROTATION_PRINT
@@ -96,11 +96,11 @@ Rectangle
         height:     parent.height * 0.2
         y:          parent.height * 0.6
 
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
-        font.pointSize: 16 * root.fontRatio
-        textFormat: Text.PlainText
-        font.family: font_lato_light.name
+        horizontalAlignment:    Text.AlignHCenter
+        verticalAlignment:      Text.AlignVCenter
+        font.pointSize:         16 * root.fontRatio
+        textFormat:             Text.PlainText
+        font.family:            font_lato_light.name
     }
 }
 

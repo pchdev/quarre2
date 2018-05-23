@@ -80,7 +80,7 @@ ApplicationWindow
             {
                 quarre_application.states   = quarre_states.states
                 quarre_application.state    = "DISCONNECTED"
-                ossia_net.oshdl.connect();
+                ossia_net.oshdl.connect     ( );
             }
         }
 

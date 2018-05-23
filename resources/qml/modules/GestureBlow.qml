@@ -7,7 +7,7 @@ Rectangle
     id: module
     color: "transparent"
 
-    property real rms:      0.0
+    property real rms: 0.0
 
     onEnabledChanged:
     {
