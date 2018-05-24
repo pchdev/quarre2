@@ -191,5 +191,28 @@ Item
         on:         vare_granular_overlap
     }
 
+    property vector3d sensors_accelerometers_xyz_data: Qt.vector3d(0, 0, 0)
+    property bool vare_percussions_handdrum: false
+    property bool vare_percussions_shake: false
 
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/sensors/accelerometers/xyz/data')
+        on:         sensors_accelerometers_xyz_data
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/vare/percussions/handdrum')
+        on:         vare_percussions_handdrum
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/vare/percussions/shake')
+        on:         vare_percussions_shake
+    }
 }

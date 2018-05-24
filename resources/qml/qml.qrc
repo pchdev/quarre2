@@ -44,5 +44,6 @@
         <file>modules/VareGranular.qml</file>
         <file>modules/VareRainbells.qml</file>
         <file>modules/VarePercs.qml</file>
+        <file>modules/items/QuarrePadToggle.qml</file>
     </qresource>
 </RCC>
