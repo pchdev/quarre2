@@ -37,5 +37,12 @@
         <file>modules/GesturePalm.qml</file>
         <file>modules/GestureShake.qml</file>
         <file>modules/OssiaModuleParameters.qml</file>
+        <file>modules/XYZRotation.qml</file>
+        <file>modules/Insects.qml</file>
+        <file>modules/VareResonator.qml</file>
+        <file>modules/VareBody.qml</file>
+        <file>modules/VareGranular.qml</file>
+        <file>modules/VareRainbells.qml</file>
+        <file>modules/VarePercs.qml</file>
     </qresource>
 </RCC>

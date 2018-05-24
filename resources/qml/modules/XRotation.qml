@@ -8,7 +8,7 @@ Rectangle
 
     onEnabledChanged:
     {
-        sensor_manager.rotation.enabled = enabled;
+        sensor_manager.rotation.active = enabled;
         polling_timer.running = enabled;
     }
 
@@ -18,7 +18,8 @@ Rectangle
         interval: 50
         repeat: true
 
-        onTriggered: ossia_modules.sensors_rotation_x_angle = sensor_manager.rotation.reading.x
+        onTriggered:
+            ossia_modules.sensors_rotation_x_angle = sensor_manager.rotation.reading.x
 
     }
 

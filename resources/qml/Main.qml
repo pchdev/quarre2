@@ -72,6 +72,10 @@ ApplicationWindow
         NetworkManager          { id: ossia_net; deviceName: "quarre-remote" }
         OssiaModuleParameters   { id: ossia_modules }
 
+//        VareBody {}
+//        VareResonator {}
+//        VareGranular {}
+
         ApplicationStates //------------------------------------------------------ MAIN_STATES
         {
             id: quarre_states

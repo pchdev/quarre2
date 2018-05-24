@@ -10,9 +10,12 @@ Item
     property vector3d touch_birds_trigger:          Qt.vector3d(0, 0, 0)
     property bool touch_trajectories_trigger:       false
     property vector2d touch_trajectories_position:  Qt.vector2d(0, 0)
-    property real sensors_rotation_z_angle:         0.0
     property real sensors_rotation_x_angle:         0.0
-    property vector2d touch_xy_points:  Qt.vector2d(0, 0)
+    property real sensors_rotation_y_angle:         0.0
+    property real sensors_rotation_z_angle:         0.0
+    property vector3d sensors_rotation_xyz_data:    Qt.vector3d(0, 0, 0)
+    property vector2d touch_xy_points:              Qt.vector2d(0, 0)
+    property bool sensors_proximity_close:          false
 
     Ossia.Binding //-------------------------------------------------------- BLOW_GESTURE
     {
@@ -63,6 +66,20 @@ Item
         on:         touch_trajectories_position
     }
 
+    Ossia.Binding //-------------------------------------------------------- ROTATION_X
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter("/modules/sensors/rotation/x/angle")
+        on:         sensors_rotation_x_angle
+    }
+
+    Ossia.Binding //-------------------------------------------------------- ROTATION_Y
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter("/modules/sensors/rotation/y/angle")
+        on:         sensors_rotation_y_angle
+    }
+
     Ossia.Binding //-------------------------------------------------------- ROTATION_Z
     {
         device:     ossia_net.client
@@ -70,17 +87,109 @@ Item
         on:         sensors_rotation_z_angle
     }
 
-    Ossia.Binding //-------------------------------------------------------- ROTATION_X
+    Ossia.Binding //-------------------------------------------------------- ROTATION_XYZ
     {
         device:     ossia_net.client
-        node:       ossia_net.format_user_parameter("/modules/rotation/x/angle")
-        on:         sensors_rotation_x_angle
+        node:       ossia_net.format_user_parameter("/modules/sensors/rotation/xyz/data")
+        on:         sensors_rotation_xyz_data
     }
 
     Ossia.Binding //-------------------------------------------------------- TOUCH_XY
     {
         device:     ossia_net.client
-        node:       ossia_net.get_user_base_address() + '/modules/xytouch/trigger'
+        node:       ossia_net.format_user_parameter('/modules/xytouch/trigger')
         on:         touch_xy_points
     }
+
+    Ossia.Binding //-------------------------------------------------------- PROXIMITY
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/sensors/proximity/close')
+        on:         sensors_proximity_close
+    }
+
+    property real vare_resonator_brightness: 0.0
+    property real vare_resonator_inpos: 1.0
+    property real vare_resonator_pitch: 440.0
+
+    Ossia.Binding //-------------------------------------------------------- VARE_RESONATOR
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/vare/resonator/brightness')
+        on:         vare_resonator_brightness
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/vare/resonator/inpos')
+        on:         vare_resonator_inpos
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/vare/resonator/pitch')
+        on:         vare_resonator_pitch
+    }
+
+    property real vare_body_tone: 0.0
+    property real vare_body_pitch: 0.46
+    property vector2d vare_body_xy: Qt.vector2d(0.5, 0.5)
+
+    Ossia.Binding //-------------------------------------------------------- VARE_BODY
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/vare/body/tone')
+        on:         vare_body_tone
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/vare/body/pitch')
+        on:         vare_body_pitch
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/vare/body/xy')
+        on:         vare_body_xy
+    }
+
+    property real vare_granular_pitch: 2.0
+    property real vare_granular_pitch_env: 0.0
+    property real vare_granular_overlap: 0.125
+    property int vare_granular_sample: 0
+
+    Ossia.Binding //-------------------------------------------------------- VARE_GRANULAR
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/vare/granular/pitch_env')
+        on:         vare_granular_pitch_env
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/vare/granular/pitch')
+        on:         vare_granular_pitch
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/vare/granular/sample')
+        on:         vare_granular_sample
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/vare/granular/overlap')
+        on:         vare_granular_overlap
+    }
+
+
 }

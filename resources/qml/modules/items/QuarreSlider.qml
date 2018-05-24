@@ -6,25 +6,36 @@ import Ossia 1.0 as Ossia
 Item
 {
     property int slider_index;
+    property real min: 0.0
+    property real max: 1.0
+    property var target
+    property string name: ""
+    property real value: 0.0
+
     id: base
+    width: parent.width * 0.65
+    height: parent.height * 0.1
+    anchors.horizontalCenter: parent.horizontalCenter
 
     Slider
     {
         id: control
-        value: 0.5
+        from: min; to: max;
+        value: base.value
 
         background: Rectangle
         {
             implicitWidth: base.width
-            implicitHeight: base.height*0.9
+            implicitHeight: base.height*0.8
             radius: 10
             color: "gray"
             anchors.verticalCenter: parent.verticalCenter
+            opacity: 0.8
         }
 
         handle: Rectangle
         {
-            implicitWidth: base.height
+            implicitWidth: base.height*1.1
             implicitHeight: implicitWidth
             radius: implicitHeight/2
             border.color: "black"
@@ -32,7 +43,6 @@ Item
             x: control.leftPadding + control.visualPosition * (control.availableWidth - width)
         }
 
-        onValueChanged:
-            ossia_net.sliders.itemAt(slider_index).value = value;
+        onValueChanged: base.value = value;
     }
 }
