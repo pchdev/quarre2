@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.Controls 2.0
 import "items"
 
 Rectangle
@@ -16,8 +17,9 @@ Rectangle
 
     QuarreSlider
     {
+        min: -1; max: 3;
         value: ossia_modules.vare_granular_pitch
-        onValueChanged: ossia_modules.vare_granular_pitch = value
+        onValueChanged: ossia_modules.vare_granular_pitch = Math.floor(value)
         y: parent.height*0.2*2
     }
 
@@ -29,10 +31,13 @@ Rectangle
         y: parent.height*0.2*3
     }
 
-    QuarreSlider
+    ComboBox
     {
-        value: ossia_modules.vare_granular_sample
-        onValueChanged: ossia_modules.vare_granular_sample = value
         y: parent.height*0.2*4
+        height: parent.height*0.1
+        width: parent.width*0.65
+        anchors.horizontalCenter: parent.horizontalCenter
+        model: ["Model 1", "Model 2", "Model 3", "Model 4", "Model 5" ]
+        onCurrentIndexChanged: ossia_modules.vare_granular_sample = currentIndex;
     }
 }

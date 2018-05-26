@@ -40,13 +40,13 @@ Rectangle
 
         onTriggered:
         {
-            if ( sensor_manager.accelerometers.reading.x < -40 && !shaking )
+            if ( sensor_manager.accelerometers.reading.y < -30 && !shaking )
             {
                 shaking = true;
                 ossia_modules.vare_percussions_shake = !ossia_modules.vare_percussions_shake
             }
 
-            else if ( sensor_manager.accelerometers.reading.x > -30 && shaking )
+            else if ( sensor_manager.accelerometers.reading.y > -20 && shaking )
                 shaking = false;
         }
     }

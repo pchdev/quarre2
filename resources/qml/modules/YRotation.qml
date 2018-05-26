@@ -1,9 +1,27 @@
 import QtQuick 2.0
+import Ossia 1.0 as Ossia
 
 Rectangle
 {
     anchors.fill: parent
     color: "transparent"
+
+    onEnabledChanged:
+    {
+        sensor_manager.rotation.active = enabled;
+        polling_timer.running = enabled;
+    }
+
+    Timer
+    {
+        id: polling_timer
+        interval: 50
+        repeat: true
+
+        onTriggered:
+            ossia_modules.sensors_rotation_y_angle = sensor_manager.rotation.reading.y
+
+    }
 
     Image
     {
@@ -22,7 +40,7 @@ Rectangle
             {
                 id: rotation
                 axis { x: 0; y: 0; z: 1 }
-                angle: sensor_manager.rotation_x_data
+                angle: ossia_modules.sensors_rotation_y_angle
             },
 
             Scale
@@ -40,7 +58,7 @@ Rectangle
     {
         id:         rotation_print
 
-        text:       "rotation: " + Math.floor(sensor_manager.rotation_x_data) + " degrees"
+        text:       "rotation: " + Math.floor(ossia_modules.sensors_rotation_y_angle) + " degrees"
         color:      "#ffffff"
         width:      parent.width
         height:     parent.height * 0.2
