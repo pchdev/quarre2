@@ -215,4 +215,105 @@ Item
         node:       ossia_net.format_user_parameter('/modules/vare/percussions/shake')
         on:         vare_percussions_shake
     }
+
+    property real markhor_resonator_brightness: 0.0
+    property real markhor_resonator_inpos: 1.0
+    property real markhor_resonator_pitch: 55.0
+    property real markhor_resonator_sustain: 0.30
+
+    Ossia.Binding //-------------------------------------------------------- MARKHOR_RESONATOR
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/markhor/resonator/brightness')
+        on:         markhor_resonator_brightness
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/markhor/resonator/inpos')
+        on:         markhor_resonator_inpos
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/markhor/resonator/pitch')
+        on:         markhor_resonator_pitch
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/markhor/resonator/sustain')
+        on:         markhor_resonator_sustain
+    }
+
+    property real markhor_body_tone: 1.0
+    property real markhor_body_pitch: -1.0
+    property vector2d markhor_body_xy: Qt.vector2d(0.5, 1.0)
+
+    Ossia.Binding //-------------------------------------------------------- MARKHOR_BODY
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/markhor/body/tone')
+        on:         markhor_body_tone
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/markhor/body/pitch')
+        on:         vare_markhor_pitch
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/markhor/body/xy')
+        on:         markhor_body_xy
+    }
+
+    property real markhor_granular_pitch: 0.0
+    property real markhor_granular_pitch_env: 0.0
+    property real markhor_granular_overlap: 0.250
+    property int markhor_granular_sample: 0
+
+    Ossia.Binding //-------------------------------------------------------- MARKHOR_GRANULAR
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/markhor/granular/pitch_env')
+        on:         markhor_granular_pitch_env
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/markhor/granular/pitch')
+        on:         markhor_granular_pitch
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/markhor/granular/sample')
+        on:         markhor_granular_sample
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/markhor/granular/overlap')
+        on:         markhor_granular_overlap
+    }
+
+    property int markhor_pads_index: 0
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/markhor/pads/index')
+        on:         markhor_pads_index
+    }
+
 }

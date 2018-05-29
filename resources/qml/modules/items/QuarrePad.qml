@@ -8,19 +8,30 @@ Rectangle
     property string active_color:           "white"
     property string inactive_color:         "#294a51"
     property bool pressed: false
+    property int index: 0
+
+    function push()
+    {
+        pad.color = active_color;
+    }
+
+    function release()
+    {
+        pad.color = inactive_color;
+    }
 
     MouseArea
     {
         anchors.fill: parent
         onPressed:
         {
-            pad.color = active_color;
             pad.pressed = true;
+            markhor_pads.pressed(index, false);
         }
 
         onReleased:
         {
-            pad.color = inactive_color;
+            markhor_pads.pressed(index, false);
             pad.pressed = false;
         }
     }

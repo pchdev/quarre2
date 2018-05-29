@@ -56,5 +56,5 @@ qint64 audio_hdl::writeData(const char *data, qint64 len)
 
 qint64 audio_hdl::bytesAvailable() const
 {
-    return 512;
+    return 256;
 }
