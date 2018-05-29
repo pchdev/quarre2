@@ -8,7 +8,9 @@ Rectangle
     property string active_color:           "white"
     property string inactive_color:         "#294a51"
     property bool pressed: false
-    property int index: 0
+    property int pad_index: 0
+
+    color: inactive_color
 
     function push()
     {
@@ -26,12 +28,12 @@ Rectangle
         onPressed:
         {
             pad.pressed = true;
-            markhor_pads.pressed(index, false);
+            markhor_pads.pressed(pad_index, true);
         }
 
         onReleased:
         {
-            markhor_pads.pressed(index, false);
+            markhor_pads.pressed(pad_index, false);
             pad.pressed = false;
         }
     }

@@ -22,7 +22,7 @@ Rectangle
 
     QuarreSlider
     {
-        min: 55.0; max: 3520.0;
+        min: 0.1; max: 2;
         onValueChanged: ossia_modules.markhor_resonator_pitch = value
         value: ossia_modules.markhor_resonator_pitch
         y: parent.height*0.2*3;

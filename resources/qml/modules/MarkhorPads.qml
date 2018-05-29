@@ -4,7 +4,7 @@ import "items"
 Rectangle
 {
     property int num_pads: 12
-    property var pads_status: Array.new(num_pads);
+    property var pads_status: new Array(num_pads);
     property var pushed_pads: []
 
     id: markhor_pads
@@ -12,6 +12,7 @@ Rectangle
 
     function pressed(i,b)
     {
+        console.log(i, b);
         pads_status[i] = b;
 
         if ( b )
@@ -20,16 +21,16 @@ Rectangle
                 pad_repeater.itemAt(pushed_pads[j]).release();
 
             pushed_pads.push(i);
-            ossia_modules.markhor_pads_index = i;
+            ossia_modules.markhor_pads_index = i+1;
             pad_repeater.itemAt(i).push();
         }
 
         else
         {
             // remove pad from array
-            for ( var k = 0; k < pushed_pads.length; ++j )
+            for ( var k = 0; k < pushed_pads.length; ++k )
                 if ( i === pushed_pads[k] )
-                    pushed_pads.splice(k);
+                    pushed_pads.splice(k,1);
 
             // release pad in gui
             pad_repeater.itemAt(i).release();
@@ -38,7 +39,7 @@ Rectangle
             if ( pushed_pads.length > 0 )
             {
                 pad_repeater.itemAt(pushed_pads[pushed_pads.length-1]).push();
-                ossia_modules.markhor_pads_index = pushed_pads[pushed_pads.length-1];
+                ossia_modules.markhor_pads_index = pushed_pads[pushed_pads.length-1]+1;
             }
 
             else ossia_modules.markhor_pads_index = 0;
@@ -61,9 +62,9 @@ Rectangle
             QuarrePad
             {
                 id:         target
-                width:      module.width/6
-                height:     module.width/6
-                index:      index
+                width:      markhor_pads.width/6
+                height:     markhor_pads.width/6
+                pad_index:  index
             }
         }
     }
