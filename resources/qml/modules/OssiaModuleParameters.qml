@@ -218,7 +218,7 @@ Item
 
     property real markhor_resonator_brightness: 0.0
     property real markhor_resonator_inpos: 1.0
-    property real markhor_resonator_pitch: 55.0
+    property real markhor_resonator_pitch: 2.0
     property real markhor_resonator_sustain: 0.30
 
     Ossia.Binding //-------------------------------------------------------- MARKHOR_RESONATOR
@@ -238,7 +238,7 @@ Item
     Ossia.Binding
     {
         device:     ossia_net.client
-        node:       ossia_net.format_user_parameter('/modules/markhor/resonator/pitch')
+        node:       ossia_net.format_user_parameter('/modules/markhor/resonator/pitch_p')
         on:         markhor_resonator_pitch
     }
 
@@ -316,4 +316,21 @@ Item
         on:         markhor_pads_index
     }
 
+    property bool strings_trigger: false
+    property alias strings: strings_new
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       '/common/modules/strings/trigger'
+        on:         strings_trigger
+    }
+
+    Ossia.Callback
+    {
+        id:         strings_new
+        device:     ossia_net.client
+        node:       '/common/modules/strings/new'
+
+    }
 }
