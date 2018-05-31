@@ -50,5 +50,7 @@
         <file>modules/MarkhorBody.qml</file>
         <file>modules/MarkhorGranular.qml</file>
         <file>modules/Transitions.qml</file>
+        <file>modules/AmmonReverb.qml</file>
+        <file>modules/Strings2.qml</file>
     </qresource>
 </RCC>

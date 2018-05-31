@@ -316,8 +316,10 @@ Item
         on:         markhor_pads_index
     }
 
-    property bool strings_trigger: false
-    property alias strings: strings_new
+    property bool strings_trigger:      false
+    property bool strings_trigger2:     false
+    property alias strings:             strings_new
+    property alias strings2:            strings_new2
 
     Ossia.Binding
     {
@@ -331,6 +333,37 @@ Item
         id:         strings_new
         device:     ossia_net.client
         node:       '/common/modules/strings/new'
-
     }
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       '/common/modules/strings/trigger2'
+        on:         strings_trigger2
+    }
+
+    Ossia.Callback
+    {
+        id:         strings_new2
+        device:     ossia_net.client
+        node:       '/common/modules/strings/new2'
+    }
+
+    property real ammon_reverb_level: 0.5
+    property int ammon_reverb_model: 0
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/ammon/reverb/level')
+        on:         ammon_reverb_level
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/ammon/reverb/model')
+        on:         ammon_reverb_model
+    }
+
+
 }

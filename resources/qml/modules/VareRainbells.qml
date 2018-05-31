@@ -5,6 +5,8 @@ Rectangle
     color: "transparent"
     anchors.fill: parent
 
+    property bool close_triggered: false
+
     onEnabledChanged:
     {
         rotation.enabled = enabled;
@@ -20,8 +22,10 @@ Rectangle
 
         onTriggered:
         {
-            if ( sensor_manager.proximity.reading.near )
+            if ( sensor_manager.proximity.reading.near && !close_triggered )
             ossia_modules.sensors_proximity_close = !ossia_modules.sensors_proximity_close
+
+            close_triggered = sensor_manager.proximity.reading.near;
         }
     }
 
