@@ -7,7 +7,7 @@ Rectangle
     property var pads_status: new Array(num_pads);
     property var pushed_pads: []
 
-    id: markhor_pads
+    id: pads_manager
     color: "transparent"
 
     function pressed(i,b)
@@ -62,8 +62,8 @@ Rectangle
             QuarrePad
             {
                 id:         target
-                width:      markhor_pads.width/6
-                height:     markhor_pads.width/6
+                width:      pads_manager.width/6
+                height:     pads_manager.width/6
                 pad_index:  index
             }
         }

@@ -28,12 +28,12 @@ Rectangle
         onPressed:
         {
             pad.pressed = true;
-            markhor_pads.pressed(pad_index, true);
+            pads_manager.pressed(pad_index, true);
         }
 
         onReleased:
         {
-            markhor_pads.pressed(pad_index, false);
+            pads_manager.pressed(pad_index, false);
             pad.pressed = false;
         }
     }
