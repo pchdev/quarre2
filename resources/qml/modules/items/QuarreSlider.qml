@@ -11,6 +11,7 @@ Item
     property var target
     property string name: ""
     property real value: 0.0
+    property alias ctl: control
 
     id: base
     width: parent.width * 0.65

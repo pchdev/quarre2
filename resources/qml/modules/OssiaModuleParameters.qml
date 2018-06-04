@@ -366,4 +366,93 @@ Item
     }
 
 
+    property real jomon_reverb_level: 0.5
+    property real jomon_lpf_freq: 1
+    property int jomon_arp_bend: 64
+    property real jomon_arp_tempo: 90
+    property var jomon_arp_notes: []
+    property int jomon_arp_notes_add: 0
+    property int jomon_arp_notes_remove: 0
+    property real jomon_arp_gate: 100
+    property int jomon_arp_velocity: 20
+    property bool jomon_palm_state: false
+    property string jomon_arp_mode: "FIFO"
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/jomon/reverb/level')
+        on:         jomon_reverb_level
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/jomon/lpf/frequency')
+        on:         jomon_lpf_freq
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/jomon/arp/bend')
+        on:         jomon_arp_bend
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/jomon/arp/tempo')
+        on:         jomon_arp_tempo
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/jomon/arp/notes/list')
+        on:         jomon_arp_notes
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/jomon/arp/notes/add')
+        on:         jomon_arp_notes_add
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/jomon/arp/notes/remove')
+        on:         jomon_arp_notes_remove
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/jomon/arp/gate')
+        on:         jomon_arp_gate
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/jomon/arp/velocity')
+        on:         jomon_arp_velocity
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/jomon/arp/mode')
+        on:         jomon_arp_mode
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/jomon/palm/state')
+        on:         jomon_palm_state
+    }
+
 }
