@@ -280,4 +280,37 @@ Item {
 
         onValueChanged: interaction_manager.force_current(value);
     }
+
+    Ossia.Callback //---------------------------------------------------------INTERACTION_INCOMING
+    {
+        id:         common_interactions_next_incoming
+        device:     ossia_client
+        node:       '/common/interactions/next/incoming'
+
+        onValueChanged: interaction_manager.prepare_next(value);
+    }
+
+    Ossia.Callback //---------------------------------------------------------INTERACTION_BEGIN
+    {
+        id:         common_interactions_next_begin
+        device:     ossia_client
+        node:       '/common/interactions/next/begin'
+
+        onValueChanged: interaction_manager.trigger_next(value);
+    }
+
+    Ossia.Callback //---------------------------------------------------------INTERACTION_END
+    {
+        id:         commmon_interactions_current_end
+        device:     ossia_client
+        node:       '/common/interactions/current/end'
+
+        onSetValue_sig:
+        {
+            if ( quarre_application.status === "INCOMING")
+                interaction_manager.cancel_incoming();
+
+            interaction_manager.end_current();
+        }
+    }
 }
