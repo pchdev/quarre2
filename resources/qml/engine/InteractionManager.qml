@@ -101,6 +101,7 @@ Item
         if ( quarre_application.state === "ACTIVE_INTERACTION" )
         {
             quarre_application.state    = "IDLE";
+            module_loader.item.enabled  = false;
             module_loader.source        = "../modules/Idle.qml"
         }
 
@@ -109,7 +110,9 @@ Item
             quarre_application.state = "INCOMING_INTERACTION";
             if ( module_on_hold != "" )
             {
+                module_loader.item.enabled = false;
                 module_loader.source = "../modules/" + module_on_hold + ".qml"
+                module_loader.item.enabled = false;
                 grey_animation_in.running = true;
             }
         }

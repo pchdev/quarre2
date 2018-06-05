@@ -31,7 +31,7 @@ Rectangle
             PropertyChanges //------------------------------ current_interaction_description
             {
                 target: current_interaction_description
-                y: current.width * 0.39
+                y: current.width * 0.42
             }
         },
 
@@ -60,7 +60,7 @@ Rectangle
             PropertyChanges
             {
                 target: current_interaction_description
-                y: current.width * 0.29
+                y: current.width * 0.32
             }
 
             PropertyChanges
@@ -209,7 +209,7 @@ Rectangle
 
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        font.pointSize: 13 * root.fontRatio
+        font.pointSize: 14 * root.fontRatio
         textFormat: Text.PlainText
         wrapMode: Text.WordWrap
         font.family: font_lato_light.name
