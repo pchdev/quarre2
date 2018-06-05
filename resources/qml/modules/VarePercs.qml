@@ -10,44 +10,45 @@ Rectangle
 
     onEnabledChanged:
     {
-        polling_timer.running = enabled;
-        sensor_manager.accelerometers.active = enabled;
+
     }
 
-    QuarrePad
+    QuarreSlider
     {
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.horizontalCenter: parent.horizontalCenter
-
-        width:      parent.width/4
-        height:     parent.width/4
-
-        onPressedChanged:
-        {
-            if ( pressed )
-            {
-                ossia_modules.vare_percussions_handdrum = !ossia_modules.vare_percussions_handdrum;
-                ossia_net.oshdl.vibrate(50);
-            }
-        }
+        min: 0.0; max: 0.3
+        value: ossia_modules.vare_env_decay
+        onValueChanged: ossia_modules.vare_env_decay = value
+        y: parent.height*0.05
     }
 
-    Timer
+    QuarreSlider
     {
-        id: polling_timer
-        interval: 25
-        repeat: true
+        min: 0.0; max: 1.0
+        value: ossia_modules.vare_gate_decay
+        onValueChanged: ossia_modules.vare_gate_decay = value
+        y: parent.height*0.2
+    }
 
-        onTriggered:
-        {
-            if ( sensor_manager.accelerometers.reading.y < -30 && !shaking )
-            {
-                shaking = true;
-                ossia_modules.vare_percussions_shake = !ossia_modules.vare_percussions_shake
-            }
+    QuarreSlider
+    {
+        value: ossia_modules.vare_gate_leak
+        onValueChanged: ossia_modules.vare_gate_leak = value
+        y: parent.height*0.35
+    }
 
-            else if ( sensor_manager.accelerometers.reading.y > -20 && shaking )
-                shaking = false;
-        }
+    QuarreSlider
+    {
+        min: 0.1; max: 50
+        value: ossia_modules.vare_noise_rate
+        onValueChanged: ossia_modules.vare_noise_rate = value
+        y: parent.height*0.5
+    }
+
+    QuarreSlider
+    {
+        min: 0.0; max: 100
+        value: ossia_modules.vare_sequencer_width
+        onValueChanged: ossia_modules.vare_sequencer_width = value
+        y: parent.height*0.65
     }
 }

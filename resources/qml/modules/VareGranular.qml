@@ -9,35 +9,41 @@ Rectangle
 
     QuarreSlider
     {
-        min: -2.0; max: 2.0;
-        value: ossia_modules.vare_granular_pitch_env
-        onValueChanged: ossia_modules.vare_granular_pitch_env = value
+        min: -3; max: 3;
+        value: ossia_modules.vare_granular_pitch
+        onValueChanged: ossia_modules.vare_granular_pitch = Math.floor(value)
+        y: parent.height*0.05
+    }
+
+    QuarreSlider
+    {
+        min: 0.5; max: 4.0
+        value: ossia_modules.vare_granular_overlap
+        onValueChanged: ossia_modules.vare_granular_overlap= value
         y: parent.height*0.2
     }
 
     QuarreSlider
     {
-        min: -1; max: 3;
-        value: ossia_modules.vare_granular_pitch
-        onValueChanged: ossia_modules.vare_granular_pitch = Math.floor(value)
-        y: parent.height*0.2*2
+        min: 2.0; max: 110.0
+        value: ossia_modules.vare_granular_rate
+        onValueChanged: ossia_modules.vare_granular_rate = value
+        y: parent.height*0.35
     }
 
     QuarreSlider
     {
-        min: 0.125; max: 0.5
-        value: ossia_modules.vare_granular_overlap
-        onValueChanged: ossia_modules.vare_granular_overlap= value
-        y: parent.height*0.2*3
+        value: ossia_modules.vare_granular_x
+        onValueChanged: ossia_modules.vare_granular_x= value
+        y: parent.height*0.5
     }
 
-    ComboBox
+    QuarreSlider
     {
-        y: parent.height*0.2*4
-        height: parent.height*0.1
-        width: parent.width*0.65
-        anchors.horizontalCenter: parent.horizontalCenter
-        model: ["Model 1", "Model 2", "Model 3", "Model 4", "Model 5" ]
-        onCurrentIndexChanged: ossia_modules.vare_granular_sample = currentIndex;
+        min: -1.0; max: 1.0
+        value: ossia_modules.vare_granular_x_p
+        onValueChanged: ossia_modules.vare_granular_x_p = value
+        y: parent.height*0.65
     }
+
 }

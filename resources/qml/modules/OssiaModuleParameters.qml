@@ -116,16 +116,8 @@ Item
         on:         sensors_proximity_close
     }
 
-    property real vare_resonator_brightness: 0.0
-    property real vare_resonator_inpos: 1.0
-    property real vare_resonator_pitch: 440.0
-
-    Ossia.Binding //-------------------------------------------------------- VARE_RESONATOR
-    {
-        device:     ossia_net.client
-        node:       ossia_net.format_user_parameter('/modules/vare/resonator/brightness')
-        on:         vare_resonator_brightness
-    }
+    property real vare_resonator_inpos: 0.0
+    property real vare_resonator_pitch_p: -2
 
     Ossia.Binding
     {
@@ -137,13 +129,14 @@ Item
     Ossia.Binding
     {
         device:     ossia_net.client
-        node:       ossia_net.format_user_parameter('/modules/vare/resonator/pitch')
-        on:         vare_resonator_pitch
+        node:       ossia_net.format_user_parameter('/modules/vare/resonator/pitch_p')
+        on:         vare_resonator_pitch_p
     }
 
-    property real vare_body_tone: 0.0
-    property real vare_body_pitch: 0.46
+    property real vare_body_tone: 0.36
+    property real vare_body_pitch: -1.0
     property vector2d vare_body_xy: Qt.vector2d(0.5, 0.5)
+    property real vare_body_sustain: 1.0
 
     Ossia.Binding //-------------------------------------------------------- VARE_BODY
     {
@@ -166,16 +159,31 @@ Item
         on:         vare_body_xy
     }
 
-    property real vare_granular_pitch: 2.0
-    property real vare_granular_pitch_env: 0.0
-    property real vare_granular_overlap: 0.125
-    property int vare_granular_sample: 0
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/vare/body/sustain')
+        on:         vare_body_sustain
+    }
+
+    property real vare_granular_pitch: 3.0
+    property real vare_granular_overlap: 1.0
+    property real vare_granular_x: 0.25
+    property real vare_granular_x_p: 1.0
+    property real vare_granular_rate: 27.5
 
     Ossia.Binding //-------------------------------------------------------- VARE_GRANULAR
     {
         device:     ossia_net.client
-        node:       ossia_net.format_user_parameter('/modules/vare/granular/pitch_env')
-        on:         vare_granular_pitch_env
+        node:       ossia_net.format_user_parameter('/modules/vare/granular/x')
+        on:         vare_granular_x
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/vare/granular/x_p')
+        on:         vare_granular_x_p
     }
 
     Ossia.Binding
@@ -188,40 +196,56 @@ Item
     Ossia.Binding
     {
         device:     ossia_net.client
-        node:       ossia_net.format_user_parameter('/modules/vare/granular/sample')
-        on:         vare_granular_sample
-    }
-
-    Ossia.Binding
-    {
-        device:     ossia_net.client
         node:       ossia_net.format_user_parameter('/modules/vare/granular/overlap')
         on:         vare_granular_overlap
     }
 
-    property vector3d sensors_accelerometers_xyz_data: Qt.vector3d(0, 0, 0)
-    property bool vare_percussions_handdrum: false
-    property bool vare_percussions_shake: false
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/vare/granular/rate')
+        on:         vare_granular_rate
+    }
+
+    property real vare_gate_decay: 0.52
+    property real vare_env_decay: 0.05
+    property real vare_gate_leak: 0.0
+    property real vare_noise_rate: 2.62
+    property real vare_sequencer_width: 100
 
     Ossia.Binding
     {
         device:     ossia_net.client
-        node:       ossia_net.format_user_parameter('/modules/sensors/accelerometers/xyz/data')
-        on:         sensors_accelerometers_xyz_data
+        node:       ossia_net.format_user_parameter('/modules/vare/gate/decay')
+        on:         vare_gate_decay
     }
 
     Ossia.Binding
     {
         device:     ossia_net.client
-        node:       ossia_net.format_user_parameter('/modules/vare/percussions/handdrum')
-        on:         vare_percussions_handdrum
+        node:       ossia_net.format_user_parameter('/modules/vare/env/decay')
+        on:         vare_env_decay
     }
 
     Ossia.Binding
     {
         device:     ossia_net.client
-        node:       ossia_net.format_user_parameter('/modules/vare/percussions/shake')
-        on:         vare_percussions_shake
+        node:       ossia_net.format_user_parameter('/modules/vare/gate/leak')
+        on:         vare_gate_leak
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/vare/noise/rate')
+        on:         vare_noise_rate
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/vare/sequencer/width')
+        on:         vare_sequencer_width
     }
 
     property real markhor_resonator_brightness: 0.0
