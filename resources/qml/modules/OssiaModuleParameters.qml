@@ -16,6 +16,14 @@ Item
     property vector3d sensors_rotation_xyz_data:    Qt.vector3d(0, 0, 0)
     property vector2d touch_xy_points:              Qt.vector2d(0, 0)
     property bool sensors_proximity_close:          false
+    property int vote_choice: 0
+
+    Ossia.Binding //-------------------------------------------------------- VOTE_CHOICE
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter("/modules/vote/choice")
+        on:         vote_choice
+    }
 
     Ossia.Binding //-------------------------------------------------------- BLOW_GESTURE
     {

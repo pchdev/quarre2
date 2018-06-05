@@ -7,15 +7,6 @@ Rectangle
     anchors.fill: parent
     color: "transparent"
 
-    property int choice: 0
-
-    Ossia.Binding
-    {
-        device: ossia_net.client
-        node:   ossia_net.format_user_parameter('/vote/choice');
-        on:     choice
-    }
-
     Rectangle
     {
         id: tree_rect
@@ -37,12 +28,12 @@ Rectangle
             {
                 color = "darkgray";
                 mountain_rect.selected = false;
-                choice = 1;
+                ossia_modules.vote_choice = 1;
             }
             else
             {
                 color = "#282a2d"
-                if ( !mountain_rect.selected ) choice = 0;
+                if ( !mountain_rect.selected ) ossia_modules.vote_choice = 0;
             }
         }
 
@@ -52,7 +43,7 @@ Rectangle
             antialiasing: true
             anchors.fill: parent
             fillMode: Image.PreserveAspectFit
-            source: "modules/tree.png"
+            source: "qrc:/modules/tree.png"
 
             transform: Scale
             {
@@ -107,12 +98,12 @@ Rectangle
             {
                 color = "darkgray";
                 tree_rect.selected = false;
-                choice = 2;
+                ossia_modules.vote_choice = 2;
             }
             else
             {
                 color = "#282a2d"
-                if ( !tree_rect.selected ) choice = 0;
+                if ( !tree_rect.selected ) ossia_modules.vote_choice = 0;
             }
         }
 
@@ -122,7 +113,7 @@ Rectangle
             antialiasing: true
             anchors.fill: parent
             fillMode: Image.PreserveAspectCrop
-            source: "modules/mountain.png"
+            source: "qrc:/modules/mountain.png"
 
             transform: Scale
             {
