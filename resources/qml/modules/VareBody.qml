@@ -8,6 +8,7 @@ Rectangle
 
     QuarreSlider
     {
+        name: "ton"
         value: ossia_modules.vare_body_tone
         onValueChanged: ossia_modules.vare_body_tone = value
         y: parent.height*0.05
@@ -15,6 +16,7 @@ Rectangle
 
     QuarreSlider
     {
+        name: "fréquence de résonance"
         min: -1.0; max: 1.0
         value: ossia_modules.vare_body_pitch
         onValueChanged: ossia_modules.vare_body_pitch = value
@@ -23,6 +25,7 @@ Rectangle
 
     QuarreSlider
     {
+        name: "position horizontale"
         value: ossia_modules.vare_body_xy.x
         onValueChanged: ossia_modules.vare_body_xy.x = value
         y: parent.height*0.35
@@ -30,6 +33,7 @@ Rectangle
 
     QuarreSlider
     {
+        name: "position verticale"
         value: ossia_modules.vare_body_xy.y
         onValueChanged: ossia_modules.vare_body_xy.y = value
         y: parent.height*0.5
@@ -37,6 +41,7 @@ Rectangle
 
     QuarreSlider
     {
+        name: "résonance"
         value: ossia_modules.vare_body_sustain
         onValueChanged: ossia_modules.vare_body_sustain = value
         y: parent.height*0.65

@@ -32,6 +32,20 @@ Item
             color: "gray"
             anchors.verticalCenter: parent.verticalCenter
             opacity: 0.8
+
+            Text
+            {
+                id:         slider_id
+                text:       name
+                color:      "#000000"
+
+                horizontalAlignment:        Text.AlignHCenter
+                verticalAlignment:          Text.AlignVCenter
+                anchors.fill:               parent
+                font.pointSize:             16 * root.fontRatio
+                font.family:                font_lato_light.name
+                antialiasing:               true
+            }
         }
 
         handle: Rectangle

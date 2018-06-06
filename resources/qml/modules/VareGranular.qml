@@ -9,6 +9,7 @@ Rectangle
 
     QuarreSlider
     {
+        name: "hauteur"
         min: -3; max: 3;
         value: ossia_modules.vare_granular_pitch
         onValueChanged: ossia_modules.vare_granular_pitch = Math.floor(value)
@@ -17,6 +18,7 @@ Rectangle
 
     QuarreSlider
     {
+        name: "densité"
         min: 0.5; max: 4.0
         value: ossia_modules.vare_granular_overlap
         onValueChanged: ossia_modules.vare_granular_overlap= value
@@ -25,6 +27,7 @@ Rectangle
 
     QuarreSlider
     {
+        name: "vitesse"
         min: 2.0; max: 110.0
         value: ossia_modules.vare_granular_rate
         onValueChanged: ossia_modules.vare_granular_rate = value
@@ -33,6 +36,7 @@ Rectangle
 
     QuarreSlider
     {
+        name: "position"
         value: ossia_modules.vare_granular_x
         onValueChanged: ossia_modules.vare_granular_x= value
         y: parent.height*0.5
@@ -40,6 +44,7 @@ Rectangle
 
     QuarreSlider
     {
+        name: "position_mod"
         min: -1.0; max: 1.0
         value: ossia_modules.vare_granular_x_p
         onValueChanged: ossia_modules.vare_granular_x_p = value

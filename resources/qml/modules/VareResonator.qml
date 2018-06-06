@@ -8,6 +8,7 @@ Rectangle
 
     QuarreSlider
     {
+        name: "position"
         value: ossia_modules.vare_resonator_inpos
         onValueChanged: ossia_modules.vare_resonator_inpos = value
         y: parent.height*0.2*2
@@ -15,6 +16,7 @@ Rectangle
 
     QuarreSlider
     {
+        name: "échelle de résonance"
         min: -2.0; max: 2.0;
         onValueChanged: ossia_modules.vare_resonator_pitch_p = value
         value: ossia_modules.vare_resonator_pitch_p

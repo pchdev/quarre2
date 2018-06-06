@@ -236,7 +236,7 @@ Rectangle
         width:      parent.width *0.7
         height:     parent.height*0.5
 
-        y:          parent.height*0.43
+        y:          parent.height*0.49
 
         textFormat:             Text.PlainText
         wrapMode:               Text.WordWrap
@@ -246,7 +246,7 @@ Rectangle
         anchors.horizontalCenter: parent.horizontalCenter
 
         font.family: font_lato_light.name
-        font.pointSize: 12 * root.fontRatio
+        font.pointSize: 14 * root.fontRatio
 
         antialiasing: true
 

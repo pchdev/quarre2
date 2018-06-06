@@ -9,6 +9,7 @@ Rectangle
 
     QuarreSlider
     {
+        name: "réverbération"
         value: ossia_modules.jomon_reverb_level
         onValueChanged: ossia_modules.jomon_reverb_level = value
         y: parent.height*0.2
@@ -16,6 +17,7 @@ Rectangle
 
     QuarreSlider
     {
+        name: "filtrage"
         min: 0.25; max: 1.0
         value: ossia_modules.jomon_lpf_freq
         onValueChanged: ossia_modules.jomon_lpf_freq = value
@@ -25,6 +27,7 @@ Rectangle
 
     QuarreSlider
     {
+        name: "force"
         min: 5; max: 25;
         value: ossia_modules.jomon_arp_velocity
         onValueChanged: ossia_modules.jomon_arp_velocity = value
@@ -33,6 +36,7 @@ Rectangle
 
     QuarreSlider
     {
+        name: "legato"
         min: 2; max: 500;
         value: ossia_modules.jomon_arp_gate
         onValueChanged: ossia_modules.jomon_arp_gate = value
