@@ -58,5 +58,6 @@
         <file>modules/JomonPalm.qml</file>
         <file>modules/items/QuarreArpPad.qml</file>
         <file>modules/items/QuarreWheelSlider.qml</file>
+        <file>modules/XYZAccel.qml</file>
     </qresource>
 </RCC>

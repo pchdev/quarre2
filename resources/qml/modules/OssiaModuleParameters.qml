@@ -14,6 +14,7 @@ Item
     property real sensors_rotation_y_angle:         0.0
     property real sensors_rotation_z_angle:         0.0
     property vector3d sensors_rotation_xyz_data:    Qt.vector3d(0, 0, 0)
+    property vector3d sensors_accelerometers_xyz_data:    Qt.vector3d(0, 0, 0)
     property vector2d touch_xy_points:              Qt.vector2d(0, 0)
     property bool sensors_proximity_close:          false
     property int vote_choice: 0
@@ -100,6 +101,13 @@ Item
         device:     ossia_net.client
         node:       ossia_net.format_user_parameter("/modules/sensors/rotation/xyz/data")
         on:         sensors_rotation_xyz_data
+    }
+
+    Ossia.Binding //-------------------------------------------------------- ACCEL_XYZ
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter("/modules/sensors/accelerometers/xyz/data")
+        on:         sensors_accelerometers_xyz_data
     }
 
     Ossia.Binding //-------------------------------------------------------- TOUCH_XY
