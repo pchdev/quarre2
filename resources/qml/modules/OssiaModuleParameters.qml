@@ -408,7 +408,7 @@ Item
 
     property real jomon_reverb_level: 0.5
     property real jomon_lpf_freq: 1
-    property int jomon_arp_bend: 64
+    property real jomon_arp_bend: 0
     property real jomon_arp_tempo: 90
     property var jomon_arp_notes: []
     property int jomon_arp_notes_add: 0

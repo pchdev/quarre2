@@ -65,6 +65,9 @@ Rectangle
                 width:      pads_manager.width/6
                 height:     pads_manager.width/6
                 pad_index:  index
+
+                onPressedChanged:
+                    pads_manager.pressed(pad_index, pressed)
             }
         }
     }

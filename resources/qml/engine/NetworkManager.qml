@@ -66,7 +66,9 @@ Item {
         {
             if ( !connected )
             {
+                console.log("failed to connect to last known address, starting discovery...");
                 os_hdl.hostAddr = "";
+                os_hdl.register_zeroconf ( "bla", "bla", 3243 );
                 os_hdl.start_discovery();
                 discovering = true;
             }
@@ -79,20 +81,21 @@ Item {
 
         function connect()
         {            
-            os_hdl.register_zeroconf ( "bla", "bla", 3243 );
-
+            quarre_application.state        = "DISCONNECTED";
             deviceAddress   = os_hdl.device_address();
             var lksa        = read_last_known_server_address();
+            console.log     ( lksa );
 
             if ( lksa !== "" )
             {
                 hostAddr = lksa;
                 // try 5s, or else activate zeroconf;
                 timeout.running = true;
+                console.log("after timeout");
             }
-
             else
             {
+                os_hdl.register_zeroconf ( "bla", "bla", 3243 );
                 start_discovery ( );
                 discovering = true;
             }
@@ -101,6 +104,7 @@ Item {
         // when quarre-server found -------------------------------------------------------
         onHostAddrChanged:
         {
+            console.log(hostAddr);
             if ( hostAddr === "" ) return;
             ossia_client.openOSCQueryClient ( hostAddr, ossia_client.localPort )
             write_last_known_server_address ( hostAddr );

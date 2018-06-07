@@ -20,10 +20,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp                 \
     cpp/oshdl.cpp                   \
-    cpp/audio_hdl.cpp
+    cpp/audio_hdl.cpp \
+    cpp/networkhdl.cpp
 
 HEADERS += cpp/oshdl.hpp            \
-    cpp/audio_hdl.hpp
+    cpp/audio_hdl.hpp \
+    cpp/networkhdl.h
 
 RESOURCES +=                        \
     resources/qml/qml.qrc           \

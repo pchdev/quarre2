@@ -43,7 +43,7 @@ Rectangle
             id: pad_repeater
             model: pads
 
-            QuarreArpPad
+            QuarrePad
             {
                 id:         target
                 width:      arp.width/6

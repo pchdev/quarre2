@@ -25,16 +25,9 @@ Rectangle
     MouseArea
     {
         anchors.fill: parent
-        onPressed:
-        {
-            pad.pressed = true;
-            pads_manager.pressed(pad_index, true);
-        }
 
-        onReleased:
-        {
-            pads_manager.pressed(pad_index, false);
-            pad.pressed = false;
-        }
+        // let parent decide what to do when pressed
+        onPressed: pad.pressed  = true;
+        onReleased: pad.pressed = false;
     }
 }
