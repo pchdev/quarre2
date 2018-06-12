@@ -304,7 +304,7 @@ Item
     {
         device:     ossia_net.client
         node:       ossia_net.format_user_parameter('/modules/markhor/body/pitch')
-        on:         vare_markhor_pitch
+        on:         markhor_body_pitch
     }
 
     Ossia.Binding

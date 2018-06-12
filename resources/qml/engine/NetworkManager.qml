@@ -91,7 +91,6 @@ Item {
                 hostAddr = lksa;
                 // try 5s, or else activate zeroconf;
                 timeout.running = true;
-                console.log("after timeout");
             }
             else
             {

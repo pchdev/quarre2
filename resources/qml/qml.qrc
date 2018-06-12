@@ -59,5 +59,6 @@
         <file>modules/items/QuarreArpPad.qml</file>
         <file>modules/items/QuarreWheelSlider.qml</file>
         <file>modules/XYZAccel.qml</file>
+        <file>modules/items/TriggerAnimation.qml</file>
     </qresource>
 </RCC>

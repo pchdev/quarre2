@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Quarre 1.0 as Quarre
 import Ossia 1.0 as Ossia
+import "items"
 
 Rectangle
 {
@@ -23,35 +24,19 @@ Rectangle
         onTriggered:
         {
             rms = sensor_manager.microphone.rms;
-            if ( rms > 0.4 && !ossia_modules.gestures_blow_trigger)
+            if ( rms > 0.3 && !ossia_modules.gestures_blow_trigger)
             {
                 ossia_modules.gestures_blow_trigger = true;
-                ossia_net.oshdl.vibrate(50);
+                anim.animation.running = true;
+
             }
-            else if ( rms < 0.4 && ossia_modules.gestures_blow_trigger )
+            else if ( rms < 0.2 && ossia_modules.gestures_blow_trigger )
                  ossia_modules.gestures_blow_trigger = false;
         }
     }
 
     // -------------------------------------------------------------------------------------------
 
-    Rectangle
-    {
-        anchors.verticalCenter:     parent.verticalCenter
-        anchors.horizontalCenter:   parent.horizontalCenter
 
-        width:  parent.width*0.2
-        height: parent.height*0.75
-
-        color: "white"
-        border.width: 15
-        border.color: "white"
-
-        Rectangle
-        {
-            color: "black"
-            anchors.fill: parent
-            height: parent.height * (1-rms);
-        }
-    }
+    TriggerAnimation { id: anim }
 }

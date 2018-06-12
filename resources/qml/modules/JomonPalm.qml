@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "items"
 
 Rectangle
 {
@@ -13,6 +14,8 @@ Rectangle
         sensor_manager.rotation.active = enabled;
         poll.running = enabled;
     }
+
+    TriggerAnimation { id: t_anim; animation.loops: Animation.Infinite; len: 625 }
 
     Timer
     {
@@ -31,12 +34,14 @@ Rectangle
             {
                 proximity_state = true;
                 ossia_modules.jomon_palm_state = true;
+                t_anim.animation.running = true;
             }
 
             else if ( !sensor_manager.proximity.reading.near && proximity_state )
             {
                 proximity_state = false;
                 ossia_modules.jomon_palm_state = false;
+                t_anim.animation.running = false;
             }
         }
     }

@@ -3,6 +3,7 @@ import QtQuick 2.0
 Item
 {
     property string module_on_hold: ""
+    property var incoming_interaction
 
     function prepare_next ( arglist )
     {
@@ -33,6 +34,8 @@ Item
         upper_view.next.description     = arglist[1];
         upper_view.next.timer.start     ( );
 
+        incoming_interaction = arglist;
+
         if ( quarre_application.state === "IDLE" )
         {
             quarre_application.state    = "INCOMING_INTERACTION";
@@ -46,6 +49,11 @@ Item
             quarre_application.state = "ACTIVE_AND_INCOMING_INTERACTIONS";
             module_on_hold = arglist[2];
         }
+    }
+
+    function trigger_next_manual(arglist)
+    {
+        trigger_next(incoming_interaction);
     }
 
     function trigger_next(arglist)

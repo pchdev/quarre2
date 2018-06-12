@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "items"
 
 Rectangle
 {
@@ -23,11 +24,16 @@ Rectangle
         onTriggered:
         {
             if ( sensor_manager.proximity.reading.near && !close_triggered )
-            ossia_modules.sensors_proximity_close = !ossia_modules.sensors_proximity_close
+            {
+                ossia_modules.sensors_proximity_close = !ossia_modules.sensors_proximity_close
+                t_anim.animation.running = true;
+            }
 
             close_triggered = sensor_manager.proximity.reading.near;
         }
     }
+
+    TriggerAnimation { id: t_anim; anchors.fill: parent }
 
     XYZRotation { id: rotation }
 
