@@ -61,6 +61,9 @@ Rectangle
         {
             // start polling timer, poll with limited time (3 or 4 seconds max)
             trajectory.length = 0;
+            recording_phase = 0;
+            sending_phase = 0;
+            trajectory_size = 0;
             record_timer.running = true;
             trajectory_canvas.getContext('2d').reset();
         }

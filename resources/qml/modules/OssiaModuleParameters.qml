@@ -220,6 +220,14 @@ Item
     property real vare_gate_leak: 0.0
     property real vare_noise_rate: 2.62
     property real vare_sequencer_width: 100
+    property real vare_seq_rate: 0.571
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/vare/seq/rate')
+        on:         vare_seq_rate
+    }
 
     Ossia.Binding
     {

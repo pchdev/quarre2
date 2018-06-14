@@ -3,8 +3,51 @@ import "items"
 
 Rectangle
 {
+    id: vres
     anchors.fill: parent
     color: "transparent"
+
+    property var rates: [ 0.571, 0.8565, 1.142, 1.713, 2.284 ]
+
+    function update(idx, st)
+    {
+        if ( st )
+        {
+            pad_repeater.itemAt(0).release();
+            pad_repeater.itemAt(idx).push();
+
+            ossia_modules.vare_seq_rate = rates[idx];
+        }
+        else
+        {
+            pad_repeater.itemAt(idx).release();
+            pad_repeater.itemAt(0).push();
+
+            ossia_modules.vare_seq_rate = rates[0];
+        }
+    }
+
+    Row
+    {
+        spacing: 10
+        width: parent.width
+        height: parent.height*0.25
+        y: parent.height *0.1
+        x: parent.height*0.13
+
+        Repeater
+        {
+            id: pad_repeater
+            model: rates
+            QuarrePad
+            {
+                pad_index: index
+                onPressedChanged: vres.update(pad_index, pressed);
+                height: vres.height*0.15
+                width: height
+            }
+        }
+    }
 
     QuarreSlider
     {

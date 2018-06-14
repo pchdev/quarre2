@@ -12,23 +12,6 @@ Rectangle
     property alias description: next_interaction_description.text
     property alias countdown: next_interaction_countdown_label.text
 
-    Timer
-    {
-        id: safety_timer
-        repeat: false
-        interval: 2000
-
-        onTriggered:
-            if ( quarre_application.state === "INCOMING_INTERACTION" )
-                interaction_manager.trigger_next_manual();
-    }
-
-    onCountChanged:
-    {
-        if ( count == 0 )
-            safety_timer.start();
-    }
-
     states: [
 
         State //--------------------------------------------------------------- FULL_VIEW_STATE
