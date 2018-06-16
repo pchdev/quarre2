@@ -427,6 +427,55 @@ Item
     property string jomon_arp_mode: "FIFO"
     property bool jomon_arp_trigger: false
 
+    property real jomon_mangler_resampler: 12000.0
+    property real jomon_mangler_thermonuclear: 0.0
+    property int jomon_mangler_bitdepth: 8.0
+    property real jomon_mangler_love: 75.0
+    property real jomon_mangler_jive: 15.0
+    property int jomon_mangler_attitude: 0
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/jomon/mangler/resample')
+        on:         jomon_mangler_resampler
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/jomon/mangler/thermonuclear')
+        on:         jomon_mangler_thermonuclear
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/jomon/mangler/bitdepth')
+        on:         jomon_mangler_bitdepth
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/jomon/mangler/love')
+        on:         jomon_mangler_love
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/jomon/mangler/jive')
+        on:         jomon_mangler_jive
+    }
+
+    Ossia.Binding
+    {
+        device:     ossia_net.client
+        node:       ossia_net.format_user_parameter('/modules/jomon/mangler/attitude')
+        on:         jomon_mangler_attitude
+    }
+
     Ossia.Binding
     {
         device:     ossia_net.client

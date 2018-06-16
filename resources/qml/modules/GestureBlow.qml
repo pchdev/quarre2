@@ -12,6 +12,7 @@ Rectangle
 
     onEnabledChanged:
     {
+        z_rotation.enabled                  = enabled;
         sensor_manager.microphone.active    = enabled;
         polling_timer.running               = enabled;        
     }
@@ -37,6 +38,6 @@ Rectangle
 
     // -------------------------------------------------------------------------------------------
 
-
+    ZRotation { id: z_rotation }
     TriggerAnimation { id: anim }
 }

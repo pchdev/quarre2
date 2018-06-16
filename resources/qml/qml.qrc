@@ -62,5 +62,7 @@
         <file>modules/items/TriggerAnimation.qml</file>
         <file>modules/AmmonBells.qml</file>
         <file>modules/JomonPalmZ.qml</file>
+        <file>modules/JomonMangler.qml</file>
+        <file>modules/JomonMangler2.qml</file>
     </qresource>
 </RCC>
