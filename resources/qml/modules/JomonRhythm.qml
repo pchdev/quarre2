@@ -15,8 +15,8 @@ Rectangle
 
         height: parent.height * 0.5
         width: height * 0.2
-        y: parent.height * 0.15
-        x: cb.x
+        y: 0
+        x: parent.height * 0.25
         value: ossia_modules.jomon_arp_bend
         live: true
 
@@ -26,17 +26,16 @@ Rectangle
     Rectangle
     {
         color: "transparent"
-        width: parent.width * 0.6
-        height: width
-        y: parent.height * 0.15
-        x: parent.width * 0.35
+        width: parent.width
+        height: parent.height*0.5
+        y: parent.height * 0.55
 
         QuarreSlider
         {
             name: "réverbération"
             value: ossia_modules.jomon_reverb_level
             onValueChanged: ossia_modules.jomon_reverb_level = value
-            y: parent.height*0.1
+            height: parent.height * 0.2
         }
 
         QuarreSlider
@@ -45,37 +44,69 @@ Rectangle
             min: 0.25; max: 1.0
             value: ossia_modules.jomon_lpf_freq
             onValueChanged: ossia_modules.jomon_lpf_freq = value
-            y: parent.height*0.3
+            y: parent.height*0.25
+            height: parent.height * 0.2
         }
 
-        QuarrePad
+        ComboBox
         {
-            id: tempo_pad
-            y: parent.height * 0.5
-            height: parent.height * 0.25
-            width: height
+            id: cb
+            y: parent.height*0.5
+            height: parent.height*0.25
+            width: parent.width*0.65
             anchors.horizontalCenter: parent.horizontalCenter
-            onPressedChanged:
-            {
-                if ( pressed ) tempo_pad.push();
-                else tempo_pad.release();
+            model: [ "FIFO", "Down", "Up", "Up/Down", "Random" ]
 
-                ossia_modules.jomon_arp_tempo = (!pressed)*90;
-            }
+            onActivated:
+                ossia_modules.jomon_arp_mode = textAt(index);
         }
     }
 
-    ComboBox
+    Canvas
     {
-        id: cb
-        y: parent.height*0.7
-        height: parent.height*0.1
-        width: parent.width*0.65
-        anchors.horizontalCenter: parent.horizontalCenter
-        model: [ "FIFO", "Down", "Up", "Up/Down", "Random" ]
+        id: string_canvas
+        x: parent.width*0.4
+        width: parent.width*0.6
+        height: parent.height*0.5
 
-        onActivated:
-            ossia_modules.jomon_arp_mode = textAt(index);
+        onPaint:
+        {
+            var ctx        = string_canvas.getContext('2d');
 
+            ctx.strokeStyle  = "#ffffff";
+            ctx.lineWidth    = 5;
+
+            var xpos = string_canvas.width*0.5;
+            ctx.moveTo(xpos, 0);
+            ctx.lineTo(xpos, string_canvas.height);
+            ctx.stroke();
+        }
+
+        MouseArea
+        {
+            property real origin: 0.0
+
+            anchors.fill: parent
+            onPressed: origin = mouseX;
+
+            onPositionChanged:
+            {
+                if ( origin <= string_canvas.width/2 &&
+                     mouse.x >= string_canvas.width/2 )
+                {
+                    ossia_net.oshdl.vibrate(50);
+                    ossia_modules.jomon_arp_trigger = !ossia_modules.jomon_arp_trigger;
+                    origin = string_canvas.width;
+                }
+
+                else if ( origin >= string_canvas.width/2 &&
+                         mouse.x <= string_canvas.width/2 )
+                {
+                    ossia_net.oshdl.vibrate(50);
+                    ossia_modules.jomon_arp_trigger = !ossia_modules.jomon_arp_trigger;
+                    origin = 0;
+                }
+            }
+        }
     }
 }

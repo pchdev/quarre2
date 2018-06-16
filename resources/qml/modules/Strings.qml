@@ -53,7 +53,7 @@ Rectangle
 
             onPositionChanged:
             {
-                if      ( origin == string_canvas.width ) return;
+                if      ( origin === string_canvas.width ) return;
                 else if ( origin <= string_canvas.left_edge &&
                           mouse.x >= string_canvas.right_edge )
                 {
@@ -64,5 +64,4 @@ Rectangle
             }
         }
     }
-
 }
