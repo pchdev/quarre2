@@ -10,5 +10,6 @@
         <file>arrow.png</file>
         <file>mountain.png</file>
         <file>tree.png</file>
+        <file>palm.png</file>
     </qresource>
 </RCC>

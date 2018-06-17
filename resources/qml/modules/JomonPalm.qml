@@ -15,6 +15,20 @@ Rectangle
         poll.running = enabled;
     }
 
+    Item
+    {
+        anchors.fill: parent
+
+        Image //----------------------------------------------------------------- GUI
+        {
+            id: hand
+            antialiasing: true
+            anchors.fill: parent
+            fillMode: Image.PreserveAspectFit
+            source: "qrc:/modules/palm.png"
+        }
+    }
+
     TriggerAnimation { id: t_anim; animation.loops: Animation.Infinite; len: 625 }
 
     Timer

@@ -15,6 +15,20 @@ Rectangle
         sensor_manager.proximity.active = enabled;
     }
 
+    Item
+    {
+        anchors.fill: parent
+
+        Image //----------------------------------------------------------------- GUI
+        {
+            id: hand
+            antialiasing: true
+            anchors.fill: parent
+            fillMode: Image.PreserveAspectFit
+            source: "qrc:/modules/palm.png"
+        }
+    }
+
     Timer
     {
         id: proximity_poll
@@ -34,7 +48,6 @@ Rectangle
     }
 
     TriggerAnimation { id: t_anim; anchors.fill: parent }
-
     XYZRotation { id: rotation }
 
 }
