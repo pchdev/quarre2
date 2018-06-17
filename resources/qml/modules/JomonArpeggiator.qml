@@ -22,7 +22,6 @@ Rectangle
             ossia_modules.jomon_arp_notes_add = idx;
             ossia_modules.jomon_arp_notes_add = 0;
         }
-
         else
         {
             ossia_modules.jomon_arp_notes_remove = idx;

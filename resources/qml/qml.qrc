@@ -50,11 +50,9 @@
         <file>modules/MarkhorBody.qml</file>
         <file>modules/MarkhorGranular.qml</file>
         <file>modules/Transitions.qml</file>
-        <file>modules/AmmonReverb.qml</file>
         <file>modules/Strings2.qml</file>
         <file>modules/JomonArpeggiator.qml</file>
         <file>modules/JomonRhythm.qml</file>
-        <file>modules/JomonReverb.qml</file>
         <file>modules/JomonPalm.qml</file>
         <file>modules/items/QuarreArpPad.qml</file>
         <file>modules/items/QuarreWheelSlider.qml</file>

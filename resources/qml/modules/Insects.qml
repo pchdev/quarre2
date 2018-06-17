@@ -34,9 +34,8 @@ Rectangle
         onDetected: t_anim.animation.running = true
     }
 
-    TriggerAnimation { id: t_anim; anchors.fill: parent }
-
-    ZRotation       { id: z_rotation }
-    XRotation       { id: x_rotation; visible: false }
-    GestureShake    { id: gesture_shake; visible: false }
+    TriggerAnimation    { id: t_anim; anchors.fill: parent }
+    ZRotation           { id: z_rotation }
+    XRotation           { id: x_rotation; visible: false }
+    GestureShake        { id: gesture_shake; visible: false }
 }

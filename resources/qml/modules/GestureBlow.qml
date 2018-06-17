@@ -29,7 +29,6 @@ Rectangle
             {
                 ossia_modules.gestures_blow_trigger = true;
                 anim.animation.running = true;
-
             }
             else if ( rms < 0.2 && ossia_modules.gestures_blow_trigger )
                  ossia_modules.gestures_blow_trigger = false;
