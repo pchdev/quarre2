@@ -11,6 +11,20 @@ Rectangle
         polling_timer.running = enabled;
     }
 
+    Item
+    {
+        anchors.fill: parent
+
+        Image //----------------------------------------------------------------- GUI
+        {
+            id: hand
+            antialiasing: true
+            anchors.fill: parent
+            fillMode: Image.PreserveAspectFit
+            source: "qrc:/modules/xyz.png"
+        }
+    }
+
     Timer
     {
         id: polling_timer
