@@ -17,11 +17,14 @@ Slider
         color: "darkgrey"
         border.color: "black"
         border.width: 1
+        width: control.availableWidth*0.5
+        x: control.availableWidth*0.25
+        implicitWidth: control.availableWidth*0.5
     }
 
     handle: Rectangle
     {
-        implicitWidth: control.width*2
+        implicitWidth: control.width
         implicitHeight: implicitWidth
         radius: implicitHeight/2
         border.color: "black"

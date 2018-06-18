@@ -48,6 +48,6 @@ Rectangle
     }
 
     TriggerAnimation { id: t_anim; anchors.fill: parent }
-    XYZRotation { id: rotation }
+    XYZRotation { id: rotation; visible: false }
 
 }

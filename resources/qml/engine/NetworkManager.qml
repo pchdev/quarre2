@@ -268,7 +268,7 @@ Item {
 
         onSetValue_sig:
         {
-            if ( quarre_application.status === "INCOMING")
+            if ( quarre_application.state === "INCOMING_INTERACTION")
                 interaction_manager.cancel_incoming();
 
             interaction_manager.end_current();
@@ -310,7 +310,7 @@ Item {
 
         onSetValue_sig:
         {
-            if ( quarre_application.status === "INCOMING")
+            if ( quarre_application.state === "INCOMING_INTERACTION")
                 interaction_manager.cancel_incoming();
 
             interaction_manager.end_current();

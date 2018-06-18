@@ -46,6 +46,9 @@ Item
             quarre_application.state = "ACTIVE_AND_INCOMING_INTERACTIONS";
             module_on_hold = arglist[2];
         }
+
+        if ( flash.opacity > 0 )
+            flash.opacity = 0;
     }
 
     function trigger_next(arglist)
@@ -150,11 +153,11 @@ Item
 
     function cancel_incoming ( )
     {
-        if ( quarre_application.state === "INCOMING_INTERACTION")
-            quarre_application.state = "IDLE";
 
-        else if ( quarre_application.state === "ACTIVE_AND_INCOMING_INTERACTIONS")
-            quarre_application.state = "ACTIVE_INTERACTION";
+        quarre_application.state = "IDLE";
+        module_loader.source = "../modules/Idle.qml"
+
+        grey_animation_out.running = true;
 
         upper_view.next.title            = "";
         upper_view.next.description      = "";

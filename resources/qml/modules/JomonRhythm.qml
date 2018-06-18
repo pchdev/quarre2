@@ -8,15 +8,68 @@ Rectangle
     anchors.fill: parent
     color: "transparent"
 
+    Canvas
+    {
+        id: string_canvas
+        x: parent.width*0.4
+        width: parent.width*0.6
+        height: parent.height*0.5
+
+        onPaint:
+        {
+            var ctx        = string_canvas.getContext('2d');
+
+            ctx.strokeStyle  = "#ffffff";
+            ctx.lineWidth    = 5;
+
+            var xpos = string_canvas.width*0.5;
+            ctx.moveTo(xpos, 0);
+            ctx.lineTo(xpos, string_canvas.height);
+            ctx.stroke();
+        }
+
+        MouseArea
+        {
+            property real origin: 0.0
+
+            anchors.fill: parent
+            onPressed:
+            {
+                origin = mouseX;
+            }
+
+            onPositionChanged:
+            {
+                if ( origin <= string_canvas.width/2 &&
+                        mouse.x >= string_canvas.width/2 )
+                {
+                    ossia_net.oshdl.vibrate(50);
+                    ossia_modules.jomon_arp_trigger = !ossia_modules.jomon_arp_trigger;
+                    origin = string_canvas.width;
+                }
+
+                else if ( origin >= string_canvas.width/2 &&
+                         mouse.x <= string_canvas.width/2 )
+                {
+                    ossia_net.oshdl.vibrate(50);
+                    ossia_modules.jomon_arp_trigger = !ossia_modules.jomon_arp_trigger;
+                    origin = 0;
+                }
+
+                mouse.accepted = false;
+            }
+        }
+    }
+
     QuarreWheelSlider
     {
         from: -1; to: 1;
         midValue: 0.0
 
         height: parent.height * 0.5
-        width: height * 0.2
+        width: height * 0.4
         y: 0
-        x: parent.height * 0.25
+        x: parent.height * 0.2
         value: ossia_modules.jomon_arp_bend
         live: true
 
@@ -59,54 +112,6 @@ Rectangle
 
             onActivated:
                 ossia_modules.jomon_arp_mode = textAt(index);
-        }
-    }
-
-    Canvas
-    {
-        id: string_canvas
-        x: parent.width*0.4
-        width: parent.width*0.6
-        height: parent.height*0.5
-
-        onPaint:
-        {
-            var ctx        = string_canvas.getContext('2d');
-
-            ctx.strokeStyle  = "#ffffff";
-            ctx.lineWidth    = 5;
-
-            var xpos = string_canvas.width*0.5;
-            ctx.moveTo(xpos, 0);
-            ctx.lineTo(xpos, string_canvas.height);
-            ctx.stroke();
-        }
-
-        MouseArea
-        {
-            property real origin: 0.0
-
-            anchors.fill: parent
-            onPressed: origin = mouseX;
-
-            onPositionChanged:
-            {
-                if ( origin <= string_canvas.width/2 &&
-                     mouse.x >= string_canvas.width/2 )
-                {
-                    ossia_net.oshdl.vibrate(50);
-                    ossia_modules.jomon_arp_trigger = !ossia_modules.jomon_arp_trigger;
-                    origin = string_canvas.width;
-                }
-
-                else if ( origin >= string_canvas.width/2 &&
-                         mouse.x <= string_canvas.width/2 )
-                {
-                    ossia_net.oshdl.vibrate(50);
-                    ossia_modules.jomon_arp_trigger = !ossia_modules.jomon_arp_trigger;
-                    origin = 0;
-                }
-            }
         }
     }
 }
