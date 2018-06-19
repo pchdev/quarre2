@@ -8,8 +8,9 @@ Rectangle
 
     property var texts: [
         "à la mémoire de Simone David...",
-        "De grands remerciements à Jean-Michaël Celerier",
-        "à Nadine, Philippe, Vincent et Paule Cochard",
+        "De grands remerciements à Nadine, Philippe, Vincent et Paule Cochard,",
+        "à Jean-Michaël Celerier",
+        "à François-Xavier Féron",
         "ainsi qu'à Thibaud Keller",
         "à toute l'équipe du SCRIME, de l'Arbre intégral et du CRNA pour leur soutien",
         "par ordre alphabétique :",
@@ -22,7 +23,6 @@ Rectangle
         "Myriam Desainte-Catherine",
         "Gaël Domenger",
         "Christian Faurens",
-        "François-Xavier Féron",
         "Donatien Garnier",
         "Antoine Hubineau",
         "Guzel K.",

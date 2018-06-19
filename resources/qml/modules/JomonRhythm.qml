@@ -11,8 +11,8 @@ Rectangle
     Canvas
     {
         id: string_canvas
-        x: parent.width*0.4
-        width: parent.width*0.6
+        x: parent.width*0.5
+        width: parent.width*0.5
         height: parent.height*0.5
 
         onPaint:
@@ -30,13 +30,11 @@ Rectangle
 
         MouseArea
         {
+            id: marea
             property real origin: 0.0
 
             anchors.fill: parent
-            onPressed:
-            {
-                origin = mouseX;
-            }
+            onPressed: origin = mouseX;
 
             onPositionChanged:
             {
@@ -55,8 +53,6 @@ Rectangle
                     ossia_modules.jomon_arp_trigger = !ossia_modules.jomon_arp_trigger;
                     origin = 0;
                 }
-
-                mouse.accepted = false;
             }
         }
     }

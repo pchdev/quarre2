@@ -9,7 +9,8 @@ Slider
 
     property real midValue: 0.5
 
-    onPressedChanged: if ( !pressed ) value = midValue;
+    onPressedChanged:
+        if ( !pressed && !marea.pressed ) value = midValue;
 
     background: Rectangle
     {

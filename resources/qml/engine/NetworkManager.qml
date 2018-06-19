@@ -223,7 +223,11 @@ Item {
         device:     ossia_client
         node:       format_user_parameter   ( '/interactions/next/incoming' )
 
-        onValueChanged: interaction_manager.prepare_next(value);
+        onValueChanged:
+        {
+            console.log("incoming:", value);
+            interaction_manager.prepare_next(value);
+        }
     }
 
     Ossia.Callback //---------------------------------------------------------INTERACTION_BEGIN
@@ -232,7 +236,11 @@ Item {
         device:     ossia_client
         node:       format_user_parameter   ( '/interactions/next/begin' )
 
-        onValueChanged: interaction_manager.trigger_next(value);
+        onValueChanged:
+        {
+            console.log("beginning:", value);
+            interaction_manager.trigger_next(value);
+        }
     }
 
     Ossia.Callback //---------------------------------------------------------INTERACTION_CANCEL
@@ -268,10 +276,12 @@ Item {
 
         onSetValue_sig:
         {
+            console.log("ending current");
+            console.log(quarre_application.state);
             if ( quarre_application.state === "INCOMING_INTERACTION")
                 interaction_manager.cancel_incoming();
 
-            interaction_manager.end_current();
+            else interaction_manager.end_current();
         }
     }
 
@@ -310,10 +320,12 @@ Item {
 
         onSetValue_sig:
         {
+            console.log("ending common current");
+            console.log(quarre_application.state);
             if ( quarre_application.state === "INCOMING_INTERACTION")
                 interaction_manager.cancel_incoming();
 
-            interaction_manager.end_current();
+            else interaction_manager.end_current();
         }
     }
 }

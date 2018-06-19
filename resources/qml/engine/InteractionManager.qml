@@ -153,7 +153,6 @@ Item
 
     function cancel_incoming ( )
     {
-
         quarre_application.state = "IDLE";
         module_loader.source = "../modules/Idle.qml"
 
