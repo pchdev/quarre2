@@ -53,16 +53,22 @@ Rectangle
 
             onPositionChanged:
             {
-                if      ( origin == string_canvas.width ) return;
-                else if ( origin <= string_canvas.left_edge &&
-                          mouse.x >= string_canvas.right_edge )
+                if ( origin <= string_canvas.left_edge &&
+                        mouse.x >= string_canvas.right_edge )
                 {
                     ossia_net.oshdl.vibrate(100);
                     ossia_modules.strings_trigger2 = !ossia_modules.strings_trigger2;
-                    origin = string_canvas.width
+                    origin = string_canvas.width;
+                }
+
+                else if ( origin >= string_canvas.right_edge &&
+                         mouse.x <= string_canvas.left_edge )
+                {
+                    ossia_net.oshdl.vibrate(100);
+                    ossia_modules.strings_trigger2 = !ossia_modules.strings_trigger2;
+                    origin = 0;
                 }
             }
         }
     }
-
 }
