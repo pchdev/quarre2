@@ -7,7 +7,7 @@ Rectangle
     property alias  timer:          current_interaction_timer
     property alias  title:          current_interaction_title.text
     property alias  description:    current_interaction_description.text
-    property alias countdown:       current_interaction_countdown_label.text
+    property alias  countdown:      current_interaction_countdown_label.text
 
     WPN114.Node on count { path: "/interactions/current/countdown" }
 

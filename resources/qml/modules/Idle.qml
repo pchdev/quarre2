@@ -12,8 +12,9 @@ Rectangle
 
         width:  parent.width
         height: parent.height
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
+
+        horizontalAlignment:    Text.AlignHCenter
+        verticalAlignment:      Text.AlignVCenter
 
         font.family:    font_lato_light.name
         font.pointSize: root.fontRatio * 30

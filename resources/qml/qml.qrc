@@ -11,55 +11,7 @@
         <file>views/HeaderView.qml</file>
         <file>views/CurrentInteractionView.qml</file>
         <file>views/NextInteractionView.qml</file>
-        <file>modules/GestureBlow.qml</file>
         <file>modules/Default.qml</file>
-        <file>modules/GestureViewer.qml</file>
         <file>modules/Idle.qml</file>
-        <file>modules/Pads.qml</file>
-        <file>modules/Sliders.qml</file>
-        <file>modules/Strings.qml</file>
-        <file>modules/TextViewer.qml</file>
-        <file>modules/Birds.qml</file>
-        <file>modules/Trajectories.qml</file>
-        <file>modules/XYTouch.qml</file>
-        <file>modules/Tutorial.qml</file>
-        <file>modules/Vote.qml</file>
-        <file>modules/XRotation.qml</file>
-        <file>modules/YRotation.qml</file>
-        <file>modules/ZRotation.qml</file>
-        <file>modules/items/QuarreBird.qml</file>
-        <file>modules/items/QuarrePad.qml</file>
-        <file>modules/items/QuarreSlider.qml</file>
-        <file>modules/items/SpatializationSphere.qml</file>
-        <file>modules/GestureHammer.qml</file>
-        <file>modules/GesturePalm.qml</file>
-        <file>modules/GestureShake.qml</file>
-        <file>modules/OssiaModuleParameters.qml</file>
-        <file>modules/XYZRotation.qml</file>
-        <file>modules/Insects.qml</file>
-        <file>modules/VareResonator.qml</file>
-        <file>modules/VareBody.qml</file>
-        <file>modules/VareGranular.qml</file>
-        <file>modules/VareRainbells.qml</file>
-        <file>modules/VarePercs.qml</file>
-        <file>modules/items/QuarrePadToggle.qml</file>
-        <file>modules/WPN214.qml</file>
-        <file>modules/MarkhorPads.qml</file>
-        <file>modules/MarkhorResonator.qml</file>
-        <file>modules/MarkhorBody.qml</file>
-        <file>modules/MarkhorGranular.qml</file>
-        <file>modules/Transitions.qml</file>
-        <file>modules/Strings2.qml</file>
-        <file>modules/JomonArpeggiator.qml</file>
-        <file>modules/JomonRhythm.qml</file>
-        <file>modules/JomonPalm.qml</file>
-        <file>modules/items/QuarreArpPad.qml</file>
-        <file>modules/items/QuarreWheelSlider.qml</file>
-        <file>modules/XYZAccel.qml</file>
-        <file>modules/items/TriggerAnimation.qml</file>
-        <file>modules/AmmonBells.qml</file>
-        <file>modules/JomonPalmZ.qml</file>
-        <file>modules/JomonMangler.qml</file>
-        <file>modules/JomonMangler2.qml</file>
     </qresource>
 </RCC>

@@ -2,9 +2,6 @@
     <qresource prefix="/background">
         <file>quarre.jpg</file>
     </qresource>
-    <qresource prefix="/teaser">
-        <file>white.png</file>
-    </qresource>
     <qresource prefix="/modules">
         <file>rose2.png</file>
         <file>arrow.png</file>

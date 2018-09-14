@@ -5,29 +5,19 @@ Rectangle
     color: "transparent"
     anchors.fill: parent
 
-    Image
+    Text //---------------------------------------------------------------------- LOGO
     {
-        id: teaser_claw
-        antialiasing: true
-        fillMode: Image.PreserveAspectCrop
-        source: "qrc:/teaser/white.png"
-        x: parent.width/1.5
-        y: parent.height *0.1
-        opacity: 0.2
-    }
+        id:         quarre_log
+        width:      parent.width
+        height:     parent.height
+        y:          parent.height*0.25
+        color:      "#ffffff"
+        text:       "quarrè"
 
-    Text
-    {
-        id: quarre_log
-        width: parent.width
-        height: parent.height
-        horizontalAlignment: Text.AlignHCenter
-        y: parent.height*0.25
+        horizontalAlignment: Text.AlignHCenter        
         font.family: font_lato_light.name
         font.pointSize: 50 * root.fontRatio
         textFormat: Text.PlainText
-        color: "#ffffff"
-        text: "quarrè"
         antialiasing: true
     }
 
