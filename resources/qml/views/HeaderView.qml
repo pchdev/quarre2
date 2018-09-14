@@ -1,8 +1,8 @@
 import QtQuick 2.0
+import WPN114 1.0 as WPN114
 
 Rectangle
 {
-    // FIRST UPPER VIEW SECTION
     property alias  timer_label: header_timer_label
     property alias  timer:       header_timer
     property alias  scenario:    header_scenario_label
@@ -69,8 +69,8 @@ Rectangle
 
     //-------------------------------------------------------------------------------------------------------
 
-    function int_to_time(value) {
-
+    function int_to_time(value)
+    {
         var min = Math.floor(value/60), sec = value % 60;
         var min_str, sec_str;
 
@@ -85,7 +85,7 @@ Rectangle
         return min_str + ":" + sec_str;
     }
 
-    Timer
+    Timer //------------------------------------------------------------ TIMER
     {
         id: header_timer
         interval: 1000
@@ -95,31 +95,30 @@ Rectangle
             parent.count += 1;
             header_timer_label.text = parent.int_to_time(parent.count);
         }
+
+        WPN114.Node on running { path: "/scenario/running" }
     }
 
-    Text
+    Text //------------------------------------------------------------ SCENARIO_LABEL
     {
-        // NAME OF THE CURRENT SCENARIO
-        id: header_scenario_label
-        text: "quarrè"
-        color: "#ffffff"
+        id:     header_scenario_label
+        text:   "quarrè"
+        color:  "#ffffff"
 
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignLeft
-        anchors.fill: parent
-        anchors.leftMargin: parent.width * 0.05
+        verticalAlignment:      Text.AlignVCenter
+        horizontalAlignment:    Text.AlignLeft
+        anchors.fill:           parent
+        anchors.leftMargin:     parent.width * 0.05
 
-        textFormat: Text.PlainText
-        font.pointSize: 14 * root.fontRatio
-        font.family: font_lato_light.name
+        textFormat:         Text.PlainText
+        font.pointSize:     14 * root.fontRatio
+        font.family:        font_lato_light.name
+
+        WPN114.Node on text { path: "/scenario/name" }
     }
 
-    Text
+    Text //----------------------------------------------------------- TIMER_LABEL
     {
-        // THE TIMER
-        // gets started whenever the device receives
-        // a critical 'scenario start' message
-        // and stopped at 'scenario end' message
         id: header_timer_label
         text: "00:00"
         color: "#ffffff"
@@ -132,9 +131,8 @@ Rectangle
         font.family: font_lato_light.name
     }
 
-    Text
+    Text //----------------------------------------------------------- CURRENT_SCENE_NAME
     {
-        // NAME OF THE CURRENT SCENE
         id: header_scene_label
         text: "connecting"
         color: "#ffffff"
@@ -147,9 +145,11 @@ Rectangle
 
         font.pointSize: 14 * root.fontRatio
         font.family: font_lato_light.name
+
+        WPN114.Node on text { path: "/scenario/scene/name" }
     }
 
-    Rectangle
+    Rectangle //---------------------------------------------------- CIRCLE
     {
         id:         header_circle
 
@@ -157,11 +157,12 @@ Rectangle
         height:     width
         radius:     width/2
         color:      "#80000000"
+
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
 
 
-        SequentialAnimation
+        SequentialAnimation //-------------------------------------- CIRCLE_ANIMATIONS
         {
             running: true
             loops: Animation.Infinite

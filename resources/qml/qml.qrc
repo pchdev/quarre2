@@ -6,7 +6,6 @@
         <file>engine/Gesture.qml</file>
         <file>engine/GestureManager.qml</file>
         <file>engine/InteractionManager.qml</file>
-        <file>engine/NetworkManager.qml</file>
         <file>engine/SensorManager.qml</file>
         <file>views/UpperView.qml</file>
         <file>views/HeaderView.qml</file>

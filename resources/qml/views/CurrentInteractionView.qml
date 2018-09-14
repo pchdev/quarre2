@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import WPN114 1.0 as WPN114
 
 Rectangle
 {
@@ -7,6 +8,8 @@ Rectangle
     property alias  title:          current_interaction_title.text
     property alias  description:    current_interaction_description.text
     property alias countdown:       current_interaction_countdown_label.text
+
+    WPN114.Node on count { path: "/interactions/current/countdown" }
 
     states: [
 

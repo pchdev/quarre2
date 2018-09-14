@@ -2,7 +2,8 @@ import QtQuick 2.7
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
-import Ossia 1.0 as Ossia
+import Quarre 1.0 as Quarre
+import WPN114 1.0 as WPN114
 
 import "application"
 import "modules"
@@ -39,12 +40,6 @@ ApplicationWindow
         source: "lato/Lato-Light.ttf"
     }
 
-    onClosing:
-    {
-        console.log("closing");
-        close.accepted = true;
-    }    
-
     // --------------------------------------------------------------------------------------------------
 
     Item
@@ -66,15 +61,14 @@ ApplicationWindow
                 event.accepted = true;
         }
 
+        WPN114.OSCQueryServer   { tcpPort: 5678; udpPort: 1234 }
+
+        Quarre.System           { id: system }
         InteractionManager      { id: interaction_manager }
         GestureManager          { id: gesture_manager }
         SensorManager           { id: sensor_manager }
-        NetworkManager          { id: ossia_net; deviceName: "quarre-remote" }
+        NetworkManager          { id: ossia_net; }
         OssiaModuleParameters   { id: ossia_modules }
-
-//        VareBody {}
-//        VareResonator {}
-//        VareGranular {}
 
         ApplicationStates //------------------------------------------------------ MAIN_STATES
         {
