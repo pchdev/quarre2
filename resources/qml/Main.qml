@@ -27,7 +27,7 @@ ApplicationWindow
     // MacBook Pro 9.2, late 2012 (13")
     // replace width with Screen.desktopAvailableWidth
     height: Screen.height
-    width: Screen.width
+    width:  Screen.width
     property real currPd: Screen.pixelDensity
 
     // refer to this when calculating font sizes
@@ -50,7 +50,6 @@ ApplicationWindow
         width:      parent.width
         focus:      true
 
-        property alias network:     ossia_net
         property alias upper_view:  upper_view
         property alias lower_view:  lower_view
 
@@ -61,13 +60,22 @@ ApplicationWindow
                 event.accepted = true;
         }
 
-        WPN114.OSCQueryServer   { tcpPort: 5678; udpPort: 1234 }
+        WPN114.OSCQueryServer // ------------------------------------------------- SERVER
+        {
+            id: server
+            singleDevice: true
+
+            tcpPort: 5678
+            udpPort: 1234
+
+            Component.onCompleted:
+                system.register_zeroconf("quarre-remote", "_osc_json.", 5678);
+        }
 
         Quarre.System           { id: system }
         InteractionManager      { id: interaction_manager }
         GestureManager          { id: gesture_manager }
         SensorManager           { id: sensor_manager }
-        NetworkManager          { id: ossia_net; }
         OssiaModuleParameters   { id: ossia_modules }
 
         ApplicationStates //------------------------------------------------------ MAIN_STATES
@@ -78,7 +86,6 @@ ApplicationWindow
             {
                 quarre_application.states   = quarre_states.states
                 quarre_application.state    = "DISCONNECTED"
-                ossia_net.oshdl.connect     ( );
             }
         }
 
@@ -171,7 +178,7 @@ ApplicationWindow
         }
     }
 
-    Rectangle
+    Rectangle //---------------------------------------------------------- FLASH_FOR_ANIMATION
     {
         id: flash
         anchors.fill: parent

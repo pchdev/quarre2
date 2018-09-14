@@ -13,5 +13,4 @@ Rectangle
 
     XYZRotation { id: xyz_rotation; visible: false }
     GestureHammer { id: hammer; visible: true }
-
 }

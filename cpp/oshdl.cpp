@@ -52,7 +52,7 @@ platform_hdl::platform_hdl()
     auto tag        = QAndroidJniObject::fromString("My Tag");
     m_wakelock      = power_mgr.callObjectMethod("newWakeLock", "(ILjava/lang/String;)Landroid/os/PowerManager$WakeLock;", lnf, tag.object<jstring>());
 
-    if      (m_wakelock.isValid())
+    if      ( m_wakelock.isValid() )
             m_wakelock.callMethod<void>("acquire", "()V");
     else    qDebug() << "Unable to lock device..!!";
 

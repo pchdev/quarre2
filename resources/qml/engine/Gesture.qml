@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import Ossia 1.0 as Ossia
+import WPN114 1.0 as WPN114
 
 Item
 {
@@ -14,13 +14,5 @@ Item
         if ( index >= 0 ) available = true;
     }
 
-    Ossia.Binding // -------------------------------------------------------------------- AVAILABLE
-    {
-        id:         parameter_available
-        device:     ossia_net.client
-        node:       ossia_net.format_user_parameter("/gestures/"+name+"/available")
-        on:         available
-    }
-
-
+    WPN114.Node on available { path: "/gestures"+name+"/available" }
 }

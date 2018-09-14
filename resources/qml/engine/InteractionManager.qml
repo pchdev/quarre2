@@ -89,7 +89,7 @@ Item
             upper_view.next.count         = 0;
             upper_view.next.timer.stop    ( );
 
-            if ( grey_out_stack.opacity == 0.7 ) grey_animation_out.running = true;
+            if ( grey_out_stack.opacity === 0.7 ) grey_animation_out.running = true;
             module_loader.item.enabled = true
 
             if ( quarre_application.state === "IDLE" ||
