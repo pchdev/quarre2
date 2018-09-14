@@ -1,7 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include "cpp/oshdl.hpp"
-#include "cpp/audio_hdl.hpp"
+#include "cpp/system.hpp"
+#include "cpp/audio.hpp"
 #include <QObject>
 #include <QQmlComponent>
 
@@ -12,8 +12,9 @@ int main(int argc, char *argv[])
 #endif
 
     QGuiApplication app(argc, argv);
-    qmlRegisterType<quarre::platform_hdl> ( "Quarre", 1, 0, "System" );
-    qmlRegisterType<quarre::audio_hdl> ( "Quarre", 1, 0, "AudioHdl" );
+
+    qmlRegisterType<quarre::platform_hdl>   ( "Quarre", 1, 0, "System" );
+    qmlRegisterType<quarre::audio_hdl>      ( "Quarre", 1, 0, "Audio" );
 
     QQmlApplicationEngine engine;
 

@@ -5,51 +5,129 @@ import WPN114 1.0 as WPN114
 
 Rectangle
 {
-    property bool connected:                    false
-    property bool accelerometers_available:      false
-    property bool rotation_available:           false
-    property bool proximity_available:          false
-    property bool microphone_available:         false
-
     property alias accelerometers: sensors_accelerometers
     property alias rotation: sensors_rotation
     property alias microphone: sensors_microphone
     property alias proximity: sensors_proximity
 
-    WPN114.Node on accelerometers_available { path: "/sensors/accelerometers/available" }
-    WPN114.Node on rotation_available { path: "/sensors/rotation/available" }
-    WPN114.Node on proximity_available { path: "/sensors/proximity/available" }
-    WPN114.Node on microphone { path: "/sensors/microphone/available" }
-
-    onConnectedChanged:
+    function stop()
     {
-        accelerometers_available     = sensors_accelerometers.connectedToBackend
-        rotation_available          = sensors_rotation.connectedToBackend
-        proximity_available         = sensors_proximity.connectedToBackend
-        microphone_available        = true;
+        sensors_microphone.active       = false;
+        sensors_accelerometers.active   = false;
+        sensors_rotation.active         = false;
+        sensors_proximity.active        = false;
+        polling_timer.running           = false;
     }
 
-    Quarre.AudioHdl //-------------------------------------------------------------- MICROPHONE
+    Timer //---------------------------------------------------------------------- POLLING_TIMER
+    {
+        id:         polling_timer
+        interval:   50
+        repeat:     true
+
+        onTriggered:
+        {
+            if ( sensors_microphone.active ) microphone_rms = sensors_microphone.rms
+            if ( sensors_accelerometers.active )
+                accelerometers_xyz = Qt.vector3d (
+                            sensors_accelerometers.reading.x, sensors_accelerometers.reading.y,
+                            sensors_accelerometers.reading.z )
+
+            if ( sensors_rotation.active )
+                rotation_xyz = Qt.vector3d (
+                            sensors_rotation.reading.x, sensors_rotation.reading.y,
+                            sensors_rotation.reading.z )
+
+            if ( sensors_proximity.active ) proximity_close = sensors_proximity.reading.close
+        }
+    }
+
+    Quarre.Audio //-------------------------------------------------------------- MICROPHONE
     {
         id:         sensors_microphone
         active:     false
+
+        WPN114.Node on active { path: "/sensors/microphone/active" }
+
+        onActiveChanged:
+        {
+            if ( active && !polling_timer.running ) polling_timer.running = true;
+            else if ( !active && !accelerometers.active && !rotation.active && !proximity.active )
+                polling_timer.running = false;
+        }
     }    
 
-    Accelerometer //---------------------------------------------------------------- ACCELEROMETER
+    property real microphone_rms: 0.0
+    WPN114.Node on microphone_rms { path: "/sensors/microphone/data/rms" }
+
+    Accelerometer //---------------------------------------------------------------- ACCELEROMETERS
     {
         id:         sensors_accelerometers
         active:     false
+
+        WPN114.Node on active { path: "/sensors/accelerometers/active" }
+        WPN114.Node on connectedToBackend { path: "/sensors/accelerometers/available" }
+
+        onActiveChanged:
+        {
+            if ( active && !polling_timer.running ) polling_timer.running = true;
+            else if ( !active && !microphone.active && !rotation.active && !proximity.active )
+                polling_timer.running = false;
+        }
     }
+
+    property real accelerometers_x: 0.0
+    property real accelerometers_y: 0.0
+    property real accelerometers_z: 0.0
+    property vector3d accelerometers_xyz: Qt.vector3d(0.0,0.0,0.0)
+
+    WPN114.Node on accelerometers_x { path: "/sensors/accelerometers/data/x" }
+    WPN114.Node on accelerometers_y { path: "/sensors/accelerometers/data/y" }
+    WPN114.Node on accelerometers_z { path: "/sensors/accelerometers/data/z" }
+    WPN114.Node on accelerometers_xyz { path: "/sensors/accelerometers/data/xyz" }
 
     RotationSensor //---------------------------------------------------------------- ROTATION
     {
         id:         sensors_rotation
         active:     false
+
+        WPN114.Node on active { path: "/sensors/rotation/active" }
+        WPN114.Node on connectedToBackend { path: "/sensors/rotation/available" }
+
+        onActiveChanged:
+        {
+            if ( active && !polling_timer.running ) polling_timer.running = true;
+            else if ( !active && !accelerometers.active && !microphone.active && !proximity.active )
+                polling_timer.running = false;
+        }
     }
+
+    property real rotation_x: 0.0
+    property real rotation_y: 0.0
+    property real rotation_z: 0.0
+    property vector3d rotation_xyz: Qt.vector3d(0.0,0.0,0.0)
+
+    WPN114.Node on rotation_x { path: "/sensors/rotation/data/x" }
+    WPN114.Node on rotation_y { path: "/sensors/rotation/data/y" }
+    WPN114.Node on rotation_z { path: "/sensors/rotation/data/z" }
+    WPN114.Node on rotation_xyz { path: "/sensors/rotation/data/xyz" }
 
     ProximitySensor //---------------------------------------------------------------- PROXIMITY
     {
         id:         sensors_proximity
         active:     false
+
+        WPN114.Node on active { path: "/sensors/proximity/active" }
+        WPN114.Node on connectedToBackend { path: "/sensors/proximity/available" }
+
+        onActiveChanged:
+        {
+            if ( active && !polling_timer.running ) polling_timer.running = true;
+            else if ( !active && !accelerometers.active && !rotation.active && !microphone.active )
+                polling_timer.running = false;
+        }
     }
+
+    property bool proximity_close: false
+    WPN114.Node on proximity_close { path: "/sensors/proximity/data/close" }
 }
