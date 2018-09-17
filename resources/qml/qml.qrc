@@ -13,5 +13,6 @@
         <file>views/NextInteractionView.qml</file>
         <file>modules/Default.qml</file>
         <file>modules/Idle.qml</file>
+        <file>engine/ModuleManager.qml</file>
     </qresource>
 </RCC>

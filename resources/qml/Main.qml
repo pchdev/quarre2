@@ -43,8 +43,8 @@ ApplicationWindow
     // --------------------------------------------------------------------------------------------------
 
     Item
-    { //            QUARRE_APPLICATION_BASE
-
+    {
+        //          QUARRE_APPLICATION_BASE
         id:         quarre_application
         height:     parent.height
         width:      parent.width
@@ -60,23 +60,25 @@ ApplicationWindow
                 event.accepted = true;
         }
 
-        WPN114.OSCQueryServer // ------------------------------------------------- SERVER
+        WPN114.OSCQueryClient // ------------------------------------------------- SERVER
         {
-            id: server
+            id: client
             singleDevice: true
+            zeroConfHost: "quarre-server"
 
-            tcpPort: 5678
-            udpPort: 1234
+            onConnected: requestHttp("/modules");
 
-            Component.onCompleted:
-                system.register_zeroconf("quarre-remote", "_osc_json.", 5678);
+            onHttpReply:
+            {
+
+            }
         }
 
         Quarre.System           { id: system }
         InteractionManager      { id: interaction_manager }
         GestureManager          { id: gesture_manager }
         SensorManager           { id: sensor_manager }
-        OssiaModuleParameters   { id: ossia_modules }
+        ModuleManager           { id: module_manager }
 
         ApplicationStates //------------------------------------------------------ MAIN_STATES
         {

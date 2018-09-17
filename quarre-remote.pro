@@ -20,10 +20,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp                 \
     cpp/system.cpp                   \
-    cpp/audio.cpp
+    cpp/audio.cpp \
+    cpp/downloadmanager.cpp
 
 HEADERS += cpp/system.hpp            \
-    cpp/audio.hpp
+    cpp/audio.hpp \
+    cpp/downloadmanager.hpp
 
 RESOURCES +=                        \
     resources/qml/qml.qrc           \

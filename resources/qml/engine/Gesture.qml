@@ -4,6 +4,7 @@ import WPN114 1.0 as WPN114
 Item
 {
     property bool available:    false
+    property bool active:       false
     property string name:       ""
 
     function check_availability()
@@ -14,5 +15,6 @@ Item
         if ( index >= 0 ) available = true;
     }
 
+    WPN114.Node on active { path: "/gestures"+name+"/active" }
     WPN114.Node on available { path: "/gestures"+name+"/available" }
 }

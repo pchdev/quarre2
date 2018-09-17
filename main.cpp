@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include "cpp/system.hpp"
 #include "cpp/audio.hpp"
+#include "cpp/downloadmanager.hpp"
 #include <QObject>
 #include <QQmlComponent>
 
@@ -15,6 +16,7 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<quarre::platform_hdl>   ( "Quarre", 1, 0, "System" );
     qmlRegisterType<quarre::audio_hdl>      ( "Quarre", 1, 0, "Audio" );
+    qmlRegisterType<DownloadManager>        ( "Quarre", 1, 0, "DownloadManager");
 
     QQmlApplicationEngine engine;
 
