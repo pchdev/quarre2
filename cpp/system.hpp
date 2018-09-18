@@ -14,8 +14,6 @@ namespace quarre {
 class platform_hdl : public QObject {
 
     Q_OBJECT
-    Q_PROPERTY      ( QString hostAddr READ hostAddr WRITE setHostAddr NOTIFY hostAddrChanged )
-    Q_PROPERTY      ( quint16 port READ port WRITE setPort )
 
     public: //------------------------------------------------------------------
 
@@ -23,24 +21,6 @@ class platform_hdl : public QObject {
     ~platform_hdl                       ( );
 
     static platform_hdl* singleton;
-
-    QString     hostAddr                ( ) const;
-    quint16     port                    ( ) const;
-    void        setHostAddr             ( QString addr );
-    void        setPort                 ( quint16 port );
-
-    Q_INVOKABLE void write_last_known_server_address    ( QString address );
-    Q_INVOKABLE QString read_last_known_server_address  ( );
-
-    Q_INVOKABLE void register_zeroconf ( QString name, QString type, quint16 port );
-    Q_INVOKABLE void stop_discovery  ();
-    Q_INVOKABLE void start_discovery ();
-
-    Q_INVOKABLE QString device_address  ( );
-
-    signals: // ---------------------------------------------------------------
-    void hostAddrChanged                ( );
-    void disconnected                   ( );
 
     public slots: //-----------------------------------------------------------
     void vibrate                ( int milliseconds )  const;

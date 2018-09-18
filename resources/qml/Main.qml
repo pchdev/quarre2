@@ -60,18 +60,11 @@ ApplicationWindow
                 event.accepted = true;
         }
 
-        WPN114.OSCQueryClient // ------------------------------------------------- SERVER
+        WPN114.OSCQueryServer // ------------------------------------------------- SERVER
         {
-            id: client
+            id: server
+            name: "quarre-remote"
             singleDevice: true
-            zeroConfHost: "quarre-server"
-
-            onConnected: requestHttp("/modules");
-
-            onHttpReply:
-            {
-
-            }
         }
 
         Quarre.System           { id: system }

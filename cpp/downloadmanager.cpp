@@ -33,9 +33,7 @@ void DownloadManager::next()
     m_output.setFileName(m_downloads.first());
 
     if ( !m_output.open(QIODevice::WriteOnly) )
-    {
         qDebug() << "error opening file for writing";
-    }
 
     QUrl url = m_queue.dequeue();
     QNetworkRequest req(url);
