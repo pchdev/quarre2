@@ -12,6 +12,8 @@ void DownloadManager::setQueue(QStringList queue)
 
     for ( const auto& file : queue )
         m_queue.enqueue(toUrl(file));
+
+    next();
 }
 
 QUrl DownloadManager::toUrl(QString file)
@@ -30,7 +32,7 @@ void DownloadManager::next()
         return;
     }
 
-    m_output.setFileName(m_downloads.first());
+    m_output.setFileName(m_downloads.first().prepend("/").prepend(m_destination).remove(0,1));
 
     if ( !m_output.open(QIODevice::WriteOnly) )
         qDebug() << "error opening file for writing";
