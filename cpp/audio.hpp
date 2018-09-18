@@ -13,7 +13,7 @@ class audio_hdl : public QIODevice
     Q_OBJECT
     Q_PROPERTY  ( qreal rms READ rms )
     Q_PROPERTY  ( bool available READ available )
-    Q_PROPERTY  ( bool active READ active WRITE set_active )
+    Q_PROPERTY  ( bool active READ active WRITE setActive )
 
     public:
     audio_hdl ( );
@@ -26,7 +26,10 @@ class audio_hdl : public QIODevice
     bool available ( ) const { return true; } // hmm...
 
     bool active     ( ) const { return m_active; }
-    Q_INVOKABLE void set_active ( bool active );
+    Q_INVOKABLE void setActive ( bool active );
+
+    signals:
+    void activeChanged();
 
     public slots:
     void monitor_input_state ( QAudio::State state ) { qDebug() << state; }

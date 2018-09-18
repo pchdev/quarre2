@@ -29,13 +29,16 @@ qint64 audio_hdl::readData(char *data, qint64 maxlen)
     return 0;
 }
 
-void audio_hdl::set_active ( bool active )
+void audio_hdl::setActive ( bool active )
 {
     if ( active && !m_active )
         m_input->start(this);
 
     else if ( !active && m_active )
         m_input->stop();
+
+    if ( active != m_active )
+        emit activeChanged();
 
     m_active = active;
 }

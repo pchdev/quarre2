@@ -65,8 +65,7 @@ Rectangle
         id:         sensors_accelerometers
         active:     false
 
-        WPN114.Node on active { path: "/sensors/accelerometers/active" }
-        WPN114.Node on connectedToBackend { path: "/sensors/accelerometers/available" }
+        WPN114.Node on active { path: "/sensors/accelerometers/active" }                        
 
         onActiveChanged:
         {
@@ -74,7 +73,11 @@ Rectangle
             else if ( !active && !microphone.active && !rotation.active && !proximity.active )
                 polling_timer.running = false;
         }
+
+        Component.onCompleted: accelerometers_available.value = connectedToBackend
     }
+
+    WPN114.Node { id: accelerometers_available; path: "/sensors/accelerometers/available" }
 
     property real accelerometers_x: 0.0
     property real accelerometers_y: 0.0
@@ -92,7 +95,6 @@ Rectangle
         active:     false
 
         WPN114.Node on active { path: "/sensors/rotation/active" }
-        WPN114.Node on connectedToBackend { path: "/sensors/rotation/available" }
 
         onActiveChanged:
         {
@@ -100,7 +102,11 @@ Rectangle
             else if ( !active && !accelerometers.active && !microphone.active && !proximity.active )
                 polling_timer.running = false;
         }
+
+        Component.onCompleted: rotation_available.value = connectedToBackend
     }
+
+    WPN114.Node { id: rotation_available; path: "/sensors/rotation/available" }
 
     property real rotation_x: 0.0
     property real rotation_y: 0.0
@@ -118,7 +124,6 @@ Rectangle
         active:     false
 
         WPN114.Node on active { path: "/sensors/proximity/active" }
-        WPN114.Node on connectedToBackend { path: "/sensors/proximity/available" }
 
         onActiveChanged:
         {
@@ -126,7 +131,11 @@ Rectangle
             else if ( !active && !accelerometers.active && !rotation.active && !microphone.active )
                 polling_timer.running = false;
         }
+
+        Component.onCompleted: proximity_available.value = connectedToBackend
     }
+
+    WPN114.Node { id: proximity_available; path: "/sensors/proximity/available" }
 
     property bool proximity_close: false
     WPN114.Node on proximity_close { path: "/sensors/proximity/data/close" }
