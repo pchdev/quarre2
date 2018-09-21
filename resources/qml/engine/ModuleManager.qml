@@ -11,6 +11,7 @@ Item
 
         onConnected:
         {
+            console.log("found server");
             download_manager.hostAddr = hostAddr;
             download_manager.hostPort = port;
         }
@@ -21,7 +22,11 @@ Item
         device: download_client
 
         path: "/modules"
-        onValueReceived: download_manager.setQueue(newValue);
+        onValueReceived:
+        {
+            console.log("Downloading modules: ", newValue);
+            download_manager.setQueue(newValue);
+        }
     }
 
     DownloadManager

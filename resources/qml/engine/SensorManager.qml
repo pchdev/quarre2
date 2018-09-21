@@ -77,7 +77,12 @@ Rectangle
         Component.onCompleted: accelerometers_available.value = connectedToBackend
     }
 
-    WPN114.Node { id: accelerometers_available; path: "/sensors/accelerometers/available" }
+    WPN114.Node
+    {
+        id: accelerometers_available;
+        path: "/sensors/accelerometers/available"
+        type: WPN114.Type.Bool
+    }
 
     property real accelerometers_x: 0.0
     property real accelerometers_y: 0.0
@@ -106,7 +111,12 @@ Rectangle
         Component.onCompleted: rotation_available.value = connectedToBackend
     }
 
-    WPN114.Node { id: rotation_available; path: "/sensors/rotation/available" }
+    WPN114.Node
+    {
+        id: rotation_available
+        type: WPN114.Type.Bool
+        path: "/sensors/rotation/available"
+    }
 
     property real rotation_x: 0.0
     property real rotation_y: 0.0
@@ -135,7 +145,12 @@ Rectangle
         Component.onCompleted: proximity_available.value = connectedToBackend
     }
 
-    WPN114.Node { id: proximity_available; path: "/sensors/proximity/available" }
+    WPN114.Node
+    {
+        id: proximity_available;
+        type: WPN114.Type.Bool;
+        path: "/sensors/proximity/available"
+    }
 
     property bool proximity_close: false
     WPN114.Node on proximity_close { path: "/sensors/proximity/data/close" }

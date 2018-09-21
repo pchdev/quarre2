@@ -40,6 +40,7 @@ class DownloadManager : public QObject
     void downloadsComplete();
 
     private:
+    QString m_modules_path;
     QStringList m_downloads;
     QString m_host_addr;
     quint16 m_host_port;

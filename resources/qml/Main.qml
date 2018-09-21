@@ -65,6 +65,12 @@ ApplicationWindow
             id: server
             name: "quarre-remote"
             singleDevice: true
+
+            onNewConnection:
+            {
+                quarre_application.state = "IDLE";
+                upper_view.header.scene.text = "welcome";
+            }
         }
 
         Quarre.System           { id: system }
