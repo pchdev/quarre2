@@ -161,7 +161,6 @@ Rectangle
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
 
-
         SequentialAnimation //-------------------------------------- CIRCLE_ANIMATIONS
         {
             running: true

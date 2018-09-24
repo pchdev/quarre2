@@ -4,37 +4,16 @@ import Quarre 1.0
 
 Item
 {
+    property string module_path: "file:///data/user/0/org.quarre.remote/files/modules/";
+
     WPN114.OSCQueryClient
     {
         id: download_client
         zeroConfHost: "quarre-server"
 
-        onConnected:
+        onTreeComplete:
         {
-            console.log("found server");
-            download_manager.hostAddr = hostAddr;
-            download_manager.hostPort = port;
+            module_loader.source = module_path+"basics/GestureHammer.qml"
         }
-    }
-
-    WPN114.Node
-    {
-        device: download_client
-
-        path: "/modules"
-        onValueReceived:
-        {
-            console.log("Downloading modules: ", newValue);
-            download_manager.setQueue(newValue);
-        }
-    }
-
-    DownloadManager
-    {
-        id: download_manager
-        destination: "/modules"
-
-        // TODO: display a notification popup
-        onDownloadsComplete: console.log("modules in sync with server")
     }
 }
