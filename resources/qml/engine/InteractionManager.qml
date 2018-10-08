@@ -8,6 +8,7 @@ Item
     WPN114.Node //-------------------------------------------------------------INTERACTION_INCOMING
     {
         id:     interactions_next_incoming
+        type:   WPN114.Type.List
         path:   "/interactions/next/incoming"
 
         onValueReceived:
@@ -39,14 +40,13 @@ Item
             {
                 quarre_application.state    = "INCOMING_INTERACTION";
                 grey_animation_in.running   = true;
-                module_loader.source        = "../modules/" + newValue[2] + ".qml"
+                module_loader.source        = module_manager.fmt(newValue[2]);
                 module_loader.item.enabled  = false;
             }
 
             else if ( quarre_application.state === "ACTIVE_INTERACTION" )
             {
                 quarre_application.state = "ACTIVE_AND_INCOMING_INTERACTIONS";
-                module_on_hold = newValue[2];
             }
 
             if ( flash.opacity > 0 ) flash.opacity = 0;
@@ -58,6 +58,7 @@ Item
     WPN114.Node //-------------------------------------------------------------INTERACTION_BEGIN
     {
         id:     interactions_next_begin
+        type:   WPN114.Type.List
         path:   "/interactions/next/begin"
 
         onValueReceived:
@@ -89,7 +90,7 @@ Item
             upper_view.next.count         = 0;
             upper_view.next.timer.stop    ( );
 
-            if ( grey_out_stack.opacity === 0.7 ) grey_animation_out.running = true;
+            if ( grey_out_stack.opacity === 0.7 ) grey_animation_out.running = true;            
             module_loader.item.enabled = true
 
             if ( quarre_application.state === "IDLE" ||
@@ -103,6 +104,7 @@ Item
     WPN114.Node //--------------------------------------------------------------INTERACTION_NEXT_CANCEL
     {
         id:     interactions_next_cancel
+        type:   WPN114.Type.Impulse
         path:   "/interactions/next/cancel"
 
         onValueReceived:
@@ -124,6 +126,7 @@ Item
     WPN114.Node //---------------------------------------------------------INTERACTION_END
     {
         id:     interactions_current_end
+        type:   WPN114.Type.Impulse
         path:   "/interactions/current/end"
 
         onValueReceived:
@@ -164,6 +167,7 @@ Item
     WPN114.Node //--------------------------------------------------------- INTERACTION_FORCE
     {
         id:     interactions_current_force
+        type:   WPN114.Type.String
         path:   "/interactions/current/force"
 
         onValueReceived:
@@ -172,7 +176,7 @@ Item
 
             quarre_application.state        = "IDLE";
             upper_view.header.scene.text    = "playground";
-            module_loader.source            = "../modules/" + module_name + ".qml"
+            module_loader.source            = module_manager.fmt(newValue);
 
             system.vibrate(100);
         }

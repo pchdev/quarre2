@@ -64,6 +64,9 @@ ApplicationWindow
         {
             id: server
             name: "quarre-remote"
+            udpPort: 1234
+            tcpPort: 5678
+
             singleDevice: true
 
             onNewConnection:

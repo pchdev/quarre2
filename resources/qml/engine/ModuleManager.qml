@@ -4,16 +4,14 @@ import Quarre 1.0
 
 Item
 {
-    property string module_path: "file:///data/user/0/org.quarre.remote/files/modules/";
+    property string path: "file:///data/user/0/org.quarre.remote/files/modules/";
+    function fmt(str) { return path+str }
 
     WPN114.OSCQueryClient
     {
         id: download_client
         zeroConfHost: "quarre-server"
 
-        onTreeComplete:
-        {
-            module_loader.source = module_path+"basics/GestureHammer.qml"
-        }
+        onTreeComplete: console.log("tree completed");
     }
 }
