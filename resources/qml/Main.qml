@@ -74,6 +74,12 @@ ApplicationWindow
                 quarre_application.state = "IDLE";
                 upper_view.header.scene.text = "welcome";
             }
+
+            onDisconnection:
+            {
+                quarre_application.state = "DISCONNECTED"
+                upper_view.header.scene.text = "disconnected";
+            }
         }
 
         Quarre.System           { id: system }
