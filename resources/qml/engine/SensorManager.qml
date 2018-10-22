@@ -123,10 +123,10 @@ Rectangle
     property real rotation_z: 0.0
     property vector3d rotation_xyz: Qt.vector3d(0.0,0.0,0.0)
 
-    WPN114.Node on rotation_x { path: "/sensors/rotation/data/x" }
-    WPN114.Node on rotation_y { path: "/sensors/rotation/data/y" }
-    WPN114.Node on rotation_z { path: "/sensors/rotation/data/z" }
-    WPN114.Node on rotation_xyz { path: "/sensors/rotation/data/xyz" }
+    WPN114.Node on rotation_x { path: "/sensors/rotation/x/data" }
+    WPN114.Node on rotation_y { path: "/sensors/rotation/y/data" }
+    WPN114.Node on rotation_z { path: "/sensors/rotation/z/data" }
+    WPN114.Node on rotation_xyz { path: "/sensors/rotation/xyz/data" }
 
     ProximitySensor //---------------------------------------------------------------- PROXIMITY
     {
@@ -153,5 +153,5 @@ Rectangle
     }
 
     property bool proximity_close: false
-    WPN114.Node on proximity_close { path: "/sensors/proximity/data/close" }
+    WPN114.Node on proximity_close { path: "/sensors/proximity/close/data" }
 }

@@ -4,14 +4,16 @@ import Quarre 1.0
 
 Item
 {
-    property string path: "file:///data/user/0/org.quarre.remote/files/modules/";
-    function fmt(str) { return path+str }
+    function fmt(str)
+    {
+        return "file://"+system.downloadPath()+"/modules/"+str;
+    }
 
     WPN114.OSCQueryClient
     {
         id: download_client
-        zeroConfHost: "quarre-server"
+        zeroConfHost: "quarre-modules"
 
-        onTreeComplete: console.log("tree completed");
+        //onConnected: requestHttp("/modules")
     }
 }

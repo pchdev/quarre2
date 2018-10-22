@@ -3,6 +3,7 @@
 #include <QNetworkInterface>
 #include <QFile>
 #include <QIODevice>
+#include <QStandardPaths>
 
 using namespace quarre;
 
@@ -50,3 +51,8 @@ void platform_hdl::vibrate(int milliseconds) const
 }
 
 #endif
+
+QString platform_hdl::downloadPath() const
+{
+    return QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+}
