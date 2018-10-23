@@ -133,7 +133,7 @@ Item
         {
             if ( quarre_application.state === "INCOMING_INTERACTION")
             {
-                interaction_manager.cancel_incoming();
+                interactions_next_cancel.value = 0;
                 return;
             }
 
@@ -179,6 +179,19 @@ Item
             module_loader.source            = module_manager.fmt(newValue);
 
             system.vibrate(100);
+        }
+    }
+
+    WPN114.Node //--------------------------------------------------------- INTERACTIONS_RESET
+    {
+        id:     interactions_reset
+        type:   WPN114.Type.Impulse
+        path:   "/interactions/reset"
+
+        onValueReceived:
+        {
+            interactions_current_end.value = 0;
+            interactions_next_cancel.value = 0;
         }
     }
 }
