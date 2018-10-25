@@ -78,7 +78,9 @@ ApplicationWindow
             onDisconnection:
             {
                 quarre_application.state = "DISCONNECTED"
+                upper_view.header.scene.color = "red";
                 upper_view.header.scene.text = "disconnected";
+                module_loader.source = "modules/Default.qml"
             }
         }
 

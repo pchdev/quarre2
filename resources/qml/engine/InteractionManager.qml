@@ -5,11 +5,15 @@ import WPN114 1.0 as WPN114
 
 Item
 {
+    property string module_on_hold
+
     WPN114.Node //-------------------------------------------------------------INTERACTION_INCOMING
     {
         id:     interactions_next_incoming
         type:   WPN114.Type.List
         path:   "/interactions/next/incoming"
+
+        critical: true
 
         onValueReceived:
         {
@@ -40,13 +44,14 @@ Item
             {
                 quarre_application.state    = "INCOMING_INTERACTION";
                 grey_animation_in.running   = true;
-                module_loader.source        = module_manager.fmt(newValue[2]);
+                module_loader.source        = module_manager.fmt(newValue[ 2 ]);
                 module_loader.item.enabled  = false;
             }
 
             else if ( quarre_application.state === "ACTIVE_INTERACTION" )
             {
                 quarre_application.state = "ACTIVE_AND_INCOMING_INTERACTIONS";
+                module_on_hold = module_manager.fmt(newValue[ 2 ]);
             }
 
             if ( flash.opacity > 0 ) flash.opacity = 0;
@@ -60,6 +65,8 @@ Item
         id:     interactions_next_begin
         type:   WPN114.Type.List
         path:   "/interactions/next/begin"
+
+        critical: true
 
         onValueReceived:
         {
@@ -107,6 +114,8 @@ Item
         type:   WPN114.Type.Impulse
         path:   "/interactions/next/cancel"
 
+        critical: true
+
         onValueReceived:
         {
             console.log("[INTERACTIONS] Cancelling next" )
@@ -128,6 +137,8 @@ Item
         id:     interactions_current_end
         type:   WPN114.Type.Impulse
         path:   "/interactions/current/end"
+
+        critical: true
 
         onValueReceived:
         {
@@ -154,7 +165,7 @@ Item
                 if ( module_on_hold != "" )
                 {
                     module_loader.item.enabled = false;
-                    module_loader.source = "../modules/" + module_on_hold + ".qml"
+                    module_loader.source = module_on_hold;
                     module_loader.item.enabled = false;
                     grey_animation_in.running = true;
                 }
@@ -169,6 +180,8 @@ Item
         id:     interactions_current_force
         type:   WPN114.Type.String
         path:   "/interactions/current/force"
+
+        critical: true
 
         onValueReceived:
         {
@@ -187,6 +200,8 @@ Item
         id:     interactions_reset
         type:   WPN114.Type.Impulse
         path:   "/interactions/reset"
+
+        critical: true
 
         onValueReceived:
         {

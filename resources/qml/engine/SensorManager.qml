@@ -38,7 +38,7 @@ Rectangle
                             sensors_rotation.reading.x, sensors_rotation.reading.y,
                             sensors_rotation.reading.z )
 
-            if ( sensors_proximity.active ) proximity_close = sensors_proximity.reading.close
+            if ( sensors_proximity.active ) proximity_close = sensors_proximity.reading.near
         }
     }
 
