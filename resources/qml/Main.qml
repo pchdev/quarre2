@@ -71,15 +71,17 @@ ApplicationWindow
 
             onNewConnection:
             {
-                quarre_application.state = "IDLE";
-                upper_view.header.scene.text = "welcome";
+                quarre_application.state        = "IDLE";
+                upper_view.header.scene.color   = "white";
+                upper_view.header.scene.text    = "welcome";
             }
 
             onDisconnection:
             {
-                quarre_application.state = "DISCONNECTED"
-                upper_view.header.scene.color = "red";
-                upper_view.header.scene.text = "disconnected";
+                quarre_application.state        = "DISCONNECTED"
+                upper_view.header.scene.color   = "red";
+                upper_view.header.scene.text    = "disconnected";
+
                 module_loader.source = "modules/Default.qml"
             }
         }
@@ -126,7 +128,6 @@ ApplicationWindow
                 height:     parent.height * 0.45
                 color:      "black"
                 opacity:    0.9
-
             }
 
             Rectangle //------------------------------------------------------ INTERACTION_MODULES

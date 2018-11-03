@@ -14,6 +14,8 @@ Item
         id: download_client
         zeroConfHost: "quarre-modules"
 
+        onDisconnected: console.log("DISCONNECTED FROM HOST");
+
         //onConnected: requestHttp("/modules")
     }
 }

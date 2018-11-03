@@ -102,7 +102,7 @@ Item
 
             if ( quarre_application.state === "IDLE" ||
                  quarre_application.state === "INCOMING_INTERACTION" )
-               quarre_application.state = "ACTIVE_INTERACTION";
+               quarre_application.state = "ACTIVE_INTERACTION";            
 
             system.vibrate(300);
         }

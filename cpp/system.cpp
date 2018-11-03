@@ -39,18 +39,18 @@ platform_hdl::platform_hdl()
 
 platform_hdl::~platform_hdl() {}
 
-#ifdef Q_OS_ANDROID // ---------------------------------------------------------------------------------------
+
 #include <QMetaObject>
 
 void platform_hdl::vibrate(int milliseconds) const
 {    
+    #ifdef Q_OS_ANDROID // ---------------------------------------------------------------------------------------
     jboolean has_vibrator   = m_vibrator.callMethod<jboolean>("hasVibrator", "()Z");
     jlong ms                = milliseconds;
 
     m_vibrator.callMethod<void>("vibrate", "(J)V", ms);
+    #endif
 }
-
-#endif
 
 QString platform_hdl::downloadPath() const
 {
