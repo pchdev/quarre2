@@ -82,7 +82,11 @@ ApplicationWindow
                 upper_view.header.scene.color   = "red";
                 upper_view.header.scene.text    = "disconnected";
 
+                upper_view.next.timer.stop();
+                upper_view.current.timer.stop();
+
                 module_loader.source = "modules/Default.qml"
+                flash.opacity = 0;
             }
         }
 
