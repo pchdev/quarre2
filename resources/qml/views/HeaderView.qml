@@ -3,11 +3,19 @@ import WPN114 1.0 as WPN114
 
 Rectangle
 {
+    id: root
     property alias  timer_label: header_timer_label
     property alias  timer:       header_timer
     property alias  scenario:    header_scenario_label
     property alias  scene:       header_scene_label
     property int    count:       0
+
+    WPN114.Node
+    {
+        path: "/scenario/reset"
+        type: WPN114.Type.Impulse
+        onValueReceived: root.count = 0
+    }
 
     //-------------------------------------------------------------------------------------------------------
     states: [
